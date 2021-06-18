@@ -139,6 +139,18 @@ if(BUILD_TESTING)
     target_link_libraries(${PROJECT_NAME}_test_synchronizer PRIVATE --coverage)
   endif()
 
+  # Cyber enum
+  add_executable(${PROJECT_NAME}_test_cyber_enum
+    test/test_cyber_enum.cpp
+  )
+  target_compile_options(${PROJECT_NAME}_test_cyber_enum PRIVATE -Wall -Wextra -Wpedantic)
+  target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE ${PROJECT_NAME} GTest::Main ${YAML_CPP_LIBRARIES})
+  gtest_discover_tests(${PROJECT_NAME}_test_cyber_enum)
+  if (CODE_COVERAGE)
+    target_compile_options(${PROJECT_NAME}_test_cyber_enum PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
+    target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE --coverage)
+  endif()
+
   # -------------------------------------------------------------------------------------
   # TEST COVERAGE
   # -------------------------------------------------------------------------------------
