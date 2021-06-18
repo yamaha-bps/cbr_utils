@@ -111,7 +111,7 @@ if(BUILD_TESTING)
     test/test_utils.cpp
   )
   target_compile_options(${PROJECT_NAME}_test_utils PRIVATE -Wall -Wextra -Wpedantic)
-  target_link_libraries(${PROJECT_NAME}_test_utils PRIVATE ${PROJECT_NAME} GTest::Main ${YAML_CPP_LIBRARIES})
+  target_link_libraries(${PROJECT_NAME}_test_utils PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_utils)
   if (CODE_COVERAGE)
     target_compile_options(${PROJECT_NAME}_test_utils PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
@@ -123,7 +123,7 @@ if(BUILD_TESTING)
     test/test_cyber_timer.cpp
   )
   target_compile_options(${PROJECT_NAME}_test_cyber_timer PRIVATE -Wall -Wextra -Wpedantic)
-  target_link_libraries(${PROJECT_NAME}_test_cyber_timer PRIVATE ${PROJECT_NAME} GTest::Main ${YAML_CPP_LIBRARIES})
+  target_link_libraries(${PROJECT_NAME}_test_cyber_timer PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_cyber_timer)
   if (CODE_COVERAGE)
     target_compile_options(${PROJECT_NAME}_test_cyber_timer PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
@@ -135,7 +135,7 @@ if(BUILD_TESTING)
     test/test_synchronizer.cpp
   )
   target_compile_options(${PROJECT_NAME}_test_synchronizer PRIVATE -Wall -Wextra -Wpedantic)
-  target_link_libraries(${PROJECT_NAME}_test_synchronizer PRIVATE ${PROJECT_NAME} GTest::Main ${YAML_CPP_LIBRARIES})
+  target_link_libraries(${PROJECT_NAME}_test_synchronizer PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_synchronizer)
   if (CODE_COVERAGE)
     target_compile_options(${PROJECT_NAME}_test_synchronizer PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
@@ -147,11 +147,23 @@ if(BUILD_TESTING)
     test/test_cyber_enum.cpp
   )
   target_compile_options(${PROJECT_NAME}_test_cyber_enum PRIVATE -Wall -Wextra -Wpedantic)
-  target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE ${PROJECT_NAME} GTest::Main ${YAML_CPP_LIBRARIES})
+  target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_cyber_enum)
   if (CODE_COVERAGE)
     target_compile_options(${PROJECT_NAME}_test_cyber_enum PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
     target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE --coverage)
+  endif()
+
+  # Introspection
+  add_executable(${PROJECT_NAME}_test_introspection
+    test/test_introspection.cpp
+  )
+  target_compile_options(${PROJECT_NAME}_test_introspection PRIVATE -Wall -Wextra -Wpedantic)
+  target_link_libraries(${PROJECT_NAME}_test_introspection PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_introspection)
+  if (CODE_COVERAGE)
+    target_compile_options(${PROJECT_NAME}_test_introspection PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
+    target_link_libraries(${PROJECT_NAME}_test_introspection PRIVATE --coverage)
   endif()
 
   # -------------------------------------------------------------------------------------

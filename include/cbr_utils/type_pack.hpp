@@ -178,6 +178,14 @@ public:
 
   // strip reference and cv qualifiers from TypePack
   using decay = apply<std::decay_t>;
+
+  template<typename T>
+  static void loop(T && f)
+  {
+    if constexpr (size > 0) {
+      static_for_aggregate(tuple{}, std::forward<T>(f));
+    }
+  }
 };
 
 }  // namespace cbr
