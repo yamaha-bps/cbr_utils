@@ -7,7 +7,6 @@
 
   <author>Thomas Gurriet</author>
   <maintainer email="thomas.gurriet@hotmail.fr">Thomas Gurriet</maintainer>
-
   <license>MIT</license>
 
   <buildtool_depend>cmake</buildtool_depend>
