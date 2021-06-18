@@ -1,4 +1,7 @@
-// Copyright 2020 Yamaha Motor Corporation, USA
+// Copyright Yamaha 2021
+// MIT License
+// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+
 
 #include <gtest/gtest.h>
 
@@ -7,6 +10,7 @@
 
 #include <string>
 
+#include "cbr_utils/introspection.hpp"
 #include "cbr_utils/static_for.hpp"
 #include "cbr_utils/utils.hpp"
 
