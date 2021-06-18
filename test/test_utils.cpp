@@ -2,7 +2,6 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
 
-
 #include <gtest/gtest.h>
 
 #include <array>

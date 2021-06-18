@@ -2,7 +2,6 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
 
-
 #ifndef CBR_UTILS__LOOP_TIMER_HPP_
 #define CBR_UTILS__LOOP_TIMER_HPP_
 
