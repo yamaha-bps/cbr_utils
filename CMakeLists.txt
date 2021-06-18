@@ -9,6 +9,7 @@ option(BUILD_TESTING "Build tests." OFF)
 option(CODE_COVERAGE "Code coverage for tests." OFF)
 
 find_package(Boost REQUIRED)
+find_package(yaml-cpp REQUIRED)
 
 # ---------------------------------------------------------------------------------------
 # TARGETS
@@ -23,6 +24,7 @@ INTERFACE
 target_link_libraries(${PROJECT_NAME}
 INTERFACE
   Boost::headers
+  yaml-cpp
 )
 
 # ---------------------------------------------------------------------------------------
@@ -164,6 +166,18 @@ if(BUILD_TESTING)
   if (CODE_COVERAGE)
     target_compile_options(${PROJECT_NAME}_test_introspection PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
     target_link_libraries(${PROJECT_NAME}_test_introspection PRIVATE --coverage)
+  endif()
+
+  # Yaml
+  add_executable(${PROJECT_NAME}_test_yaml
+    test/test_yaml.cpp
+  )
+  target_compile_options(${PROJECT_NAME}_test_yaml PRIVATE -Wall -Wextra -Wpedantic)
+  target_link_libraries(${PROJECT_NAME}_test_yaml PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_yaml)
+  if (CODE_COVERAGE)
+    target_compile_options(${PROJECT_NAME}_test_yaml PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
+    target_link_libraries(${PROJECT_NAME}_test_yaml PRIVATE --coverage)
   endif()
 
   # -------------------------------------------------------------------------------------
