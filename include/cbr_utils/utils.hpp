@@ -7,8 +7,6 @@
 #include <chrono>
 #include <ctime>
 #include <functional>
-#include <iomanip>
-#include <iostream>
 #include <sstream>
 #include <string>
 #include <type_traits>
@@ -29,14 +27,14 @@ namespace cbr
  ***************************************************************************/
 inline bool strcmpi(
   const std::string_view str1,
-  const std::string_view str2)
+  const std::string_view str2) noexcept
 {
   return (str1.size() == str2.size()) &&
          std::equal(
     str1.begin(),
     str1.end(),
     str2.begin(),
-    [](const char & c1, const char & c2) {
+    [](const unsigned char c1, const unsigned char c2) {
       if (c1 == c2 ||
       std::toupper(c1) == std::toupper(c2))
       {
@@ -111,7 +109,7 @@ inline typename clock_t::time_point fromDateStr(const std::string & str)
     try {
       nanoSec = std::chrono::duration_cast<std::chrono::nanoseconds>(
         std::chrono::duration<double>(std::stod(str.substr(pos))));
-    } catch (...) {
+    } catch (const std::exception &) {
     }
   }
 
@@ -120,7 +118,7 @@ inline typename clock_t::time_point fromDateStr(const std::string & str)
 
 
 /***************************************************************************
- * \brief Check if string is a valid filename under linux and windows
+ * \brief Check if string is a valid filename for linux and windows
  ***************************************************************************/
 inline bool isValidFilename(const std::string_view str)
 {
@@ -398,93 +396,6 @@ bool is_strictly_sorted(ExecutionPolicy && policy, ForwardIt first, ForwardIt la
   return detail::is_sorted_impl<ForwardIt, std::greater_equal>(std::move(policy), first, last);
 }
 
-
-/***************************************************************************
- * \brief Return engine name in marine terminology
- ***************************************************************************/
-inline std::string engine_name(const std::size_t nEng, const std::size_t engId)
-{
-  if (nEng < 2) {
-    return "engine";
-  } else if (nEng == 2) {
-    if (engId == 0) {
-      return "port engine";
-    } else {
-      return "starboard engine";
-    }
-  } else if (nEng == 3) {
-    if (engId == 0) {
-      return "port engine";
-    } else if (engId == 1) {
-      return "center engine";
-    } else {
-      return "starboard engine";
-    }
-  } else if (nEng == 4) {
-    if (engId == 0) {
-      return "port engine";
-    } else if (engId == 1) {
-      return "center port engine";
-    } else if (engId == 2) {
-      return "center starboard engine";
-    } else {
-      return "starboard engine";
-    }
-  } else if (nEng == 5) {
-    if (engId == 0) {
-      return "port engine";
-    } else if (engId == 1) {
-      return "center port engine";
-    } else if (engId == 2) {
-      return "center engine";
-    } else if (engId == 3) {
-      return "center starboard engine";
-    } else {
-      return "starboard engine";
-    }
-  } else {
-    return "engine " + std::to_string(engId + 1);
-  }
-}
-
 }  // namespace cbr
-
-template<typename T>
-std::ostream & operator<<(std::ostream & os, const std::vector<T> & v)
-{
-  const auto & sz = v.size();
-
-  if (sz == 1) {
-    os << '{' << v[0] << '}';
-  } else {
-    if (sz > 1) {
-      os << '{';
-      for (std::size_t i = 0; i < (sz - 1); i++) {
-        os << v[i] << ", ";
-      }
-      os << v.back() << '}';
-    }
-  }
-
-  return os;
-}
-
-template<typename T, std::size_t sz>
-std::ostream & operator<<(std::ostream & os, const std::array<T, sz> & v)
-{
-  if constexpr (sz == 1) {
-    os << '{' << v[0] << '}';
-  } else {
-    if constexpr (sz > 1) {
-      os << '{';
-      for (std::size_t i = 0; i < (sz - 1); i++) {
-        os << v[i] << ", ";
-      }
-      os << v.back() << '}';
-    }
-  }
-
-  return os;
-}
 
 #endif  // CBR_UTILS__UTILS_HPP_
