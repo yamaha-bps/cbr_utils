@@ -8,6 +8,8 @@ option(BUILD_EXAMPLES "Build examples." OFF)
 option(BUILD_TESTING "Build tests." OFF)
 option(CODE_COVERAGE "Code coverage for tests." OFF)
 
+find_package(Boost REQUIRED)
+
 # ---------------------------------------------------------------------------------------
 # TARGETS
 # ---------------------------------------------------------------------------------------
@@ -18,9 +20,10 @@ INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-# target_link_libraries(${PROJECT_NAME}
-# INTERFACE
-# )
+target_link_libraries(${PROJECT_NAME}
+INTERFACE
+  Boost::headers
+)
 
 # ---------------------------------------------------------------------------------------
 # EXAMPLES
@@ -163,3 +166,10 @@ if(BUILD_TESTING)
     )
   endif()
 endif()
+
+# uninstall target
+configure_file(
+	"${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake.in"
+	"${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake"
+	IMMEDIATE @ONLY)
+add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)

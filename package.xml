@@ -9,6 +9,8 @@
   <maintainer email="thomas.gurriet@hotmail.fr">Thomas Gurriet</maintainer>
   <license>MIT</license>
 
+  <depend>libboost-dev</depend>
+
   <buildtool_depend>cmake</buildtool_depend>
 
   <export>
