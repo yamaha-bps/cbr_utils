@@ -6,6 +6,7 @@
 #define CBR_UTILS__CYBER_ENUM_HPP_
 
 #include <array>
+#include <stdexcept>
 #include <string>
 #include <type_traits>
 
@@ -53,7 +54,7 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
   }
   constexpr CyberEnum & operator=(const std::string_view data)  // NOLINT
   {
-    int data_tmp;
+    int data_tmp{};
     bool found = check(data, data_tmp);
     if (!found) {
       throw std::runtime_error("Enum value is invalid.");
@@ -64,7 +65,7 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
 
   constexpr bool operator>(const std::string_view rhs) const noexcept
   {
-    int data;
+    int data{};
     bool found = check(rhs, data);
     if (!found) {
       return true;
@@ -73,7 +74,7 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
   }
   constexpr bool operator<(const std::string_view rhs) const noexcept
   {
-    int data;
+    int data{};
     bool found = check(rhs, data);
     if (!found) {
       return true;
@@ -82,7 +83,7 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
   }
   constexpr bool operator>=(const std::string_view rhs) const noexcept
   {
-    int data;
+    int data{};
     bool found = check(rhs, data);
     if (!found) {
       return true;
@@ -91,7 +92,7 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
   }
   constexpr bool operator<=(const std::string_view rhs) const noexcept
   {
-    int data;
+    int data{};
     bool found = check(rhs, data);
     if (!found) {
       return true;

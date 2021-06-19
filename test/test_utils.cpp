@@ -168,7 +168,9 @@ TEST(Utils, all_unique)
 
 TEST(Utils, digit_perm)
 {
-  constexpr std::array<std::array<int, 3>, 2> vals{-1, 0, 1, -2, 0, 3};
+  constexpr std::array<std::array<int, 3>, 2> vals{
+    std::array<int, 3>{-1, 0, 1}, std::array<int, 3>{-2, 0, 3}
+  };
   constexpr auto vtx = cbr::digit_perm(vals);
 
   ASSERT_EQ(vtx.size(), 3LU * 3LU);
