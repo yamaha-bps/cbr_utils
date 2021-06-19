@@ -83,6 +83,8 @@ jobs:
       run: make test
 
     - name: Test Coverage
-      working-directory: ${{ github.workspace }}/build
-      run: make testcov
+      working-directory: ${{ github.workspace }}
+      run: |
+        lcov -c --no-external --directory . -d build/CMakeFiles -o lcov.info
+        genhtml lcov.info -o out
 
