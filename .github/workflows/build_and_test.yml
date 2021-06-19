@@ -72,7 +72,8 @@ jobs:
         -DCMAKE_BUILD_TYPE=Debug \
         -DBUILD_TESTING=ON \
         -DBUILD_EXAMPLES=OFF \
-        -DCODE_COVERAGE=ON
+        -DCMAKE_CXX_FLAGS="-O0 -g --coverage --fno-inline" \
+        -DCMAKE_EXE_LINKER_FLAGS="--coverage"
 
     - name: Build
       working-directory: ${{ github.workspace }}/build
@@ -82,9 +83,9 @@ jobs:
       working-directory: ${{ github.workspace }}/build
       run: make test
 
-    - name: Test Coverage
+    - name: Analyze coverage
       working-directory: ${{ github.workspace }}
       run: |
-        lcov -c --no-external --directory . -d build/CMakeFiles -o lcov.info
+        lcov -c --no-external --directory include -d build/CMakeFiles -o lcov.info
         genhtml lcov.info -o out
 
