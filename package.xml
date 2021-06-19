@@ -10,6 +10,7 @@
   <license>MIT</license>
 
   <depend>libboost-dev</depend>
+  <depend>yaml-cpp</depend>
 
   <buildtool_depend>cmake</buildtool_depend>
 

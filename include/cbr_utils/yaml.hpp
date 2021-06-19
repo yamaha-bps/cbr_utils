@@ -7,12 +7,10 @@
 
 #include <yaml-cpp/yaml.h>
 
-#include <boost/mpl/range_c.hpp>
-#include <boost/mpl/for_each.hpp>
-#include <boost/fusion/adapted/struct/detail/extension.hpp>
-#include <boost/fusion/include/at.hpp>
-#include <boost/fusion/include/value_at.hpp>
-#include <boost/fusion/support/is_sequence.hpp>
+#include <boost/hana/at_key.hpp>
+#include <boost/hana/for_each.hpp>
+#include <boost/hana/fuse.hpp>
+#include <boost/hana/keys.hpp>
 
 #include <optional>
 #include <variant>
@@ -23,78 +21,24 @@
 #include "type_traits.hpp"
 #include "static_for.hpp"
 
-namespace cbr
-{
-
-/* Recursive YAML reader for boost fusion containers */
-template<typename Seq>
-struct YAMLReader
-{
-  explicit YAMLReader(const YAML::Node & yaml, Seq & seq)
-  : yaml_(yaml), seq_(seq) {}
-
-  template<typename Index>
-  void operator()(Index)
-  {
-    using TypeAtIndex = typename boost::fusion::result_of::value_at<Seq, Index>::type;
-    const std::string name(boost::fusion::extension::struct_member_name<Seq, Index::value>::call());
-    if (!yaml_[name] || yaml_[name].IsNull()) {
-      if constexpr (cbr::is_std_optional_v<TypeAtIndex>) {  //NOLINT
-        boost::fusion::at<Index>(seq_) = std::nullopt;
-        return;
-      } else {
-        throw YAML::KeyNotFound(YAML::Mark::null_mark(), name);
-      }
-    }
-
-    try {
-      boost::fusion::at<Index>(seq_) = yaml_[name].as<TypeAtIndex>();
-    } catch (const YAML::RepresentationException & e) {
-      throw YAML::KeyNotFound(YAML::Mark::null_mark(), name);
-    }
-  }
-
-private:
-  const YAML::Node & yaml_;
-  Seq & seq_;
-};
-
-
-/* Recursive YAML writer for boost fusion containers */
-template<typename Seq>
-struct YAMLWriter
-{
-  explicit YAMLWriter(YAML::Node & yaml, const Seq & seq)
-  : yaml_(yaml), seq_(seq) {}
-
-  template<typename Index>
-  void operator()(Index)
-  {
-    const std::string name(boost::fusion::extension::struct_member_name<Seq, Index::value>::call());
-    yaml_[name] = boost::fusion::at<Index>(seq_);
-  }
-
-private:
-  YAML::Node & yaml_;
-  const Seq & seq_;
-};
-
-}  // namespace cbr
-
 namespace YAML
 {
 
-/* Overload yaml-cpp encode and decode functions for boost fusion containers */
+/* Overload yaml-cpp encode and decode functions for several containers */
 template<typename T>
 struct convert
 {
   static Node encode(const T & val)
   {
-    if constexpr (boost::fusion::traits::is_sequence<T>::value) {
-      using Indices = boost::mpl::range_c<int, 0, boost::fusion::result_of::size<T>::value>;
-      Node yaml;
-      boost::mpl::for_each<Indices>(cbr::YAMLWriter(yaml, val));
-      return yaml;
+    if constexpr (boost::hana::Struct<T>::value) {
+      Node ret;
+      boost::hana::for_each(val, boost::hana::fuse([&ret](auto key, const auto & value) {
+        if constexpr (boost::hana::Struct<decltype(value)>::value)
+          ret[boost::hana::to<char const *>(key)] = YAML::Node(value);
+        else
+          ret[boost::hana::to<char const *>(key)] = value;
+      }));
+      return ret;
     } else if constexpr (cbr::is_scoped_enum_v<T>) {  //NOLINT
       using UT = std::underlying_type_t<T>;
       return Node(static_cast<UT>(val));
@@ -111,23 +55,28 @@ struct convert
         return Node(val.value());
       }
       return Node();
-
     } else {
-      static_assert(
-        ::cbr::false_v<T>,
-        "Unsupported type for YAML decoding.");
+      static_assert(::cbr::false_v<T>, "Unsupported type for YAML encoding.");
     }
   }
 
   static bool decode(const Node & yaml, T & val)
   {
-    if constexpr (boost::fusion::traits::is_sequence<T>::value) {
-      using Indices = boost::mpl::range_c<int, 0, boost::fusion::result_of::size<T>::value>;
-      try {
-        boost::mpl::for_each<Indices>(cbr::YAMLReader(yaml, val));
-      } catch (const std::exception & e) {
-        return false;
-      }
+    if constexpr (boost::hana::Struct<T>::value) {
+      boost::hana::for_each(boost::hana::keys(val), [&](auto key) {
+        using ValT = std::decay_t<decltype(boost::hana::at_key(val, key))>;
+
+        char const * key_c = boost::hana::to<char const *>(key);
+        if constexpr (cbr::is_std_optional_v<ValT>) {
+          if (!yaml[key_c] || yaml[key_c].IsNull()) {
+            boost::hana::at_key(val, key) = std::nullopt;
+          } else {
+            boost::hana::at_key(val, key) = yaml[key_c].template as<typename ValT::value_type>();
+          }
+        } else {
+          boost::hana::at_key(val, key) = yaml[key_c].template as<ValT>();
+        }
+      });
       return true;
     } else if constexpr (cbr::is_scoped_enum_v<T>) {  //NOLINT
       try {
@@ -170,9 +119,7 @@ struct convert
       }
       return true;
     } else {
-      static_assert(
-        ::cbr::false_v<T>,
-        "Unsupported type for YAML decoding.");
+      static_assert(::cbr::false_v<T>, "Unsupported type for YAML decoding.");
     }
   }
 };

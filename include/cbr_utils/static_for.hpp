@@ -5,6 +5,7 @@
 #ifndef CBR_UTILS__STATIC_FOR_HPP_
 #define CBR_UTILS__STATIC_FOR_HPP_
 
+#include <functional>
 #include <type_traits>
 #include <utility>
 
@@ -20,29 +21,21 @@ namespace cbr
 namespace detail
 {
 
-template<typename Lambda, typename T, T I, T ... Is>
-void static_for_iseq_impl(Lambda && f, std::integer_sequence<T, I, Is...>)
+template<typename Lambda, typename T, T ... Is>
+void static_for_iseq_impl(Lambda && f, std::integer_sequence<T, Is...>)
 {
-  using Is_t = std::integer_sequence<T, Is...>;
-  using I_t = std::integral_constant<T, I>;
-  using return_t = std::invoke_result_t<Lambda, I_t>;
+  using return_t = std::common_type_t<
+    std::invoke_result_t<Lambda, std::integral_constant<T, Is>> ...
+  >;
   if constexpr (std::is_same_v<return_t, bool>) {
-    if (f(I_t{})) {
-      if constexpr (sizeof...(Is) > 0) {
-        static_for_iseq_impl(std::forward<Lambda>(f), Is_t());
-      }
-    }
+    (std::invoke(f, std::integral_constant<T, Is>()) && ...);
   } else {
-    f(I_t{});
-    if constexpr (sizeof...(Is) > 0) {
-      static_for_iseq_impl(std::forward<Lambda>(f), Is_t());
-    }
+    (std::invoke(f, std::integral_constant<T, Is>()), ...);
   }
 }
 
 template<typename T, T... Vs>
 struct static_for_impl;
-
 
 template<typename Is>
 struct static_for_impl<Is>
@@ -92,22 +85,16 @@ using static_for_index = detail::static_for_impl<std::size_t, Vs...>;
 namespace detail
 {
 
-template<typename Seq, typename Lambda, std::size_t I, std::size_t ... Is>
-void static_for_aggregate_impl(Seq && s, Lambda && f, std::index_sequence<I, Is...>)
+template<typename Seq, typename Lambda, std::size_t ... Is>
+void static_for_aggregate_impl(Seq && s, Lambda && f, std::index_sequence<Is...>)
 {
-  using Is_t = std::index_sequence<Is...>;
-  using return_t = std::invoke_result_t<Lambda, decltype(std::get<I>(s))>;
+  using return_t = std::common_type_t<
+    std::invoke_result_t<Lambda, decltype(std::get<Is>(s))> ...
+  >;
   if constexpr (std::is_same_v<return_t, bool>) {
-    if (f(std::get<I>(s))) {
-      if constexpr (sizeof...(Is) > 0) {
-        static_for_aggregate_impl(std::forward<Seq>(s), std::forward<Lambda>(f), Is_t{});
-      }
-    }
+    (std::invoke(f, std::get<Is>(s)) && ...);
   } else {
-    f(std::get<I>(s));
-    if constexpr (sizeof...(Is) > 0) {
-      static_for_aggregate_impl(std::forward<Seq>(s), std::forward<Lambda>(f), Is_t{});
-    }
+    (std::invoke(f, std::get<Is>(s)), ...);
   }
 }
 
@@ -119,8 +106,7 @@ void static_for_aggregate(Seq && s, Lambda && f)
   using Seq_t = std::decay_t<Seq>;
   using s_t = decltype(s);
 
-  using boost::fusion::traits::is_sequence;
-  if constexpr (is_sequence<Seq_t>::value) {
+  if constexpr (boost::hana::Struct<Seq_t>::value) {
     if constexpr (std::is_rvalue_reference_v<s_t>) {
       const auto t = copy_to_tuple(std::forward<Seq>(s));
       using N = std::tuple_size<decltype(t)>;

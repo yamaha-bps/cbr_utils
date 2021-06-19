@@ -93,6 +93,14 @@ install(
   DESTINATION  ${export_dest_dir}
 )
 
+# Add target for uninstallation
+configure_file(
+	${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake.in
+	${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake
+	IMMEDIATE @ONLY
+)
+add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)
+
 # ---------------------------------------------------------------------------------------
 # TESTING
 # ---------------------------------------------------------------------------------------
@@ -179,23 +187,5 @@ if(BUILD_TESTING)
     target_compile_options(${PROJECT_NAME}_test_yaml PRIVATE -O0 -g --coverage -fno-inline -fno-inline-small-functions -fno-default-inline)
     target_link_libraries(${PROJECT_NAME}_test_yaml PRIVATE --coverage)
   endif()
-
-  # -------------------------------------------------------------------------------------
-  # TEST COVERAGE
-  # -------------------------------------------------------------------------------------
-
-  if(CODE_COVERAGE)
-    add_custom_target(testcov
-      COMMAND lcov -c --include ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/\\* -d ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles -o ${PROJECT_NAME}_testcov.info
-      COMMAND genhtml ${PROJECT_NAME}_testcov.info -o out
-      COMMAND echo "Open file://${CMAKE_CURRENT_BINARY_DIR}/out/index.html in a browser to view results"
-    )
-  endif()
 endif()
 
-# uninstall target
-configure_file(
-	"${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake.in"
-	"${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake"
-	IMMEDIATE @ONLY)
-add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)

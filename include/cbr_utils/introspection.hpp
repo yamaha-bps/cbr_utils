@@ -5,15 +5,10 @@
 #ifndef CBR_UTILS__INTROSPECTION_HPP_
 #define CBR_UTILS__INTROSPECTION_HPP_
 
-#include <boost/fusion/adapted/struct/adapt_struct.hpp>
-#include <boost/mpl/range_c.hpp>
-#include <boost/mpl/for_each.hpp>
-#include <boost/fusion/adapted/struct/detail/extension.hpp>
-#include <boost/fusion/include/at.hpp>
-#include <boost/fusion/include/value_at.hpp>
-#include <boost/fusion/support/is_sequence.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/type_index.hpp>
+#include <boost/hana/accessors.hpp>
+#include <boost/hana/size.hpp>
+#include <boost/hana/for_each.hpp>
+#include <boost/hana/keys.hpp>
 
 #include <type_traits>
 #include <utility>
@@ -30,14 +25,18 @@ auto copy_to_tuple_impl(Seq && s, std::index_sequence<Is...>)
   using Seq_t = std::decay_t<Seq>;
   using s_t = decltype(s);
 
-  using boost::fusion::traits::is_sequence;
-  static_assert(is_sequence<Seq_t>::value, "Input must be a boost sequence");
+  static_assert(boost::hana::Struct<Seq_t>::value, "Input must be a boost::hana struct");
 
-  using boost::fusion::at_c;
+  constexpr auto accessors = boost::hana::accessors<Seq_t>();
+
   if constexpr (std::is_rvalue_reference_v<s_t>) {
-    return std::make_tuple(std::move(at_c<Is>(s))...);
+    return std::make_tuple(
+      std::move(boost::hana::second(accessors[boost::hana::size_c<Is>])(s)) ...
+    );
   } else {
-    return std::make_tuple(at_c<Is>(s)...);
+    return std::make_tuple(
+      boost::hana::second(accessors[boost::hana::size_c<Is>])(s) ...
+    );
   }
 }
 
@@ -46,11 +45,12 @@ auto bind_to_tuple_impl(Seq & s, std::index_sequence<Is...>)
 {
   using Seq_t = std::decay_t<Seq>;
 
-  using boost::fusion::traits::is_sequence;
-  static_assert(is_sequence<Seq_t>::value, "Input must be a boost sequence");
+  static_assert(boost::hana::Struct<Seq_t>::value, "Input must be a boost::hana struct");
 
-  using boost::fusion::at_c;
-  return std::tie(at_c<Is>(s)...);
+  constexpr auto accessors = boost::hana::accessors<Seq_t>();
+  return std::tie(
+    boost::hana::second(accessors[boost::hana::size_c<Is>])(s) ...
+  );
 }
 
 }  // namespace detail
@@ -60,12 +60,11 @@ auto copy_to_tuple(Seq && s)
 {
   using Seq_t = std::decay_t<Seq>;
 
-  using boost::fusion::traits::is_sequence;
-  static_assert(is_sequence<Seq_t>::value, "Input must be a boost sequence");
+  static_assert(boost::hana::Struct<Seq_t>::value, "Input must be a boost::hana struct");
 
   return detail::copy_to_tuple_impl(
     std::forward<Seq>(s),
-    std::make_index_sequence<boost::fusion::result_of::size<Seq_t>::value>{});
+    std::make_index_sequence<decltype(boost::hana::length(s))::value>{});
 }
 
 template<typename Seq>
@@ -73,12 +72,11 @@ auto bind_to_tuple(Seq & s)
 {
   using Seq_t = std::decay_t<Seq>;
 
-  using boost::fusion::traits::is_sequence;
-  static_assert(is_sequence<Seq_t>::value, "Input must be a boost sequence");
+  static_assert(boost::hana::Struct<Seq_t>::value, "Input must be a boost::hana struct");
 
   return detail::bind_to_tuple_impl(
     s,
-    std::make_index_sequence<boost::fusion::result_of::size<Seq_t>::value>{});
+    std::make_index_sequence<decltype(boost::hana::length(s))::value>{});
 }
 
 }  // namespace cbr

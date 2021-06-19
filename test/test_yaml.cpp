@@ -4,8 +4,8 @@
 
 #include <gtest/gtest.h>
 
-#include <boost/fusion/adapted/struct/define_struct.hpp>
-#include <boost/fusion/include/define_struct.hpp>
+#include <boost/hana/define_struct.hpp>
+#include <boost/hana/adapt_struct.hpp>
 
 #include <memory>
 #include <string>
@@ -13,16 +13,28 @@
 
 #include "cbr_utils/yaml.hpp"
 
-BOOST_FUSION_DEFINE_STRUCT(
-  (bps) (sub),
-  SubParameters,
-  (int, sub0)(float, sub1)(bool, sub2)
-)
+namespace cbr {
+namespace sub {
+struct SubParameters{
+  BOOST_HANA_DEFINE_STRUCT(
+    SubParameters,
+    (int, sub0),
+    (float, sub1),
+    (bool, sub2)
+  );
+};
+}  // namespace sub
 
-BOOST_FUSION_DEFINE_STRUCT(
-  (bps), Parameters,
-  (std::string, param1)(int, param2)(double, param3)(bps::sub::SubParameters, sub)
-)
+struct Parameters{
+  BOOST_HANA_DEFINE_STRUCT(
+    Parameters,
+    (std::string, param1),
+    (int, param2),
+    (double, param3),
+    (sub::SubParameters, sub)
+  );
+};
+}  // namespace cbr
 
 TEST(Yaml, Basic)
 {
@@ -30,19 +42,19 @@ TEST(Yaml, Basic)
     "{param1: hello, param2: 2, param3: 1.01, sub: {sub0: 12312, sub1: -1.4, sub2: true}}"
   );
 
-  auto config = yaml.as<bps::Parameters>();
+  auto config = yaml.as<cbr::Parameters>();
 
-  ASSERT_NO_THROW(yaml.as<bps::Parameters>());
+  ASSERT_NO_THROW(yaml.as<cbr::Parameters>());
 
   YAML::Node yaml2;
   ASSERT_NO_THROW(yaml2 = config);
 
   ASSERT_ANY_THROW(
-    YAML::Load("{sub0: hallo, sub1: -1.4}").as<bps::sub::SubParameters>()
+    YAML::Load("{sub0: hallo, sub1: -1.4}").as<cbr::sub::SubParameters>()
   );
 
   ASSERT_ANY_THROW(
-    YAML::Load("{sub0: 123}").as<bps::sub::SubParameters>()
+    YAML::Load("{sub0: 123}").as<cbr::sub::SubParameters>()
   );
 }
 
@@ -53,10 +65,10 @@ struct InvisibleStruct
   double invisible{};  // needs default initialization
 };
 
-BOOST_FUSION_ADAPT_STRUCT(
+BOOST_HANA_ADAPT_STRUCT(
   InvisibleStruct,
-  (int, visible)
-)
+  visible
+);
 
 TEST(Yaml, Invisible)
 {
@@ -69,11 +81,12 @@ TEST(Yaml, Invisible)
 }
 
 
-BOOST_FUSION_DEFINE_STRUCT(
-  (),
+struct VectorParameter {
+BOOST_HANA_DEFINE_STRUCT(
   VectorParameter,
   (std::vector<int>, vector)
-)
+);
+};
 
 TEST(Yaml, VectorType)
 {
@@ -99,17 +112,17 @@ struct OptionalStruct2
   std::optional<double> optional_2;
 };
 
-BOOST_FUSION_ADAPT_STRUCT(
+BOOST_HANA_ADAPT_STRUCT(
   OptionalStruct1,
   optional_1,
   optional_2
-)
+);
 
-BOOST_FUSION_ADAPT_STRUCT(
+BOOST_HANA_ADAPT_STRUCT(
   OptionalStruct2,
   optional_1,
   optional_2
-)
+);
 
 TEST(Yaml, Optional)
 {
