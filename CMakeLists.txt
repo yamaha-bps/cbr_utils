@@ -95,8 +95,6 @@ add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_D
 # ---------------------------------------------------------------------------------------
 
 if(BUILD_TESTING)
-  enable_testing()
-
   find_package(GTest REQUIRED)
 
   add_compile_options(-Wall -Wextra -Wpedantic -Werror)
