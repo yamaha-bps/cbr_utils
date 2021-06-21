@@ -15,9 +15,9 @@
 namespace cbr
 {
 
-/***************************************************************************
- * \brief Better enum class type
- ***************************************************************************/
+/**
+ * @brief type unsafe enum
+ */
 template<typename T>
 struct CyberEnum : crtp<T, CyberEnum<T>>
 {
@@ -44,6 +44,9 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     }
   }
 
+  /**
+   * @brief operator= from int
+   */
   constexpr CyberEnum & operator=(const int data)  // NOLINT
   {
     if (!check(data)) {
@@ -52,6 +55,11 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     data_ = data;
     return *this;
   }
+
+  /**
+   * @brief operator= from string_view, string_view used due to read only purposes
+   *
+   */
   constexpr CyberEnum & operator=(const std::string_view data)  // NOLINT
   {
     int data_tmp{};
@@ -63,6 +71,9 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     return *this;
   }
 
+  /**
+   * @brief operator> from string_view
+   */
   constexpr bool operator>(const std::string_view rhs) const noexcept
   {
     int data{};
@@ -72,6 +83,10 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     }
     return data_ > data;
   }
+
+  /**
+   * @brief operator< from string_view
+   */
   constexpr bool operator<(const std::string_view rhs) const noexcept
   {
     int data{};
@@ -81,6 +96,10 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     }
     return data_ < data;
   }
+
+  /**
+   * @brief operator>= from string_view
+   */
   constexpr bool operator>=(const std::string_view rhs) const noexcept
   {
     int data{};
@@ -90,6 +109,9 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     }
     return data_ >= data;
   }
+  /**
+   * @brief operator<= from string_view
+   */
   constexpr bool operator<=(const std::string_view rhs) const noexcept
   {
     int data{};
@@ -105,6 +127,9 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
   constexpr operator std::string_view() const noexcept {return c_str();}
   constexpr explicit operator const char *() const noexcept {return c_str();}
 
+  /**
+   * @brief returns a pointer to an array that contains a null-terminated sequence of characters
+   */
   constexpr const char * c_str() const noexcept
   {
     for (std::size_t i = 0; i < T::values.size(); i++) {
@@ -115,21 +140,33 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     return nullptr;
   }
 
+  /**
+   * @brief returns the result of c_str() as type std::string
+   */
   std::string string() const noexcept
   {
     return c_str();
   }
 
+  /**
+   * @brief returns the result of c_str() as type std::string_view
+   */
   constexpr std::string_view string_view() const noexcept
   {
     return c_str();
   }
 
+  /**
+   * @brief returns true if data_ is a member of values array
+   */
   constexpr bool is_valid() const noexcept
   {
     return check(data_);
   }
 
+  /**
+   * @brief returns value of data_
+   */
   constexpr int get() const noexcept
   {
     return data_;
@@ -138,6 +175,9 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
   constexpr std::size_t operator[](const std::size_t i) const noexcept {return T::values[i];}
   constexpr const char * operator()(const std::size_t i) const noexcept{return T::names[i];}
 
+  /**
+   * @brief returns true if data is in values array
+   */
   static constexpr bool check(const int data) noexcept
   {
     static_assert(
@@ -152,6 +192,10 @@ struct CyberEnum : crtp<T, CyberEnum<T>>
     return false;
   }
 
+  /**
+   * @brief returns true if dataStr is in names array, sets dataVal to corresponding element in
+   *        value array
+   */
   static constexpr bool check(const std::string_view dataStr, int & dataVal) noexcept
   {
     static_assert(
