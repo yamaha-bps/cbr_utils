@@ -10,6 +10,10 @@
 namespace cbr::detail
 {
 
+/**
+ * @brief compile time determination of correct duration cast
+ *
+ */
 template<typename clock_t>
 struct ClockTraits
 {

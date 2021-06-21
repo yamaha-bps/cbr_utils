@@ -8,6 +8,10 @@
 namespace cbr
 {
 
+/**
+ * @brief crtp
+ *
+ */
 template<typename T, typename crtpType>
 struct crtp
 {
