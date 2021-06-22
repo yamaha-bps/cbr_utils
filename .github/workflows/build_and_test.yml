@@ -85,7 +85,7 @@ jobs:
     - name: Analyze coverage
       working-directory: ${{ github.workspace }}
       run: |
-        lcov -c --no-external --directory include -d build/CMakeFiles -o lcov.info
+        lcov -c --no-external --directory include -d build/CMakeFiles -o coverage.info
         lcov --list coverage.info
         bash <(curl -s https://codecov.io/bash) -f coverage.info
 
