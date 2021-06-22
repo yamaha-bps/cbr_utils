@@ -17,6 +17,10 @@
 namespace cbr
 {
 
+/**
+ * @brief
+ *
+ */
 template<
   typename ratio_t = std::ratio<1>,
   typename T = double,
@@ -58,53 +62,93 @@ public:
     clock_ = std::move(clock);
   }
 
+  /**
+   * @brief Set the clock object
+   *
+   */
   void set_clock(const clock_t & clock)
   {
     clock_ = std::make_shared<clock_t>(clock);
   }
 
+  /**
+   * @brief Set the clock object
+   *
+   */
   void set_clock(clock_t && clock)
   {
     clock_ = std::make_shared<clock_t>(std::move(clock));
   }
 
+  /**
+   * @brief returns current time
+   *
+   */
   time_point now() const noexcept
   {
     return clock_->now();
   }
 
+  /**
+   * @brief sets starting time, starts timer
+   *
+   */
   void tic(const time_point t_start) noexcept
   {
     t_start_ = t_start;
     running_ = true;
   }
 
+  /**
+   * @brief sets starting time to current time
+   *
+   */
   void tic() noexcept
   {
     tic(clock_->now());
   }
 
+  /**
+   * @brief returns time clock traits object with duration between start and t_stop
+   *
+   */
   duration_t tacChrono(const time_point t_stop) const noexcept
   {
     const auto duration = t_stop - t_start_;
     return detail::template ClockTraits<clock_t>::template duration_cast<duration_t>(duration);
   }
 
+  /**
+   * @brief returns time duration between start and now
+   *
+   */
   duration_t tacChrono() const noexcept
   {
     return tacChrono(clock_->now());
   }
 
+  /**
+   * @brief returns time duration between start and t_stop
+   *
+   */
   T tac(const time_point t_stop) const noexcept
   {
     return tacChrono(t_stop).count();
   }
 
+  /**
+   * @brief returns time duration between start and now
+   *
+   */
   T tac() const noexcept
   {
     return tacChrono().count();
   }
 
+  /**
+   * @brief resets and returns dt_ and computes average duration
+   *
+   */
   const duration_t & tocChrono(const time_point t_stop) noexcept
   {
     if (running_) {
@@ -118,11 +162,21 @@ public:
     return dt_;
   }
 
+  /**
+   * @brief calls tocChrono() with current time
+   *
+   */
   const duration_t & tocChrono() noexcept
   {
     return tocChrono(clock_->now());
   }
 
+  /**
+   * @brief saves current dt and restarts clock
+   *
+   * @param t_stop
+   * @return const duration_t&
+   */
   const duration_t & tocticChrono(const time_point t_stop) noexcept
   {
     tocChrono(t_stop);
@@ -130,31 +184,55 @@ public:
     return dt_;
   }
 
+  /**
+   * @brief saves current dt and restarts clock at current time
+   *
+   */
   const duration_t & tocticChrono() noexcept
   {
     return tocticChrono(clock_->now());
   }
 
+  /**
+   * @brief calls tocChrono() with t_stop, returns duration
+   *
+   */
   T toc(const time_point t_stop) noexcept
   {
     return tocChrono(t_stop).count();
   }
 
+  /**
+   * @brief calls tocChrono(), returning duration
+   *
+   */
   T toc() noexcept
   {
     return tocChrono().count();
   }
 
+  /**
+   * @brief calls tocticChrono() with t_stop, returning duration
+   *
+   */
   T toctic(const time_point t_stop) noexcept
   {
     return tocticChrono(t_stop).count();
   }
 
+  /**
+   * @brief calls tocticChrono(), returning duration
+   *
+   */
   T toctic() noexcept
   {
     return tocticChrono().count();
   }
 
+  /**
+   * @brief restarts clock at t_start, sets average duration to 0
+   *
+   */
   void restart(const time_point t_start) noexcept
   {
     avg_ = 0.;
@@ -164,38 +242,66 @@ public:
     tic(t_start);
   }
 
+  /**
+   * @brief calls restart with current time
+   *
+   */
   void restart() noexcept
   {
     restart(clock_->now());
   }
 
+  /**
+   * @brief stops time at current dt and average duration
+   *
+   */
   void stop() noexcept
   {
     running_ = false;
   }
 
+  /**
+   * @brief Get the Average object
+   *
+   */
   template<typename _T = const double &>
   std::enable_if_t<with_average, _T> getAverage() const noexcept
   {
     return avg_;
   }
 
+  /**
+   * @brief Get the Average Count object
+   *
+   */
   template<typename _T = const std::size_t &>
   std::enable_if_t<with_average, _T> getAverageCount() const noexcept
   {
     return i_;
   }
 
+  /**
+   * @brief self explanatory
+   *
+   */
   const auto & isRunnning() const noexcept
   {
     return running_;
   }
 
+  /**
+   * @brief Get the Latest Chrono object
+   *
+   */
   const auto & getLatestChrono() const noexcept
   {
     return dt_;
   }
 
+  /**
+   * @brief Get the Latest object
+   *
+   */
   auto getLatest() const noexcept
   {
     return dt_.count();
@@ -218,6 +324,10 @@ protected:
   time_point t_start_{};
 };
 
+/**
+ * @brief Doesn't use averaging. Not recommended for optimal performance.
+ *
+ */
 template<
   typename ratio_t = std::ratio<1>,
   typename T = double,
@@ -234,6 +344,10 @@ struct CyberTimerNoAvg : public CyberTimer<ratio_t, T, clock_t, false>
   using CyberTimer<ratio_t, T, clock_t, false>::CyberTimer;
 };
 
+/**
+ * @brief Cyber time struct representing milliseconds
+ *
+ */
 template<
   typename T = int64_t,
   typename clock_t = std::chrono::high_resolution_clock,
@@ -250,6 +364,10 @@ struct CyberTimerMilli : public CyberTimer<std::milli, T, clock_t, with_average>
   using CyberTimer<std::milli, T, clock_t, with_average>::CyberTimer;
 };
 
+/**
+ * @brief Cyber time struct representing microseconds
+ *
+ */
 template<
   typename T = int64_t,
   typename clock_t = std::chrono::high_resolution_clock,
@@ -266,6 +384,10 @@ struct CyberTimerMicro : public CyberTimer<std::micro, T, clock_t, with_average>
   using CyberTimer<std::micro, T, clock_t, with_average>::CyberTimer;
 };
 
+/**
+ * @brief Cyber time struct representing nanoseconds
+ *
+ */
 template<
   typename T = int64_t,
   typename clock_t = std::chrono::high_resolution_clock,
