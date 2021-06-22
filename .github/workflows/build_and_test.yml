@@ -86,5 +86,6 @@ jobs:
       working-directory: ${{ github.workspace }}
       run: |
         lcov -c --no-external --directory include -d build/CMakeFiles -o lcov.info
-        genhtml lcov.info -o out
+        lcov --list coverage.info
+        bash <(curl -s https://codecov.io/bash) -f coverage.info
 
