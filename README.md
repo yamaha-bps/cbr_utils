@@ -87,6 +87,8 @@
 ### Built With
 
 * [Libboost](https://www.boost.org/)
+* [yaml-cpp](https://github.com/jbeder/yaml-cpp)
+* [GTest](https://github.com/google/googletest)
 
 
 
@@ -102,6 +104,16 @@ To get a local copy up and running follow these simple steps.
 * libboost
   ```sh
   sudo apt install libboost-dev
+  ```
+
+* yaml-cpp
+  ```sh
+  sudo apt install libyaml-cpp-dev
+  ```
+
+* GTest
+  ```sh
+  sudo apt install libgtest-dev
   ```
 
 
@@ -125,8 +137,11 @@ To get a local copy up and running follow these simple steps.
    ```sh
    sudo make install
    ```
-
-
+5. Verify Successful Install
+   ```sh
+   make test
+   ```
+   - tests should succesfully run
 
 <!-- USAGE EXAMPLES -->
 ## Usage
