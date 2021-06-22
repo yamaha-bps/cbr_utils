@@ -202,10 +202,10 @@ Project Link: [https://github.com/yamaha-bps/cbr_utils](https://github.com/yamah
 [contributors-shield]: https://img.shields.io/github/contributors/yamaha-bps/repo.svg?style=for-the-badge
 [contributors-url]: https://github.com/yamaha-bps/cbr_utils/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/yamaha-bps/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/yamaha-bps/repo/network/members
+[forks-url]: https://github.com/yamaha-bps/cbr_utils/network/members
 [stars-shield]: https://img.shields.io/github/stars/yamaha-bps/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/yamaha-bps/repo/stargazers
+[stars-url]: https://github.com/yamaha-bps/cbr_utils/stargazers
 [issues-shield]: https://img.shields.io/github/issues/yamaha-bps/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/yamaha-bps/repo/issues
+[issues-url]: https://github.com/yamaha-bps/cbr_utils/issues
 [license-shield]: https://img.shields.io/github/license/yamaha-bps/repo.svg?style=for-the-badge
 [license-url]: https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE

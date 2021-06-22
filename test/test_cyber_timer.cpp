@@ -11,6 +11,8 @@
 
 using namespace std::chrono_literals;
 
+template class cbr::CyberTimer<>;
+
 TEST(CyberTimer, staticWithAverage)
 {
   using cbr::CyberTimer;
