@@ -109,6 +109,11 @@ if(BUILD_TESTING)
   target_link_libraries(${PROJECT_NAME}_test_cyber_timer PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_cyber_timer)
 
+  # Loop timer
+  add_executable(${PROJECT_NAME}_test_loop_timer test/test_loop_timer.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_loop_timer PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_loop_timer)
+
   # Synchronizer
   add_executable(${PROJECT_NAME}_test_synchronizer test/test_synchronizer.cpp)
   target_link_libraries(${PROJECT_NAME}_test_synchronizer PRIVATE ${PROJECT_NAME} GTest::Main)
