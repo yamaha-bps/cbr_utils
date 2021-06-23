@@ -99,7 +99,7 @@ To get a local copy up and running follow these simple steps.
 
 
 
-### Prerequisites
+### Install dependencies
 
 * libboost
   ```sh
@@ -111,7 +111,7 @@ To get a local copy up and running follow these simple steps.
   sudo apt install libyaml-cpp-dev
   ```
 
-* GTest
+* GTest (only necessary to build tests)
   ```sh
   sudo apt install libgtest-dev
   ```
@@ -137,11 +137,15 @@ To get a local copy up and running follow these simple steps.
    ```sh
    sudo make install
    ```
-5. Verify Successful Install
+5. Verify successful install (tests should all pass)
    ```sh
    make test
    ```
-   - tests should succesfully run
+
+6. Uninstall if you don't like it
+   ```sh
+   sudo make uninstall
+   ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
