@@ -19,8 +19,8 @@
 //    3. This notice may not be removed or altered from any source
 //    distribution.
 
-#ifndef BPS_LIBRARY__CONCURRENCY__THREAD_POOL_HPP_
-#define BPS_LIBRARY__CONCURRENCY__THREAD_POOL_HPP_
+#ifndef CBR_UTILS__THREAD_POOL_HPP_
+#define CBR_UTILS__THREAD_POOL_HPP_
 
 #include <vector>
 #include <queue>
@@ -32,6 +32,10 @@
 #include <functional>
 #include <stdexcept>
 #include <utility>
+
+namespace cbr
+{
+
 
 class ThreadPool
 {
@@ -128,5 +132,7 @@ inline ThreadPool::~ThreadPool()
     worker.join();
   }
 }
+}
+}  // namespace cbr
 
-#endif  // BPS_LIBRARY__CONCURRENCY__THREAD_POOL_HPP_
+#endif  // CBR_UTILS__THREAD_POOL_HPP_
