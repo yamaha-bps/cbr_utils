@@ -36,7 +36,7 @@ class CyberTimer
 public:
   using clock_t = _clock_t;
   using duration_t = std::chrono::duration<T, ratio_t>;
-  using time_point = typename detail::ClockTraits<clock_t>::time_point;
+  using time_point_t = typename detail::ClockTraits<clock_t>::time_point;
 
   CyberTimer() = default;
   CyberTimer(const CyberTimer &) = default;
@@ -45,62 +45,45 @@ public:
   CyberTimer & operator=(CyberTimer &&) = default;
   ~CyberTimer() = default;
 
-  explicit CyberTimer(std::shared_ptr<clock_t> clock) noexcept
+  explicit CyberTimer(const std::shared_ptr<clock_t> & clock) noexcept
+  : clock_(clock)
+  {}
+
+  explicit CyberTimer(std::shared_ptr<clock_t> && clock) noexcept
   : clock_(std::move(clock))
   {}
 
-  explicit CyberTimer(const clock_t & clock)
-  : clock_(std::make_shared<clock_t>(clock))
-  {}
+  void set_clock(const std::shared_ptr<clock_t> & clock) noexcept
+  {
+    clock_ = clock;
+  }
 
-  explicit CyberTimer(clock_t && clock)
-  : clock_(std::make_shared<clock_t>(std::move(clock)))
-  {}
-
-  void set_clock(std::shared_ptr<clock_t> clock) noexcept
+  void set_clock(std::shared_ptr<clock_t> && clock) noexcept
   {
     clock_ = std::move(clock);
   }
 
   /**
-   * @brief Set the clock object
+   * @brief returns current clock time
    *
    */
-  void set_clock(const clock_t & clock)
-  {
-    clock_ = std::make_shared<clock_t>(clock);
-  }
-
-  /**
-   * @brief Set the clock object
-   *
-   */
-  void set_clock(clock_t && clock)
-  {
-    clock_ = std::make_shared<clock_t>(std::move(clock));
-  }
-
-  /**
-   * @brief returns current time
-   *
-   */
-  time_point now() const noexcept
+  time_point_t now() const noexcept
   {
     return clock_->now();
   }
 
   /**
-   * @brief sets starting time, starts timer
+   * @brief starts timer to specified timepoint
    *
    */
-  void tic(const time_point t_start) noexcept
+  void tic(const time_point_t t_start) noexcept
   {
     t_start_ = t_start;
     running_ = true;
   }
 
   /**
-   * @brief sets starting time to current time
+   * @brief starts timer to current clock time
    *
    */
   void tic() noexcept
@@ -109,18 +92,18 @@ public:
   }
 
   /**
-   * @brief returns time clock traits object with duration between start and t_stop
-   *
+   * @brief returns duration between specified timepoint and when timer last started.
+   * Undefined behavior if called before timer was ever started
    */
-  duration_t tacChrono(const time_point t_stop) const noexcept
+  duration_t tacChrono(const time_point_t t_stop) const noexcept
   {
     const auto duration = t_stop - t_start_;
     return detail::template ClockTraits<clock_t>::template duration_cast<duration_t>(duration);
   }
 
   /**
-   * @brief returns time duration between start and now
-   *
+   * @brief returns duration between current clock time and when timer last started.
+   * Undefined behavior if called before timer was ever started
    */
   duration_t tacChrono() const noexcept
   {
@@ -128,17 +111,17 @@ public:
   }
 
   /**
-   * @brief returns time duration between start and t_stop
-   *
+   * @brief returns duration count between specified timepoint and when timer last started.
+   * Undefined behavior if called before timer was ever started
    */
-  T tac(const time_point t_stop) const noexcept
+  T tac(const time_point_t t_stop) const noexcept
   {
     return tacChrono(t_stop).count();
   }
 
   /**
-   * @brief returns time duration between start and now
-   *
+   * @brief returns duration count between current clock time and when timer last started.
+   * Undefined behavior if called before timer was ever started
    */
   T tac() const noexcept
   {
@@ -146,10 +129,14 @@ public:
   }
 
   /**
-   * @brief resets and returns dt_ and computes average duration
-   *
+   * @brief stops timer and returns duration between specified timepoint
+   * and when timer last started.
+   * If with_average==true, updates the timer duration average
+   * Returns latest timer duration if timer is not running when called and does not update
+   * the timer duration average.
+   * Undefined behavior if called before timer was ever started
    */
-  const duration_t & tocChrono(const time_point t_stop) noexcept
+  const duration_t & tocChrono(const time_point_t t_stop) noexcept
   {
     if (running_) {
       dt_ = tacChrono(t_stop);
@@ -163,8 +150,9 @@ public:
   }
 
   /**
-   * @brief calls tocChrono() with current time
-   *
+   * @brief stops timer and returns duration between current clock time
+   * and when timer last started.
+   * If with_average==true, updates the timer duration average
    */
   const duration_t & tocChrono() noexcept
   {
@@ -172,12 +160,10 @@ public:
   }
 
   /**
-   * @brief saves current dt and restarts clock
-   *
-   * @param t_stop
-   * @return const duration_t&
+   * @brief calls tocChrono and then tic with specified timepoint
+   * and returns the result of the tocChrono call
    */
-  const duration_t & tocticChrono(const time_point t_stop) noexcept
+  const duration_t & tocticChrono(const time_point_t t_stop) noexcept
   {
     tocChrono(t_stop);
     tic(t_stop);
@@ -185,8 +171,8 @@ public:
   }
 
   /**
-   * @brief saves current dt and restarts clock at current time
-   *
+   * @brief calls tocChrono and then tic with the same current clock time
+   * and returns the result of the tocChrono call
    */
   const duration_t & tocticChrono() noexcept
   {
@@ -194,17 +180,19 @@ public:
   }
 
   /**
-   * @brief calls tocChrono() with t_stop, returns duration
-   *
+   * @brief stops timer and returns duration count between specified timepoint
+   * and when timer last started.
+   * If with_average==true, updates the timer duration average
    */
-  T toc(const time_point t_stop) noexcept
+  T toc(const time_point_t t_stop) noexcept
   {
     return tocChrono(t_stop).count();
   }
 
   /**
-   * @brief calls tocChrono(), returning duration
-   *
+   * @brief stops timer and returns duration count between current clock time
+   * and when timer last started.
+   * If with_average==true, updates the timer duration average
    */
   T toc() noexcept
   {
@@ -212,17 +200,17 @@ public:
   }
 
   /**
-   * @brief calls tocticChrono() with t_stop, returning duration
-   *
+   * @brief calls toc and then tic with specified timepoint
+   * and returns the result of the toc call
    */
-  T toctic(const time_point t_stop) noexcept
+  T toctic(const time_point_t t_stop) noexcept
   {
     return tocticChrono(t_stop).count();
   }
 
   /**
-   * @brief calls tocticChrono(), returning duration
-   *
+   * @brief calls toc and then tic with the same current clock time
+   * and returns the result of the toc call
    */
   T toctic() noexcept
   {
@@ -230,29 +218,7 @@ public:
   }
 
   /**
-   * @brief restarts clock at t_start, sets average duration to 0
-   *
-   */
-  void restart(const time_point t_start) noexcept
-  {
-    avg_ = 0.;
-    if constexpr (with_average) {
-      i_ = 0;
-    }
-    tic(t_start);
-  }
-
-  /**
-   * @brief calls restart with current time
-   *
-   */
-  void restart() noexcept
-  {
-    restart(clock_->now());
-  }
-
-  /**
-   * @brief stops time at current dt and average duration
+   * @brief stops timer without updating duration average and latest duration.
    *
    */
   void stop() noexcept
@@ -261,18 +227,31 @@ public:
   }
 
   /**
-   * @brief Get the Average object
-   *
+   * @brief resets the timer duration average and restarts clock to specified timepoint
+   * Only available if with_average==true.
    */
-  template<typename _T = const double &>
-  std::enable_if_t<with_average, _T> getAverage() const noexcept
+  template<typename _T = void>
+  std::enable_if_t<with_average, _T> restart(const time_point_t t_start) noexcept
   {
-    return avg_;
+    avg_ = 0.;
+    i_ = 0;
+    tic(t_start);
   }
 
   /**
-   * @brief Get the Average Count object
-   *
+   * @brief resets the timer duration average and restarts clock to current clock time
+   * Only available if with_average==true.
+   */
+  template<typename _T = void>
+  std::enable_if_t<with_average, _T> restart() noexcept
+  {
+    restart(clock_->now());
+  }
+
+  /**
+   * @brief get number of duration samples used for the computation of the average timer duration
+   * since construction or last restart.
+   * Only available if with_average==true.
    */
   template<typename _T = const std::size_t &>
   std::enable_if_t<with_average, _T> getAverageCount() const noexcept
@@ -281,8 +260,21 @@ public:
   }
 
   /**
-   * @brief self explanatory
-   *
+   * @brief get average timer duration (as a double, in the time unit specified by ratio_t)
+   * for all pairs of tic() and toc() calls since construction or last restart.
+   * Only available if with_average==true.
+   * if getAverageCount()==0, returns 0.
+   */
+  template<typename _T = const double &>
+  std::enable_if_t<with_average, _T> getAverage() const noexcept
+  {
+    return avg_;
+  }
+
+
+  /**
+   * @brief returns whether or not the timer is running,
+   * true just after a tic() call, and false just after a toc() call
    */
   const auto & isRunnning() const noexcept
   {
@@ -290,8 +282,8 @@ public:
   }
 
   /**
-   * @brief Get the Latest Chrono object
-   *
+   * @brief returns latest timer duration
+   * Undefined behavior if called before timer was ever started
    */
   const auto & getLatestChrono() const noexcept
   {
@@ -299,10 +291,10 @@ public:
   }
 
   /**
-   * @brief Get the Latest object
-   *
+   * @brief returns latest timer duration count
+   * Undefined behavior if called before timer was ever started
    */
-  auto getLatest() const noexcept
+  auto getLatestCount() const noexcept
   {
     return dt_.count();
   }
@@ -317,16 +309,15 @@ protected:
 
 protected:
   std::shared_ptr<clock_t> clock_ = std::make_shared<clock_t>();
-  std::size_t i_{};
+  std::size_t i_ = 0;
   duration_t dt_{};
-  double avg_{};
-  bool running_{};
-  time_point t_start_{};
+  double avg_ = 0.;
+  bool running_ = false;
+  time_point_t t_start_{};
 };
 
 /**
- * @brief Doesn't use averaging. Not recommended for optimal performance.
- *
+ * @brief CyberTimer template without average computation
  */
 template<
   typename ratio_t = std::ratio<1>,
@@ -345,8 +336,7 @@ struct CyberTimerNoAvg : public CyberTimer<ratio_t, T, clock_t, false>
 };
 
 /**
- * @brief Cyber time struct representing milliseconds
- *
+ * @brief CyberTimer template with milliseconds units and int64_t default duration representation
  */
 template<
   typename T = int64_t,
@@ -365,8 +355,7 @@ struct CyberTimerMilli : public CyberTimer<std::milli, T, clock_t, with_average>
 };
 
 /**
- * @brief Cyber time struct representing microseconds
- *
+ * @brief CyberTimer template with microseconds units and int64_t default duration representation
  */
 template<
   typename T = int64_t,
@@ -385,8 +374,7 @@ struct CyberTimerMicro : public CyberTimer<std::micro, T, clock_t, with_average>
 };
 
 /**
- * @brief Cyber time struct representing nanoseconds
- *
+ * @brief CyberTimer template with nanoseconds units and int64_t default duration representation
  */
 template<
   typename T = int64_t,
