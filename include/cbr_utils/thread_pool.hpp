@@ -132,7 +132,7 @@ inline ThreadPool::~ThreadPool()
     worker.join();
   }
 }
-}
+
 }  // namespace cbr
 
 #endif  // CBR_UTILS__THREAD_POOL_HPP_
