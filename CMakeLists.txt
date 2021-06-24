@@ -1,0 +1,137 @@
+cmake_minimum_required(VERSION 3.15)
+project(cbr_utils VERSION 0.1.0)
+
+include(CTest)
+include(GoogleTest)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+find_package(Boost REQUIRED)
+find_package(yaml-cpp REQUIRED)
+
+# ---------------------------------------------------------------------------------------
+# TARGETS
+# ---------------------------------------------------------------------------------------
+
+add_library(${PROJECT_NAME} INTERFACE)
+target_include_directories(${PROJECT_NAME}
+INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+target_link_libraries(${PROJECT_NAME}
+INTERFACE
+  Boost::headers
+  yaml-cpp
+)
+
+# ---------------------------------------------------------------------------------------
+# INSTALLATION
+# ---------------------------------------------------------------------------------------
+
+include(GNUInstallDirs)
+
+# Header files
+install(
+  DIRECTORY    ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}
+  DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+# Targets
+install(
+  TARGETS               ${PROJECT_NAME}
+  EXPORT                ${PROJECT_NAME}_targets
+  LIBRARY DESTINATION   ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION   ${CMAKE_INSTALL_LIBDIR}
+)
+
+# ---------------------------------------------------------------------------------------
+# CMAKE CONFIGURATION
+# ---------------------------------------------------------------------------------------
+
+set(export_dest_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+
+# Generate TARGETS files
+install(
+  EXPORT       ${PROJECT_NAME}_targets
+  FILE         ${PROJECT_NAME}Targets.cmake
+  NAMESPACE    ${PROJECT_NAME}::
+  DESTINATION  ${export_dest_dir}
+)
+
+# Generate CONFIG file
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+  cmake/ConfigTemplate.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+  INSTALL_DESTINATION ${export_dest_dir}
+)
+
+# Generate VERSION file
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Version.cmake
+  VERSION ${PACKAGE_VERSION}
+  COMPATIBILITY SameMajorVersion
+)
+
+# Install CONFIG and VERSION files
+install(
+  FILES        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+               ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Version.cmake
+  DESTINATION  ${export_dest_dir}
+)
+
+# Add target for uninstallation
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake
+  IMMEDIATE @ONLY
+)
+add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)
+
+# ---------------------------------------------------------------------------------------
+# TESTING
+# ---------------------------------------------------------------------------------------
+
+if(BUILD_TESTING)
+  find_package(GTest REQUIRED)
+
+  add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+
+  # Utils
+  add_executable(${PROJECT_NAME}_test_utils test/test_utils.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_utils PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_utils)
+
+  # Cyber timer
+  add_executable(${PROJECT_NAME}_test_cyber_timer test/test_cyber_timer.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_cyber_timer PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_cyber_timer)
+
+  # Loop timer
+  add_executable(${PROJECT_NAME}_test_loop_timer test/test_loop_timer.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_loop_timer PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_loop_timer)
+
+  # Synchronizer
+  add_executable(${PROJECT_NAME}_test_synchronizer test/test_synchronizer.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_synchronizer PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_synchronizer)
+
+  # Cyber enum
+  add_executable(${PROJECT_NAME}_test_cyber_enum test/test_cyber_enum.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_cyber_enum)
+
+  # Introspection
+  add_executable(${PROJECT_NAME}_test_introspection test/test_introspection.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_introspection PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_introspection)
+
+  # Yaml
+  add_executable(${PROJECT_NAME}_test_yaml test/test_yaml.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_yaml PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_yaml)
+endif()
+
