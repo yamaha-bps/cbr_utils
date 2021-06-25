@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #include <gtest/gtest.h>
 
@@ -13,9 +13,12 @@
 
 #include "cbr_utils/yaml.hpp"
 
-namespace cbr {
-namespace sub {
-struct SubParameters{
+namespace cbr
+{
+namespace sub
+{
+struct SubParameters
+{
   BOOST_HANA_DEFINE_STRUCT(
     SubParameters,
     (int, sub0),
@@ -25,7 +28,8 @@ struct SubParameters{
 };
 }  // namespace sub
 
-struct Parameters{
+struct Parameters
+{
   BOOST_HANA_DEFINE_STRUCT(
     Parameters,
     (std::string, param1),
@@ -81,11 +85,12 @@ TEST(Yaml, Invisible)
 }
 
 
-struct VectorParameter {
-BOOST_HANA_DEFINE_STRUCT(
-  VectorParameter,
-  (std::vector<int>, vector)
-);
+struct VectorParameter
+{
+  BOOST_HANA_DEFINE_STRUCT(
+    VectorParameter,
+    (std::vector<int>, vector)
+  );
 };
 
 TEST(Yaml, VectorType)

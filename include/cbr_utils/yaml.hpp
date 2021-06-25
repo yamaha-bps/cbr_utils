@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #ifndef CBR_UTILS__YAML_HPP_
 #define CBR_UTILS__YAML_HPP_
@@ -32,12 +32,15 @@ struct convert
   {
     if constexpr (boost::hana::Struct<T>::value) {
       Node ret;
-      boost::hana::for_each(val, boost::hana::fuse([&ret](auto key, const auto & value) {
-        if constexpr (boost::hana::Struct<decltype(value)>::value)
-          ret[boost::hana::to<char const *>(key)] = YAML::Node(value);
-        else
-          ret[boost::hana::to<char const *>(key)] = value;
-      }));
+      boost::hana::for_each(
+        val, boost::hana::fuse(
+          [&ret](auto key, const auto & value) {
+            if constexpr (boost::hana::Struct<decltype(value)>::value) {
+              ret[boost::hana::to<char const *>(key)] = YAML::Node(value);
+            } else {
+              ret[boost::hana::to<char const *>(key)] = value;
+            }
+          }));
       return ret;
     } else if constexpr (cbr::is_scoped_enum_v<T>) {  //NOLINT
       using UT = std::underlying_type_t<T>;
@@ -63,20 +66,21 @@ struct convert
   static bool decode(const Node & yaml, T & val)
   {
     if constexpr (boost::hana::Struct<T>::value) {
-      boost::hana::for_each(boost::hana::keys(val), [&](auto key) {
-        using ValT = std::decay_t<decltype(boost::hana::at_key(val, key))>;
+      boost::hana::for_each(
+        boost::hana::keys(val), [&](auto key) {
+          using ValT = std::decay_t<decltype(boost::hana::at_key(val, key))>;
 
-        char const * key_c = boost::hana::to<char const *>(key);
-        if constexpr (cbr::is_std_optional_v<ValT>) {
-          if (!yaml[key_c] || yaml[key_c].IsNull()) {
-            boost::hana::at_key(val, key) = std::nullopt;
+          char const * key_c = boost::hana::to<char const *>(key);
+          if constexpr (cbr::is_std_optional_v<ValT>) {
+            if (!yaml[key_c] || yaml[key_c].IsNull()) {
+              boost::hana::at_key(val, key) = std::nullopt;
+            } else {
+              boost::hana::at_key(val, key) = yaml[key_c].template as<typename ValT::value_type>();
+            }
           } else {
-            boost::hana::at_key(val, key) = yaml[key_c].template as<typename ValT::value_type>();
+            boost::hana::at_key(val, key) = yaml[key_c].template as<ValT>();
           }
-        } else {
-          boost::hana::at_key(val, key) = yaml[key_c].template as<ValT>();
-        }
-      });
+        });
       return true;
     } else if constexpr (cbr::is_scoped_enum_v<T>) {  //NOLINT
       try {
