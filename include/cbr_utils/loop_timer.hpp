@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #ifndef CBR_UTILS__LOOP_TIMER_HPP_
 #define CBR_UTILS__LOOP_TIMER_HPP_
@@ -15,6 +15,9 @@
 namespace cbr
 {
 
+/**
+ * @brief Loop synchronization utility class
+ */
 template<typename _clock_t = std::chrono::high_resolution_clock, bool _steady = false>
 class LoopTimer
 {
@@ -48,6 +51,33 @@ public:
     clock_(std::move(clock))
   {}
 
+  /**
+   * @brief set clock
+   */
+  void set_clock(const std::shared_ptr<clock_t> & clock) noexcept
+  {
+    clock_ = clock;
+  }
+
+  /**
+   * @brief set clock
+   */
+  void set_clock(std::shared_ptr<clock_t> && clock) noexcept
+  {
+    clock_ = std::move(clock);
+  }
+
+  /**
+   * @brief set loop rate
+   */
+  void set_rate(const duration_t & rate) noexcept
+  {
+    rate_ = rate;
+  }
+
+  /**
+   * @brief wait until next deadline
+   */
   void wait()
   {
     const auto tNow = clock_->now();
@@ -69,11 +99,34 @@ public:
           tNm1_ = tNow;
         }
       }
-      count_++;
     } else {
       tNm1_ = tNow;
-      count_++;
     }
+    count_++;
+  }
+
+  /**
+   * @brief returns how many time the wait() function was called
+   */
+  const std::size_t & get_count() const noexcept
+  {
+    return count_;
+  }
+
+  /**
+   * @brief returns rate
+   */
+  const duration_t & get_rate() const noexcept
+  {
+    return rate_;
+  }
+
+  /**
+   * @brief returns clock
+   */
+  std::shared_ptr<clock_t> get_clock() const
+  {
+    return clock_;
   }
 
 protected:

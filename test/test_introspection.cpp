@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #include <gtest/gtest.h>
 
@@ -201,19 +201,19 @@ TEST(Introspection, StaticForAggregate)
 
   i = 0;
   cbr::HanaStruct fs{"a1", 1, 2.};
-  cbr::static_for_aggregate(fs, fun);
+  cbr::static_for_hana(fs, fun);
   ASSERT_EQ(i, 7);
   ASSERT_EQ(fs.b, 0);
   ASSERT_EQ(fs.c, 2.);
 
   i = 0;
   fs = cbr::HanaStruct {"a1", 1, 2.};
-  cbr::static_for_aggregate(const_cast<const cbr::HanaStruct &>(fs), fun);
+  cbr::static_for_hana(const_cast<const cbr::HanaStruct &>(fs), fun);
   ASSERT_EQ(i, 8);
   ASSERT_EQ(fs.b, 1);
   ASSERT_EQ(fs.c, 2.);
 
   i = 0;
-  cbr::static_for_aggregate(cbr::HanaStruct{"a1", 1, 2.}, fun);
+  cbr::static_for_hana(cbr::HanaStruct{"a1", 1, 2.}, fun);
   ASSERT_EQ(i, 8);
 }

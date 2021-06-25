@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #ifndef CBR_UTILS__CRTP_HPP_
 #define CBR_UTILS__CRTP_HPP_
@@ -9,8 +9,7 @@ namespace cbr
 {
 
 /**
- * @brief crtp
- *
+ * @brief crtp helper, see https://www.fluentcpp.com/2017/05/19/crtp-helper/
  */
 template<typename T, typename crtpType>
 struct crtp

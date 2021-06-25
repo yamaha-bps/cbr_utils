@@ -1,12 +1,11 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #ifndef CBR_UTILS__UTILS_HPP_
 #define CBR_UTILS__UTILS_HPP_
 
 #include <array>
-#include <bitset>
 #include <chrono>
 #include <ctime>
 #include <functional>
@@ -134,7 +133,7 @@ inline bool isValidFilename(const std::string_view str)
  * \brief Takes a duration in second (as a double) and rounds to a duration
  * in the best units (s, ms, us)
  ***************************************************************************/
-inline std::pair<double, std::string> formatDuration(double t)
+inline std::pair<double, std::string> formatDuration(const double t)
 {
   double dt = t;
   std::string dtUnit = "s";
@@ -152,128 +151,10 @@ inline std::pair<double, std::string> formatDuration(double t)
 
 
 /***************************************************************************
- * \brief Compute the set of arrays of all possible one-to-one permutations
- *  of elements between the 2 inputs
- ***************************************************************************/
-template<std::size_t n, typename T>
-constexpr auto binary_perm(
-  const std::array<T, n> & min,
-  const std::array<T, n> & max) noexcept
-{
-  const std::size_t N = std::size_t(1) << n;
-  std::array<std::array<T, n>, N> out{};
-
-  for (std::size_t i = 0; i < N; i++) {
-    const std::bitset<n> currComb(i);
-    for (std::size_t j = 0; j < n; j++) {
-      if (currComb[j]) {
-        out[i][j] = max[j];
-      } else {
-        out[i][j] = min[j];
-      }
-    }
-  }
-
-  return out;
-}
-
-template<std::size_t n, typename T>
-constexpr auto binary_perm(
-  const T & min,
-  const T & max) noexcept
-{
-  const std::size_t N = std::size_t(1) << n;
-  std::array<std::array<T, n>, N> out{};
-
-  for (std::size_t i = 0; i < N; i++) {
-    const std::bitset<n> currComb(i);
-    for (std::size_t j = 0; j < n; j++) {
-      if (currComb[j]) {
-        out[i][j] = max;
-      } else {
-        out[i][j] = min;
-      }
-    }
-  }
-
-  return out;
-}
-
-template<size_t n, typename T = bool>
-constexpr auto binary_perm() noexcept
-{
-  const std::size_t N = std::size_t(1) << n;
-  std::array<std::array<T, n>, N> out{};
-
-  for (std::size_t i = 0; i < N; i++) {
-    const std::bitset<n> currComb(i);
-    for (std::size_t j = 0; j < n; j++) {
-      out[i][j] = currComb[j];
-    }
-  }
-
-  return out;
-}
-
-
-/***************************************************************************
- * \brief Compute the set of arrays of all possible one-to-one permutations
- *  of elements between the N inputs
- ***************************************************************************/
-template<std::size_t n, std::size_t b, typename T>
-constexpr auto digit_perm(const std::array<std::array<T, b>, n> & vals) noexcept
-{
-  const std::size_t N = detail::pow_fast<n>(b);
-  std::array<std::array<T, n>, N> out{};
-
-  for (std::size_t i = 0; i < N; i++) {
-    const digitset<n, b> currComb(i);
-    for (std::size_t j = 0; j < n; j++) {
-      out[i][j] = vals[j][currComb[j]];
-    }
-  }
-
-  return out;
-}
-
-template<std::size_t n, std::size_t b, typename T>
-constexpr auto digit_perm(const std::array<T, b> & vals) noexcept
-{
-  const std::size_t N = detail::pow_fast<n>(b);
-  std::array<std::array<T, n>, N> out{};
-
-  for (std::size_t i = 0; i < N; i++) {
-    const digitset<n, b> currComb(i);
-    for (std::size_t j = 0; j < n; j++) {
-      out[i][j] = vals[currComb[j]];
-    }
-  }
-
-  return out;
-}
-
-template<std::size_t n, std::size_t b, typename T = uint8_t>
-constexpr auto digit_perm() noexcept
-{
-  const std::size_t N = detail::pow_fast<n>(b);
-  std::array<std::array<T, n>, N> out{};
-
-  for (std::size_t i = 0; i < N; i++) {
-    const digitset<n, b> currComb(i);
-    for (std::size_t j = 0; j < n; j++) {
-      out[i][j] = currComb[j];
-    }
-  }
-
-  return out;
-}
-
-
-/***************************************************************************
  * \brief Check if all values in array are unique
  ***************************************************************************/
 template<typename T, std::size_t N, typename BinaryPredicate>
-constexpr bool all_unique(const std::array<T, N> & a, BinaryPredicate p)
+constexpr bool all_unique(const std::array<T, N> & a, BinaryPredicate && p)
 {
   for (std::size_t i = 0; i < N; i++) {
     for (std::size_t j = i + 1; j < N; j++) {

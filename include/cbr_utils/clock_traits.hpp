@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #ifndef CBR_UTILS__CLOCK_TRAITS_HPP_
 #define CBR_UTILS__CLOCK_TRAITS_HPP_
@@ -11,7 +11,7 @@ namespace cbr::detail
 {
 
 /**
- * @brief compile time determination of correct duration cast
+ * @brief clock traits wrapper
  *
  */
 template<typename clock_t>
