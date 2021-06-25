@@ -18,8 +18,7 @@ namespace cbr
 {
 
 /**
- * @brief
- *
+ * @brief Timer class with averaging capabilities
  */
 template<
   typename ratio_t = std::ratio<1>,
@@ -53,11 +52,17 @@ public:
   : clock_(std::move(clock))
   {}
 
+  /**
+   * @brief set clock
+   */
   void set_clock(const std::shared_ptr<clock_t> & clock) noexcept
   {
     clock_ = clock;
   }
 
+  /**
+   * @brief set clock
+   */
   void set_clock(std::shared_ptr<clock_t> && clock) noexcept
   {
     clock_ = std::move(clock);
@@ -65,7 +70,6 @@ public:
 
   /**
    * @brief returns current clock time
-   *
    */
   time_point_t now() const noexcept
   {
@@ -74,7 +78,6 @@ public:
 
   /**
    * @brief starts timer to specified timepoint
-   *
    */
   void tic(const time_point_t t_start) noexcept
   {
@@ -84,7 +87,6 @@ public:
 
   /**
    * @brief starts timer to current clock time
-   *
    */
   void tic() noexcept
   {
@@ -219,7 +221,6 @@ public:
 
   /**
    * @brief stops timer without updating duration average and latest duration.
-   *
    */
   void stop() noexcept
   {
@@ -297,6 +298,14 @@ public:
   auto get_latest() const noexcept
   {
     return dt_.count();
+  }
+
+  /**
+   * @brief returns timer's clock
+   */
+  std::shared_ptr<clock_t> get_clock() const
+  {
+    return clock_;
   }
 
 protected:
