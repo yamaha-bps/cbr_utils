@@ -558,7 +558,7 @@ TEST(Utils, StaticFor)
   count = 0;
   cbr::static_for<std::index_sequence<1, 2, 4>>(
     [&count]([[maybe_unused]] auto i) {
-      if (i > 2) {
+      if constexpr (i > 2) {
         return false;
       }
       count += i;

@@ -5,6 +5,7 @@
 #ifndef CBR_UTILS__STATIC_FOR_HPP_
 #define CBR_UTILS__STATIC_FOR_HPP_
 
+#include <experimental/type_traits>
 #include <functional>
 #include <type_traits>
 #include <utility>
@@ -24,13 +25,24 @@ namespace detail
 template<typename Lambda, typename T, T ... Is>
 void static_for_iseq_impl(Lambda && f, std::integer_sequence<T, Is...>)
 {
-  using return_t = std::common_type_t<
-    std::invoke_result_t<Lambda, std::integral_constant<T, Is>> ...
+  constexpr bool has_common_type = std::experimental::is_detected_v<std::common_type_t,
+      std::invoke_result_t<Lambda, std::integral_constant<T, Is>>...
   >;
-  if constexpr (std::is_same_v<return_t, bool>) {
-    (std::invoke(f, std::integral_constant<T, Is>()) && ...);
-  } else {
-    (std::invoke(f, std::integral_constant<T, Is>()), ...);
+
+  static_assert(
+    has_common_type,
+    "Operators passed to the static_for function must all have the same return type.");
+
+  if constexpr (has_common_type) {
+    using return_t = std::common_type_t<
+      std::invoke_result_t<Lambda, std::integral_constant<T, Is>>...
+    >;
+
+    if constexpr (std::is_same_v<return_t, bool>) {
+      (std::invoke(f, std::integral_constant<T, Is>()) && ...);
+    } else {
+      (std::invoke(f, std::integral_constant<T, Is>()), ...);
+    }
   }
 }
 
@@ -89,7 +101,7 @@ template<typename Seq, typename Lambda, std::size_t ... Is>
 void static_for_aggregate_impl(Seq && s, Lambda && f, std::index_sequence<Is...>)
 {
   using return_t = std::common_type_t<
-    std::invoke_result_t<Lambda, decltype(std::get<Is>(s))> ...
+    std::invoke_result_t<Lambda, decltype(std::get<Is>(s))>...
   >;
   if constexpr (std::is_same_v<return_t, bool>) {
     (std::invoke(f, std::get<Is>(s)) && ...);
