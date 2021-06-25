@@ -67,7 +67,7 @@ TEST(CyberTimer, Basic)
   ASSERT_NEAR(tmr.get_average(), 10000., 1000.);
   ASSERT_EQ(tmr.get_average_count(), N);
 
-  ASSERT_EQ(tmr.is_runnning(), true);
+  ASSERT_EQ(tmr.is_runnning(), false);
 
   tmr.restart();
 
@@ -78,7 +78,9 @@ TEST(CyberTimer, Basic)
   tmr.tic();
   *clock += 100;
   const auto dt1 = tmr.toc();
-  const auto dt2 = tmr.toc_chrono().count();
+  ASSERT_EQ(tmr.is_runnning(), false);
+  const auto dt2 = tmr.toc_tic();
+  ASSERT_EQ(tmr.is_runnning(), true);
   const auto dt3 = tmr.get_latest();
   const auto dt4 = tmr.get_latest_chrono().count();
 
@@ -92,5 +94,5 @@ TEST(CyberTimer, Basic)
   ASSERT_NEAR(tmr.get_average(), 100000., 10000.);
 
   *clock += 10;
-  ASSERT_DOUBLE_EQ(tmr.tac(), 110000.);
+  ASSERT_DOUBLE_EQ(tmr.tac(), 10000.);
 }

@@ -141,6 +141,7 @@ public:
   const duration_t & toc_chrono(const time_point_t t_stop) noexcept
   {
     if (running_) {
+      running_ = false;
       dt_ = tac_chrono(t_stop);
       if constexpr (with_average) {
         i_++;
@@ -162,10 +163,10 @@ public:
   }
 
   /**
-   * @brief calls tocChrono and then tic with specified timepoint
-   * and returns the result of the tocChrono call
+   * @brief calls toc_chrono and then tic with specified timepoint
+   * and returns the result of the toc_chrono call
    */
-  const duration_t & toctic_chrono(const time_point_t t_stop) noexcept
+  const duration_t & toc_tic_chrono(const time_point_t t_stop) noexcept
   {
     toc_chrono(t_stop);
     tic(t_stop);
@@ -173,12 +174,12 @@ public:
   }
 
   /**
-   * @brief calls tocChrono and then tic with the same current clock time
-   * and returns the result of the tocChrono call
+   * @brief calls toc_chrono and then tic with the same current clock time
+   * and returns the result of the toc_chrono call
    */
-  const duration_t & toctic_chrono() noexcept
+  const duration_t & toc_tic_chrono() noexcept
   {
-    return toctic_chrono(clock_->now());
+    return toc_tic_chrono(clock_->now());
   }
 
   /**
@@ -205,18 +206,18 @@ public:
    * @brief calls toc and then tic with specified timepoint
    * and returns the result of the toc call
    */
-  T toctic(const time_point_t t_stop) noexcept
+  T toc_tic(const time_point_t t_stop) noexcept
   {
-    return toctic_chrono(t_stop).count();
+    return toc_tic_chrono(t_stop).count();
   }
 
   /**
    * @brief calls toc and then tic with the same current clock time
    * and returns the result of the toc call
    */
-  T toctic() noexcept
+  T toc_tic() noexcept
   {
-    return toctic_chrono().count();
+    return toc_tic_chrono().count();
   }
 
   /**
