@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_ros/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
 #ifndef CBR_UTILS__CYBER_TIMER_HPP_
 #define CBR_UTILS__CYBER_TIMER_HPP_
@@ -95,7 +95,7 @@ public:
    * @brief returns duration between specified timepoint and when timer last started.
    * Undefined behavior if called before timer was ever started
    */
-  duration_t tacChrono(const time_point_t t_stop) const noexcept
+  duration_t tac_chrono(const time_point_t t_stop) const noexcept
   {
     const auto duration = t_stop - t_start_;
     return detail::template ClockTraits<clock_t>::template duration_cast<duration_t>(duration);
@@ -105,9 +105,9 @@ public:
    * @brief returns duration between current clock time and when timer last started.
    * Undefined behavior if called before timer was ever started
    */
-  duration_t tacChrono() const noexcept
+  duration_t tac_chrono() const noexcept
   {
-    return tacChrono(clock_->now());
+    return tac_chrono(clock_->now());
   }
 
   /**
@@ -116,7 +116,7 @@ public:
    */
   T tac(const time_point_t t_stop) const noexcept
   {
-    return tacChrono(t_stop).count();
+    return tac_chrono(t_stop).count();
   }
 
   /**
@@ -125,7 +125,7 @@ public:
    */
   T tac() const noexcept
   {
-    return tacChrono().count();
+    return tac_chrono().count();
   }
 
   /**
@@ -136,10 +136,10 @@ public:
    * the timer duration average.
    * Undefined behavior if called before timer was ever started
    */
-  const duration_t & tocChrono(const time_point_t t_stop) noexcept
+  const duration_t & toc_chrono(const time_point_t t_stop) noexcept
   {
     if (running_) {
-      dt_ = tacChrono(t_stop);
+      dt_ = tac_chrono(t_stop);
       if constexpr (with_average) {
         i_++;
         compute_avg();
@@ -154,18 +154,18 @@ public:
    * and when timer last started.
    * If with_average==true, updates the timer duration average
    */
-  const duration_t & tocChrono() noexcept
+  const duration_t & toc_chrono() noexcept
   {
-    return tocChrono(clock_->now());
+    return toc_chrono(clock_->now());
   }
 
   /**
    * @brief calls tocChrono and then tic with specified timepoint
    * and returns the result of the tocChrono call
    */
-  const duration_t & tocticChrono(const time_point_t t_stop) noexcept
+  const duration_t & toctic_chrono(const time_point_t t_stop) noexcept
   {
-    tocChrono(t_stop);
+    toc_chrono(t_stop);
     tic(t_stop);
     return dt_;
   }
@@ -174,9 +174,9 @@ public:
    * @brief calls tocChrono and then tic with the same current clock time
    * and returns the result of the tocChrono call
    */
-  const duration_t & tocticChrono() noexcept
+  const duration_t & toctic_chrono() noexcept
   {
-    return tocticChrono(clock_->now());
+    return toctic_chrono(clock_->now());
   }
 
   /**
@@ -186,7 +186,7 @@ public:
    */
   T toc(const time_point_t t_stop) noexcept
   {
-    return tocChrono(t_stop).count();
+    return toc_chrono(t_stop).count();
   }
 
   /**
@@ -196,7 +196,7 @@ public:
    */
   T toc() noexcept
   {
-    return tocChrono().count();
+    return toc_chrono().count();
   }
 
   /**
@@ -205,7 +205,7 @@ public:
    */
   T toctic(const time_point_t t_stop) noexcept
   {
-    return tocticChrono(t_stop).count();
+    return toctic_chrono(t_stop).count();
   }
 
   /**
@@ -214,7 +214,7 @@ public:
    */
   T toctic() noexcept
   {
-    return tocticChrono().count();
+    return toctic_chrono().count();
   }
 
   /**
@@ -254,7 +254,7 @@ public:
    * Only available if with_average==true.
    */
   template<typename _T = const std::size_t &>
-  std::enable_if_t<with_average, _T> getAverageCount() const noexcept
+  std::enable_if_t<with_average, _T> get_average_count() const noexcept
   {
     return i_;
   }
@@ -266,7 +266,7 @@ public:
    * if getAverageCount()==0, returns 0.
    */
   template<typename _T = const double &>
-  std::enable_if_t<with_average, _T> getAverage() const noexcept
+  std::enable_if_t<with_average, _T> get_average() const noexcept
   {
     return avg_;
   }
@@ -276,7 +276,7 @@ public:
    * @brief returns whether or not the timer is running,
    * true just after a tic() call, and false just after a toc() call
    */
-  const auto & isRunnning() const noexcept
+  const auto & is_runnning() const noexcept
   {
     return running_;
   }
@@ -285,7 +285,7 @@ public:
    * @brief returns latest timer duration
    * Undefined behavior if called before timer was ever started
    */
-  const auto & getLatestChrono() const noexcept
+  const auto & get_latest_chrono() const noexcept
   {
     return dt_;
   }
@@ -294,7 +294,7 @@ public:
    * @brief returns latest timer duration count
    * Undefined behavior if called before timer was ever started
    */
-  auto getLatestCount() const noexcept
+  auto get_latest() const noexcept
   {
     return dt_.count();
   }
