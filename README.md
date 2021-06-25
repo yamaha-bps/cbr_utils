@@ -25,7 +25,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-
+[![Coverage][coverage-shield]][coverage-url]
 
 
 <!-- PROJECT LOGO -->
@@ -196,6 +196,8 @@ Project Link: [https://github.com/yamaha-bps/cbr_utils](https://github.com/yamah
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[coverage-shield]: https://img.shields.io/codecov/c/github/yamaha-bps/cbr_utils?style=for-the-badge&token=EA1KEBJWBU
+[coverage-url]: https://codecov.io/gh/yamaha-bps/cbr_utils
 [contributors-shield]: https://img.shields.io/github/contributors/yamaha-bps/cbr_utils.svg?style=for-the-badge
 [contributors-url]: https://github.com/yamaha-bps/cbr_utils/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/yamaha-bps/cbr_utils.svg?style=for-the-badge
