@@ -5,8 +5,9 @@
 #ifndef CBR_UTILS__DIGITSET_HPP_
 #define CBR_UTILS__DIGITSET_HPP_
 
-#include <cstdint>
 #include <array>
+#include <bitset>
+#include <utility>
 #include <utility>
 
 namespace cbr
@@ -33,6 +34,10 @@ constexpr std::size_t pow_fast(const std::size_t b) noexcept
 }
 }
 
+/**
+ * @brief extention of std::bitset for bases > 2,
+ * i.e. extract the digits of a number in a given base
+ */
 template<std::size_t _len, uint8_t _base = 10>
 class digitset
 {
@@ -47,6 +52,11 @@ public:
   digitset & operator=(digitset &&) = default;
   ~digitset() = default;
 
+/**
+ * @brief construct digit set from value
+ * If input has more digits than the specified length of the digit set,
+ * then it is the input modulus base^lenth that is used.
+ */
   constexpr digitset(std::size_t val) noexcept
   {
     val %= detail::pow_fast<_len>(_base);
@@ -58,27 +68,41 @@ public:
     }
   }
 
+  /**
+   * @brief access the digit at a given position.
+   */
   constexpr uint8_t operator[](const std::size_t pos) const
   {
     return data_[pos];
   }
 
+  /**
+   * @brief access the digit at a given position.
+   */
   uint8_t & operator[](const std::size_t pos)
   {
     return data_[pos];
   }
 
+  /**
+   * @brief returns the size of the digit set
+   */
   constexpr std::size_t size() const noexcept
   {
     return _len;
   }
 
-
-  uint8_t test(std::size_t pos) const
+  /**
+   * @brief access the digit at a given position with bound checking.
+   */
+  uint8_t test(const std::size_t pos) const
   {
     return data_.at(pos);
   }
 
+  /**
+   * @brief returns the number of non-zero digits
+   */
   constexpr std::size_t count() const noexcept
   {
     std::size_t out = 0;
@@ -91,6 +115,9 @@ public:
     return out;
   }
 
+  /**
+   * @brief converts the digit set back to an std::size_t
+   */
   constexpr std::size_t to_ulong() const noexcept
   {
     if (_len == 1) {
@@ -115,6 +142,122 @@ public:
 private:
   std::array<uint8_t, _len> data_{};
 };
+
+/***************************************************************************
+ * \brief Compute the set of arrays of all possible one-to-one permutations
+ *  of elements between the N inputs
+ ***************************************************************************/
+template<std::size_t n, std::size_t b, typename T>
+constexpr auto digit_perm(const std::array<std::array<T, b>, n> & vals) noexcept
+{
+  const std::size_t N = detail::pow_fast<n>(b);
+  std::array<std::array<T, n>, N> out{};
+
+  for (std::size_t i = 0; i < N; i++) {
+    const digitset<n, b> currComb(i);
+    for (std::size_t j = 0; j < n; j++) {
+      out[i][j] = vals[j][currComb[j]];
+    }
+  }
+
+  return out;
+}
+
+template<std::size_t n, std::size_t b, typename T>
+constexpr auto digit_perm(const std::array<T, b> & vals) noexcept
+{
+  const std::size_t N = detail::pow_fast<n>(b);
+  std::array<std::array<T, n>, N> out{};
+
+  for (std::size_t i = 0; i < N; i++) {
+    const digitset<n, b> currComb(i);
+    for (std::size_t j = 0; j < n; j++) {
+      out[i][j] = vals[currComb[j]];
+    }
+  }
+
+  return out;
+}
+
+template<std::size_t n, std::size_t b, typename T = uint8_t>
+constexpr auto digit_perm() noexcept
+{
+  const std::size_t N = detail::pow_fast<n>(b);
+  std::array<std::array<T, n>, N> out{};
+
+  for (std::size_t i = 0; i < N; i++) {
+    const digitset<n, b> currComb(i);
+    for (std::size_t j = 0; j < n; j++) {
+      out[i][j] = currComb[j];
+    }
+  }
+
+  return out;
+}
+
+/***************************************************************************
+ * \brief Compute the set of arrays of all possible one-to-one permutations
+ *  of elements between the 2 inputs
+ ***************************************************************************/
+template<std::size_t n, typename T>
+constexpr auto binary_perm(
+  const std::array<T, n> & min,
+  const std::array<T, n> & max) noexcept
+{
+  const std::size_t N = std::size_t(1) << n;
+  std::array<std::array<T, n>, N> out{};
+
+  for (std::size_t i = 0; i < N; i++) {
+    const std::bitset<n> currComb(i);
+    for (std::size_t j = 0; j < n; j++) {
+      if (currComb[j]) {
+        out[i][j] = max[j];
+      } else {
+        out[i][j] = min[j];
+      }
+    }
+  }
+
+  return out;
+}
+
+template<std::size_t n, typename T>
+constexpr auto binary_perm(
+  const T & min,
+  const T & max) noexcept
+{
+  const std::size_t N = std::size_t(1) << n;
+  std::array<std::array<T, n>, N> out{};
+
+  for (std::size_t i = 0; i < N; i++) {
+    const std::bitset<n> currComb(i);
+    for (std::size_t j = 0; j < n; j++) {
+      if (currComb[j]) {
+        out[i][j] = max;
+      } else {
+        out[i][j] = min;
+      }
+    }
+  }
+
+  return out;
+}
+
+template<size_t n, typename T = bool>
+constexpr auto binary_perm() noexcept
+{
+  const std::size_t N = std::size_t(1) << n;
+  std::array<std::array<T, n>, N> out{};
+
+  for (std::size_t i = 0; i < N; i++) {
+    const std::bitset<n> currComb(i);
+    for (std::size_t j = 0; j < n; j++) {
+      out[i][j] = currComb[j];
+    }
+  }
+
+  return out;
+}
 
 }  // namespace cbr
 

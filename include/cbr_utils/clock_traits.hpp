@@ -11,7 +11,7 @@ namespace cbr::detail
 {
 
 /**
- * @brief compile time determination of correct duration cast
+ * @brief clock traits wrapper
  *
  */
 template<typename clock_t>

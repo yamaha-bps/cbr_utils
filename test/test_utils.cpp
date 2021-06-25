@@ -600,6 +600,7 @@ TEST(Utils, Specialization)
 TEST(Utils, dateStr)
 {
   const auto now = std::chrono::system_clock::now();
+  const auto nowStr0 = cbr::dateStr();
 
   const auto nowStr = cbr::dateStr(now);
   const auto nowStrFullPres = cbr::dateStr(now, true);
@@ -610,6 +611,7 @@ TEST(Utils, dateStr)
   const auto nowStr2 = cbr::dateStr(now2);
   const auto nowStrFullPres2 = cbr::dateStr(nowFullPres2, true);
 
+  ASSERT_EQ(nowStr, nowStr0);
   ASSERT_EQ(nowStr, nowStr2);
   ASSERT_EQ(
     nowStrFullPres.substr(0, nowStrFullPres.length() - 2),
@@ -633,4 +635,48 @@ TEST(Utils, is_sorted)
   EXPECT_FALSE(cbr::is_sorted(v3.cbegin(), v3.cend()));
   EXPECT_FALSE(cbr::is_sorted(v4.cbegin(), v4.cend()));
   EXPECT_FALSE(cbr::is_strictly_sorted(v4.cbegin(), v4.cend()));
+}
+
+TEST(Utils, ValidFilename)
+{
+  EXPECT_TRUE(cbr::isValidFilename("test"));
+  EXPECT_FALSE(cbr::isValidFilename("\\test"));
+  EXPECT_FALSE(cbr::isValidFilename("/test"));
+  EXPECT_FALSE(cbr::isValidFilename(":test"));
+  EXPECT_FALSE(cbr::isValidFilename("*test"));
+  EXPECT_FALSE(cbr::isValidFilename("?test"));
+  EXPECT_FALSE(cbr::isValidFilename("\"test"));
+  EXPECT_FALSE(cbr::isValidFilename("<test"));
+  EXPECT_FALSE(cbr::isValidFilename(">test"));
+  EXPECT_FALSE(cbr::isValidFilename("|test"));
+}
+
+TEST(Utils, formatDuration)
+{
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(5.).first, 5.);
+  EXPECT_EQ(cbr::formatDuration(5.).second, "s");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(1.).first, 1.);
+  EXPECT_EQ(cbr::formatDuration(1.).second, "s");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(0.1).first, 100.);
+  EXPECT_EQ(cbr::formatDuration(0.1).second, "ms");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(0.01).first, 10.);
+  EXPECT_EQ(cbr::formatDuration(0.01).second, "ms");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(0.001).first, 1.);
+  EXPECT_EQ(cbr::formatDuration(0.001).second, "ms");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(0.0001).first, 100.);
+  EXPECT_EQ(cbr::formatDuration(0.0001).second, "us");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(0.00001).first, 10.);
+  EXPECT_EQ(cbr::formatDuration(0.00001).second, "us");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(0.000001).first, 1.);
+  EXPECT_EQ(cbr::formatDuration(0.000001).second, "us");
+
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(0.0000001).first, 0.1);
+  EXPECT_EQ(cbr::formatDuration(0.0000001).second, "us");
 }

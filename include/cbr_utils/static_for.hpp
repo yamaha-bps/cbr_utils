@@ -112,33 +112,39 @@ void static_for_aggregate_impl(Seq && s, Lambda && f, std::index_sequence<Is...>
 
 }  // namespace detail
 
+/**
+ * @brief statically iterate over the fields of an aggregate
+ */
 template<typename Seq, typename Lambda>
 void static_for_aggregate(Seq && s, Lambda && f)
 {
   using Seq_t = std::decay_t<Seq>;
+
+  detail::static_for_aggregate_impl(
+    std::forward<Seq>(s),
+    std::forward<Lambda>(f),
+    std::make_index_sequence<std::tuple_size_v<Seq_t>>{});
+}
+
+template<typename Seq, typename Lambda>
+void static_for_hana(Seq && s, Lambda && f)
+{
   using s_t = decltype(s);
 
-  if constexpr (boost::hana::Struct<Seq_t>::value) {
-    if constexpr (std::is_rvalue_reference_v<s_t>) {
-      const auto t = copy_to_tuple(std::forward<Seq>(s));
-      using N = std::tuple_size<decltype(t)>;
-      detail::static_for_aggregate_impl(
-        t,
-        std::forward<Lambda>(f),
-        std::make_index_sequence<N::value>{});
-    } else {
-      auto t = bind_to_tuple(s);
-      using N = std::tuple_size<decltype(t)>;
-      detail::static_for_aggregate_impl(
-        std::move(t),
-        std::forward<Lambda>(f),
-        std::make_index_sequence<N::value>{});
-    }
-  } else {
+  if constexpr (std::is_rvalue_reference_v<s_t>) {
+    const auto t = copy_to_tuple(std::forward<Seq>(s));
+    using N = std::tuple_size<decltype(t)>;
     detail::static_for_aggregate_impl(
-      std::forward<Seq>(s),
+      t,
       std::forward<Lambda>(f),
-      std::make_index_sequence<std::tuple_size_v<Seq_t>>{});
+      std::make_index_sequence<N::value>{});
+  } else {
+    auto t = bind_to_tuple(s);
+    using N = std::tuple_size<decltype(t)>;
+    detail::static_for_aggregate_impl(
+      std::move(t),
+      std::forward<Lambda>(f),
+      std::make_index_sequence<N::value>{});
   }
 }
 

@@ -55,6 +55,9 @@ auto bind_to_tuple_impl(Seq & s, std::index_sequence<Is...>)
 
 }  // namespace detail
 
+/**
+ * @brief copy the fields of a boost::hana::Struct into a tuple
+ */
 template<typename Seq>
 auto copy_to_tuple(Seq && s)
 {
@@ -67,6 +70,9 @@ auto copy_to_tuple(Seq && s)
     std::make_index_sequence<decltype(boost::hana::length(s))::value>{});
 }
 
+/**
+ * @brief ties the fields of a boost::hana::Struct to a tuple
+ */
 template<typename Seq>
 auto bind_to_tuple(Seq & s)
 {

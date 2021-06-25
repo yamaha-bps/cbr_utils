@@ -9,8 +9,7 @@ namespace cbr
 {
 
 /**
- * @brief crtp
- *
+ * @brief crtp helper, see https://www.fluentcpp.com/2017/05/19/crtp-helper/
  */
 template<typename T, typename crtpType>
 struct crtp
