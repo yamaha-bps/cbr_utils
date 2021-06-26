@@ -127,16 +127,13 @@ To get a local copy up and running follow these simple steps.
 3. Build
    ```sh
    cd cbr_utils/build
-   cmake .. -DBUILD_TESTING=ON -DBUILD_EXAMPLES=ON
+   cmake .. -DBUILD_EXAMPLES=ON
    make
    ```
+   
 4. Install
    ```sh
    sudo make install
-   ```
-5. Verify successful install (tests should all pass)
-   ```sh
-   make test
    ```
 
 6. Uninstall if you don't like it
@@ -144,6 +141,11 @@ To get a local copy up and running follow these simple steps.
    sudo make uninstall
    ```
 
+7. To run the tests:
+   ```sh
+   cmake .. -DBUILD_EXAMPLES=ON -DBUILD_TESTING=ON
+   make test
+   ```
 <!-- USAGE EXAMPLES -->
 
 
