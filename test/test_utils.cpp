@@ -551,7 +551,7 @@ TEST(Utils, StaticFor)
   count = 0;
   cbr::static_for<std::index_sequence<1, 2, 4>>(
     [&count]([[maybe_unused]] auto i) {
-      count += i;
+      count += static_cast<int>(i);
     });
   ASSERT_EQ(count, 7);
 
@@ -561,7 +561,7 @@ TEST(Utils, StaticFor)
       if constexpr (i > 2) {
         return false;
       }
-      count += i;
+      count += static_cast<int>(i);
       return true;
     });
   ASSERT_EQ(count, 3);
