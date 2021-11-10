@@ -184,7 +184,7 @@ TEST(Utils, digit_perm)
   ASSERT_EQ(vtx[7], (std::array<int, 2>{0, 3}));
   ASSERT_EQ(vtx[8], (std::array<int, 2>{1, 3}));
 
-  constexpr auto vtxIdx = cbr::digit_perm<2, 3, int>();
+  constexpr auto vtxIdx = cbr::digit_perm<2, 3>();
   for (std::size_t i = 0; i < vtxIdx.size(); i++) {
     for (std::size_t j = 0; j < 2; j++) {
       ASSERT_EQ(vtx[i][j], vals[j][vtxIdx[i][j]]);
