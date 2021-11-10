@@ -1,14 +1,37 @@
 cmake_minimum_required(VERSION 3.15)
 project(cbr_utils VERSION 0.1.0)
 
-include(CTest)
-include(GoogleTest)
+# ---------------------------------------------------------------------------------------
+# GLOBAL FLAGS
+# ---------------------------------------------------------------------------------------
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+
+# ---------------------------------------------------------------------------------------
+# OPTIONS
+# ---------------------------------------------------------------------------------------
+
+include(CTest)
+
+
+# Release type
+set(default_build_type "Release")
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
+  set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+
+# ---------------------------------------------------------------------------------------
+# DEPENDENCIES
+# ---------------------------------------------------------------------------------------
+
 find_package(Boost REQUIRED)
 find_package(yaml-cpp REQUIRED)
+
 
 # ---------------------------------------------------------------------------------------
 # TARGETS
@@ -25,6 +48,7 @@ INTERFACE
   Boost::headers
   yaml-cpp
 )
+
 
 # ---------------------------------------------------------------------------------------
 # INSTALLATION
@@ -45,6 +69,7 @@ install(
   LIBRARY DESTINATION   ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION   ${CMAKE_INSTALL_LIBDIR}
 )
+
 
 # ---------------------------------------------------------------------------------------
 # CMAKE CONFIGURATION
@@ -90,14 +115,16 @@ configure_file(
 )
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)
 
+
 # ---------------------------------------------------------------------------------------
 # TESTING
 # ---------------------------------------------------------------------------------------
 
 if(BUILD_TESTING)
+  include(GoogleTest)
   find_package(GTest REQUIRED)
 
-  add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+  add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wconversion -Werror)
 
   # Utils
   add_executable(${PROJECT_NAME}_test_utils test/test_utils.cpp)

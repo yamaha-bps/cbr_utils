@@ -38,7 +38,7 @@ constexpr std::size_t pow_fast(const std::size_t b) noexcept
  * @brief extention of std::bitset for bases > 2,
  * i.e. extract the digits of a number in a given base
  */
-template<std::size_t _len, uint8_t _base = 10>
+template<std::size_t _len, std::size_t _base = 10>
 class digitset
 {
   static_assert(_base > 1, "Base must be > 1.");
@@ -71,7 +71,7 @@ public:
   /**
    * @brief access the digit at a given position.
    */
-  constexpr uint8_t operator[](const std::size_t pos) const
+  constexpr std::size_t operator[](const std::size_t pos) const
   {
     return data_[pos];
   }
@@ -79,7 +79,7 @@ public:
   /**
    * @brief access the digit at a given position.
    */
-  uint8_t & operator[](const std::size_t pos)
+  std::size_t & operator[](const std::size_t pos)
   {
     return data_[pos];
   }
@@ -95,7 +95,7 @@ public:
   /**
    * @brief access the digit at a given position with bound checking.
    */
-  uint8_t test(const std::size_t pos) const
+  std::size_t test(const std::size_t pos) const
   {
     return data_.at(pos);
   }
@@ -124,7 +124,7 @@ public:
       return data_[0];
     }
 
-    std::size_t b = static_cast<std::size_t>(_base);
+    std::size_t b = _base;
     std::size_t out = static_cast<std::size_t>(data_[0]) +
       b * static_cast<std::size_t>(data_[1]);
     if (_len == 2) {
@@ -140,7 +140,7 @@ public:
   }
 
 private:
-  std::array<uint8_t, _len> data_{};
+  std::array<std::size_t, _len> data_{};
 };
 
 /***************************************************************************
@@ -179,7 +179,7 @@ constexpr auto digit_perm(const std::array<T, b> & vals) noexcept
   return out;
 }
 
-template<std::size_t n, std::size_t b, typename T = uint8_t>
+template<std::size_t n, std::size_t b, typename T = std::size_t>
 constexpr auto digit_perm() noexcept
 {
   const std::size_t N = detail::pow_fast<n>(b);
@@ -188,7 +188,7 @@ constexpr auto digit_perm() noexcept
   for (std::size_t i = 0; i < N; i++) {
     const digitset<n, b> currComb(i);
     for (std::size_t j = 0; j < n; j++) {
-      out[i][j] = currComb[j];
+      out[i][j] = static_cast<T>(currComb[j]);
     }
   }
 

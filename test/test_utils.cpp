@@ -408,7 +408,7 @@ TEST(Utils, IntegerPack)
   static_assert(std::is_same_v<cbr::makeIntegerPack<int, 4>, cbr::IntegerPack<int, 0, 1, 2, 3>>);
   static_assert(std::is_same_v<cbr::makeIndexPack<4>, cbr::IndexPack<0, 1, 2, 3>>);
 
-  int count = 0;
+  std::size_t count = 0;
   cbr::IndexPack<1, 2, 4>::loop(
     [&count](auto i) {
       count += i;
@@ -529,7 +529,7 @@ TEST(Utils, StaticFor)
   ASSERT_DOUBLE_EQ(std::get<double>(t), 1.);
   ASSERT_EQ(std::get<int>(t), 2);
 
-  int count = 0;
+  std::size_t count = 0;
   cbr::static_for_index<0, 9>(
     [&count]([[maybe_unused]] auto i) {
       count++;
