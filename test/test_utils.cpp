@@ -529,7 +529,7 @@ TEST(Utils, StaticFor)
   ASSERT_DOUBLE_EQ(std::get<double>(t), 1.);
   ASSERT_EQ(std::get<int>(t), 2);
 
-  std::size_t count = 0;
+  int count = 0;
   cbr::static_for_index<0, 9>(
     [&count]([[maybe_unused]] auto i) {
       count++;
