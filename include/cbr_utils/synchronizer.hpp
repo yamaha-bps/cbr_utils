@@ -25,14 +25,14 @@ template<>
 class Synchronizer<>
 {
 public:
-  explicit Synchronizer(int64_t delta_t)
-  : delta_t(delta_t),
-    next_t(std::numeric_limits<int64_t>::min())
+  explicit Synchronizer(const int64_t delta_t)
+  : m_delta_t(delta_t),
+    m_next_t(std::numeric_limits<int64_t>::min())
   {}
 
 protected:
-  std::mutex search_mtx;  // to run one search at a time
-  int64_t delta_t, next_t;
+  std::mutex m_search_mtx;  // to run one search at a time
+  int64_t m_delta_t, m_next_t;
 };
 
 
@@ -84,7 +84,7 @@ public:
    */
   explicit Synchronizer<T, Ts...>(int64_t delta_t = 0)
   : Synchronizer<Ts...>(delta_t),
-    impl{
+    m_impl{
       {},
       0,
       0,
@@ -133,7 +133,7 @@ public:
   void register_nonsync_callback(S && c)
   {
     if constexpr (k == 0) {
-      impl.callback_this_ = c;
+      m_impl.callback_this_ = c;
     }
     if constexpr (k != 0) {
       Synchronizer<Ts...>::template register_nonsync_callback<k - 1>(std::forward<S>(c));
@@ -154,7 +154,7 @@ public:
   void set_time_fcn(S && f)
   {
     if constexpr (k == 0) {
-      impl.time_fcn = f;
+      m_impl.time_fcn = f;
     }
     if constexpr (k != 0) {
       Synchronizer<Ts...>::template set_time_fcn<k - 1>(std::forward<S>(f));
@@ -172,14 +172,14 @@ public:
   void add(S && el)
   {
     if constexpr (k == 0) {
-      auto el_time = impl.time_fcn(el);
-      if (el_time < Synchronizer<>::next_t) {
+      auto el_time = m_impl.time_fcn(el);
+      if (el_time < Synchronizer<>::m_next_t) {
         return;  // doesn't respect minimal delta_t
       }
-      if (!impl.queue.empty() && el_time < impl.time_fcn(impl.queue.back())) {
+      if (!m_impl.queue.empty() && el_time < m_impl.time_fcn(m_impl.queue.back())) {
         return;  // time not monotonically increasing
       }
-      impl.queue.emplace_back(std::forward<S>(el));
+      m_impl.queue.emplace_back(std::forward<S>(el));
     }
     if constexpr (k != 0) {
       Synchronizer<Ts...>::template add<k - 1>(std::forward<S>(el));
@@ -205,12 +205,12 @@ public:
   void add_and_search(S && el)
   {
     add<k>(std::forward<S>(el));
-    if (Synchronizer<Ts...>::search_mtx.try_lock()) {
+    if (Synchronizer<Ts...>::m_search_mtx.try_lock()) {
       bool search_more = true;
       while (search_more) {
         search_more = search();
       }
-      Synchronizer<Ts...>::search_mtx.unlock();
+      Synchronizer<Ts...>::m_search_mtx.unlock();
     }
   }
 
@@ -229,7 +229,7 @@ protected:
     CallbackThis callback_this_;
   };
 
-  Impl impl{};
+  Impl m_impl{};
   CallbackAll callback_{};
 
   // Print on stream for debugging
@@ -260,8 +260,8 @@ protected:
   // increase first counter for first element with stamp at least time
   void increase_first_with_time(int64_t time)
   {
-    if (time >= impl.time_fcn(impl.queue.at(impl.search_idx))) {
-      ++impl.search_idx;
+    if (time >= m_impl.time_fcn(m_impl.queue.at(m_impl.search_idx))) {
+      ++m_impl.search_idx;
       return;
     }
     if constexpr (sizeof...(Ts) != 0) {
@@ -274,7 +274,7 @@ protected:
   decltype(auto) getImpl() {
     if constexpr (k == 0) {
       // *INDENT-OFF*
-      return (impl);  // return reference due to ()
+      return (m_impl);  // return reference due to ()
       // *INDENT-ON*
     }
     if constexpr (k != 0) {
@@ -287,7 +287,7 @@ protected:
   decltype(auto) getImpl() const {
     if constexpr (k == 0) {
       // *INDENT-OFF*
-      return (impl);  // return reference due to ()
+      return (m_impl);  // return reference due to ()
       // *INDENT-ON*
     }
     if constexpr (k != 0) {

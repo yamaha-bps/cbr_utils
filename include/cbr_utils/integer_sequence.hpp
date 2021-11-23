@@ -62,7 +62,8 @@ struct make_iseq_impl_<T, First, Curr, Ts...>
       }
     } ();
 
-  using type = typename make_iseq_impl_<T, First, Curr + dir, Curr, Ts...>::type;
+  using type = typename make_iseq_impl_<T, First, static_cast<T>(static_cast<dir_t>(Curr) + dir),
+      Curr, Ts...>::type;
 };
 
 }  // namespace detail

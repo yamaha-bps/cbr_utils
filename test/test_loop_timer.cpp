@@ -14,7 +14,7 @@ using namespace std::chrono_literals;
 using cbr::LoopTimer;
 using cbr::LoopTimerSteady;
 
-constexpr std::size_t eps = 2000000;
+constexpr int64_t eps = 2000000;
 
 TEST(LoopTimer, Init)
 {
@@ -54,30 +54,30 @@ TEST(LoopTimer, WaitNotSteady)
   timer.wait();
   ASSERT_EQ(timer.get_count(), 1);
   const auto t1 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t1 - t0).count(), 0, eps);
+  ASSERT_TRUE(std::abs((t1 - t0).count() - 0) < eps);
 
   timer.wait();
   ASSERT_EQ(timer.get_count(), 2);
   const auto t2 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t2 - t1).count(), 100000000, eps);
+  ASSERT_TRUE(std::abs((t2 - t1).count() - 100000000) < eps);
 
   std::this_thread::sleep_for(50ms);
   timer.wait();
   ASSERT_EQ(timer.get_count(), 3);
   const auto t3 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t3 - t2).count(), 100000000, eps);
+  ASSERT_TRUE(std::abs((t3 - t2).count() - 100000000) < eps);
 
   std::this_thread::sleep_for(150ms);
   timer.wait();
   ASSERT_EQ(timer.get_count(), 4);
   const auto t4 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t4 - t3).count(), 150000000, eps);
+  ASSERT_TRUE(std::abs((t4 - t3).count() - 150000000) < eps);
 
   std::this_thread::sleep_for(30ms);
   timer.wait();
   ASSERT_EQ(timer.get_count(), 5);
   const auto t5 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t5 - t4).count(), 100000000, eps);
+  ASSERT_TRUE(std::abs((t5 - t4).count() - 100000000) < eps);
 }
 
 TEST(LoopTimer, WaitSteady)
@@ -87,25 +87,25 @@ TEST(LoopTimer, WaitSteady)
   const auto t0 = std::chrono::high_resolution_clock::now();
   timer.wait();
   const auto t1 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t1 - t0).count(), 0, eps);
+  ASSERT_TRUE(std::abs((t1 - t0).count() - 0) < eps);
 
   timer.wait();
   const auto t2 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t2 - t1).count(), 100000000, eps);
+  ASSERT_TRUE(std::abs((t2 - t1).count() - 100000000) < eps);
 
   std::this_thread::sleep_for(50ms);
   timer.wait();
   const auto t3 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t3 - t2).count(), 100000000, eps);
+  ASSERT_TRUE(std::abs((t3 - t2).count() - 100000000) < eps);
 
   std::this_thread::sleep_for(150ms);
   timer.wait();
   const auto t4 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t4 - t3).count(), 150000000, eps);
+  ASSERT_TRUE(std::abs((t4 - t3).count() - 150000000) < eps);
 
   timer.wait();
   const auto t5 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t5 - t4).count(), 50000000, eps);
+  ASSERT_TRUE(std::abs((t5 - t4).count() - 50000000) < eps);
 
   std::this_thread::sleep_for(150ms);
   timer.wait();
@@ -113,5 +113,5 @@ TEST(LoopTimer, WaitSteady)
   std::this_thread::sleep_for(30ms);
   timer.wait();
   const auto t7 = std::chrono::high_resolution_clock::now();
-  ASSERT_NEAR((t7 - t6).count(), 50000000, eps);
+  ASSERT_TRUE(std::abs((t7 - t6).count() - 50000000) < eps);
 }

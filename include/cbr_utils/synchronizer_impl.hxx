@@ -19,7 +19,7 @@ bool Synchronizer<T, Ts...>::search()
 {
   static constexpr auto all_idx = std::make_index_sequence<1 + sizeof...(Ts)>{};
 
-  keep_n_before_time(0, Synchronizer<>::next_t);
+  keep_n_before_time(0, Synchronizer<>::m_next_t);
 
   //// BOOK KEEPING ////
   auto one_of_every_type = foldWithAnd(
@@ -97,7 +97,7 @@ bool Synchronizer<T, Ts...>::search()
   keep_n_before_time(1, max_t_best);
 
   // set time to start searching for next msg
-  Synchronizer<>::next_t = min_t_best + Synchronizer<>::delta_t;
+  Synchronizer<>::m_next_t = min_t_best + Synchronizer<>::m_delta_t;
 
   // optimal solution is now at front, call callback on set
   call_callback(all_idx);
@@ -119,8 +119,8 @@ template<typename T, typename ... Ts>
 void Synchronizer<T, Ts...>::printOn(std::ostream & os) const
 {
   os << "Synchronizer size " << 1 + sizeof...(Ts) <<
-    " (dt=" << Synchronizer<>::delta_t <<
-    ", nt=" << Synchronizer<>::next_t << ")" << std::endl;
+    " (dt=" << Synchronizer<>::m_delta_t <<
+    ", nt=" << Synchronizer<>::m_next_t << ")" << std::endl;
   size_t counter = 0;
   auto f = [&os, &counter](const auto & impl) {
       if (impl.queue.empty()) {

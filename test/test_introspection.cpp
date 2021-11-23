@@ -187,7 +187,7 @@ TEST(Introspection, StaticForAggregate)
   auto fun = cbr::overload
   {
     [&](const std::string & v) {
-      i += v.size();
+      i += static_cast<int>(v.size());
     },
     [&](int & v) {
       i += v;

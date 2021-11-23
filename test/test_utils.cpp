@@ -184,7 +184,7 @@ TEST(Utils, digit_perm)
   ASSERT_EQ(vtx[7], (std::array<int, 2>{0, 3}));
   ASSERT_EQ(vtx[8], (std::array<int, 2>{1, 3}));
 
-  constexpr auto vtxIdx = cbr::digit_perm<2, 3, int>();
+  constexpr auto vtxIdx = cbr::digit_perm<2, 3>();
   for (std::size_t i = 0; i < vtxIdx.size(); i++) {
     for (std::size_t j = 0; j < 2; j++) {
       ASSERT_EQ(vtx[i][j], vals[j][vtxIdx[i][j]]);
@@ -408,7 +408,7 @@ TEST(Utils, IntegerPack)
   static_assert(std::is_same_v<cbr::makeIntegerPack<int, 4>, cbr::IntegerPack<int, 0, 1, 2, 3>>);
   static_assert(std::is_same_v<cbr::makeIndexPack<4>, cbr::IndexPack<0, 1, 2, 3>>);
 
-  int count = 0;
+  std::size_t count = 0;
   cbr::IndexPack<1, 2, 4>::loop(
     [&count](auto i) {
       count += i;
@@ -551,7 +551,7 @@ TEST(Utils, StaticFor)
   count = 0;
   cbr::static_for<std::index_sequence<1, 2, 4>>(
     [&count]([[maybe_unused]] auto i) {
-      count += i;
+      count += static_cast<int>(i);
     });
   ASSERT_EQ(count, 7);
 
@@ -561,7 +561,7 @@ TEST(Utils, StaticFor)
       if constexpr (i > 2) {
         return false;
       }
-      count += i;
+      count += static_cast<int>(i);
       return true;
     });
   ASSERT_EQ(count, 3);
