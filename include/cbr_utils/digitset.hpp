@@ -41,8 +41,8 @@ constexpr std::size_t pow_fast(const std::size_t b) noexcept
 template<std::size_t _len, std::size_t _base = 10>
 class digitset
 {
-  static_assert(_base > 1, "Base must be > 1.");
-  static_assert(_len > 0, "Length must be > 0.");
+  static_assert(_base > 0, "Base must be > 0");
+  static_assert(_len > 0, "Length must be > 0");
 
 public:
   digitset() = default;
