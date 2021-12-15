@@ -381,36 +381,30 @@ template<class T>
 concept numpy_type = (select_npy_type<T>::type != NPY_TYPES::NPY_NOTYPE);
 
 template<class T>
-concept not_numpy_type = not numpy_type<T>;
-
-template<class T>
 concept numpy_range = std::ranges::range<T>&& numpy_type<std::ranges::range_value_t<T>>;
 
 template<class T>
 concept numpy_matrix =
-  std::ranges::range<T> and std::ranges::range<std::ranges::range_value_t<T>> and
+  std::ranges::range<T> and
+  std::ranges::range<std::ranges::range_value_t<T>> and
   numpy_type<std::ranges::range_value_t<std::ranges::range_value_t<T>>>;
 
 template<class T>
-concept numeric_range = std::ranges::range<T>&& requires
-{
-  static_cast<double>(std::ranges::range_value_t<T>{});
+concept numpy_eigen_dense =
+  std::is_base_of_v<Eigen::DenseBase<T>, T> and
+  numpy_type<typename T::value_type>;
+
+template<class T>
+concept row_major = requires(T t) {
+  requires t.IsRowMajor == 1;
 };
 
 template<class T>
-concept numeric_matrix =
-  std::ranges::range<T>&& std::ranges::range<std::ranges::range_value_t<T>>&& requires
-{
-  static_cast<double>(std::ranges::range_value_t<std::ranges::range_value_t<T>>{});
-};
+concept string_range = std::ranges::range<T> and
+  std::same_as<std::ranges::range_value_t<T>, std::string>;
 
 template<class T>
-concept string_range =
-  std::ranges::range<T>&& std::same_as<std::ranges::range_value_t<T>, std::string>;
-
-template<class T>
-concept has_data = requires(T v)
-{
+concept has_data = requires(T v) {
   v.data();
 };
 
@@ -446,24 +440,6 @@ PyObject * get_array(const T & vs)
   return PyArray_SimpleNewFromData(1, &vsize, type, (void *)(vs.data()));
 }
 
-template<numeric_range T>
-requires not_numpy_type<std::ranges::range_value_t<T>>
-PyObject * get_array(const T & vs)
-{
-  const auto size = std::ranges::size(vs);
-  npy_intp vsize = size;
-
-  PyObject * varray = PyArray_SimpleNew(1, &vsize, NPY_DOUBLE);
-  double * it = static_cast<double *>(PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
-
-  for (const auto & v : vs) {
-    *it = static_cast<double>(v);
-    it++;
-  }
-
-  return varray;
-}
-
 
 template<numpy_matrix T>
 PyObject * get_2darray(const T & mat)
@@ -492,45 +468,54 @@ PyObject * get_2darray(const T & mat)
   return varray;
 }
 
-template<numpy_matrix T>
-requires(has_data<T>)
+template<numpy_eigen_dense T>
 PyObject * get_2darray(const T & mat)
 {
-  if (std::ranges::size(mat) < 1) {throw std::runtime_error("get_2d_array v too small");}
-
-  using value_t = std::ranges::range_value_t<std::ranges::range_value_t<T>>;
+  using value_t = typename T::value_type;
   constexpr NPY_TYPES type = select_npy_type<value_t>::type;
 
-  const auto nRows = std::ranges::size(mat);
-  const auto nCols = std::ranges::size(*std::ranges::begin(mat));
-  npy_intp vsize[2] = {static_cast<npy_intp>(nRows), static_cast<npy_intp>(nCols)};
+  const auto nRows = mat.rows();
+  const auto nCols = mat.cols();
 
-  return PyArray_SimpleNewFromData(2, vsize, type, (void *)(mat.data()));
-}
+  if (nRows < 1 || nCols < 1) {
+    throw std::runtime_error("get_2d_array v too small");
+  }
 
-template<numeric_matrix T>
-requires not_numpy_type<std::ranges::range_value_t<std::ranges::range_value_t<T>>>
-PyObject * get_2darray(const T & mat)
-{
-  if (std::ranges::size(mat) < 1) {throw std::runtime_error("get_2d_array v too small");}
+  npy_intp vsize[2] = {static_cast<npy_intp>(nRows),
+    static_cast<npy_intp>(nCols)};
 
-  const auto nRows = std::ranges::size(mat);
-  const auto nCols = std::ranges::size(*std::ranges::begin(mat));
-  npy_intp vsize[2] = {static_cast<npy_intp>(nRows), static_cast<npy_intp>(nCols)};
+  PyObject * varray = PyArray_SimpleNew(2, vsize, type);
 
-  PyObject * varray = PyArray_SimpleNew(2, vsize, NPY_DOUBLE);
+  value_t * it = static_cast<value_t *>(
+    PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
 
-  double * it = static_cast<double *>(PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
-
-  for (const auto & row : mat) {
-    if (std::ranges::size(row) != nCols) {throw std::runtime_error("Missmatched array size");}
-    for (const auto & v : row) {
-      *it = static_cast<double>(v);
+  for (Eigen::Index i = 0; i < nRows; i++) {
+    for (Eigen::Index j = 0; j < nCols; j++) {
+      *it = mat(i, j);
       it++;
     }
   }
 
   return varray;
+}
+
+template<numpy_eigen_dense T>
+requires row_major<T> PyObject * get_2darray(const T & mat)
+{
+  using value_t = typename T::value_type;
+  constexpr NPY_TYPES type = select_npy_type<value_t>::type;
+
+  const auto nRows = mat.rows();
+  const auto nCols = mat.cols();
+
+  if (nRows < 1 || nCols < 1) {
+    throw std::runtime_error("get_2d_array v too small");
+  }
+
+  npy_intp vsize[2] = {static_cast<npy_intp>(nRows),
+    static_cast<npy_intp>(nCols)};
+
+  return PyArray_SimpleNewFromData(2, vsize, type, (void *)(mat.data()));
 }
 
 // sometimes, for labels and such, we need string arrays
@@ -546,7 +531,7 @@ PyObject * get_array(const T & strings)
 }
 
 // not all matplotlib need 2d arrays, some prefer lists of lists
-template<numeric_matrix T>
+template<typename T>
 PyObject * get_listlist(const T & ll)
 {
   PyObject * listlist = PyList_New(std::ranges::size(ll));
