@@ -19,29 +19,22 @@
 #include <variant>
 #include <vector>
 
-#ifndef WITHOUT_NUMPY
+
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
-
-#ifdef WITH_OPENCV
-#include <opencv2/opencv.hpp>
-#endif  // WITH_OPENCV
-
-/*
- * A bunch of constants were removed in OpenCV 4 in favour of enum classes, so
- * define the ones we need here.
- */
-#if CV_MAJOR_VERSION > 3
-#define CV_BGR2RGB cv::COLOR_BGR2RGB
-#define CV_BGRA2RGBA cv::COLOR_BGRA2RGBA
-#endif
-#endif  // WITHOUT_NUMPY
 
 #if PY_MAJOR_VERSION >= 3
 #define PyString_FromString PyUnicode_FromString
 #define PyInt_FromLong PyLong_FromLong
 #define PyString_FromString PyUnicode_FromString
 #endif
+
+// Forward declare
+namespace Eigen
+{
+template<typename Derived>
+class DenseBase;
+}
 
 namespace matplotlibcpp
 {
@@ -52,63 +45,63 @@ static std::string s_backend;
 
 struct _interpreter
 {
-  PyObject * s_python_function_arrow;
-  PyObject * s_python_function_show;
-  PyObject * s_python_function_close;
-  PyObject * s_python_function_draw;
-  PyObject * s_python_function_pause;
-  PyObject * s_python_function_save;
-  PyObject * s_python_function_figure;
-  PyObject * s_python_function_fignum_exists;
-  PyObject * s_python_function_plot;
-  PyObject * s_python_function_quiver;
-  PyObject * s_python_function_contour;
-  PyObject * s_python_function_semilogx;
-  PyObject * s_python_function_semilogy;
-  PyObject * s_python_function_loglog;
-  PyObject * s_python_function_fill;
-  PyObject * s_python_function_fill_between;
-  PyObject * s_python_function_hist;
-  PyObject * s_python_function_imshow;
-  PyObject * s_python_function_scatter;
-  PyObject * s_python_function_boxplot;
-  PyObject * s_python_function_subplot;
-  PyObject * s_python_function_subplot2grid;
-  PyObject * s_python_function_legend;
-  PyObject * s_python_function_xlim;
-  PyObject * s_python_function_ion;
-  PyObject * s_python_function_ginput;
-  PyObject * s_python_function_ylim;
-  PyObject * s_python_function_title;
-  PyObject * s_python_function_axis;
-  PyObject * s_python_function_axhline;
-  PyObject * s_python_function_axvline;
-  PyObject * s_python_function_axvspan;
-  PyObject * s_python_function_xlabel;
-  PyObject * s_python_function_ylabel;
-  PyObject * s_python_function_gca;
-  PyObject * s_python_function_xticks;
-  PyObject * s_python_function_yticks;
-  PyObject * s_python_function_margins;
-  PyObject * s_python_function_tick_params;
-  PyObject * s_python_function_grid;
-  PyObject * s_python_function_cla;
-  PyObject * s_python_function_clf;
-  PyObject * s_python_function_errorbar;
-  PyObject * s_python_function_annotate;
-  PyObject * s_python_function_tight_layout;
   PyObject * s_python_colormap;
   PyObject * s_python_empty_tuple;
-  PyObject * s_python_function_stem;
-  PyObject * s_python_function_xkcd;
-  PyObject * s_python_function_text;
-  PyObject * s_python_function_suptitle;
+  PyObject * s_python_function_annotate;
+  PyObject * s_python_function_arrow;
+  PyObject * s_python_function_axhline;
+  PyObject * s_python_function_axis;
+  PyObject * s_python_function_axvline;
+  PyObject * s_python_function_axvspan;
   PyObject * s_python_function_bar;
   PyObject * s_python_function_barh;
+  PyObject * s_python_function_boxplot;
+  PyObject * s_python_function_cla;
+  PyObject * s_python_function_clf;
+  PyObject * s_python_function_close;
   PyObject * s_python_function_colorbar;
-  PyObject * s_python_function_subplots_adjust;
+  PyObject * s_python_function_contour;
+  PyObject * s_python_function_draw;
+  PyObject * s_python_function_errorbar;
+  PyObject * s_python_function_fignum_exists;
+  PyObject * s_python_function_figure;
+  PyObject * s_python_function_fill;
+  PyObject * s_python_function_fill_between;
+  PyObject * s_python_function_gca;
+  PyObject * s_python_function_ginput;
+  PyObject * s_python_function_grid;
+  PyObject * s_python_function_hist;
+  PyObject * s_python_function_imshow;
+  PyObject * s_python_function_ion;
+  PyObject * s_python_function_legend;
+  PyObject * s_python_function_loglog;
+  PyObject * s_python_function_margins;
+  PyObject * s_python_function_pause;
+  PyObject * s_python_function_plot;
+  PyObject * s_python_function_quiver;
   PyObject * s_python_function_rcparams;
+  PyObject * s_python_function_save;
+  PyObject * s_python_function_scatter;
+  PyObject * s_python_function_semilogx;
+  PyObject * s_python_function_semilogy;
+  PyObject * s_python_function_show;
   PyObject * s_python_function_spy;
+  PyObject * s_python_function_stem;
+  PyObject * s_python_function_subplot2grid;
+  PyObject * s_python_function_subplot;
+  PyObject * s_python_function_subplots_adjust;
+  PyObject * s_python_function_suptitle;
+  PyObject * s_python_function_text;
+  PyObject * s_python_function_tick_params;
+  PyObject * s_python_function_tight_layout;
+  PyObject * s_python_function_title;
+  PyObject * s_python_function_xkcd;
+  PyObject * s_python_function_xlabel;
+  PyObject * s_python_function_xlim;
+  PyObject * s_python_function_xticks;
+  PyObject * s_python_function_ylabel;
+  PyObject * s_python_function_ylim;
+  PyObject * s_python_function_yticks;
 
   /* For now, _interpreter is implemented as a singleton since its currently not possible to have
      multiple independent embedded python interpreters without patching the python source code
@@ -149,7 +142,6 @@ struct _interpreter
   }
 
 private:
-#ifndef WITHOUT_NUMPY
 #if PY_MAJOR_VERSION >= 3
 
   void * import_numpy()
@@ -165,7 +157,6 @@ private:
     import_array();  // initialize C-API
   }
 
-#endif
 #endif
 
   _interpreter()
@@ -191,9 +182,7 @@ private:
     PySys_SetArgv(argc, (char **)(argv));
 #endif
 
-#ifndef WITHOUT_NUMPY
     import_numpy();  // initialize numpy C-API
-#endif
 
     PyObject * matplotlibname = PyString_FromString("matplotlib");
     PyObject * pyplotname = PyString_FromString("matplotlib.pyplot");
@@ -230,64 +219,63 @@ private:
     Py_DECREF(pylabname);
     if (!pylabmod) {throw std::runtime_error("Error loading module pylab!");}
 
+    s_python_empty_tuple = PyTuple_New(0);
+
+    s_python_function_annotate = safe_import(pymod, "annotate");
     s_python_function_arrow = safe_import(pymod, "arrow");
-    s_python_function_show = safe_import(pymod, "show");
-    s_python_function_close = safe_import(pymod, "close");
-    s_python_function_draw = safe_import(pymod, "draw");
-    s_python_function_pause = safe_import(pymod, "pause");
-    s_python_function_figure = safe_import(pymod, "figure");
-    s_python_function_fignum_exists = safe_import(pymod, "fignum_exists");
-    s_python_function_plot = safe_import(pymod, "plot");
-    s_python_function_quiver = safe_import(pymod, "quiver");
-    s_python_function_contour = safe_import(pymod, "contour");
-    s_python_function_semilogx = safe_import(pymod, "semilogx");
-    s_python_function_semilogy = safe_import(pymod, "semilogy");
-    s_python_function_loglog = safe_import(pymod, "loglog");
-    s_python_function_fill = safe_import(pymod, "fill");
-    s_python_function_fill_between = safe_import(pymod, "fill_between");
-    s_python_function_hist = safe_import(pymod, "hist");
-    s_python_function_scatter = safe_import(pymod, "scatter");
-    s_python_function_boxplot = safe_import(pymod, "boxplot");
-    s_python_function_subplot = safe_import(pymod, "subplot");
-    s_python_function_subplot2grid = safe_import(pymod, "subplot2grid");
-    s_python_function_legend = safe_import(pymod, "legend");
-    s_python_function_xlim = safe_import(pymod, "xlim");
-    s_python_function_ylim = safe_import(pymod, "ylim");
-    s_python_function_title = safe_import(pymod, "title");
-    s_python_function_axis = safe_import(pymod, "axis");
     s_python_function_axhline = safe_import(pymod, "axhline");
+    s_python_function_axis = safe_import(pymod, "axis");
     s_python_function_axvline = safe_import(pymod, "axvline");
     s_python_function_axvspan = safe_import(pymod, "axvspan");
-    s_python_function_xlabel = safe_import(pymod, "xlabel");
-    s_python_function_ylabel = safe_import(pymod, "ylabel");
-    s_python_function_gca = safe_import(pymod, "gca");
-    s_python_function_xticks = safe_import(pymod, "xticks");
-    s_python_function_yticks = safe_import(pymod, "yticks");
-    s_python_function_margins = safe_import(pymod, "margins");
-    s_python_function_tick_params = safe_import(pymod, "tick_params");
-    s_python_function_grid = safe_import(pymod, "grid");
-    s_python_function_ion = safe_import(pymod, "ion");
-    s_python_function_ginput = safe_import(pymod, "ginput");
-    s_python_function_save = safe_import(pylabmod, "savefig");
-    s_python_function_annotate = safe_import(pymod, "annotate");
-    s_python_function_cla = safe_import(pymod, "cla");
-    s_python_function_clf = safe_import(pymod, "clf");
-    s_python_function_errorbar = safe_import(pymod, "errorbar");
-    s_python_function_tight_layout = safe_import(pymod, "tight_layout");
-    s_python_function_stem = safe_import(pymod, "stem");
-    s_python_function_xkcd = safe_import(pymod, "xkcd");
-    s_python_function_text = safe_import(pymod, "text");
-    s_python_function_suptitle = safe_import(pymod, "suptitle");
     s_python_function_bar = safe_import(pymod, "bar");
     s_python_function_barh = safe_import(pymod, "barh");
+    s_python_function_boxplot = safe_import(pymod, "boxplot");
+    s_python_function_cla = safe_import(pymod, "cla");
+    s_python_function_clf = safe_import(pymod, "clf");
+    s_python_function_close = safe_import(pymod, "close");
     s_python_function_colorbar = PyObject_GetAttrString(pymod, "colorbar");
-    s_python_function_subplots_adjust = safe_import(pymod, "subplots_adjust");
-    s_python_function_rcparams = PyObject_GetAttrString(pymod, "rcParams");
-    s_python_function_spy = PyObject_GetAttrString(pymod, "spy");
-#ifndef WITHOUT_NUMPY
+    s_python_function_contour = safe_import(pymod, "contour");
+    s_python_function_draw = safe_import(pymod, "draw");
+    s_python_function_errorbar = safe_import(pymod, "errorbar");
+    s_python_function_fignum_exists = safe_import(pymod, "fignum_exists");
+    s_python_function_figure = safe_import(pymod, "figure");
+    s_python_function_fill = safe_import(pymod, "fill");
+    s_python_function_fill_between = safe_import(pymod, "fill_between");
+    s_python_function_gca = safe_import(pymod, "gca");
+    s_python_function_ginput = safe_import(pymod, "ginput");
+    s_python_function_grid = safe_import(pymod, "grid");
+    s_python_function_hist = safe_import(pymod, "hist");
     s_python_function_imshow = safe_import(pymod, "imshow");
-#endif
-    s_python_empty_tuple = PyTuple_New(0);
+    s_python_function_ion = safe_import(pymod, "ion");
+    s_python_function_legend = safe_import(pymod, "legend");
+    s_python_function_loglog = safe_import(pymod, "loglog");
+    s_python_function_margins = safe_import(pymod, "margins");
+    s_python_function_pause = safe_import(pymod, "pause");
+    s_python_function_plot = safe_import(pymod, "plot");
+    s_python_function_quiver = safe_import(pymod, "quiver");
+    s_python_function_rcparams = PyObject_GetAttrString(pymod, "rcParams");
+    s_python_function_save = safe_import(pylabmod, "savefig");
+    s_python_function_scatter = safe_import(pymod, "scatter");
+    s_python_function_semilogx = safe_import(pymod, "semilogx");
+    s_python_function_semilogy = safe_import(pymod, "semilogy");
+    s_python_function_show = safe_import(pymod, "show");
+    s_python_function_spy = PyObject_GetAttrString(pymod, "spy");
+    s_python_function_stem = safe_import(pymod, "stem");
+    s_python_function_subplot = safe_import(pymod, "subplot");
+    s_python_function_subplot2grid = safe_import(pymod, "subplot2grid");
+    s_python_function_subplots_adjust = safe_import(pymod, "subplots_adjust");
+    s_python_function_suptitle = safe_import(pymod, "suptitle");
+    s_python_function_text = safe_import(pymod, "text");
+    s_python_function_tick_params = safe_import(pymod, "tick_params");
+    s_python_function_tight_layout = safe_import(pymod, "tight_layout");
+    s_python_function_title = safe_import(pymod, "title");
+    s_python_function_xkcd = safe_import(pymod, "xkcd");
+    s_python_function_xlabel = safe_import(pymod, "xlabel");
+    s_python_function_xlim = safe_import(pymod, "xlim");
+    s_python_function_xticks = safe_import(pymod, "xticks");
+    s_python_function_ylabel = safe_import(pymod, "ylabel");
+    s_python_function_ylim = safe_import(pymod, "ylim");
+    s_python_function_yticks = safe_import(pymod, "yticks");
   }
 
   ~_interpreter() {Py_Finalize();}
@@ -306,37 +294,9 @@ private:
 /// See also: https://matplotlib.org/2.0.2/api/matplotlib_configuration_api.html#matplotlib.use
 inline void backend(const std::string & name) {detail::s_backend = name;}
 
-inline bool annotate(std::string annotation, double x, double y)
-{
-  detail::_interpreter::get();
-
-  PyObject * xy = PyTuple_New(2);
-  PyObject * str = PyString_FromString(annotation.c_str());
-
-  PyTuple_SetItem(xy, 0, PyFloat_FromDouble(x));
-  PyTuple_SetItem(xy, 1, PyFloat_FromDouble(y));
-
-  PyObject * kwargs = PyDict_New();
-  PyDict_SetItemString(kwargs, "xy", xy);
-
-  PyObject * args = PyTuple_New(1);
-  PyTuple_SetItem(args, 0, str);
-
-  PyObject * res =
-    PyObject_Call(detail::_interpreter::get().s_python_function_annotate, args, kwargs);
-
-  Py_DECREF(args);
-  Py_DECREF(kwargs);
-
-  if (res) {Py_DECREF(res);}
-
-  return res;
-}
-
 namespace detail
 {
 
-#ifndef WITHOUT_NUMPY
 // Type selector for numpy array conversion
 template<typename T>
 struct select_npy_type
@@ -416,20 +376,26 @@ struct select_npy_type<unsigned long long>
 
 // A couple concepts
 
-template<class T>
-concept numeric_range = std::ranges::range<T>&& requires
-{
-  static_cast<double>(std::ranges::range_value_t<T>{});
-};
 
 template<class T>
 concept numpy_type = (select_npy_type<T>::type != NPY_TYPES::NPY_NOTYPE);
 
 template<class T>
-concept not_numpy_type = (select_npy_type<T>::type == NPY_TYPES::NPY_NOTYPE);
+concept not_numpy_type = not numpy_type<T>;
 
 template<class T>
 concept numpy_range = std::ranges::range<T>&& numpy_type<std::ranges::range_value_t<T>>;
+
+template<class T>
+concept numpy_matrix =
+  std::ranges::range<T> and std::ranges::range<std::ranges::range_value_t<T>> and
+  numpy_type<std::ranges::range_value_t<std::ranges::range_value_t<T>>>;
+
+template<class T>
+concept numeric_range = std::ranges::range<T>&& requires
+{
+  static_cast<double>(std::ranges::range_value_t<T>{});
+};
 
 template<class T>
 concept numeric_matrix =
@@ -455,11 +421,16 @@ PyObject * get_array(const T & vs)
   using value_t = std::ranges::range_value_t<T>;
   constexpr NPY_TYPES type = select_npy_type<value_t>::type;
 
-  std::vector<value_t> vec(std::ranges::begin(vs), std::ranges::end(vs));
+  const auto size = std::ranges::size(vs);
+  npy_intp vsize = size;
 
-  npy_intp vsize = vec.size();
+  PyObject * varray = PyArray_SimpleNew(2, vsize, type);
+  value_t * it = static_cast<value_t *>(PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
 
-  PyObject * varray = PyArray_SimpleNewFromData(1, &vsize, type, (void *)(vec.data()));
+  for (const auto & v : vs) {
+    *it = v;
+    it++;
+  }
 
   return varray;
 }
@@ -472,66 +443,95 @@ PyObject * get_array(const T & vs)
 
   npy_intp vsize = std::ranges::size(vs);
 
-  PyObject * varray = PyArray_SimpleNewFromData(1, &vsize, type, (void *)(vs.data()));
-
-  return varray;
+  return PyArray_SimpleNewFromData(1, &vsize, type, (void *)(vs.data()));
 }
 
 template<numeric_range T>
-requires(not_numpy_type<std::ranges::range_value_t<T>>)
+requires not_numpy_type<std::ranges::range_value_t<T>>
 PyObject * get_array(const T & vs)
 {
   const auto size = std::ranges::size(vs);
   npy_intp vsize = size;
-  size_t memsize = size * sizeof(double);
-  double * dp = static_cast<double *>(::malloc(memsize));
-  std::size_t i = 0;
+
+  PyObject * varray = PyArray_SimpleNew(1, &vsize, NPY_DOUBLE);
+  double * it = static_cast<double *>(PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
+
   for (const auto & v : vs) {
-    dp[i++] = static_cast<double>(v);
+    *it = static_cast<double>(v);
+    it++;
   }
-  PyObject * varray = PyArray_SimpleNewFromData(1, &vsize, NPY_DOUBLE, dp);
-  PyArray_UpdateFlags(reinterpret_cast<PyArrayObject *>(varray), NPY_ARRAY_OWNDATA);
 
   return varray;
 }
 
-template<numeric_matrix T>
-PyObject * get_2darray(const T & vs)
-{
-  if (std::ranges::size(vs) < 1) {throw std::runtime_error("get_2d_array v too small");}
 
-  const auto nRows = std::ranges::size(vs);
-  const auto nCols = std::ranges::size(*std::ranges::begin(vs));
+template<numpy_matrix T>
+PyObject * get_2darray(const T & mat)
+{
+  if (std::ranges::size(mat) < 1) {throw std::runtime_error("get_2d_array v too small");}
+
+  using value_t = std::ranges::range_value_t<std::ranges::range_value_t<T>>;
+  constexpr NPY_TYPES type = select_npy_type<value_t>::type;
+
+  const auto nRows = std::ranges::size(mat);
+  const auto nCols = std::ranges::size(*std::ranges::begin(mat));
   npy_intp vsize[2] = {static_cast<npy_intp>(nRows), static_cast<npy_intp>(nCols)};
 
-  PyArrayObject * varray = (PyArrayObject *)PyArray_SimpleNew(2, vsize, NPY_DOUBLE);
+  PyObject * varray = PyArray_SimpleNew(2, vsize, type);
 
-  double * vd_begin = static_cast<double *>(PyArray_DATA(varray));
+  value_t * it = static_cast<value_t *>(PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
 
-  for (const auto & row : vs) {
+  for (const auto & row : mat) {
     if (std::ranges::size(row) != nCols) {throw std::runtime_error("Missmatched array size");}
     for (const auto & v : row) {
-      *vd_begin = static_cast<double>(v);
-      vd_begin++;
+      *it = v;
+      it++;
     }
   }
 
-  return reinterpret_cast<PyObject *>(varray);
+  return varray;
 }
 
-#else  // fallback if we don't have numpy: copy every element of the given vector
-
-template<typename Numeric>
-PyObject * get_array(const std::vector<Numeric> & v)
+template<numpy_matrix T>
+requires(has_data<T>)
+PyObject * get_2darray(const T & mat)
 {
-  PyObject * list = PyList_New(v.size());
-  for (size_t i = 0; i < v.size(); ++i) {
-    PyList_SetItem(list, i, PyFloat_FromDouble(v.at(i)));
-  }
-  return list;
+  if (std::ranges::size(mat) < 1) {throw std::runtime_error("get_2d_array v too small");}
+
+  using value_t = std::ranges::range_value_t<std::ranges::range_value_t<T>>;
+  constexpr NPY_TYPES type = select_npy_type<value_t>::type;
+
+  const auto nRows = std::ranges::size(mat);
+  const auto nCols = std::ranges::size(*std::ranges::begin(mat));
+  npy_intp vsize[2] = {static_cast<npy_intp>(nRows), static_cast<npy_intp>(nCols)};
+
+  return PyArray_SimpleNewFromData(2, vsize, type, (void *)(mat.data()));
 }
 
-#endif  // WITHOUT_NUMPY
+template<numeric_matrix T>
+requires not_numpy_type<std::ranges::range_value_t<std::ranges::range_value_t<T>>>
+PyObject * get_2darray(const T & mat)
+{
+  if (std::ranges::size(mat) < 1) {throw std::runtime_error("get_2d_array v too small");}
+
+  const auto nRows = std::ranges::size(mat);
+  const auto nCols = std::ranges::size(*std::ranges::begin(mat));
+  npy_intp vsize[2] = {static_cast<npy_intp>(nRows), static_cast<npy_intp>(nCols)};
+
+  PyObject * varray = PyArray_SimpleNew(2, vsize, NPY_DOUBLE);
+
+  double * it = static_cast<double *>(PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
+
+  for (const auto & row : mat) {
+    if (std::ranges::size(row) != nCols) {throw std::runtime_error("Missmatched array size");}
+    for (const auto & v : row) {
+      *it = static_cast<double>(v);
+      it++;
+    }
+  }
+
+  return varray;
+}
 
 // sometimes, for labels and such, we need string arrays
 template<string_range T>
@@ -549,16 +549,15 @@ PyObject * get_array(const T & strings)
 template<numeric_matrix T>
 PyObject * get_listlist(const T & ll)
 {
-  PyObject * listlist = PyList_New(ll.size());
-  for (std::size_t i = 0; i < ll.size(); ++i) {
-    PyList_SetItem(listlist, i, get_array(ll[i]));
+  PyObject * listlist = PyList_New(std::ranges::size(ll));
+  std::size_t i = 0;
+  for (const auto & l : ll) {
+    PyList_SetItem(listlist, i++, get_array(l));
   }
   return listlist;
 }
 
-using varargin_value_t = typename std::variant<std::string, double, bool, std::vector<double>>;
-using varargin_t = typename std::map<std::string, varargin_value_t>;
-
+// Converter of C++ type to PyObject type
 struct PyObjectConvertor
 {
   PyObject * operator()(const std::string & v) const {return PyString_FromString(v.c_str());}
@@ -578,6 +577,10 @@ struct PyObjectConvertor
     return list;
   }
 };
+
+// Handle kwargs
+using varargin_value_t = typename std::variant<std::string, double, bool, std::vector<double>>;
+using varargin_t = typename std::map<std::string, varargin_value_t>;
 
 PyObject * to_PyObject(const varargin_value_t & var)
 {
@@ -599,6 +602,34 @@ PyObject * create_kwargs(const detail::varargin_t & keywords)
 }
 
 }  // namespace detail
+
+inline bool annotate(std::string annotation, double x, double y)
+{
+  detail::_interpreter::get();
+
+  PyObject * xy = PyTuple_New(2);
+  PyObject * str = PyString_FromString(annotation.c_str());
+
+  PyTuple_SetItem(xy, 0, PyFloat_FromDouble(x));
+  PyTuple_SetItem(xy, 1, PyFloat_FromDouble(y));
+
+  PyObject * kwargs = PyDict_New();
+  PyDict_SetItemString(kwargs, "xy", xy);
+
+  PyObject * args = PyTuple_New(1);
+  PyTuple_SetItem(args, 0, str);
+
+  PyObject * res =
+    PyObject_Call(detail::_interpreter::get().s_python_function_annotate, args, kwargs);
+
+  Py_DECREF(args);
+  Py_DECREF(kwargs);
+
+  if (res) {Py_DECREF(res);}
+
+  return res;
+}
+
 
 /// Plot a line through the given x and y data points..
 ///
@@ -632,7 +663,6 @@ bool plot(const T1 & x, const T2 & y, const detail::varargin_t & keywords)
 
 // TODO - it should be possible to make this work by implementing
 // a non-numpy alternative for `detail::get_2darray()`.
-#ifndef WITHOUT_NUMPY
 template<typename T1, typename T2, typename T3>
 void plot_surface(
   const T1 & x,
@@ -788,7 +818,6 @@ void spy(const T & x, const detail::varargin_t & keywords = {})
   Py_DECREF(kwargs);
   if (res) {Py_DECREF(res);}
 }
-#endif  // WITHOUT_NUMPY
 
 template<typename T1, typename T2, typename T3>
 void plot3(
@@ -1038,7 +1067,6 @@ bool hist(
   return res;
 }
 
-#ifndef WITHOUT_NUMPY
 namespace detail
 {
 
@@ -1097,38 +1125,6 @@ inline void imshow(
     keywords,
     out);
 }
-
-#ifdef WITH_OPENCV
-void imshow(const cv::Mat & image, const detail::varargin_t & keywords = {})
-{
-  // Convert underlying type of matrix, if needed
-  cv::Mat image2;
-  NPY_TYPES npy_type = NPY_UINT8;
-  switch (image.type() & CV_MAT_DEPTH_MASK) {
-    case CV_8U:
-      image2 = image;
-      break;
-    case CV_32F:
-      image2 = image;
-      npy_type = NPY_FLOAT;
-      break;
-    default:
-      image.convertTo(image2, CV_MAKETYPE(CV_8U, image.channels()));
-  }
-
-  // If color image, convert from BGR to RGB
-  switch (image2.channels()) {
-    case 3:
-      cv::cvtColor(image2, image2, CV_BGR2RGB);
-      break;
-    case 4:
-      cv::cvtColor(image2, image2, CV_BGRA2RGBA);
-  }
-
-  detail::imshow(image2.data, npy_type, image2.rows, image2.cols, image2.channels(), keywords);
-}
-#endif  // WITH_OPENCV
-#endif  // WITHOUT_NUMPY
 
 template<typename T1, typename T2>
 bool scatter(
