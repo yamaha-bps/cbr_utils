@@ -418,7 +418,7 @@ PyObject * get_array(const T & vs)
   const auto size = std::ranges::size(vs);
   npy_intp vsize = size;
 
-  PyObject * varray = PyArray_SimpleNew(2, vsize, type);
+  PyObject * varray = PyArray_SimpleNew(2, &vsize, type);
   value_t * it = static_cast<value_t *>(PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
 
   for (const auto & v : vs) {
