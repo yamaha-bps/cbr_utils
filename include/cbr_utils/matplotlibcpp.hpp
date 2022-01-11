@@ -489,8 +489,8 @@ PyObject * get_2darray(const T & mat)
   value_t * it = static_cast<value_t *>(
     PyArray_DATA(reinterpret_cast<PyArrayObject *>(varray)));
 
-  for (Eigen::Index i = 0; i < nRows; i++) {
-    for (Eigen::Index j = 0; j < nCols; j++) {
+  for (long int i = 0; i < nRows; i++) {
+    for (long int j = 0; j < nCols; j++) {
       *it = mat(i, j);
       it++;
     }
