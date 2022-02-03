@@ -2957,27 +2957,6 @@ bool plot(const A & a, const B & b, const std::string & format, Args... args)
 }
 
 /*
- * This group of plot() functions is needed to support initializer lists, i.e. calling
- *    plot( {1,2,3,4} )
- */
-inline bool plot(
-  const std::vector<double> & x, const std::vector<double> & y, const std::string & format = "")
-{
-  return plot(x, y, format);
-}
-
-inline bool plot(const std::vector<double> & y, const std::string & format = "")
-{
-  return plot(y, format);
-}
-
-inline bool plot(
-  const std::vector<double> & x, const std::vector<double> & y, const detail::varargin_t & keywords)
-{
-  return plot(x, y, keywords);
-}
-
-/*
  * This class allows dynamic plots, ie changing the plotted data without clearing and re-plotting
  */
 class Plot
