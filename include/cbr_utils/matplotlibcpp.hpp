@@ -567,19 +567,19 @@ struct PyObjectConvertor
 using varargin_value_t = typename std::variant<std::string, double, bool, std::vector<double>>;
 using varargin_t = typename std::map<std::string, varargin_value_t>;
 
-PyObject * to_PyObject(const varargin_value_t & var)
+inline PyObject * to_PyObject(const varargin_value_t & var)
 {
   return std::visit(PyObjectConvertor{}, var);
 }
 
-void update_kwargs(PyObject * kwargs, const detail::varargin_t & keywords)
+inline void update_kwargs(PyObject * kwargs, const detail::varargin_t & keywords)
 {
   for (const auto & [key, val] : keywords) {
     PyDict_SetItemString(kwargs, key.c_str(), to_PyObject(val));
   }
 }
 
-PyObject * create_kwargs(const detail::varargin_t & keywords)
+inline PyObject * create_kwargs(const detail::varargin_t & keywords)
 {
   PyObject * kwargs = PyDict_New();
   update_kwargs(kwargs, keywords);
