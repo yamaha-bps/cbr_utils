@@ -42,18 +42,18 @@ struct convert
             }
           }));
       return ret;
-    } else if constexpr (cbr::is_scoped_enum_v<T>) {  //NOLINT
+    } else if constexpr (::cbr::is_scoped_enum_v<T>) {  //NOLINT
       using UT = std::underlying_type_t<T>;
       return Node(static_cast<UT>(val));
-    } else if constexpr (cbr::is_std_tuple_v<T>) {  //NOLINT
+    } else if constexpr (::cbr::is_std_tuple_v<T>) {  //NOLINT
       Node yaml(NodeType::Sequence);
-      cbr::static_for_index<std::tuple_size_v<T>>(
+      ::cbr::static_for_index<std::tuple_size_v<T>>(
         [&](auto i) {
           yaml.push_back(std::get<i.value>(val));
         });
       return yaml;
 
-    } else if constexpr (cbr::is_std_optional_v<T>) {  //NOLINT
+    } else if constexpr (::cbr::is_std_optional_v<T>) {  //NOLINT
       if (val.has_value()) {
         return Node(val.value());
       }
@@ -71,7 +71,7 @@ struct convert
           using ValT = std::decay_t<decltype(boost::hana::at_key(val, key))>;
 
           char const * key_c = boost::hana::to<char const *>(key);
-          if constexpr (cbr::is_std_optional_v<ValT>) {
+          if constexpr (::cbr::is_std_optional_v<ValT>) {
             if (!yaml[key_c] || yaml[key_c].IsNull()) {
               boost::hana::at_key(val, key) = std::nullopt;
             } else {
@@ -82,7 +82,7 @@ struct convert
           }
         });
       return true;
-    } else if constexpr (cbr::is_scoped_enum_v<T>) {  //NOLINT
+    } else if constexpr (::cbr::is_scoped_enum_v<T>) {  //NOLINT
       try {
         using UT = std::underlying_type_t<T>;
         const auto v = yaml.as<UT>();
@@ -95,7 +95,7 @@ struct convert
         return false;
       }
       return true;
-    } else if constexpr (cbr::is_std_tuple_v<T>) {  //NOLINT
+    } else if constexpr (::cbr::is_std_tuple_v<T>) {  //NOLINT
       if (!yaml.IsSequence()) {
         return false;
       }
@@ -103,14 +103,14 @@ struct convert
         return false;
       }
 
-      cbr::static_for_index<std::tuple_size_v<T>>(
+      ::cbr::static_for_index<std::tuple_size_v<T>>(
         [&](auto i) {
           std::get<i.value>(val) = yaml[i].template as<std::tuple_element_t<i.value, T>>();
         });
 
       return true;
 
-    } else if constexpr (cbr::is_std_optional_v<T>) {  //NOLINT
+    } else if constexpr (::cbr::is_std_optional_v<T>) {  //NOLINT
       if (!yaml || yaml.IsNull()) {
         val = std::nullopt;
         return true;
