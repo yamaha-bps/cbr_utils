@@ -13,9 +13,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # OPTIONS
 # ---------------------------------------------------------------------------------------
 
-include(CTest)
-
-
 # Release type
 set(default_build_type "Release")
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -24,6 +21,15 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
+# Build examples
+if(NOT BUILD_EXAMPLES)
+  set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples." FORCE)
+endif()
+
+# Build examples
+if(NOT BUILD_TESTING)
+  set(BUILD_TESTING OFF CACHE BOOL "Build tests." FORCE)
+endif()
 
 # ---------------------------------------------------------------------------------------
 # DEPENDENCIES
@@ -115,6 +121,11 @@ configure_file(
 )
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)
 
+# ---------------------------------------------------------------------------------------
+# EXAMPLES
+# ---------------------------------------------------------------------------------------
+if(BUILD_EXAMPLES)
+endif()
 
 # ---------------------------------------------------------------------------------------
 # TESTING

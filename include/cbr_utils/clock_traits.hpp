@@ -11,7 +11,8 @@ namespace cbr::detail
 {
 
 /**
- * @brief clock traits wrapper
+ * @brief Simple clock type adapter
+ * @details Works out of the box for std::chrono clocks
  *
  */
 template<typename clock_t>
@@ -20,6 +21,13 @@ struct ClockTraits
   using time_point = typename clock_t::time_point;
   using duration = typename clock_t::duration;
 
+  /**
+   * @brief Converts clock specific duration type to chono duration type
+   * @details Uses std::chrono::duration_cast to do the conversion
+   *
+   * @param d Duration value
+   * @return Converted duration
+   */
   template<typename duration_t>
   static duration_t duration_cast(const duration & d)
   {
