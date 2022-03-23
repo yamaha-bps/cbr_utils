@@ -80,7 +80,7 @@
 
 
 ## Content overview
-
+All the provided utilities are in the `cbr` namespace (except for matplotlibcpp.hpp, where things have been left in the `matplotlibcpp` namespace).
 ### Clocks and timers
 ### Compile time loop
 ### Digitset
@@ -101,7 +101,7 @@
 * [yaml-cpp](https://github.com/jbeder/yaml-cpp)
 
 ### Optional
-* [GTest](https://github.com/google/googletest) (for testing only)
+* [GTest](https://github.com/google/googletest) (to build tests)
 * [Python](https://www.python.org/), [Numpy](https://numpy.org/), [Matplotlib](https://matplotlib.org/) (to use matplotlibcpp.hpp header)
 
 
@@ -128,7 +128,7 @@ To get a local copy up and running follow these simple steps.
   sudo apt install libgtest-dev
   ```
 
-* Python, Numpy, Matplotlib
+* Python, Numpy, Matplotlib (only necessary to use matplotlibcpp)
   ```sh
   sudo apt install libpython3-dev python3-matplotlib python3-numpy
   ```
@@ -219,9 +219,6 @@ Project Link: [https://github.com/yamaha-bps/cbr_utils](https://github.com/yamah
 ## Acknowledgements
 
 * [Yamaha Motor Corporation](https://yamaha-motor.com/)
-
-
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
