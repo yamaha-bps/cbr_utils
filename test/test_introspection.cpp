@@ -12,16 +12,10 @@
 #include "cbr_utils/static_for.hpp"
 #include "cbr_utils/utils.hpp"
 
-namespace cbr
-{
+namespace cbr {
 struct HanaStruct
 {
-  BOOST_HANA_DEFINE_STRUCT(
-    HanaStruct,
-    (std::string, a),
-    (int, b),
-    (double, c)
-  );
+  BOOST_HANA_DEFINE_STRUCT(HanaStruct, (std::string, a), (int, b), (double, c));
 };
 }  // namespace cbr
 
@@ -96,77 +90,68 @@ TEST(Introspection, StaticForAggregate)
 {
   std::pair<double, int> p{1., 2};
 
-  cbr::static_for_aggregate(
-    p, [](auto v) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
-        ASSERT_EQ(v, 1.);
-        v = 2.;
-      } else {
-        ASSERT_EQ(v, 2);
-        v = 3;
-      }
-    });
+  cbr::static_for_aggregate(p, [](auto v) {
+    if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
+      ASSERT_EQ(v, 1.);
+      v = 2.;
+    } else {
+      ASSERT_EQ(v, 2);
+      v = 3;
+    }
+  });
   ASSERT_EQ(p.first, 1.);
   ASSERT_EQ(p.second, 2);
 
-  cbr::static_for_aggregate(
-    p, [](auto & v) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
-        ASSERT_EQ(v, 1.);
-        v = 2.;
-      } else {
-        ASSERT_EQ(v, 2);
-        v = 3;
-      }
-    });
+  cbr::static_for_aggregate(p, [](auto & v) {
+    if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
+      ASSERT_EQ(v, 1.);
+      v = 2.;
+    } else {
+      ASSERT_EQ(v, 2);
+      v = 3;
+    }
+  });
   ASSERT_EQ(p.first, 2.);
   ASSERT_EQ(p.second, 3);
 
-  cbr::static_for_aggregate(
-    p, [](const auto & v) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
-        ASSERT_EQ(v, 2.);
-      } else {
-        ASSERT_EQ(v, 3);
-      }
-    });
+  cbr::static_for_aggregate(p, [](const auto & v) {
+    if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
+      ASSERT_EQ(v, 2.);
+    } else {
+      ASSERT_EQ(v, 3);
+    }
+  });
 
+  cbr::static_for_aggregate(std::make_pair(1., 2), [](auto v) {
+    if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
+      ASSERT_EQ(v, 1.);
+    } else {
+      ASSERT_EQ(v, 2);
+    }
+  });
 
-  cbr::static_for_aggregate(
-    std::make_pair(1., 2), [](auto v) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
-        ASSERT_EQ(v, 1.);
-      } else {
-        ASSERT_EQ(v, 2);
-      }
-    });
+  cbr::static_for_aggregate(std::make_pair(1., 2), [](auto & v) {
+    if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
+      ASSERT_EQ(v, 1.);
+    } else {
+      ASSERT_EQ(v, 2);
+    }
+  });
 
-
-  cbr::static_for_aggregate(
-    std::make_pair(1., 2), [](auto & v) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
-        ASSERT_EQ(v, 1.);
-      } else {
-        ASSERT_EQ(v, 2);
-      }
-    });
-
-  cbr::static_for_aggregate(
-    std::make_pair(1., 2), [](const auto & v) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
-        ASSERT_EQ(v, 1.);
-      } else {
-        ASSERT_EQ(v, 2);
-      }
-    });
+  cbr::static_for_aggregate(std::make_pair(1., 2), [](const auto & v) {
+    if constexpr (std::is_same_v<std::decay_t<decltype(v)>, double>) {
+      ASSERT_EQ(v, 1.);
+    } else {
+      ASSERT_EQ(v, 2);
+    }
+  });
 
   int i = 0;
   std::array a{1, 2, 3};
-  cbr::static_for_aggregate(
-    a, [&](auto & v) {
-      i += v;
-      v = 0;
-    });
+  cbr::static_for_aggregate(a, [&](auto & v) {
+    i += v;
+    v = 0;
+  });
   ASSERT_EQ(i, 6);
   ASSERT_EQ(a[0], 0);
   ASSERT_EQ(a[1], 0);
@@ -174,21 +159,16 @@ TEST(Introspection, StaticForAggregate)
 
   i = 0;
   std::tuple t{1, 2, 3};
-  cbr::static_for_aggregate(
-    t, [&](auto & v) {
-      i += v;
-      v = 0;
-    });
+  cbr::static_for_aggregate(t, [&](auto & v) {
+    i += v;
+    v = 0;
+  });
   ASSERT_EQ(i, 6);
   ASSERT_EQ(std::get<0>(t), 0);
   ASSERT_EQ(std::get<1>(t), 0);
   ASSERT_EQ(std::get<2>(t), 0);
 
-  auto fun = cbr::overload
-  {
-    [&](const std::string & v) {
-      i += static_cast<int>(v.size());
-    },
+  auto fun = cbr::overload{[&](const std::string & v) { i += static_cast<int>(v.size()); },
     [&](int & v) {
       i += v;
       v = 0;
@@ -196,8 +176,7 @@ TEST(Introspection, StaticForAggregate)
     [&](double v) {
       i += 2 * static_cast<int>(v);
       v = 0.;
-    }
-  };
+    }};
 
   i = 0;
   cbr::HanaStruct fs{"a1", 1, 2.};
@@ -206,8 +185,8 @@ TEST(Introspection, StaticForAggregate)
   ASSERT_EQ(fs.b, 0);
   ASSERT_EQ(fs.c, 2.);
 
-  i = 0;
-  fs = cbr::HanaStruct {"a1", 1, 2.};
+  i  = 0;
+  fs = cbr::HanaStruct{"a1", 1, 2.};
   cbr::static_for_hana(const_cast<const cbr::HanaStruct &>(fs), fun);
   ASSERT_EQ(i, 8);
   ASSERT_EQ(fs.b, 1);

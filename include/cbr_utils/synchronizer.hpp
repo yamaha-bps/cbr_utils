@@ -12,22 +12,18 @@
 #include <mutex>
 #include <utility>
 
-
-namespace cbr
-{
+namespace cbr {
 
 // Synchronizer data structure: base definition
-template<typename ... T>
+template<typename... T>
 class Synchronizer;
-
 
 template<>
 class Synchronizer<>
 {
 public:
   explicit Synchronizer(const int64_t delta_t)
-  : m_delta_t(delta_t),
-    m_next_t(std::numeric_limits<int64_t>::min())
+      : m_delta_t(delta_t), m_next_t(std::numeric_limits<int64_t>::min())
   {}
 
 protected:
@@ -35,14 +31,13 @@ protected:
   int64_t m_delta_t, m_next_t;
 };
 
-
 // Synchronizer data structure: recursive definition
-template<typename T, typename ... Ts>
-class Synchronizer<T, Ts...>: public Synchronizer<Ts...>
+template<typename T, typename... Ts>
+class Synchronizer<T, Ts...> : public Synchronizer<Ts...>
 {
 public:
-  using CallbackAll = std::function<void (T &&, Ts && ...)>;
-  using CallbackThis = std::function<void (T &&)>;
+  using CallbackAll  = std::function<void(T &&, Ts &&...)>;
+  using CallbackThis = std::function<void(T &&)>;
 
   /**
    * @brief Synchronize a message stream
@@ -83,17 +78,13 @@ public:
    * /// ...
    */
   explicit Synchronizer<T, Ts...>(int64_t delta_t = 0)
-  : Synchronizer<Ts...>(delta_t),
-    m_impl{
-      {},
-      0,
-      0,
-      [](const T &) {return 0;},
-      [](T &&) {return;}
-    },
-    callback_([](T &&, Ts && ...) {})
-  {
-  }
+      : Synchronizer<Ts...>(delta_t), m_impl{{},
+                                        0,
+                                        0,
+                                        [](const T &) { return 0; },
+                                        [](T &&) { return; }},
+        callback_([](T &&, Ts &&...) {})
+  {}
 
   /* Copies not allowed */
   Synchronizer<T, Ts...>(const Synchronizer<T, Ts...> &) = delete;
@@ -101,7 +92,7 @@ public:
   /* FIXME(pettni): implement proper moving */
   Synchronizer<T, Ts...>(Synchronizer<T, Ts...> &&) = delete;
   Synchronizer<T, Ts...> & operator=(Synchronizer<T, Ts...> &&) = delete;
-  ~Synchronizer<T, Ts...>() = default;
+  ~Synchronizer<T, Ts...>()                                     = default;
 
   /**
    * @brief Register a callback to use for synchronized element sets
@@ -132,9 +123,7 @@ public:
   template<size_t k, typename S>
   void register_nonsync_callback(S && c)
   {
-    if constexpr (k == 0) {
-      m_impl.callback_this_ = c;
-    }
+    if constexpr (k == 0) { m_impl.callback_this_ = c; }
     if constexpr (k != 0) {
       Synchronizer<Ts...>::template register_nonsync_callback<k - 1>(std::forward<S>(c));
     }
@@ -153,12 +142,8 @@ public:
   template<size_t k, typename S>
   void set_time_fcn(S && f)
   {
-    if constexpr (k == 0) {
-      m_impl.time_fcn = f;
-    }
-    if constexpr (k != 0) {
-      Synchronizer<Ts...>::template set_time_fcn<k - 1>(std::forward<S>(f));
-    }
+    if constexpr (k == 0) { m_impl.time_fcn = f; }
+    if constexpr (k != 0) { Synchronizer<Ts...>::template set_time_fcn<k - 1>(std::forward<S>(f)); }
   }
 
   /**
@@ -181,9 +166,7 @@ public:
       }
       m_impl.queue.emplace_back(std::forward<S>(el));
     }
-    if constexpr (k != 0) {
-      Synchronizer<Ts...>::template add<k - 1>(std::forward<S>(el));
-    }
+    if constexpr (k != 0) { Synchronizer<Ts...>::template add<k - 1>(std::forward<S>(el)); }
   }
 
   /**
@@ -207,9 +190,7 @@ public:
     add<k>(std::forward<S>(el));
     if (Synchronizer<Ts...>::m_search_mtx.try_lock()) {
       bool search_more = true;
-      while (search_more) {
-        search_more = search();
-      }
+      while (search_more) { search_more = search(); }
       Synchronizer<Ts...>::m_search_mtx.unlock();
     }
   }
@@ -236,7 +217,7 @@ protected:
   void printOn(std::ostream & os) const;
 
   // Move front element in each queue to callback
-  template<size_t ... I>
+  template<size_t... I>
   void call_callback(std::index_sequence<I...>)
   {
     return std::invoke(callback_, std::move(getImpl<I>().queue.front())...);
@@ -253,8 +234,7 @@ protected:
           impl.queue.pop_front();
         }
       },
-      std::make_index_sequence<1 + sizeof...(Ts)>{}
-    );
+      std::make_index_sequence<1 + sizeof...(Ts)>{});
   }
 
   // increase first counter for first element with stamp at least time
@@ -264,55 +244,51 @@ protected:
       ++m_impl.search_idx;
       return;
     }
-    if constexpr (sizeof...(Ts) != 0) {
-      Synchronizer<Ts...>::increase_first_with_time(time);
-    }
+    if constexpr (sizeof...(Ts) != 0) { Synchronizer<Ts...>::increase_first_with_time(time); }
   }
 
   // return Impl & for given index
   template<size_t k>
-  decltype(auto) getImpl() {
+  decltype(auto) getImpl()
+  {
     if constexpr (k == 0) {
       // *INDENT-OFF*
       return (m_impl);  // return reference due to ()
       // *INDENT-ON*
     }
-    if constexpr (k != 0) {
-      return Synchronizer<Ts...>::template getImpl<k - 1>();
-    }
+    if constexpr (k != 0) { return Synchronizer<Ts...>::template getImpl<k - 1>(); }
   }
 
   // return const Impl & for given index
   template<size_t k>
-  decltype(auto) getImpl() const {
+  decltype(auto) getImpl() const
+  {
     if constexpr (k == 0) {
       // *INDENT-OFF*
       return (m_impl);  // return reference due to ()
       // *INDENT-ON*
     }
-    if constexpr (k != 0) {
-      return Synchronizer<Ts...>::template getImpl<k - 1>();
-    }
+    if constexpr (k != 0) { return Synchronizer<Ts...>::template getImpl<k - 1>(); }
   }
 
   // Minimal search time across all queues
-  template<size_t ... I>
+  template<size_t... I>
   int64_t min_first_time(std::index_sequence<I...>) const
   {
     auto search_time = [](const auto & impl) {
-        return impl.time_fcn(impl.queue.at(impl.search_idx));
-      };
-    return std::min<int64_t>({search_time(getImpl<I>()) ...});
+      return impl.time_fcn(impl.queue.at(impl.search_idx));
+    };
+    return std::min<int64_t>({search_time(getImpl<I>())...});
   }
 
   // Maximal search time across all queues
-  template<size_t ... I>
+  template<size_t... I>
   int64_t max_first_time(std::index_sequence<I...>) const
   {
     auto search_time = [](const auto & impl) {
-        return impl.time_fcn(impl.queue.at(impl.search_idx));
-      };
-    return std::max<int64_t>({search_time(getImpl<I>()) ...});
+      return impl.time_fcn(impl.queue.at(impl.search_idx));
+    };
+    return std::max<int64_t>({search_time(getImpl<I>())...});
   }
 
   // fold with && over indices
@@ -325,14 +301,14 @@ protected:
   }
 
   // apply function to each implementation in pack
-  template<size_t ... I, typename S>
+  template<size_t... I, typename S>
   void mapApply(S && f, std::index_sequence<I...>)
   {
     (std::invoke(f, getImpl<I>()), ...);
   }
 
   // apply const function to each implementation in pack
-  template<size_t ... I, typename S>
+  template<size_t... I, typename S>
   void mapApply(S && f, std::index_sequence<I...>) const
   {
     (std::invoke(f, getImpl<I>()), ...);

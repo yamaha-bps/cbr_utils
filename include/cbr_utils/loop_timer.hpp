@@ -12,8 +12,7 @@
 
 #include "clock_traits.hpp"
 
-namespace cbr
-{
+namespace cbr {
 
 /**
  * @brief Loop synchronization utility class
@@ -22,58 +21,41 @@ template<typename _clock_t = std::chrono::high_resolution_clock, bool _steady = 
 class LoopTimer
 {
 public:
-  using clock_t = _clock_t;
+  using clock_t      = _clock_t;
   using time_point_t = typename detail::ClockTraits<clock_t>::time_point;
-  using duration_t = typename detail::ClockTraits<clock_t>::duration;
+  using duration_t   = typename detail::ClockTraits<clock_t>::duration;
 
-  LoopTimer() = default;
+  LoopTimer()                  = default;
   LoopTimer(const LoopTimer &) = default;
-  LoopTimer(LoopTimer &&) = default;
+  LoopTimer(LoopTimer &&)      = default;
   LoopTimer & operator=(const LoopTimer &) = default;
   LoopTimer & operator=(LoopTimer &&) = default;
-  ~LoopTimer() = default;
+  ~LoopTimer()                        = default;
 
-  explicit LoopTimer(const duration_t & rate) noexcept
-  : rate_(rate)
+  explicit LoopTimer(const duration_t & rate) noexcept : rate_(rate) {}
+
+  LoopTimer(const duration_t & rate, const std::shared_ptr<clock_t> & clock) noexcept
+      : rate_(rate), clock_(clock)
   {}
 
-  LoopTimer(
-    const duration_t & rate,
-    const std::shared_ptr<clock_t> & clock) noexcept
-  : rate_(rate),
-    clock_(clock)
-  {}
-
-  LoopTimer(
-    const duration_t & rate,
-    std::shared_ptr<clock_t> && clock) noexcept
-  : rate_(rate),
-    clock_(std::move(clock))
+  LoopTimer(const duration_t & rate, std::shared_ptr<clock_t> && clock) noexcept
+      : rate_(rate), clock_(std::move(clock))
   {}
 
   /**
    * @brief set clock
    */
-  void set_clock(const std::shared_ptr<clock_t> & clock) noexcept
-  {
-    clock_ = clock;
-  }
+  void set_clock(const std::shared_ptr<clock_t> & clock) noexcept { clock_ = clock; }
 
   /**
    * @brief set clock
    */
-  void set_clock(std::shared_ptr<clock_t> && clock) noexcept
-  {
-    clock_ = std::move(clock);
-  }
+  void set_clock(std::shared_ptr<clock_t> && clock) noexcept { clock_ = std::move(clock); }
 
   /**
    * @brief set loop rate
    */
-  void set_rate(const duration_t & rate) noexcept
-  {
-    rate_ = rate;
-  }
+  void set_rate(const duration_t & rate) noexcept { rate_ = rate; }
 
   /**
    * @brief wait until next deadline
@@ -84,13 +66,11 @@ public:
     if (count_ > 0) {
       const auto tTarget = tNm1_ + rate_;
       const auto wait_time =
-        detail::template
-        ClockTraits<clock_t>::template duration_cast<std::chrono::nanoseconds>(tTarget - tNow);
+        detail::template ClockTraits<clock_t>::template duration_cast<std::chrono::nanoseconds>(
+          tTarget - tNow);
       if constexpr (_steady) {
         tNm1_ = tTarget;
-        if (tNow < tTarget) {
-          std::this_thread::sleep_for(wait_time);
-        }
+        if (tNow < tTarget) { std::this_thread::sleep_for(wait_time); }
       } else {
         if (tNow < tTarget) {
           tNm1_ = tTarget;
@@ -108,26 +88,17 @@ public:
   /**
    * @brief returns how many time the wait() function was called
    */
-  const std::size_t & get_count() const noexcept
-  {
-    return count_;
-  }
+  const std::size_t & get_count() const noexcept { return count_; }
 
   /**
    * @brief returns rate
    */
-  const duration_t & get_rate() const noexcept
-  {
-    return rate_;
-  }
+  const duration_t & get_rate() const noexcept { return rate_; }
 
   /**
    * @brief returns clock
    */
-  std::shared_ptr<clock_t> get_clock() const
-  {
-    return clock_;
-  }
+  std::shared_ptr<clock_t> get_clock() const { return clock_; }
 
 protected:
   duration_t rate_{1};
@@ -139,12 +110,12 @@ protected:
 template<typename clock_t = std::chrono::high_resolution_clock>
 struct LoopTimerSteady : public LoopTimer<clock_t, true>
 {
-  LoopTimerSteady() = default;
+  LoopTimerSteady()                        = default;
   LoopTimerSteady(const LoopTimerSteady &) = default;
-  LoopTimerSteady(LoopTimerSteady &&) = default;
+  LoopTimerSteady(LoopTimerSteady &&)      = default;
   LoopTimerSteady & operator=(const LoopTimerSteady &) = default;
   LoopTimerSteady & operator=(LoopTimerSteady &&) = default;
-  ~LoopTimerSteady() = default;
+  ~LoopTimerSteady()                              = default;
   using LoopTimer<clock_t, true>::LoopTimer;
 };
 

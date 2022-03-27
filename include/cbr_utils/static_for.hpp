@@ -10,33 +10,28 @@
 #include <type_traits>
 #include <utility>
 
-#include "type_traits.hpp"
 #include "integer_sequence.hpp"
 #include "introspection.hpp"
+#include "type_traits.hpp"
 
-namespace cbr
-{
+namespace cbr {
 /***************************************************************************
  * \brief Static for loop over integral_constant
  ***************************************************************************/
-namespace detail
-{
+namespace detail {
 
-template<typename Lambda, typename T, T ... Is>
+template<typename Lambda, typename T, T... Is>
 void static_for_iseq_impl(Lambda && f, std::integer_sequence<T, Is...>)
 {
   constexpr bool has_common_type = std::experimental::is_detected_v<std::common_type_t,
-      std::invoke_result_t<Lambda, std::integral_constant<T, Is>>...
-  >;
+    std::invoke_result_t<Lambda, std::integral_constant<T, Is>>...>;
 
-  static_assert(
-    has_common_type,
+  static_assert(has_common_type,
     "Operators passed to the static_for function must all have the same return type.");
 
   if constexpr (has_common_type) {
-    using return_t = std::common_type_t<
-      std::invoke_result_t<Lambda, std::integral_constant<T, Is>>...
-    >;
+    using return_t =
+      std::common_type_t<std::invoke_result_t<Lambda, std::integral_constant<T, Is>>...>;
 
     if constexpr (std::is_same_v<return_t, bool>) {
       (std::invoke(f, std::integral_constant<T, Is>()) && ...);
@@ -94,15 +89,12 @@ using static_for_index = detail::static_for_impl<std::size_t, Vs...>;
 /***************************************************************************
  * \brief Static for loop over aggregate
  ***************************************************************************/
-namespace detail
-{
+namespace detail {
 
-template<typename Seq, typename Lambda, std::size_t ... Is>
+template<typename Seq, typename Lambda, std::size_t... Is>
 void static_for_aggregate_impl(Seq && s, Lambda && f, std::index_sequence<Is...>)
 {
-  using return_t = std::common_type_t<
-    std::invoke_result_t<Lambda, decltype(std::get<Is>(s))>...
-  >;
+  using return_t = std::common_type_t<std::invoke_result_t<Lambda, decltype(std::get<Is>(s))>...>;
   if constexpr (std::is_same_v<return_t, bool>) {
     (std::invoke(f, std::get<Is>(s)) && ...);
   } else {
@@ -120,8 +112,7 @@ void static_for_aggregate(Seq && s, Lambda && f)
 {
   using Seq_t = std::decay_t<Seq>;
 
-  detail::static_for_aggregate_impl(
-    std::forward<Seq>(s),
+  detail::static_for_aggregate_impl(std::forward<Seq>(s),
     std::forward<Lambda>(f),
     std::make_index_sequence<std::tuple_size_v<Seq_t>>{});
 }
@@ -133,18 +124,14 @@ void static_for_hana(Seq && s, Lambda && f)
 
   if constexpr (std::is_rvalue_reference_v<s_t>) {
     const auto t = copy_to_tuple(std::forward<Seq>(s));
-    using N = std::tuple_size<decltype(t)>;
+    using N      = std::tuple_size<decltype(t)>;
     detail::static_for_aggregate_impl(
-      t,
-      std::forward<Lambda>(f),
-      std::make_index_sequence<N::value>{});
+      t, std::forward<Lambda>(f), std::make_index_sequence<N::value>{});
   } else {
-    auto t = bind_to_tuple(s);
+    auto t  = bind_to_tuple(s);
     using N = std::tuple_size<decltype(t)>;
     detail::static_for_aggregate_impl(
-      std::move(t),
-      std::forward<Lambda>(f),
-      std::make_index_sequence<N::value>{});
+      std::move(t), std::forward<Lambda>(f), std::make_index_sequence<N::value>{});
   }
 }
 

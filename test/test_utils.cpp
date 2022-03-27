@@ -11,9 +11,8 @@
 #include <utility>
 #include <vector>
 
-#include "cbr_utils/utils.hpp"
 #include "cbr_utils/digitset.hpp"
-
+#include "cbr_utils/utils.hpp"
 
 template<typename T>
 struct TemplateExtractor
@@ -48,9 +47,7 @@ TEST(Utils, binary_perm)
 
   constexpr auto vtxIdx = cbr::binary_perm<3>();
   for (std::size_t i = 0; i < vtxIdx.size(); i++) {
-    for (std::size_t j = 0; j < 3; j++) {
-      ASSERT_EQ(vtx[i][j], vtxIdx[i][j] ? max[j] : min[j]);
-    }
+    for (std::size_t j = 0; j < 3; j++) { ASSERT_EQ(vtx[i][j], vtxIdx[i][j] ? max[j] : min[j]); }
   }
 
   constexpr auto vtx2 = cbr::binary_perm<3>(-3, 2);
@@ -148,7 +145,7 @@ TEST(Utils, all_unique)
     int a;
   };
 
-  auto Scomp = [](const S & s1, const S & s2) {return s1.a == s2.a;};
+  auto Scomp = [](const S & s1, const S & s2) { return s1.a == s2.a; };
 
   constexpr std::array a1{1, 2, 3, 4};
   constexpr std::array a2{1, 2, 3, 4, 3};
@@ -169,8 +166,7 @@ TEST(Utils, all_unique)
 TEST(Utils, digit_perm)
 {
   constexpr std::array<std::array<int, 3>, 2> vals{
-    std::array<int, 3>{-1, 0, 1}, std::array<int, 3>{-2, 0, 3}
-  };
+    std::array<int, 3>{-1, 0, 1}, std::array<int, 3>{-2, 0, 3}};
   constexpr auto vtx = cbr::digit_perm(vals);
 
   ASSERT_EQ(vtx.size(), 3LU * 3LU);
@@ -186,9 +182,7 @@ TEST(Utils, digit_perm)
 
   constexpr auto vtxIdx = cbr::digit_perm<2, 3>();
   for (std::size_t i = 0; i < vtxIdx.size(); i++) {
-    for (std::size_t j = 0; j < 2; j++) {
-      ASSERT_EQ(vtx[i][j], vals[j][vtxIdx[i][j]]);
-    }
+    for (std::size_t j = 0; j < 2; j++) { ASSERT_EQ(vtx[i][j], vals[j][vtxIdx[i][j]]); }
   }
 
   constexpr auto vtx2 = cbr::digit_perm<2>(std::array<int, 3>{3, 4, 5});
@@ -209,11 +203,9 @@ TEST(Utils, TypePack)
   static_assert(myPack::size == 3u);
   static_assert(std::is_same_v<myPack::tuple, std::tuple<bool, std::string, std::vector<int>>>);
   static_assert(std::is_same_v<myPack::tuple, myPack::unpack<std::tuple>>);
-  static_assert(
-    std::is_same_v<std::tuple<bool, std::string, std::vector<int>, double, int>,
+  static_assert(std::is_same_v<std::tuple<bool, std::string, std::vector<int>, double, int>,
     myPack::unpack<std::tuple, double, int>>);
-  static_assert(
-    std::is_same_v<std::tuple<double, int, bool, std::string, std::vector<int>>,
+  static_assert(std::is_same_v<std::tuple<double, int, bool, std::string, std::vector<int>>,
     myPack::unpack_prefixed<std::tuple, double, int>>);
 
   using nestedPack1 = myPack::apply<std::vector>;
@@ -244,55 +236,38 @@ TEST(Utils, TypePack)
   static_assert(std::is_same_v<myPack2::decay, cbr::TypePack<int, double, std::vector<int>>>);
 
   static_assert(
-    std::is_same_v<
-      cbr::TypePack<int, float, double>::head<3>,
-      cbr::TypePack<int, float, double>
-  >);
+    std::is_same_v<cbr::TypePack<int, float, double>::head<3>, cbr::TypePack<int, float, double>>);
 
   static_assert(
-    std::is_same_v<
-      cbr::TypePack<int, float, double>::head<2>,
-      cbr::TypePack<int, float>
-  >);
+    std::is_same_v<cbr::TypePack<int, float, double>::head<2>, cbr::TypePack<int, float>>);
 
   static_assert(
-    std::is_same_v<
-      cbr::TypePack<int, float, double>::tail<2>,
-      cbr::TypePack<float, double>
-  >);
+    std::is_same_v<cbr::TypePack<int, float, double>::tail<2>, cbr::TypePack<float, double>>);
 
   static_assert(
-    std::is_same_v<
-      cbr::TypePack<int, float, double>::reversed,
-      cbr::TypePack<double, float, int>
-  >);
+    std::is_same_v<cbr::TypePack<int, float, double>::reversed, cbr::TypePack<double, float, int>>);
 
   static_assert(
-    std::is_same_v<
-      typename cbr::TypePack<int, float, double>::subset<std::index_sequence<0, 2>>,
-      cbr::TypePack<int, double>
-  >);
+    std::is_same_v<typename cbr::TypePack<int, float, double>::subset<std::index_sequence<0, 2>>,
+      cbr::TypePack<int, double>>);
 
   using S1 = std::tuple<int>;
   using S2 = std::tuple<int, int>;
 
   using myPack3 = cbr::TypePack<S1, S2, S1>;
   static_assert(
-    std::is_same_v<
-      myPack3::member_v<TemplateExtractor>,
-      std::integer_sequence<size_t, 1, 2, 1>
-  >);
-  using packDuplicate = typename myPack::duplicate<3>;
+    std::is_same_v<myPack3::member_v<TemplateExtractor>, std::integer_sequence<size_t, 1, 2, 1>>);
+  using packDuplicate  = typename myPack::duplicate<3>;
   using packDuplicate2 = cbr::typepack_cat<myPack, myPack, myPack>::type;
 
   static_assert(std::is_same_v<packDuplicate, packDuplicate2>);
 }
 
-template<std::size_t ...>
+template<std::size_t...>
 struct A
 {};
 
-template<std::size_t, typename ...>
+template<std::size_t, typename...>
 struct B
 {};
 
@@ -314,15 +289,10 @@ TEST(Utils, IntegerPack)
   static_assert(myPack::size == 3U);
   static_assert(std::is_same_v<myPack::type, std::size_t>);
   static_assert(std::is_same_v<myPack::integer_sequence, std::index_sequence<0, 2, 1>>);
-  static_assert(
-    myPack::array[0] == 0LU &&
-    myPack::array[1] == 2LU &&
-    myPack::array[2] == 1LU);
+  static_assert(myPack::array[0] == 0LU && myPack::array[1] == 2LU && myPack::array[2] == 1LU);
   static_assert(myPack::tuple == std::make_tuple(0LU, 2LU, 1LU));
-  static_assert(
-    myPack::array[0] == myPack::value<0>() &&
-    myPack::array[1] == myPack::value<1>() &&
-    myPack::array[2] == myPack::value<2>());
+  static_assert(myPack::array[0] == myPack::value<0>() && myPack::array[1] == myPack::value<1>()
+                && myPack::array[2] == myPack::value<2>());
 
   using nestedPack1 = myPack::apply<A>;
   static_assert(nestedPack1::size == 3u);
@@ -360,11 +330,8 @@ TEST(Utils, IntegerPack)
   static_assert(std::is_same_v<nestedPack6::type<1>, D<double, float, 2>>);
   static_assert(std::is_same_v<nestedPack6::type<2>, D<double, float, 1>>);
 
-  using joinedPack =
-    typename cbr::integerpack_cat<
-    cbr::IntegerPack<int64_t, -1, -2>,
-    cbr::IntegerPack<int, 1, 2>
-    >::type;
+  using joinedPack = typename cbr::integerpack_cat<cbr::IntegerPack<int64_t, -1, -2>,
+    cbr::IntegerPack<int, 1, 2>>::type;
   static_assert(std::is_same_v<joinedPack::type, int64_t>);
   static_assert(joinedPack::value<0>() == -1L);
   static_assert(joinedPack::value<1>() == -2L);
@@ -376,16 +343,14 @@ TEST(Utils, IntegerPack)
   static_assert(std::is_same_v<myPack::unpack_prefixed<A, 5, 6>, A<5, 6, 0, 2, 1>>);
   static_assert(std::is_same_v<myPack::unpack_prefixed_typed<C, double>, C<double, 0, 2, 1>>);
   static_assert(
-    std::is_same_v<myPack::unpack_prefixed_typed_2<D, int, float>,
-    D<int, float, 0, 2, 1>>);
+    std::is_same_v<myPack::unpack_prefixed_typed_2<D, int, float>, D<int, float, 0, 2, 1>>);
 
   static_assert(std::is_same_v<myPack::duplicate<3>, cbr::IndexPack<0, 2, 1, 0, 2, 1, 0, 2, 1>>);
 
   static_assert(std::is_same_v<myPack::append<7, 8>, cbr::IndexPack<0, 2, 1, 7, 8>>);
   static_assert(std::is_same_v<myPack::append_front<7, 8>, cbr::IndexPack<7, 8, 0, 2, 1>>);
 
-  static_assert(
-    std::is_same_v<myPack::subset<std::index_sequence<0, 0, 2, 1, 2>>,
+  static_assert(std::is_same_v<myPack::subset<std::index_sequence<0, 0, 2, 1, 2>>,
     cbr::IndexPack<0, 0, 1, 2, 1>>);
 
   static_assert(std::is_same_v<myPack::reversed, cbr::IndexPack<1, 2, 0>>);
@@ -398,7 +363,7 @@ TEST(Utils, IntegerPack)
   static_assert(std::is_same_v<myPack::tail<2>, cbr::IndexPack<2, 1>>);
   static_assert(std::is_same_v<myPack::tail<1>, cbr::IndexPack<1>>);
 
-  using Is = std::integer_sequence<bool, false, true, false>;
+  using Is  = std::integer_sequence<bool, false, true, false>;
   using Is2 = std::index_sequence<3, 2, 1>;
   static_assert(cbr::toIntegerPack<Is>::size == 3UL);
   static_assert(std::is_same_v<cbr::toIntegerPack<Is>::type, bool>);
@@ -409,31 +374,17 @@ TEST(Utils, IntegerPack)
   static_assert(std::is_same_v<cbr::makeIndexPack<4>, cbr::IndexPack<0, 1, 2, 3>>);
 
   std::size_t count = 0;
-  cbr::IndexPack<1, 2, 4>::loop(
-    [&count](auto i) {
-      count += i;
-    });
+  cbr::IndexPack<1, 2, 4>::loop([&count](auto i) { count += i; });
   ASSERT_EQ(count, 7);
 
   static_assert(
-    std::is_same_v<cbr::make_integer_sequence<int, 3, 6>,
-    std::integer_sequence<int, 3, 4, 5, 6>>);
-  static_assert(
-    std::is_same_v<cbr::make_index_sequence<3, 6>,
-    std::index_sequence<3, 4, 5, 6>>);
+    std::is_same_v<cbr::make_integer_sequence<int, 3, 6>, std::integer_sequence<int, 3, 4, 5, 6>>);
+  static_assert(std::is_same_v<cbr::make_index_sequence<3, 6>, std::index_sequence<3, 4, 5, 6>>);
 
-  static_assert(
-    std::is_same_v<cbr::makeIntegerPack<int, 3>,
-    cbr::IntegerPack<int, 0, 1, 2>>);
-  static_assert(
-    std::is_same_v<cbr::makeIntegerPack<int, 3, 6>,
-    cbr::IntegerPack<int, 3, 4, 5, 6>>);
-  static_assert(
-    std::is_same_v<cbr::makeIndexPack<3, 6>,
-    cbr::IndexPack<3, 4, 5, 6>>);
-  static_assert(
-    std::is_same_v<cbr::makeIndexPack<3>,
-    cbr::IndexPack<0, 1, 2>>);
+  static_assert(std::is_same_v<cbr::makeIntegerPack<int, 3>, cbr::IntegerPack<int, 0, 1, 2>>);
+  static_assert(std::is_same_v<cbr::makeIntegerPack<int, 3, 6>, cbr::IntegerPack<int, 3, 4, 5, 6>>);
+  static_assert(std::is_same_v<cbr::makeIndexPack<3, 6>, cbr::IndexPack<3, 4, 5, 6>>);
+  static_assert(std::is_same_v<cbr::makeIndexPack<3>, cbr::IndexPack<0, 1, 2>>);
 }
 
 TEST(Utils, SubTuple)
@@ -450,46 +401,29 @@ TEST(Utils, SubTuple)
 
 struct Dummy
 {
-  std::pair<int, double> Function1(std::vector<int>, double)
-  {
-    return {0, 0};
-  }
+  std::pair<int, double> Function1(std::vector<int>, double) { return {0, 0}; }
 
-  std::pair<int, double> Function2(std::vector<int>, const double &) const
-  {
-    return {0, 0};
-  }
+  std::pair<int, double> Function2(std::vector<int>, const double &) const { return {0, 0}; }
 };
 
-TEST(Utils, FunctionSignature) {
-  static_assert(
-    std::is_same_v<
-      cbr::signature<decltype(&Dummy::Function1)>::return_type,
-      std::pair<int, double>
-  >);
-  static_assert(
-    std::is_same_v<
-      cbr::signature<decltype(&Dummy::Function1)>::argument_type,
-      cbr::TypePack<std::vector<int>, double>
-  >);
+TEST(Utils, FunctionSignature)
+{
+  static_assert(std::is_same_v<cbr::signature<decltype(&Dummy::Function1)>::return_type,
+    std::pair<int, double>>);
+  static_assert(std::is_same_v<cbr::signature<decltype(&Dummy::Function1)>::argument_type,
+    cbr::TypePack<std::vector<int>, double>>);
 
-  static_assert(
-    std::is_same_v<
-      cbr::signature<decltype(&Dummy::Function2)>::return_type,
-      std::pair<int, double>
-  >);
-  static_assert(
-    std::is_same_v<
-      cbr::signature<decltype(&Dummy::Function2)>::argument_type,
-      cbr::TypePack<std::vector<int>, const double &>
-  >);
+  static_assert(std::is_same_v<cbr::signature<decltype(&Dummy::Function2)>::return_type,
+    std::pair<int, double>>);
+  static_assert(std::is_same_v<cbr::signature<decltype(&Dummy::Function2)>::argument_type,
+    cbr::TypePack<std::vector<int>, const double &>>);
 }
 
-template<int ... Idx>
+template<int... Idx>
 struct Dummy2;
 
-
-TEST(Utils, IseqUtils) {
+TEST(Utils, IseqUtils)
+{
   using iseq = std::integer_sequence<int, 2, 3, 4>;
   using test = cbr::iseq_apply_t<iseq, Dummy2>;
   static_assert(std::is_same_v<test, Dummy2<2, 3, 4>>);
@@ -499,71 +433,56 @@ TEST(Utils, IseqUtils) {
 
   static_assert(cbr::iseq_sum_v<std::integer_sequence<int, 0, 5, 11>> == 16);
 
-  static_assert(
-    std::is_same_v<
-      cbr::iseq_join_t<
-        std::integer_sequence<int, 0, 1, 2>,
-        std::integer_sequence<int, 3, 1, 3>
-      >,
-      std::integer_sequence<int, 0, 1, 2, 3, 1, 3>
-  >);
+  static_assert(std::is_same_v<
+    cbr::iseq_join_t<std::integer_sequence<int, 0, 1, 2>, std::integer_sequence<int, 3, 1, 3>>,
+    std::integer_sequence<int, 0, 1, 2, 3, 1, 3>>);
 }
 
 TEST(Utils, StaticFor)
 {
   std::tuple<double, int> t;
 
-  auto l1 = [](double & d) {d = d + 1.;};
+  auto l1 = [](double & d) { d = d + 1.; };
 
-  auto l2 = [](int & i) {i = i + 2;};
+  auto l2 = [](int & i) { i = i + 2; };
 
   auto visitor = cbr::overload{l1, l2};
 
-  cbr::static_for_index<2>(
-    [&](auto i) {
-      using T = typename std::tuple_element<i.value, decltype(t)>::type;
-      std::get<i.value>(t) = T(0);
-      visitor(std::get<i.value>(t));
-    });
+  cbr::static_for_index<2>([&](auto i) {
+    using T              = typename std::tuple_element<i.value, decltype(t)>::type;
+    std::get<i.value>(t) = T(0);
+    visitor(std::get<i.value>(t));
+  });
 
   ASSERT_DOUBLE_EQ(std::get<double>(t), 1.);
   ASSERT_EQ(std::get<int>(t), 2);
 
   int count = 0;
-  cbr::static_for_index<0, 9>(
-    [&count]([[maybe_unused]] auto i) {
-      count++;
-    });
+  cbr::static_for_index<0, 9>([&count]([[maybe_unused]] auto i) { count++; });
   ASSERT_EQ(count, 10);
 
-  count = 0;
-  auto l3 = [ & i_ = count](int i) mutable {i_ += i;};
+  count   = 0;
+  auto l3 = [&i_ = count](int i) mutable { i_ += i; };
   cbr::static_for<int, 4>{l3};
   ASSERT_EQ(count, 6);
 
-  cbr::static_for<int, 20>(
-    [&count]([[maybe_unused]] auto i) {
-      count++;
-      return count < 15;
-    });
+  cbr::static_for<int, 20>([&count]([[maybe_unused]] auto i) {
+    count++;
+    return count < 15;
+  });
   ASSERT_EQ(count, 15);
 
   count = 0;
   cbr::static_for<std::index_sequence<1, 2, 4>>(
-    [&count]([[maybe_unused]] auto i) {
-      count += static_cast<int>(i);
-    });
+    [&count]([[maybe_unused]] auto i) { count += static_cast<int>(i); });
   ASSERT_EQ(count, 7);
 
   count = 0;
-  cbr::static_for<std::index_sequence<1, 2, 4>>(
-    [&count]([[maybe_unused]] auto i) {
-      if constexpr (i > 2) {
-        return false;
-      }
-      count += static_cast<int>(i);
-      return true;
-    });
+  cbr::static_for<std::index_sequence<1, 2, 4>>([&count]([[maybe_unused]] auto i) {
+    if constexpr (i > 2) { return false; }
+    count += static_cast<int>(i);
+    return true;
+  });
   ASSERT_EQ(count, 3);
 }
 
@@ -581,40 +500,30 @@ TEST(Utils, Specialization)
   static_assert(cbr::is_specialization_v<T4, std::shared_ptr>);
   static_assert(cbr::is_specialization_v<T5, std::unique_ptr>);
 
-  static_assert(
-    cbr::is_std_vector_v<T1>&&
-    !cbr::is_std_vector_v<T2>&&
-    !cbr::is_std_vector_v<T3>);
+  static_assert(cbr::is_std_vector_v<T1> && !cbr::is_std_vector_v<T2> && !cbr::is_std_vector_v<T3>);
 
-  static_assert(
-    !cbr::is_std_array_v<T1>&&
-    cbr::is_std_array_v<T2>&&
-    !cbr::is_std_array_v<T3>);
+  static_assert(!cbr::is_std_array_v<T1> && cbr::is_std_array_v<T2> && !cbr::is_std_array_v<T3>);
 
-  static_assert(
-    !cbr::is_std_tuple_v<T1>&&
-    !cbr::is_std_tuple_v<T2>&&
-    cbr::is_std_tuple_v<T3>);
+  static_assert(!cbr::is_std_tuple_v<T1> && !cbr::is_std_tuple_v<T2> && cbr::is_std_tuple_v<T3>);
 }
 
 TEST(Utils, dateStr)
 {
-  const auto now = std::chrono::system_clock::now();
+  const auto now     = std::chrono::system_clock::now();
   const auto nowStr0 = cbr::dateStr();
 
-  const auto nowStr = cbr::dateStr(now);
+  const auto nowStr         = cbr::dateStr(now);
   const auto nowStrFullPres = cbr::dateStr(now, true);
 
-  const auto now2 = cbr::fromDateStr(nowStr);
+  const auto now2         = cbr::fromDateStr(nowStr);
   const auto nowFullPres2 = cbr::fromDateStr(nowStrFullPres);
 
-  const auto nowStr2 = cbr::dateStr(now2);
+  const auto nowStr2         = cbr::dateStr(now2);
   const auto nowStrFullPres2 = cbr::dateStr(nowFullPres2, true);
 
   ASSERT_EQ(nowStr, nowStr0);
   ASSERT_EQ(nowStr, nowStr2);
-  ASSERT_EQ(
-    nowStrFullPres.substr(0, nowStrFullPres.length() - 2),
+  ASSERT_EQ(nowStrFullPres.substr(0, nowStrFullPres.length() - 2),
     nowStrFullPres2.substr(0, nowStrFullPres.length() - 2));
 }
 

@@ -7,14 +7,11 @@
 struct CyberClock
 {
   using time_point = std::size_t;
-  using duration = std::size_t;
+  using duration   = std::size_t;
 
   time_point t = 0;
 
-  time_point now() const
-  {
-    return t;
-  }
+  time_point now() const { return t; }
 
   CyberClock & operator+=(duration d)
   {
@@ -29,14 +26,13 @@ struct CyberClock
   }
 };
 
-namespace cbr::detail
-{
+namespace cbr::detail {
 
 template<>
 struct ClockTraits<CyberClock>
 {
   using time_point = typename CyberClock::time_point;
-  using duration = typename CyberClock::duration;
+  using duration   = typename CyberClock::duration;
 
   template<typename duration_t>
   static duration_t duration_cast(const duration & d)
@@ -45,4 +41,4 @@ struct ClockTraits<CyberClock>
   }
 };
 
-}
+}  // namespace cbr::detail

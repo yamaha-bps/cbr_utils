@@ -7,19 +7,17 @@
 
 #include <chrono>
 
-namespace cbr::detail
-{
+namespace cbr::detail {
 
 /**
  * @brief Simple clock type adapter
  * @details Works out of the box for std::chrono clocks
- *
  */
 template<typename clock_t>
 struct ClockTraits
 {
   using time_point = typename clock_t::time_point;
-  using duration = typename clock_t::duration;
+  using duration   = typename clock_t::duration;
 
   /**
    * @brief Converts clock specific duration type to chono duration type

@@ -12,10 +12,10 @@ struct ExampleEnum : cbr::CyberEnum<ExampleEnum>
   using cbr::CyberEnum<ExampleEnum>::operator=;
 
   static constexpr int off = 0;
-  static constexpr int on = 1;
+  static constexpr int on  = 1;
 
   static constexpr std::array values = {1, 2};
-  static constexpr std::array names = {"off", "on"};
+  static constexpr std::array names  = {"off", "on"};
 };
 
 TEST(CyberEnum, Basic)

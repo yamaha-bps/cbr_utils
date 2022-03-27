@@ -125,6 +125,12 @@ add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_D
 # EXAMPLES
 # ---------------------------------------------------------------------------------------
 if(BUILD_EXAMPLES)
+  file(GLOB EXAMPLES_SRC "examples/*")
+  foreach(testsourcefile ${EXAMPLES_SRC})
+    string(REPLACE ".cpp" "" testname ${testsourcefile})
+    add_executable(${testname} ${testsourcefile})
+    target_link_libraries(${testname} YourLib)
+  endforeach(testsourcefile ${PROJECT_NAME})
 endif()
 
 # ---------------------------------------------------------------------------------------
@@ -132,6 +138,7 @@ endif()
 # ---------------------------------------------------------------------------------------
 
 if(BUILD_TESTING)
+  enable_testing()
   include(GoogleTest)
   find_package(GTest REQUIRED)
 
