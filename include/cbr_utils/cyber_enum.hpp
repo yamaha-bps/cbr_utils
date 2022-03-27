@@ -22,8 +22,8 @@ namespace cbr {
  *  ```
  * struct ExampleEnum : CyberEnum<ExampleEnum>
  * {
- *   using CyberEnum<ExampleEnum>::CyberEnum;
- *   using CyberEnum<ExampleEnum>::operator=;
+ *   using this_t::CyberEnum;
+ *   using this_t::operator=;
  *
  *   static constexpr int off = 0;
  *   static constexpr int on = 1;
@@ -194,6 +194,9 @@ struct CyberEnum
 
 private:
   int data_ = T::values[0];
+
+protected:
+  using this_t = CyberEnum<T>;
 };
 
 template<typename T>

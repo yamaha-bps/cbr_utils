@@ -19,9 +19,6 @@
 
 namespace cbr {
 
-/***************************************************************************
- * \brief List of integers
- ***************************************************************************/
 template<typename T, T... Vs>
 struct IntegerPack;
 
@@ -115,10 +112,17 @@ using integerpack_cat = typename detail::_integerpack_cat<Ts...>;
 template<typename... Ts>
 using integerpack_cat_t = typename integerpack_cat<Ts...>::type;
 
+/**
+ * @brief Compile time list of integers
+ * @details Similar to std::integer_sequence but with more functionalities
+ *
+ * @tparam Type An integer type to use for the elements of the list
+ * @tparam Vals A non-type parameter pack representing the list
+ */
 template<typename Type, Type... Vals>
 struct IntegerPack
 {
-private:
+protected:
   using this_t = IntegerPack<Type, Vals...>;
 
 public:

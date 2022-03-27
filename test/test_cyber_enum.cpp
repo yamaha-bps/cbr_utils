@@ -8,8 +8,8 @@
 
 struct ExampleEnum : cbr::CyberEnum<ExampleEnum>
 {
-  using cbr::CyberEnum<ExampleEnum>::CyberEnum;
-  using cbr::CyberEnum<ExampleEnum>::operator=;
+  using this_t::CyberEnum;
+  using this_t::operator=;
 
   static constexpr int off = 0;
   static constexpr int on  = 1;
@@ -20,8 +20,8 @@ struct ExampleEnum : cbr::CyberEnum<ExampleEnum>
 
 struct ExampleEnum2 : cbr::CyberEnum<ExampleEnum2>
 {
-  using cbr::CyberEnum<ExampleEnum2>::CyberEnum;
-  using cbr::CyberEnum<ExampleEnum2>::operator=;
+  using this_t::CyberEnum;
+  using this_t::operator=;
 
   static constexpr std::array<int, 0> values{};
   static constexpr std::array<const char *, 0> names{};
