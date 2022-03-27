@@ -45,9 +45,9 @@ namespace cbr {
  * clock is default constructed from specified type if not specified at construction or set.
  *
  * @tparam ratio_t Duration units (default: std::ratio<1>, i.e. seconds)
- *         T Duration underlying representation type (default: double)
- *         clock_t Clock type (default: std::chrono::high_resolution_clock)
- *         with_average Boolean value to activate averaging functionalities (default: true)
+ * @tparam T Duration underlying representation type (default: double)
+ * @tparam clock_t Clock type (default: std::chrono::high_resolution_clock)
+ * @tparam with_average Boolean value to activate averaging functionalities (default: true)
  */
 template<typename ratio_t = std::ratio<1>,
   typename T              = double,
@@ -324,7 +324,7 @@ public:
    * @brief Get latest timer duration.
    * @details Undefined behavior if called before timer was ever started.
    *
-   * @return Return duration over latest successive tic and toc calls.
+   * @return Duration over latest successive tic and toc calls.
    */
   const auto & get_latest_chrono() const noexcept { return dt_; }
 
@@ -332,14 +332,14 @@ public:
    * @brief Get latest timer duration.
    * @details Undefined behavior if called before timer was ever started.
    *
-   * @return Return duration over latest successive tic and toc calls.
+   * @return Duration over latest successive tic and toc calls.
    */
   auto get_latest() const noexcept { return dt_.count(); }
 
   /**
    * @brief Get timer's clock.
    *
-   * @return Returns timer's clock.
+   * @return Timer's clock.
    */
   std::shared_ptr<clock_t> get_clock() const { return clock_; }
 
