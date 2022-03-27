@@ -2,6 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
+/// @endcond
+
 #ifndef CBR_UTILS__SYNCHRONIZER_IMPL_HXX_
 #define CBR_UTILS__SYNCHRONIZER_IMPL_HXX_
 
@@ -120,3 +122,5 @@ void Synchronizer<T, Ts...>::printOn(std::ostream & os) const
 }  // namespace cbr
 
 #endif  // CBR_UTILS__SYNCHRONIZER_IMPL_HXX_
+
+/// @cond

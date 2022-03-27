@@ -1,5 +1,7 @@
 #pragma once
 
+/// @cond
+
 // Python headers must be included before any system headers, since
 // they define _POSIX_C_SOURCE
 #include <Python.h>
@@ -2994,3 +2996,5 @@ private:
 };
 
 }  // end namespace matplotlibcpp
+
+/// @endcond

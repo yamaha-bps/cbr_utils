@@ -20,6 +20,9 @@ namespace cbr {
 /***************************************************************************
  * \brief Static for loop over integral_constant
  ***************************************************************************/
+
+/// @cond
+
 namespace detail {
 
 template<typename Lambda, typename T, T... Is>
@@ -82,6 +85,8 @@ struct static_for_impl<T, N>
 
 }  // namespace detail
 
+/// @endcond
+
 template<typename T, T... Vs>
 using static_for = detail::static_for_impl<T, Vs...>;
 
@@ -91,6 +96,8 @@ using static_for_index = detail::static_for_impl<std::size_t, Vs...>;
 /***************************************************************************
  * \brief Static for loop over aggregate
  ***************************************************************************/
+
+/// @cond
 namespace detail {
 
 template<typename Seq, typename Lambda, std::size_t... Is>
@@ -105,6 +112,7 @@ void static_for_aggregate_impl(Seq && s, Lambda && f, std::index_sequence<Is...>
 }
 
 }  // namespace detail
+/// @endcond
 
 /**
  * @brief statically iterate over the fields of an aggregate

@@ -13,6 +13,8 @@
 
 namespace cbr {
 
+/// @cond
+
 /***************************************************************************
  * \brief Build integer sequence between 2 numbers
  ***************************************************************************/
@@ -70,6 +72,8 @@ struct make_iseq_impl_<T, First, Curr, Ts...>
 
 }  // namespace detail
 
+/// @endcond
+
 template<typename T, T... Vs>
 using make_integer_sequence = typename detail::make_iseq_impl_<T, Vs...>::type;
 
@@ -88,6 +92,8 @@ auto sub_tuple(const T<S...> & t, std::index_sequence<I...>)
   return T<std::tuple_element_t<I, T<S...>>...>(std::get<I>(t)...);
 }
 
+/// @cond
+
 // Apply an integer_sequence<Int, I1, I2 ...> to a templated type T<Int...> to form T<I1, I2, ...>
 template<typename ISeq, template<typename ISeq::value_type...> typename T>
 struct iseq_apply;
@@ -98,8 +104,12 @@ struct iseq_apply<std::integer_sequence<Int, I...>, T>
   using type = T<I...>;
 };
 
+/// @endcond
+
 template<typename ISeq, template<typename ISeq::value_type...> typename T>
 using iseq_apply_t = typename iseq_apply<ISeq, T>::type;
+
+/// @cond
 
 // Cumulative prefix sum for std::integer_sequence (c.f. std::exclusive_scan)
 template<typename Cur, typename ISeq, typename ISeq::value_type Sum>
@@ -115,9 +125,13 @@ struct iseq_psum<std::integer_sequence<T, Cur...>, std::integer_sequence<T, Firs
         Sum + First>
 {};
 
+/// @endcond
+
 template<class ISeq>
 using iseq_psum_t =
   typename iseq_psum<std::integer_sequence<typename ISeq::value_type>, ISeq, 0>::type;
+
+/// @cond
 
 // Sum for std::integer_sequence
 template<typename ISeq>
@@ -129,8 +143,12 @@ struct iseq_sum<std::integer_sequence<T, I...>>
   static constexpr T value = (I + ...);
 };
 
+/// @endcond
+
 template<typename ISeq>
 constexpr typename ISeq::value_type iseq_sum_v = iseq_sum<ISeq>::value;
+
+/// @cond
 
 // Join multiple std::integer_sequence's
 template<typename...>
@@ -147,6 +165,8 @@ struct iseq_join<std::integer_sequence<Int, I1...>, std::integer_sequence<Int, I
 {
   using type = typename iseq_join<std::integer_sequence<Int, I1..., I2...>, Rem...>::type;
 };
+
+/// @endcond
 
 template<typename... T>
 using iseq_join_t = typename iseq_join<T...>::type;

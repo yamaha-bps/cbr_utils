@@ -16,6 +16,8 @@
 
 namespace cbr {
 
+/// @cond
+
 // Synchronizer data structure: base definition
 template<typename... T>
 class Synchronizer;
@@ -32,6 +34,8 @@ protected:
   std::mutex m_search_mtx;  // to run one search at a time
   int64_t m_delta_t, m_next_t;
 };
+
+/// @endcond
 
 // Synchronizer data structure: recursive definition
 template<typename T, typename... Ts>

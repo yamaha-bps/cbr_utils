@@ -110,16 +110,7 @@ protected:
 };
 
 template<typename clock_t = std::chrono::high_resolution_clock>
-struct LoopTimerSteady : public LoopTimer<clock_t, true>
-{
-  LoopTimerSteady()                        = default;
-  LoopTimerSteady(const LoopTimerSteady &) = default;
-  LoopTimerSteady(LoopTimerSteady &&)      = default;
-  LoopTimerSteady & operator=(const LoopTimerSteady &) = default;
-  LoopTimerSteady & operator=(LoopTimerSteady &&) = default;
-  ~LoopTimerSteady()                              = default;
-  using LoopTimer<clock_t, true>::LoopTimer;
-};
+using LoopTimerSteady = LoopTimer<clock_t, true>;
 
 }  // namespace cbr
 

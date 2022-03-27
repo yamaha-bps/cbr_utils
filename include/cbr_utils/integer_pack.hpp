@@ -19,6 +19,8 @@
 
 namespace cbr {
 
+/// @cond
+
 template<typename T, T... Vs>
 struct IntegerPack;
 
@@ -106,6 +108,8 @@ struct _integerpack_dupli<T, std::index_sequence<Idx...>>
 
 }  // namespace detail
 
+/// @endcond
+
 template<typename... Ts>
 using integerpack_cat = typename detail::_integerpack_cat<Ts...>;
 
@@ -123,17 +127,43 @@ template<typename Type, Type... Vals>
 struct IntegerPack
 {
 protected:
+  /**
+   * @brief Type of the integer list.
+   */
   using this_t = IntegerPack<Type, Vals...>;
 
 public:
+  /**
+   * @brief Size of the integer list.
+   */
   static constexpr std::size_t size = sizeof...(Vals);
-  using type                        = Type;
 
+  /**
+   * @brief Type of the elements of the integer list.
+   */
+  using type = Type;
+
+  /**
+   * @brief std::integer_sequence representation of the integer list.
+   */
   using integer_sequence = std::integer_sequence<Type, Vals...>;
 
+  /**
+   * @brief std::array representation of the integer list.
+   */
   constexpr static std::array<Type, size> array{Vals...};
+
+  /**
+   * @brief std::tuple representation of the integer list.
+   */
   constexpr static std::tuple tuple = std::make_tuple(Vals...);
 
+  /**
+   * @brief Get list element at given index.
+   *
+   * @tparam idx Index of the element to return.
+   * @return Element of the list at specified index.
+   */
   template<std::size_t idx>
   constexpr static Type value()
   {

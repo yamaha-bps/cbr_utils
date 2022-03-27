@@ -17,6 +17,9 @@
 #include <utility>
 
 namespace cbr {
+
+/// @cond
+
 namespace detail {
 
 template<typename Seq, std::size_t... Is>
@@ -49,6 +52,8 @@ auto bind_to_tuple_impl(Seq & s, std::index_sequence<Is...>)
 }
 
 }  // namespace detail
+
+/// @endcond
 
 /**
  * @brief copy the fields of a boost::hana::Struct into a tuple

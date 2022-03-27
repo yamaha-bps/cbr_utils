@@ -16,6 +16,8 @@
 
 namespace cbr {
 
+/// @cond
+
 /***************************************************************************
  * \brief Type pack Concatenation
  ***************************************************************************/
@@ -36,6 +38,8 @@ struct _typepack_cat<T<Args1...>, T<Args2...>, Rem...>
 };
 }  // namespace detail
 
+/// @endcond
+
 template<typename... Ts>
 using typepack_cat = typename detail::_typepack_cat<Ts...>;
 
@@ -45,6 +49,7 @@ using typepack_cat_t = typename typepack_cat<Ts...>::type;
 /***************************************************************************
  * \brief Type pack duplicate
  ***************************************************************************/
+/// @cond
 namespace detail {
 template<typename T, size_t Idx>
 using _typepack_dupli_ignore = T;
@@ -60,6 +65,7 @@ struct _typepack_dupli<T, std::index_sequence<Idx...>>
 };
 
 }  // namespace detail
+/// @endcond
 
 template<typename T, size_t N>
 using typepack_dupli = typename detail::_typepack_dupli<T, std::make_index_sequence<N>>;
@@ -70,6 +76,7 @@ using typepack_dupli_t = typename typepack_dupli<T, N>::type;
 /***************************************************************************
  * \brief Type pack
  ***************************************************************************/
+/// @cond
 template<typename... Args>
 struct TypePack;
 
@@ -115,6 +122,8 @@ struct member_v_impl
 };
 
 }  // namespace detail
+
+/// @endcond
 
 template<typename... Args>
 struct TypePack
