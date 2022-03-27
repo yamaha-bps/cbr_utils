@@ -40,7 +40,10 @@
   <p align="center">
     Collection of various programmatic tools.
     <br />
-    <a href="https://github.com/yamaha-bps/cbr_utils"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/yamaha-bps/cbr_utils/"><strong>Explore the repo»</strong></a>
+    <br />
+    <br />
+    <a href="https://yamaha-bps.github.io/cbr_utils/"><strong>Explore the docs»</strong></a>
     <br />
     <br />
     <a href="https://github.com/yamaha-bps/cbr_utils/issues">Report Bug</a>
@@ -52,7 +55,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<summary>Table of Contents</summary>
+## Table of Contents
 <ol>
   <li>
     <a href="#about-the-project">About The Project</a>
