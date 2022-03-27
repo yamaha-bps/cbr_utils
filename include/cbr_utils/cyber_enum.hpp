@@ -2,6 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
+/** @file */
+
 #ifndef CBR_UTILS__CYBER_ENUM_HPP_
 #define CBR_UTILS__CYBER_ENUM_HPP_
 
@@ -14,8 +16,10 @@ namespace cbr {
 
 /**
  * @brief Type unsafe enum
- * @details Enum that can be implicitly constructed/converted to and from integer and string_view
+ * @details Enum that can be implicitly constructed/converted to and from integer and string_view.
+ *
  * Example:
+ *  ```
  * struct ExampleEnum : CyberEnum<ExampleEnum>
  * {
  *   using CyberEnum<ExampleEnum>::CyberEnum;
@@ -27,7 +31,7 @@ namespace cbr {
  *   static constexpr std::array values = {0, 1};
  *   static constexpr std::array names = {"off", "on"};
  * };
- *
+ * ```
  */
 template<typename T>
 struct CyberEnum

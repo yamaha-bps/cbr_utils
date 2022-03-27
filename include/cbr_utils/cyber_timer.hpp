@@ -2,6 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
+/** @file */
+
 #ifndef CBR_UTILS__CYBER_TIMER_HPP_
 #define CBR_UTILS__CYBER_TIMER_HPP_
 
@@ -19,18 +21,19 @@ namespace cbr {
 /**
  * @brief Timer class with averaging capabilities
  * @details Has a couple of basic functionalities:
- * tic Starts the timer.
- * toc If timer is started, returns duration since last tic and stops timer. If timer is stopped,
+ *
+ * - tic: Starts the timer.
+ * - toc: If timer is started, returns duration since last tic and stops timer. If timer is stopped,
  *     returns same value as last toc. This last toc value can also be retrieved by calling
  *     get_latest().
- * tac Returns duration since last tic, but does NOT stop the timer. toc_tic Zero
- * delay call to toc and tic in succession (lap time).
+ * - tac:  Returns duration since last tic, but does NOT stop the timer.
+ * - toc_tic: Zero delay call to toc and tic in succession (lap time).
  *
  * If averaging functionality is active, the successive calls to toc (when timer is started) are
  * averaged and this average can be queried by calling get_average(), or reset by calling restart().
  *
  * Example usage:
- *
+ * ```
  * CyberTimer<> timer;
  * timer.tic();
  * complexFunctionTakingTime1();
@@ -40,7 +43,7 @@ namespace cbr {
  *
  * std::cout << "Function 1 took: " << duration1 << "seconds" << std::endl;
  * std::cout << "Functions 1 and 2 combined took: " << duration2 << "seconds" << std::endl;
- *
+ * ```
  * Notes:
  * clock is default constructed from specified type if not specified at construction or set.
  *

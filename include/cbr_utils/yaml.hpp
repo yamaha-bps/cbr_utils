@@ -2,6 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
+/** @file */
+
 #ifndef CBR_UTILS__YAML_HPP_
 #define CBR_UTILS__YAML_HPP_
 

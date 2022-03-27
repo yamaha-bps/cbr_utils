@@ -2,6 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
+/** @file */
+
 #ifndef CBR_UTILS__CLOCK_TRAITS_HPP_
 #define CBR_UTILS__CLOCK_TRAITS_HPP_
 

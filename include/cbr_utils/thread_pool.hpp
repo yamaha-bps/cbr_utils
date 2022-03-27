@@ -19,6 +19,8 @@
 //    3. This notice may not be removed or altered from any source
 //    distribution.
 
+/** @file */
+
 #ifndef CBR_UTILS__THREAD_POOL_HPP_
 #define CBR_UTILS__THREAD_POOL_HPP_
 

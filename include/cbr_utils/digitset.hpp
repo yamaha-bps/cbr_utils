@@ -2,6 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_utils/blob/master/LICENSE
 
+/** @file */
+
 #ifndef CBR_UTILS__DIGITSET_HPP_
 #define CBR_UTILS__DIGITSET_HPP_
 
@@ -13,6 +15,13 @@ namespace cbr {
 
 namespace detail {
 
+/**
+ * @brief Compile time integer power function
+
+ * @tparam e Exponent
+ * @param b Base
+ * @return b^e
+ */
 template<std::size_t e = 2>
 constexpr std::size_t pow_fast(const std::size_t b) noexcept
 {
@@ -51,7 +60,7 @@ public:
    * @brief Construct digit set from a value.
    * @details It is the value modulo BASE^N_DIGITS that is being used.
    *
-   * @param
+   * @param val Value to be represented by the digitset
    */
   constexpr digitset(std::size_t val) noexcept
   {
@@ -68,6 +77,7 @@ public:
   /**
    * @brief Get the nth digit of the represented number.
    *
+   * @param n Index of digit to return.
    * @return The nth digit of the represented number.
    */
   constexpr std::size_t operator[](const std::size_t n) const { return m_data[n]; }
@@ -75,13 +85,14 @@ public:
   /**
    * @brief Get the nth digit of the represented number.
    *
+   * @param n Index of digit to return.
    * @return A reference to the nth digit of the represented number.
    */
   std::size_t & operator[](const std::size_t n) { return m_data[n]; }
 
   /**
    * @brief Get the size of the digit set.
-   * @details Returns N_DIGITS
+   * @details Returns N_DIGITS.
    *
    * @return The size of the digit set.
    */
@@ -91,6 +102,7 @@ public:
    * @brief Get the nth digit of the represented number.
    * @details Performs bound checking.
    *
+   * @param n Index of digit to return.
    * @return The nth digit of the represented number.
    */
   std::size_t test(const std::size_t n) const { return m_data.at(n); }
@@ -114,7 +126,7 @@ public:
   /**
    * @brief Get the represented number.
    *
-   * @return The represented number as an std::size_t;
+   * @return The represented number as an std::size_t.
    */
   constexpr std::size_t to_ulong() const noexcept
   {
@@ -142,12 +154,12 @@ private:
  * @details There are m^n such tuples.
  *
  * Example:
- *
+ * ```
  * constexpr std::size_t n = 3;
  * constexpr std::size_t m = 2;
  * std::array<std::array<int, m>, n> vals{{{1, 2}, {3, 4}, {5, 6}}};
  * const auto perms = digit_perm(vals);
- *
+ * ```
  * Then perms == {{1,3,5}, {1,3,6}, {1,4,5}, {1,4,6}, {2,3,5}, {2,3,6}, {2,4,5}, {2,4,6}};
  *
  * @tparam n Size of the tuple.
@@ -178,12 +190,12 @@ constexpr auto digit_perm(const std::array<std::array<T, m>, n> & vals) noexcept
  * tuple.
  *
  * Example:
- *
+ * ```
  * constexpr std::size_t n = 3;
  * constexpr std::size_t m = 2;
  * std::array<int, m> vals{{1, 2}};
  * const auto perms = digit_perm<n>(vals);
- *
+ * ```
  * Then perms == {{1,1,1}, {1,1,2}, {1,2,1}, {1,2,2}, {2,1,1}, {2,1,2}, {2,2,1}, {2,2,2}};
  *
  * @tparam n Size of the tuple.
@@ -214,11 +226,11 @@ constexpr auto digit_perm(const std::array<T, m> & vals) noexcept
  * {0,...,m-1}.
  *
  * Example:
- *
+ * ```
  * constexpr std::size_t n = 3;
  * constexpr std::size_t m = 2;
  * const auto perms = digit_perm<n,m>();
- *
+ * ```
  * Then perms == {{0,0,0}, {0,0,1}, {0,1,0}, {0,1,1}, {1,0,0}, {1,0,1}, {1,1,0}, {1,1,1}};
  *
  * @tparam n Size of the tuple.
@@ -248,12 +260,12 @@ constexpr auto digit_perm() noexcept
  * @details There are 2^n such tuples.
  *
  * Example:
- *
+ * ```
  * constexpr std::size_t n = 3;
  * std::array<int, n> min{{0,1,2}};
  * std::array<int, n> max{{3,4,5}};
  * const auto perms = binary_perm(min, max);
- *
+ * ```
  * Then perms == {{0,1,2}, {0,1,5}, {0,4,2}, {0,4,5}, {3,1,2}, {3,1,5}, {3,4,2}, {3,4,5}};
  *
  * @tparam n Size of the tuple.
@@ -290,12 +302,12 @@ constexpr auto binary_perm(const std::array<T, n> & min, const std::array<T, n> 
  * tuple.
  *
  * Example:
- *
+ * ```
  * constexpr std::size_t n = 3;
  * int min = 1;
  * int max = 5;
  * const auto perms = binary_perm<n>(min, max);
- *
+ * ```
  * Then perms == {{1,1,1}, {1,1,5}, {1,5,1}, {1,5,5}, {5,1,1}, {5,1,5}, {5,5,1}, {5,5,5}};
  *
  * @tparam n Size of the tuple.
@@ -331,10 +343,10 @@ constexpr auto binary_perm(const T & min, const T & max) noexcept
  * @details There are 2^n such tuples. The possible values for each element of the tuple are 0 or 1.
  *
  * Example:
- *
+ * ```
  * constexpr std::size_t n = 3;
  * const auto perms = binary_perm<n>();
- *
+ * ```
  * Then perms == {{0,0,0}, {0,0,1}, {0,1,0}, {0,1,1}, {1,0,0}, {1,0,1}, {1,1,0}, {1,1,1}};
  *
  * @tparam n Size of the tuple.
