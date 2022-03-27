@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,327,89,353"/>
+<area shape="rect" id="node2" href="$structcbr_1_1is__chrono__duration_3_01std_1_1chrono_1_1duration_3_01R_00_01P_01_4_01_4.html" title=" " alt="" coords="147,5,320,61"/>
+<area shape="rect" id="node3" href="$structcbr_1_1is__specialization_3_01Ref_3_01Args_8_8_8_01_4_00_01Ref_01_4.html" title=" " alt="" coords="146,86,321,127"/>
+<area shape="rect" id="node4" href="$structcbr_1_1is__std__array_3_01std_1_1array_3_01T_00_01S_01_4_01_4.html" title=" " alt="" coords="155,151,312,193"/>
+<area shape="rect" id="node5" href="$structcbr_1_1is__std__optional_3_01std_1_1optional_3_01T_01_4_01_4.html" title=" " alt="" coords="148,217,319,258"/>
+<area shape="rect" id="node6" href="$structcbr_1_1is__std__pair_3_01std_1_1pair_3_01T1_00_01T2_01_4_01_4.html" title=" " alt="" coords="156,282,311,323"/>
+<area shape="rect" id="node7" href="$structcbr_1_1is__std__shared__ptr_3_01std_1_1shared__ptr_3_01T_01_4_01_4.html" title=" " alt="" coords="154,348,313,404"/>
+<area shape="rect" id="node8" href="$structcbr_1_1is__std__tuple_3_01std_1_1tuple_3_01Ts_8_8_8_01_4_01_4.html" title=" " alt="" coords="155,429,312,470"/>
+<area shape="rect" id="node9" href="$structcbr_1_1is__std__unique__ptr_3_01std_1_1unique__ptr_3_01T_01_4_01_4.html" title=" " alt="" coords="154,495,313,551"/>
+<area shape="rect" id="node10" href="$structcbr_1_1is__std__variant_3_01std_1_1variant_3_01Ts_8_8_8_01_4_01_4.html" title=" " alt="" coords="143,575,324,617"/>
+<area shape="rect" id="node11" href="$structcbr_1_1is__std__vector_3_01std_1_1vector_3_01T_00_01Ts_8_8_8_01_4_01_4.html" title=" " alt="" coords="137,641,329,682"/>
+</map>
