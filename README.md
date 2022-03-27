@@ -42,7 +42,6 @@
     <br />
     <a href="https://github.com/yamaha-bps/cbr_utils/"><strong>Explore the repo»</strong></a>
     <br />
-    <br />
     <a href="https://yamaha-bps.github.io/cbr_utils/"><strong>Explore the docs»</strong></a>
     <br />
     <br />
