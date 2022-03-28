@@ -509,7 +509,7 @@ public:
    * T::loop([]{const auto i}{std::cout << i.value << std::endl;});
    * ```
    *
-   * @tparam T Type of the functor.
+   * @tparam T Type of the callable.
    */
   template<typename T>
   static void loop(T && f)
@@ -533,7 +533,7 @@ using toIntegerPack = typename detail::IntegerPackBuild<ISeq>::type;
  * (2 elements included).
  * - If Vs is 1 element, create an integer pack from 0 to Vs (Vs excluded).
  *
- * @tparam T Type of the elements of the integer pack.
+ * @tparam T Type of the elements of the integer pack, or std::integer_sequence.
  * @tparam Vs Construction parameters for the integer pack.
  */
 template<typename T, T... Vs>

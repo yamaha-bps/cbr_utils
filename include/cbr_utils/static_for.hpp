@@ -30,7 +30,7 @@ void static_for_iseq_impl(Lambda && f, std::integer_sequence<T, Is...>)
     std::invoke_result_t<Lambda, std::integral_constant<T, Is>>...>;
 
   static_assert(has_common_type,
-    "Operators passed to the static_for function must all have the same return type.");
+    "Callable passed to the static_for function must all have the same return type.");
 
   if constexpr (has_common_type) {
     using return_t =
@@ -89,15 +89,43 @@ struct static_for_impl<T, N>
 
 /// @endcond
 
+/**
+ * @brief Compile time loop over integers.
+ * @details Defines a type whose contructor takes a callable.
+ * What is being passed to the callable are std::integral_contant objects whose values are
+ * specified by the template parameters:
+ * - If Vs is empty, then iterates the std::integer_sequence T.
+ * - If Vs is 2 elements, iterates over all values between this 2 elements (2 elements included).
+ * - If Vs is 1 element, iterates from 0 to Vs (Vs excluded).
+ *
+ * Example:
+ * ```
+ * template<int i>
+ * struct S{
+ *  void print(){
+ *    std::cout << i << std::endl;
+ *  }
+ * };
+ * static_for<int,2,3>([]{const auto i}{
+ *    S<i.value> s;
+ *    s.print();
+ * });
+ * ```
+ * Notes:
+ * - The callables passed to the static_for function must all have the same return type.
+ * - If return type is bool, only iterates until callable returns false;
+ *
+ * @tparam T Type of the elements to iterate over, or std::integer_sequence
+ * @tparam Vs Loop values parameters.
+ */
 template<typename T, T... Vs>
 using static_for = detail::static_for_impl<T, Vs...>;
 
+/**
+ * @brief Same as static_for but with integer type set to std::size_t.
+ */
 template<std::size_t... Vs>
 using static_for_index = detail::static_for_impl<std::size_t, Vs...>;
-
-/***************************************************************************
- * \brief Static for loop over aggregate
- ***************************************************************************/
 
 /// @cond
 namespace detail {
@@ -117,33 +145,49 @@ void static_for_aggregate_impl(Seq && s, Lambda && f, std::index_sequence<Is...>
 /// @endcond
 
 /**
- * @brief statically iterate over the fields of an aggregate
+ * @brief Compile time loop over fields of an aggregage.
+ * @details Works for every type that supports std::get().
+ * What is being passed to the callable are references (possibly const) to the fields of the
+ * aggregage.
+
+ * Example:
+ * ```
+ * std::tuple<int,double,float> t{0,1.,2.};
+ * static_for_aggregate(t, []{const auto & v}{
+ *   std::cout << v << std::endl;
+ * });
+ * ```
+ * @tparam Seq Type of the aggregate object.
+ * @tparam T Type of the callable.
  */
-template<typename Seq, typename Lambda>
-void static_for_aggregate(Seq && s, Lambda && f)
+template<typename Seq, typename T>
+void static_for_aggregate(Seq && s, T && f)
 {
   using Seq_t = std::decay_t<Seq>;
 
-  detail::static_for_aggregate_impl(std::forward<Seq>(s),
-    std::forward<Lambda>(f),
-    std::make_index_sequence<std::tuple_size_v<Seq_t>>{});
+  detail::static_for_aggregate_impl(
+    std::forward<Seq>(s), std::forward<T>(f), std::make_index_sequence<std::tuple_size_v<Seq_t>>{});
 }
 
-template<typename Seq, typename Lambda>
-void static_for_hana(Seq && s, Lambda && f)
+/**
+ * @brief Compile time loop over fields of a boost::hana::Struct.
+ * @details Works the same as static_for_aggregate, but uses boost::hana::Struct machinery to
+ * reference the fields.
+ */
+template<typename Seq, typename T>
+void static_for_hana(Seq && s, T && f)
 {
   using s_t = decltype(s);
 
   if constexpr (std::is_rvalue_reference_v<s_t>) {
     const auto t = copy_to_tuple(std::forward<Seq>(s));
     using N      = std::tuple_size<decltype(t)>;
-    detail::static_for_aggregate_impl(
-      t, std::forward<Lambda>(f), std::make_index_sequence<N::value>{});
+    detail::static_for_aggregate_impl(t, std::forward<T>(f), std::make_index_sequence<N::value>{});
   } else {
     auto t  = bind_to_tuple(s);
     using N = std::tuple_size<decltype(t)>;
     detail::static_for_aggregate_impl(
-      std::move(t), std::forward<Lambda>(f), std::make_index_sequence<N::value>{});
+      std::move(t), std::forward<T>(f), std::make_index_sequence<N::value>{});
   }
 }
 
