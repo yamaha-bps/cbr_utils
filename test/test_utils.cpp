@@ -366,6 +366,7 @@ TEST(Utils, IntegerPack)
   using Is  = std::integer_sequence<bool, false, true, false>;
   using Is2 = std::index_sequence<3, 2, 1>;
   static_assert(cbr::toIntegerPack<Is>::size == 3UL);
+  static_assert(cbr::makeIntegerPack<Is>::size == 3UL);
   static_assert(std::is_same_v<cbr::toIntegerPack<Is>::type, bool>);
   static_assert(std::is_same_v<cbr::toIntegerPack<Is>::integer_sequence, Is>);
   static_assert(std::is_same_v<cbr::toIndexPack<Is2>::integer_sequence, Is2>);

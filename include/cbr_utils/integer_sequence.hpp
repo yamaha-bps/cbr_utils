@@ -74,6 +74,13 @@ struct make_iseq_impl_<T, First, Curr, Ts...>
 
 /// @endcond
 
+/**
+ * @brief Create std::integer_sequence
+ * @details
+ *
+ * @tparam T
+ * @tparam Vs
+ */
 template<typename T, T... Vs>
 using make_integer_sequence = typename detail::make_iseq_impl_<T, Vs...>::type;
 
