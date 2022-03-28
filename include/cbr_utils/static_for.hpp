@@ -17,14 +17,12 @@
 #include "type_traits.hpp"
 
 namespace cbr {
-/***************************************************************************
- * \brief Static for loop over integral_constant
- ***************************************************************************/
 
 /// @cond
 
 namespace detail {
 
+// Static for loop implementation from using std::integer_sequence.
 template<typename Lambda, typename T, T... Is>
 void static_for_iseq_impl(Lambda && f, std::integer_sequence<T, Is...>)
 {
@@ -46,9 +44,11 @@ void static_for_iseq_impl(Lambda && f, std::integer_sequence<T, Is...>)
   }
 }
 
+// Static for loop implementation.
 template<typename T, T... Vs>
 struct static_for_impl;
 
+// Static for loop implementation.
 template<typename Is>
 struct static_for_impl<Is>
 {
@@ -61,6 +61,7 @@ struct static_for_impl<Is>
   }
 };
 
+// Static for loop implementation.
 template<typename T, T First, T Last>
 struct static_for_impl<T, First, Last>
 {
@@ -71,6 +72,7 @@ struct static_for_impl<T, First, Last>
   }
 };
 
+// Static for loop implementation.
 template<typename T, T N>
 struct static_for_impl<T, N>
 {

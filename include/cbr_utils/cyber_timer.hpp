@@ -45,12 +45,12 @@ namespace cbr {
  * std::cout << "Functions 1 and 2 combined took: " << duration2 << "seconds" << std::endl;
  * ```
  * Notes:
- * clock is default constructed from specified type if not specified at construction or set.
+ * - Clock is default constructed from specified type if not specified at construction or set.
  *
  * @tparam ratio_t Duration units (default: std::ratio<1>, i.e. seconds)
  * @tparam T Duration underlying representation type (default: double)
  * @tparam clock_t Clock type (default: std::chrono::high_resolution_clock)
- * @tparam with_average Boolean value to activate averaging functionalities (default: true)
+ * @tparam with_average Boolean value to activate averaging functionality (default: true)
  */
 template<typename ratio_t = std::ratio<1>,
   typename T              = double,
@@ -87,14 +87,14 @@ public:
   explicit CyberTimer(std::shared_ptr<clock_t> && clock) noexcept : clock_(std::move(clock)) {}
 
   /**
-   * @brief Set the clock object.
+   * @brief Set the timer's clock.
    *
    * @param clock Shared pointer to a clock.
    */
   void set_clock(const std::shared_ptr<clock_t> & clock) noexcept { clock_ = clock; }
 
   /**
-   * @brief Set the clock object.
+   * @brief Set the timer's clock.
    *
    * @param clock Shared pointer to a clock.
    */
@@ -366,16 +366,17 @@ protected:
   time_point_t t_start_{};
 };
 
-// /**
-//  * @brief CyberTimer template without average computation
-//  */
+/**
+ * @brief Alias for a cyberTimer without average computation.
+ */
 template<typename ratio_t = std::ratio<1>,
   typename T              = double,
   typename clock_t        = std::chrono::high_resolution_clock>
 using CyberTimerNoAvg = CyberTimer<ratio_t, T, clock_t, false>;
 
 /**
- * @brief CyberTimer template with milliseconds units and int64_t default duration representation
+ * @brief Alias for a cyberTimer template with milliseconds units and int64_t default duration
+ * representation.
  */
 template<typename T = int64_t,
   typename clock_t  = std::chrono::high_resolution_clock,
@@ -383,7 +384,8 @@ template<typename T = int64_t,
 using CyberTimerMilli = CyberTimer<std::milli, T, clock_t, with_average>;
 
 /**
- * @brief CyberTimer template with microseconds units and int64_t default duration representation
+ * @brief Alias for a cyberTimer template with microseconds units and int64_t default duration
+ * representation.
  */
 template<typename T = int64_t,
   typename clock_t  = std::chrono::high_resolution_clock,
@@ -391,7 +393,8 @@ template<typename T = int64_t,
 using CyberTimerMicro = CyberTimer<std::micro, T, clock_t, with_average>;
 
 /**
- * @brief CyberTimer template with nanoseconds units and int64_t default duration representation
+ * @brief Alias for a cyberTimer template with nanoseconds units and int64_t default duration
+ * representation.
  */
 template<typename T = int64_t,
   typename clock_t  = std::chrono::high_resolution_clock,

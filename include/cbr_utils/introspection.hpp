@@ -56,7 +56,12 @@ auto bind_to_tuple_impl(Seq & s, std::index_sequence<Is...>)
 /// @endcond
 
 /**
- * @brief copy the fields of a boost::hana::Struct into a tuple
+ * @brief Copy the fields of a boost::hana::Struct into a tuple.
+ * @details Not recursive.
+ *
+ * @tparam Seq Type of the input struct.
+ * @param s Input struct.
+ * @return std::tuple containting copies of the fields of the the struct.
  */
 template<typename Seq>
 auto copy_to_tuple(Seq && s)
@@ -70,7 +75,12 @@ auto copy_to_tuple(Seq && s)
 }
 
 /**
- * @brief ties the fields of a boost::hana::Struct to a tuple
+ * @brief Bind the fields of a boost::hana::Struct to a tuple of references to these field.
+ * @details Not recursive.
+ *
+ * @tparam Seq Type of the input struct.
+ * @param s Input struct.
+ * @return std::tuple containting references to the fields of the struct.
  */
 template<typename Seq>
 auto bind_to_tuple(Seq & s)
