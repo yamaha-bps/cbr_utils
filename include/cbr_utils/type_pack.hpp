@@ -40,6 +40,12 @@ struct _typepack_cat<T<Args1...>, T<Args2...>, Rem...>
 
 /// @endcond
 
+/**
+ * @brief
+ * @details
+ *
+ * @tparam Ts
+ */
 template<typename... Ts>
 using typepack_cat = typename detail::_typepack_cat<Ts...>;
 
