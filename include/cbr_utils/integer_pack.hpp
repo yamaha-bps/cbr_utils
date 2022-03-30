@@ -108,11 +108,16 @@ struct _integerpack_dupli<T, std::index_sequence<Idx...>>
 
 }  // namespace detail
 
-/// @endcond
-
 template<typename... Ts>
 using integerpack_cat = typename detail::_integerpack_cat<Ts...>;
 
+/// @endcond
+
+/**
+ * @brief Concatenate multiple IntegerPack into one.
+ *
+ * @tparam Ts Integer packs to concatenate.
+ */
 template<typename... Ts>
 using integerpack_cat_t = typename integerpack_cat<Ts...>::type;
 
@@ -186,7 +191,7 @@ public:
    * Then T2 == TypePack<S<0,9,8>,S<1,9,8>,S<2,9,8>>.
    *
    * @tparam T Templated type to use for application.
-   * @tparam Vs Optional values to append to the type's template parameters.
+   * @tparam Vs Optional values to append to T's template parameters.
    */
   template<template<Type...> typename T, Type... Vs>
   using apply = TypePack<T<Vals, Vs...>...>;
@@ -303,7 +308,7 @@ public:
    *
    * Then T2 == S<0,1,2,5,6>.
    *
-   * @tparam T Templated type to use for application.
+   * @tparam T Templated type to use for unpacking.
    * @tparam Vs Optional values to append to the type's template parameters.
    */
   template<template<Type...> typename T, Type... Vs>
@@ -322,7 +327,7 @@ public:
    *
    * Then T2 == S<5,6, 0,1,2>.
    *
-   * @tparam T Templated type to use for application.
+   * @tparam T Templated type to use for unpacking.
    * @tparam Vs Optional values to prepend to the type's template parameters.
    */
   template<template<Type...> typename T, Type... Vs>
@@ -341,7 +346,7 @@ public:
    *
    * Then T2 == S<double,0,1,2>.
    *
-   * @tparam T Templated type to use for application.
+   * @tparam T Templated type to use for unpacking.
    * @tparam T1 Optional type to prepend to the type's template parameters.
    */
   template<template<typename, Type...> typename T, typename T1>
