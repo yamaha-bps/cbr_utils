@@ -40,7 +40,9 @@
   <p align="center">
     Collection of various programmatic tools.
     <br />
-    <a href="https://github.com/yamaha-bps/cbr_utils"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/yamaha-bps/cbr_utils/"><strong>Explore the repo»</strong></a>
+    <br />
+    <a href="https://yamaha-bps.github.io/cbr_utils/"><strong>Explore the docs»</strong></a>
     <br />
     <br />
     <a href="https://github.com/yamaha-bps/cbr_utils/issues">Report Bug</a>
@@ -52,48 +54,61 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>
+## Table of Contents
+<ol>
+  <li>
+    <a href="#about-the-project">About The Project</a>
+    <ul>
+      <li><a href="#built-with">Built With</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#getting-started">Getting Started</a>
+    <ul>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#installation">Installation</a></li>
+    </ul>
+  </li>
+  <li><a href="#roadmap">Roadmap</a></li>
+  <li><a href="#contributing">Contributing</a></li>
+  <li><a href="#license">License</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#acknowledgements">Acknowledgements</a></li>
+</ol>
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
 
-### Built With
+## Content overview
+All the provided utilities are in the `cbr` namespace (except for matplotlibcpp.hpp, where things have been left in the `matplotlibcpp` namespace).
+### Clocks and timers
+### Compile time loop
+### Digitset
+### Enum
+### Integer sequence
+### List of types
+### Plotting
+### Synchronization
+### Thead pool
+### Type traits
+### Yaml
+### Misc
 
+## Dependencies
+
+### Required
 * [Libboost](https://www.boost.org/)
 * [yaml-cpp](https://github.com/jbeder/yaml-cpp)
-* [GTest](https://github.com/google/googletest)
 
+### Optional
+* [GTest](https://github.com/google/googletest) (to build tests)
+* [Python](https://www.python.org/), [Numpy](https://numpy.org/), [Matplotlib](https://matplotlib.org/) (to use matplotlibcpp.hpp header)
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
-
 
 
 ### Install dependencies
@@ -107,12 +122,16 @@ To get a local copy up and running follow these simple steps.
   ```sh
   sudo apt install libyaml-cpp-dev
   ```
-
+#### Optional
 * GTest (only necessary to build tests)
   ```sh
   sudo apt install libgtest-dev
   ```
 
+* Python, Numpy, Matplotlib (only necessary to use matplotlibcpp)
+  ```sh
+  sudo apt install libpython3-dev python3-matplotlib python3-numpy
+  ```
 
 ### Build and Install
 
@@ -122,41 +141,50 @@ To get a local copy up and running follow these simple steps.
    ```
 2. Make build directory
    ```sh
-   mkdir cbr_utils/build
+   mkdir cbr_utils/build && cd cbr_utils/build
    ```
 3. Build
    ```sh
-   cd cbr_utils/build
+   cmake ..
+   make
+   ```
+
+4. To build examples (optional)
+   ```sh
    cmake .. -DBUILD_EXAMPLES=ON
    make
    ```
-   
-4. Install
+
+5. Install
    ```sh
    sudo make install
    ```
 
-6. Uninstall if you don't like it
+6. To uninstall if you don't like it
    ```sh
    sudo make uninstall
    ```
 
-7. To run the tests:
+7. To build and run the tests:
    ```sh
-   cmake .. -DBUILD_EXAMPLES=ON -DBUILD_TESTING=ON
+   cmake .. -DBUILD_TESTING=ON
    make test
    ```
-<!-- USAGE EXAMPLES -->
 
+## Use with cmake
 
+To utilize `cbr_utils` in your own project, include something along these lines in your `CMakeLists.txt`
+```cmake
+find_package(cbr_utils)
 
+add_executable(my_executable main.cpp)
+target_link_libraries(my_executable cbr_utils::cbr_utils)
+```
 
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/yamaha-bps/cbr_utils/issues) for a list of proposed features (and known issues).
-
-
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -191,9 +219,6 @@ Project Link: [https://github.com/yamaha-bps/cbr_utils](https://github.com/yamah
 ## Acknowledgements
 
 * [Yamaha Motor Corporation](https://yamaha-motor.com/)
-
-
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

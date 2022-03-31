@@ -8,14 +8,23 @@
 
 struct ExampleEnum : cbr::CyberEnum<ExampleEnum>
 {
-  using cbr::CyberEnum<ExampleEnum>::CyberEnum;
-  using cbr::CyberEnum<ExampleEnum>::operator=;
+  using this_t::CyberEnum;
+  using this_t::operator=;
 
   static constexpr int off = 0;
-  static constexpr int on = 1;
+  static constexpr int on  = 1;
 
   static constexpr std::array values = {1, 2};
-  static constexpr std::array names = {"off", "on"};
+  static constexpr std::array names  = {"off", "on"};
+};
+
+struct ExampleEnum2 : cbr::CyberEnum<ExampleEnum2>
+{
+  using this_t::CyberEnum;
+  using this_t::operator=;
+
+  static constexpr std::array<int, 0> values{};
+  static constexpr std::array<const char *, 0> names{};
 };
 
 TEST(CyberEnum, Basic)
@@ -56,4 +65,7 @@ TEST(CyberEnum, Basic)
 
   ASSERT_NE(e3, 1);
   ASSERT_NE(e3, "off"sv);
+
+  ExampleEnum2 e4;
+  ASSERT_EQ(e4.c_str(), nullptr);
 }

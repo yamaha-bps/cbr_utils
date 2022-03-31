@@ -11,17 +11,18 @@
 #include "cyber_clock.hpp"
 
 using cbr::CyberTimer;
-using cbr::CyberTimerMilli;
+using cbr::CyberTimerNoAvg;
 
-TEST(CyberTimer, Init)
+template<typename T>
+void testTmr()
 {
-  CyberTimer timer1;
+  T timer1;
 
   auto clock1 = std::make_shared<std::chrono::high_resolution_clock>();
-  CyberTimer timer3(clock1);
+  T timer3(clock1);
   ASSERT_EQ(clock1, timer3.get_clock());
 
-  CyberTimer timer4(std::move(clock1));
+  T timer4(std::move(clock1));
   ASSERT_NE(clock1, timer4.get_clock());
 
   auto clock2 = std::make_shared<std::chrono::high_resolution_clock>();
@@ -34,6 +35,12 @@ TEST(CyberTimer, Init)
   timer1.set_clock(std::move(clock3));
   ASSERT_NE(clock3, timer1.get_clock());
   ASSERT_EQ(clock4, timer1.get_clock());
+}
+
+TEST(CyberTimer, Init)
+{
+  testTmr<CyberTimer<>>();
+  testTmr<CyberTimerNoAvg<>>();
 }
 
 TEST(CyberTimer, Basic)
@@ -59,9 +66,8 @@ TEST(CyberTimer, Basic)
     buffer.emplace_back(dt);
   }
 
-  const double avg =
-    std::accumulate(buffer.begin(), buffer.end(), 0.) /
-    static_cast<double>(tmr.get_average_count());
+  const double avg = std::accumulate(buffer.begin(), buffer.end(), 0.)
+                   / static_cast<double>(tmr.get_average_count());
 
   ASSERT_NEAR(avg, tmr.get_average(), 1e-8);
   ASSERT_NEAR(tmr.get_average(), 10000., 1000.);

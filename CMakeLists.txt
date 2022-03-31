@@ -13,9 +13,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # OPTIONS
 # ---------------------------------------------------------------------------------------
 
-include(CTest)
-
-
 # Release type
 set(default_build_type "Release")
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -24,6 +21,15 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
+# Build examples
+if(NOT BUILD_EXAMPLES)
+  set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples." FORCE)
+endif()
+
+# Build examples
+if(NOT BUILD_TESTING)
+  set(BUILD_TESTING OFF CACHE BOOL "Build tests." FORCE)
+endif()
 
 # ---------------------------------------------------------------------------------------
 # DEPENDENCIES
@@ -115,21 +121,33 @@ configure_file(
 )
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)
 
+# ---------------------------------------------------------------------------------------
+# EXAMPLES
+# ---------------------------------------------------------------------------------------
+if(BUILD_EXAMPLES)
+  file(GLOB EXAMPLES_SRC "examples/*")
+  foreach(testsourcefile ${EXAMPLES_SRC})
+    string(REPLACE ".cpp" "" testname ${testsourcefile})
+    add_executable(${testname} ${testsourcefile})
+    target_link_libraries(${testname} YourLib)
+  endforeach(testsourcefile ${PROJECT_NAME})
+endif()
 
 # ---------------------------------------------------------------------------------------
 # TESTING
 # ---------------------------------------------------------------------------------------
 
 if(BUILD_TESTING)
+  enable_testing()
   include(GoogleTest)
   find_package(GTest REQUIRED)
 
   add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wconversion -Werror)
 
-  # Utils
-  add_executable(${PROJECT_NAME}_test_utils test/test_utils.cpp)
-  target_link_libraries(${PROJECT_NAME}_test_utils PRIVATE ${PROJECT_NAME} GTest::Main)
-  gtest_discover_tests(${PROJECT_NAME}_test_utils)
+  # Cyber enum
+  add_executable(${PROJECT_NAME}_test_cyber_enum test/test_cyber_enum.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_cyber_enum)
 
   # Cyber timer
   add_executable(${PROJECT_NAME}_test_cyber_timer test/test_cyber_timer.cpp)
@@ -146,15 +164,20 @@ if(BUILD_TESTING)
   target_link_libraries(${PROJECT_NAME}_test_synchronizer PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_synchronizer)
 
-  # Cyber enum
-  add_executable(${PROJECT_NAME}_test_cyber_enum test/test_cyber_enum.cpp)
-  target_link_libraries(${PROJECT_NAME}_test_cyber_enum PRIVATE ${PROJECT_NAME} GTest::Main)
-  gtest_discover_tests(${PROJECT_NAME}_test_cyber_enum)
+  # Threadpool
+  add_executable(${PROJECT_NAME}_test_threadpool test/test_threadpool.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_threadpool PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_threadpool)
 
   # Introspection
   add_executable(${PROJECT_NAME}_test_introspection test/test_introspection.cpp)
   target_link_libraries(${PROJECT_NAME}_test_introspection PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_introspection)
+
+  # Utils
+  add_executable(${PROJECT_NAME}_test_utils test/test_utils.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_utils PRIVATE ${PROJECT_NAME} GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_utils)
 
   # Yaml
   add_executable(${PROJECT_NAME}_test_yaml test/test_yaml.cpp)

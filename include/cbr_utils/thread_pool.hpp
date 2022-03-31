@@ -19,119 +19,116 @@
 //    3. This notice may not be removed or altered from any source
 //    distribution.
 
+/** @file */
+
 #ifndef CBR_UTILS__THREAD_POOL_HPP_
 #define CBR_UTILS__THREAD_POOL_HPP_
 
-#include <vector>
-#include <queue>
-#include <memory>
-#include <thread>
-#include <mutex>
 #include <condition_variable>
-#include <future>
 #include <functional>
+#include <future>
+#include <memory>
+#include <mutex>
+#include <queue>
 #include <stdexcept>
+#include <thread>
 #include <utility>
+#include <vector>
 
-namespace cbr
-{
+namespace cbr {
 
-
+/**
+ * @brief Thread pool.
+ * @details Pool with a fixed number of workers that can used to dispatch work.
+ */
 class ThreadPool
 {
 public:
-  ThreadPool() = default;
+  // Constructors
+  ThreadPool()                   = default;
   ThreadPool(const ThreadPool &) = delete;
-  ThreadPool(ThreadPool &&) = delete;
+  ThreadPool(ThreadPool &&)      = delete;
   ThreadPool & operator=(const ThreadPool &) = delete;
   ThreadPool & operator=(ThreadPool &&) = delete;
-  ~ThreadPool();
+  ~ThreadPool()
+  {
+    {
+      std::scoped_lock lock(m_mtx);
+      m_stop = true;
+    }
+    m_cv.notify_all();
+    for (std::thread & worker : m_workers) { worker.join(); }
+  }
 
-  explicit ThreadPool(size_t);
-  template<class F, class ... Args>
-  auto enqueue(F && f, Args && ... args)
-  ->std::future<typename std::result_of<F(Args...)>::type>;
-
-private:
-  // need to keep track of threads so we can join them
-  std::vector<std::thread> workers;
-  // the task queue
-  std::queue<std::function<void()>> tasks;
-
-  // synchronization
-  std::mutex queue_mutex;
-  std::condition_variable condition;
-  bool stop;
-};
-
-// the constructor just launches some amount of workers
-inline ThreadPool::ThreadPool(size_t threads)
-:   stop(false)
-{
-  for (size_t i = 0; i < threads; ++i) {
-    workers.emplace_back(
-      [this]
-      {
-        for (;; ) {
+  /**
+   * @brief Construct a new ThreadPool with a given number of workers.
+   *
+   * @param n_workers Number of workers in the thread pool.
+   */
+  explicit ThreadPool(const std::size_t n_workers) : m_stop(false)
+  {
+    for (std::size_t i = 0; i < n_workers; ++i) {
+      m_workers.emplace_back([this] {
+        while (true) {
           std::function<void()> task;
-
           {
-            std::unique_lock lock(this->queue_mutex);
-            this->condition.wait(
-              lock,
-              [this] {return this->stop || !this->tasks.empty();});
-            if (this->stop && this->tasks.empty()) {
-              return;
-            }
-            task = std::move(this->tasks.front());
-            this->tasks.pop();
+            std::unique_lock lock(this->m_mtx);
+            this->m_cv.wait(lock, [this] { return this->m_stop || !this->m_tasks.empty(); });
+            if (this->m_stop && this->m_tasks.empty()) { return; }
+            task = std::move(this->m_tasks.front());
+            this->m_tasks.pop();
           }
 
           task();
         }
-      }
-    );
-  }
-}
-
-// add new work item to the pool
-template<class F, class ... Args>
-auto ThreadPool::enqueue(F && f, Args && ... args)
-->std::future<typename std::result_of<F(Args...)>::type>
-{
-  using return_type = typename std::result_of<F(Args...)>::type;
-
-  auto task = std::make_shared<std::packaged_task<return_type()>>(
-    std::bind(std::forward<F>(f), std::forward<Args>(args)...)
-  );
-
-  std::future<return_type> res = task->get_future();
-  {
-    std::unique_lock lock(queue_mutex);
-
-    // don't allow enqueueing after stopping the pool
-    if (stop) {
-      throw std::runtime_error("enqueue on stopped ThreadPool");
+      });
     }
-
-    tasks.emplace([task]() {(*task)();});
   }
-  condition.notify_one();
-  return res;
-}
 
-// the destructor joins all threads
-inline ThreadPool::~ThreadPool()
-{
+  /**
+   * @brief Enqueue task into the thread pool.
+   * @details Task is automatically started as soon as worker becomes available.
+   *
+   * @tparam F Type of the task.
+   * @tparam Args Types of the arguments of the task.
+   * @param f Task callable object.
+   * @param args Arguments of the task.
+   * @return std::future for the task.
+   */
+  template<class F, class... Args>
+  std::future<typename std::result_of<F(Args...)>::type> enqueue(F && f, Args &&... args)
   {
-    std::unique_lock lock(queue_mutex);
-    stop = true;
+    using return_type = typename std::result_of<F(Args...)>::type;
+
+    auto task = std::make_shared<std::packaged_task<return_type()>>(
+      std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+
+    std::future<return_type> res = task->get_future();
+    {
+      std::scoped_lock lock(m_mtx);
+
+      // don't allow enqueueing after stopping the pool
+      if (m_stop) { throw std::runtime_error("enqueue on stopped ThreadPool"); }
+
+      m_tasks.emplace([task]() { (*task)(); });
+    }
+    m_cv.notify_one();
+    return res;
   }
-  condition.notify_all();
-  for (std::thread & worker : workers) {
-    worker.join();
-  }
-}
+
+private:
+  /// @cond
+  // need to keep track of threads so we can join them
+  std::vector<std::thread> m_workers;
+  // the task queue
+  std::queue<std::function<void()>> m_tasks;
+
+  // synchronization
+  std::mutex m_mtx;
+  std::condition_variable m_cv;
+  bool m_stop;
+  /// @endcond
+};
 
 }  // namespace cbr
 

@@ -15,9 +15,9 @@ TEST(SynchronizerTest, Print)
 {
   cbr::Synchronizer<int, std::string, std::string> sync;
 
-  sync.set_time_fcn<0>([](const int & i) {return i;});
-  sync.set_time_fcn<1>([](const std::string & s) {return s.size();});
-  sync.set_time_fcn<2>([](const std::string & s) {return 2 * s.size();});
+  sync.set_time_fcn<0>([](const int & i) { return i; });
+  sync.set_time_fcn<1>([](const std::string & s) { return s.size(); });
+  sync.set_time_fcn<2>([](const std::string & s) { return 2 * s.size(); });
 
   sync.add_and_search<0>(3);
   sync.add_and_search<0>(7);
@@ -42,20 +42,19 @@ TEST(SynchronizerTest, Basic)
 {
   cbr::Synchronizer<int, std::string, std::string> sync;
 
-  sync.set_time_fcn<0>([](const int & i) {return i;});
-  sync.set_time_fcn<1>([](const std::string & s) {return s.size();});
-  sync.set_time_fcn<2>([](const std::string & s) {return 2 * s.size();});
+  sync.set_time_fcn<0>([](const int & i) { return i; });
+  sync.set_time_fcn<1>([](const std::string & s) { return s.size(); });
+  sync.set_time_fcn<2>([](const std::string & s) { return 2 * s.size(); });
 
   int sol_0;
   std::string sol_1;
   std::string sol_2;
 
-  sync.register_callback(
-    [&sol_0, &sol_1, &sol_2](int && i, std::string && s1, std::string && s2) {
-      sol_0 = i;
-      sol_1 = s1;
-      sol_2 = s2;
-    });
+  sync.register_callback([&sol_0, &sol_1, &sol_2](int && i, std::string && s1, std::string && s2) {
+    sol_0 = i;
+    sol_1 = s1;
+    sol_2 = s2;
+  });
 
   sync.add_and_search<0>(3);
   sync.add_and_search<0>(7);
@@ -65,39 +64,29 @@ TEST(SynchronizerTest, Basic)
   sync.add_and_search<1>("hello hello");
   sync.add_and_search<2>("hello");
 
-  ASSERT_EQ(
-    sol_0, 12
-  );
-  ASSERT_EQ(
-    sol_1, "hello hello"
-  );
-  ASSERT_EQ(
-    sol_2, "hello"
-  );
+  ASSERT_EQ(sol_0, 12);
+  ASSERT_EQ(sol_1, "hello hello");
+  ASSERT_EQ(sol_2, "hello");
 }
-
 
 TEST(SynchronizerTest, Example1)
 {
   // example 1 from https://wiki.ros.org/message_filters/ApproximateTime
   cbr::Synchronizer<int, int, int, int> sync;
 
-  sync.set_time_fcn<0>([](const int & i) {return i;});
-  sync.set_time_fcn<1>([](const int & i) {return i;});
-  sync.set_time_fcn<2>([](const int & i) {return i;});
-  sync.set_time_fcn<3>([](const int & i) {return i;});
+  sync.set_time_fcn<0>([](const int & i) { return i; });
+  sync.set_time_fcn<1>([](const int & i) { return i; });
+  sync.set_time_fcn<2>([](const int & i) { return i; });
+  sync.set_time_fcn<3>([](const int & i) { return i; });
 
   int cb0 = 0, cb1 = 0, cb2 = 0, cb3 = 0;
 
-  sync.register_callback(
-    [&cb0, &cb1, &cb2, &cb3]
-      (int && i0, int && i1, int && i2, int && i3)
-    {
-      cb0 = i0;
-      cb1 = i1;
-      cb2 = i2;
-      cb3 = i3;
-    });
+  sync.register_callback([&cb0, &cb1, &cb2, &cb3](int && i0, int && i1, int && i2, int && i3) {
+    cb0 = i0;
+    cb1 = i1;
+    cb2 = i2;
+    cb3 = i3;
+  });
 
   // first set
   sync.add_and_search<2>(10);
@@ -213,33 +202,23 @@ TEST(SynchronizerTest, Example1)
   sync.add_and_search<3>(93);
 }
 
-
 TEST(SynchronizerTest, Example2)
 {
   // example 2 from https://wiki.ros.org/message_filters/ApproximateTime
   cbr::Synchronizer<int, int> sync;
 
-  sync.set_time_fcn<0>([](const int & i) {return i;});
-  sync.set_time_fcn<1>([](const int & i) {return i;});
+  sync.set_time_fcn<0>([](const int & i) { return i; });
+  sync.set_time_fcn<1>([](const int & i) { return i; });
 
   std::vector<std::pair<int, int>> sets;
 
-  sync.register_callback(
-    [&sets]
-      (int && i0, int && i1)
-    {
-      sets.push_back({i0, i1});
-    });
+  sync.register_callback([&sets](int && i0, int && i1) { sets.push_back({i0, i1}); });
 
   // set 1
-  for (int i = 0; i != 10; ++i) {
-    sync.add_and_search<0>(2 + 50 * i);
-  }
+  for (int i = 0; i != 10; ++i) { sync.add_and_search<0>(2 + 50 * i); }
 
   // set 2
-  for (int i = 0; i != 11; ++i) {
-    sync.add_and_search<1>(40 * i);
-  }
+  for (int i = 0; i != 11; ++i) { sync.add_and_search<1>(40 * i); }
 
   ASSERT_EQ(sets[0].first, 2);
   ASSERT_EQ(sets[0].second, 0);
@@ -266,7 +245,6 @@ TEST(SynchronizerTest, Example2)
   ASSERT_EQ(sets[7].second, 360);
 }
 
-
 TEST(SynchronizerTest, UniquePtr)
 {
   auto object1 = std::make_unique<int>(10);
@@ -278,20 +256,18 @@ TEST(SynchronizerTest, UniquePtr)
 
   cbr::Synchronizer<std::unique_ptr<int>, std::unique_ptr<int>> sync;
 
-  sync.set_time_fcn<0>([](const std::unique_ptr<int> & p) {return *p;});
-  sync.set_time_fcn<1>([](const std::unique_ptr<int> & p) {return *p;});
+  sync.set_time_fcn<0>([](const std::unique_ptr<int> & p) { return *p; });
+  sync.set_time_fcn<1>([](const std::unique_ptr<int> & p) { return *p; });
 
   intptr_t res1, res2;
-  sync.register_callback(
-    [&res1, &res2](std::unique_ptr<int> && p1, std::unique_ptr<int> && p2)
-    {
-      // can move out of container
-      auto u1 = std::move(p1);
-      auto u2 = std::move(p2);
+  sync.register_callback([&res1, &res2](std::unique_ptr<int> && p1, std::unique_ptr<int> && p2) {
+    // can move out of container
+    auto u1 = std::move(p1);
+    auto u2 = std::move(p2);
 
-      res1 = reinterpret_cast<intptr_t>(u1.get());
-      res2 = reinterpret_cast<intptr_t>(u2.get());
-    });
+    res1 = reinterpret_cast<intptr_t>(u1.get());
+    res2 = reinterpret_cast<intptr_t>(u2.get());
+  });
 
   // can move into container
   sync.add_and_search<0>(std::move(object1));
@@ -301,7 +277,6 @@ TEST(SynchronizerTest, UniquePtr)
   ASSERT_EQ(addr1, res1);
   ASSERT_EQ(addr2, res2);
 }
-
 
 TEST(SynchronizerTest, l_or_r_values)
 {
@@ -316,16 +291,14 @@ TEST(SynchronizerTest, l_or_r_values)
 
     cbr::Synchronizer<std::vector<int>, std::vector<int>> sync;
 
-    sync.set_time_fcn<0>([](const std::vector<int> & p) {return p[0];});
-    sync.set_time_fcn<1>([](const std::vector<int> & p) {return p[0];});
+    sync.set_time_fcn<0>([](const std::vector<int> & p) { return p[0]; });
+    sync.set_time_fcn<1>([](const std::vector<int> & p) { return p[0]; });
 
     intptr_t res1, res2;
-    sync.register_callback(
-      [&res1, &res2](std::vector<int> && p1, std::vector<int> && p2)
-      {
-        res1 = reinterpret_cast<intptr_t>(p1.data());
-        res2 = reinterpret_cast<intptr_t>(p2.data());
-      });
+    sync.register_callback([&res1, &res2](std::vector<int> && p1, std::vector<int> && p2) {
+      res1 = reinterpret_cast<intptr_t>(p1.data());
+      res2 = reinterpret_cast<intptr_t>(p2.data());
+    });
 
     // can move into container
     sync.add_and_search<0>(std::move(v1));
@@ -348,16 +321,14 @@ TEST(SynchronizerTest, l_or_r_values)
 
     cbr::Synchronizer<std::vector<int>, std::vector<int>> sync;
 
-    sync.set_time_fcn<0>([](const std::vector<int> & p) {return p[0];});
-    sync.set_time_fcn<1>([](const std::vector<int> & p) {return p[0];});
+    sync.set_time_fcn<0>([](const std::vector<int> & p) { return p[0]; });
+    sync.set_time_fcn<1>([](const std::vector<int> & p) { return p[0]; });
 
     intptr_t res1, res2;
-    sync.register_callback(
-      [&res1, &res2](std::vector<int> && p1, std::vector<int> && p2)
-      {
-        res1 = reinterpret_cast<intptr_t>(p1.data());
-        res2 = reinterpret_cast<intptr_t>(p2.data());
-      });
+    sync.register_callback([&res1, &res2](std::vector<int> && p1, std::vector<int> && p2) {
+      res1 = reinterpret_cast<intptr_t>(p1.data());
+      res2 = reinterpret_cast<intptr_t>(p2.data());
+    });
 
     // can move into container
     sync.add_and_search<0>(v1);
@@ -370,27 +341,23 @@ TEST(SynchronizerTest, l_or_r_values)
   }
 }
 
-
 TEST(SynchronizerTest, withDelta)
 {
   cbr::Synchronizer<int, int, int, int> sync(15);
 
-  sync.set_time_fcn<0>([](const int & i) {return i;});
-  sync.set_time_fcn<1>([](const int & i) {return i;});
-  sync.set_time_fcn<2>([](const int & i) {return i;});
-  sync.set_time_fcn<3>([](const int & i) {return i;});
+  sync.set_time_fcn<0>([](const int & i) { return i; });
+  sync.set_time_fcn<1>([](const int & i) { return i; });
+  sync.set_time_fcn<2>([](const int & i) { return i; });
+  sync.set_time_fcn<3>([](const int & i) { return i; });
 
   int cb0 = 0, cb1 = 0, cb2 = 0, cb3 = 0;
 
-  sync.register_callback(
-    [&cb0, &cb1, &cb2, &cb3]
-      (int && i0, int && i1, int && i2, int && i3)
-    {
-      cb0 = i0;
-      cb1 = i1;
-      cb2 = i2;
-      cb3 = i3;
-    });
+  sync.register_callback([&cb0, &cb1, &cb2, &cb3](int && i0, int && i1, int && i2, int && i3) {
+    cb0 = i0;
+    cb1 = i1;
+    cb2 = i2;
+    cb3 = i3;
+  });
 
   // first set
   sync.add_and_search<2>(10);
@@ -436,50 +403,34 @@ TEST(SynchronizerTest, withDelta)
   ASSERT_EQ(cb2, 33);
 }
 
-
 TEST(SynchronizerTest, fallOut)
 {
   // example 1 from https://wiki.ros.org/message_filters/ApproximateTime
   cbr::Synchronizer<int, int, int, int> sync;
 
-  sync.set_time_fcn<0>([](const int & i) {return i;});
-  sync.set_time_fcn<1>([](const int & i) {return i;});
-  sync.set_time_fcn<2>([](const int & i) {return i;});
-  sync.set_time_fcn<3>([](const int & i) {return i;});
+  sync.set_time_fcn<0>([](const int & i) { return i; });
+  sync.set_time_fcn<1>([](const int & i) { return i; });
+  sync.set_time_fcn<2>([](const int & i) { return i; });
+  sync.set_time_fcn<3>([](const int & i) { return i; });
 
   int cb0 = 0, cb1 = 0, cb2 = 0, cb3 = 0;
 
-  sync.register_callback(
-    [&cb0, &cb1, &cb2, &cb3]
-      (int && i0, int && i1, int && i2, int && i3)
-    {
-      cb0 = i0;
-      cb1 = i1;
-      cb2 = i2;
-      cb3 = i3;
-    });
+  sync.register_callback([&cb0, &cb1, &cb2, &cb3](int && i0, int && i1, int && i2, int && i3) {
+    cb0 = i0;
+    cb1 = i1;
+    cb2 = i2;
+    cb3 = i3;
+  });
 
   int cbf0 = -1, cbf1 = -1, cbf2 = -1, cbf3 = -1;
 
-  sync.register_nonsync_callback<0>(
-    [&cbf0](int && i) {
-      cbf0 = i;
-    });
+  sync.register_nonsync_callback<0>([&cbf0](int && i) { cbf0 = i; });
 
-  sync.register_nonsync_callback<1>(
-    [&cbf1](int && i) {
-      cbf1 = i;
-    });
+  sync.register_nonsync_callback<1>([&cbf1](int && i) { cbf1 = i; });
 
-  sync.register_nonsync_callback<2>(
-    [&cbf2](int && i) {
-      cbf2 = i;
-    });
+  sync.register_nonsync_callback<2>([&cbf2](int && i) { cbf2 = i; });
 
-  sync.register_nonsync_callback<3>(
-    [&cbf3](int && i) {
-      cbf3 = i;
-    });
+  sync.register_nonsync_callback<3>([&cbf3](int && i) { cbf3 = i; });
 
   // first set
   sync.add_and_search<2>(10);
@@ -512,9 +463,9 @@ TEST(SynchronizerTest, fallOut)
   ASSERT_EQ(cb0, 11);
   ASSERT_EQ(cb1, 12);
   ASSERT_EQ(cb3, 13);
-  ASSERT_EQ(cbf3, -1);  // verify callback not yet called
+  ASSERT_EQ(cbf3, -1);         // verify callback not yet called
   sync.add_and_search<2>(33);  // pivot, trigger solution for set2 and missed value
-  ASSERT_EQ(cbf3, 26);  // veryfy callback was called on dropped value
+  ASSERT_EQ(cbf3, 26);         // veryfy callback was called on dropped value
   ASSERT_EQ(cb1, 20);
   ASSERT_EQ(cb0, 21);
   ASSERT_EQ(cb2, 22);
@@ -532,7 +483,7 @@ TEST(SynchronizerTest, fallOut)
   ASSERT_EQ(cb2, 22);
   ASSERT_EQ(cb3, 23);
   sync.add_and_search<0>(43);  // pivot, trigger solution for set3
-  ASSERT_EQ(cbf3, 34);  // verify callback was called on dropped value 34
+  ASSERT_EQ(cbf3, 34);         // verify callback was called on dropped value 34
   ASSERT_EQ(cb0, 30);
   ASSERT_EQ(cb1, 31);
   ASSERT_EQ(cb3, 32);
@@ -578,9 +529,9 @@ TEST(SynchronizerTest, fallOut)
   ASSERT_EQ(cb2, 46);
   ASSERT_EQ(cb3, 47);
   ASSERT_EQ(cb0, 47);
-  ASSERT_EQ(cbf2, -1);  // verify callback was called on dropped value 72
+  ASSERT_EQ(cbf2, -1);         // verify callback was called on dropped value 72
   sync.add_and_search<3>(82);  // pivot, trigger solution for set6
-  ASSERT_EQ(cbf2, 72);  // verify callback was called on dropped value 72
+  ASSERT_EQ(cbf2, 72);         // verify callback was called on dropped value 72
   ASSERT_EQ(cb3, 60);
   ASSERT_EQ(cb2, 65);
   ASSERT_EQ(cb0, 67);
@@ -604,34 +555,26 @@ TEST(SynchronizerTest, fallOut)
   ASSERT_EQ(cbf1, -1);  // verify callback was never called
 }
 
-
 TEST(SynchronizerTest, fallOut2)
 {
   // example 1 from https://wiki.ros.org/message_filters/ApproximateTime
   cbr::Synchronizer<int, int> sync;
 
-  sync.set_time_fcn<0>([](const int & i) {return i;});
-  sync.set_time_fcn<1>([](const int & i) {return i;});
+  sync.set_time_fcn<0>([](const int & i) { return i; });
+  sync.set_time_fcn<1>([](const int & i) { return i; });
 
   int cb0 = -1, cb1 = -1;
 
-  sync.register_callback(
-    [&cb0, &cb1](int && i0, int && i1)
-    {
-      cb0 = i0;
-      cb1 = i1;
-    });
+  sync.register_callback([&cb0, &cb1](int && i0, int && i1) {
+    cb0 = i0;
+    cb1 = i1;
+  });
 
   std::vector<int> missed_0;
 
-  sync.register_nonsync_callback<0>(
-    [&missed_0](int && i) {
-      missed_0.push_back(i);
-    });
+  sync.register_nonsync_callback<0>([&missed_0](int && i) { missed_0.push_back(i); });
 
-  for (int i = 0; i < 10; i++) {
-    sync.add_and_search<0>(i);
-  }
+  for (int i = 0; i < 10; i++) { sync.add_and_search<0>(i); }
 
   sync.add_and_search<1>(11);
 
@@ -643,7 +586,5 @@ TEST(SynchronizerTest, fallOut2)
 
   // rest should be missed
   ASSERT_EQ(missed_0.size(), size_t(10));
-  for (size_t i = 0; i < 10; i++) {
-    ASSERT_EQ(missed_0[i], static_cast<int>(i));
-  }
+  for (size_t i = 0; i < 10; i++) { ASSERT_EQ(missed_0[i], static_cast<int>(i)); }
 }
