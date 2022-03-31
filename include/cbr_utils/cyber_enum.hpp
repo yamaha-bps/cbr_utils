@@ -44,123 +44,123 @@ struct CyberEnum
   ~CyberEnum()                                  = default;
 
   constexpr CyberEnum(const int data)  // NOLINT
-      : data_{data}
+      : m_data{data}
   {
     if (!is_valid()) { throw std::runtime_error("Enum value is invalid."); }
   }
   constexpr CyberEnum(const std::string_view data)  // NOLINT
   {
-    bool found = check(data, data_);
+    bool found = check(data, m_data);
 
     if (!found) { throw std::runtime_error("Enum value is invalid."); }
   }
 
   /**
-   * @brief Operator= from int
+   * @brief Operator= from int.
    */
   constexpr CyberEnum & operator=(const int data)  // NOLINT
   {
     if (!check(data)) { throw std::runtime_error("Enum value provided is invalid."); }
-    data_ = data;
+    m_data = data;
     return *this;
   }
 
   /**
-   * @brief Operator= from string_view, string_view used due to read only purposes
+   * @brief Operator= from string_view, string_view used due to read only constraints.
    */
   constexpr CyberEnum & operator=(const std::string_view data)  // NOLINT
   {
     int data_tmp{};
     bool found = check(data, data_tmp);
     if (!found) { throw std::runtime_error("Enum value is invalid."); }
-    data_ = data_tmp;
+    m_data = data_tmp;
     return *this;
   }
 
   /**
-   * @brief Operator> from string_view
+   * @brief Operator> from string_view.
    */
   constexpr bool operator>(const std::string_view rhs) const noexcept
   {
     int data{};
     bool found = check(rhs, data);
     if (!found) { return true; }
-    return data_ > data;
+    return m_data > data;
   }
 
   /**
-   * @brief Operator< from string_view
+   * @brief Operator< from string_view.
    */
   constexpr bool operator<(const std::string_view rhs) const noexcept
   {
     int data{};
     bool found = check(rhs, data);
     if (!found) { return true; }
-    return data_ < data;
+    return m_data < data;
   }
 
   /**
-   * @brief Operator>= from string_view
+   * @brief Operator>= from string_view.
    */
   constexpr bool operator>=(const std::string_view rhs) const noexcept
   {
     int data{};
     bool found = check(rhs, data);
     if (!found) { return true; }
-    return data_ >= data;
+    return m_data >= data;
   }
   /**
-   * @brief Operator<= from string_view
+   * @brief Operator<= from string_view.
    */
   constexpr bool operator<=(const std::string_view rhs) const noexcept
   {
     int data{};
     bool found = check(rhs, data);
     if (!found) { return true; }
-    return data_ <= data;
+    return m_data <= data;
   }
 
-  constexpr operator auto() const noexcept { return data_; }
+  constexpr operator auto() const noexcept { return m_data; }
   operator std::string() const noexcept { return c_str(); }
   constexpr operator std::string_view() const noexcept { return c_str(); }
   constexpr explicit operator const char *() const noexcept { return c_str(); }
 
   /**
-   * @brief Returns a pointer to an array that contains a null-terminated sequence of characters
+   * @brief Returns a pointer to an array that contains a null-terminated sequence of characters.
    */
   constexpr const char * c_str() const noexcept
   {
     for (std::size_t i = 0; i < T::values.size(); i++) {
-      if (T::values[i] == data_) { return T::names[i]; }
+      if (T::values[i] == m_data) { return T::names[i]; }
     }
     return nullptr;
   }
 
   /**
-   * @brief Returns the result of c_str() as type std::string
+   * @brief Returns the result of c_str() as type std::string.
    */
   std::string string() const noexcept { return c_str(); }
 
   /**
-   * @brief Returns the result of c_str() as type std::string_view
+   * @brief Returns the result of c_str() as type std::string_view.
    */
   constexpr std::string_view string_view() const noexcept { return c_str(); }
 
   /**
-   * @brief Returns true if data_ is a member of values array
+   * @brief Returns true if m_data is a member of values array.
    */
-  constexpr bool is_valid() const noexcept { return check(data_); }
+  constexpr bool is_valid() const noexcept { return check(m_data); }
 
   /**
-   * @brief Returns value of data_
+   * @brief Returns value of m_data.
    */
-  constexpr int get() const noexcept { return data_; }
+  constexpr int get() const noexcept { return m_data; }
 
   constexpr std::size_t operator[](const std::size_t i) const noexcept { return T::values[i]; }
   constexpr const char * operator()(const std::size_t i) const noexcept { return T::names[i]; }
 
   /**
-   * @brief Returns true if data is in values array
+   * @brief Returns true if data is in values array.
    */
   static constexpr bool check(const int data) noexcept
   {
@@ -175,7 +175,7 @@ struct CyberEnum
 
   /**
    * @brief Returns true if dataStr is in names array, sets dataVal to corresponding element in
-   *        value array
+   *        value array.
    */
   static constexpr bool check(const std::string_view dataStr, int & dataVal) noexcept
   {
@@ -193,16 +193,21 @@ struct CyberEnum
   }
 
 private:
-  int data_ = T::values[0];
+  int m_data = T::values.empty() ? 0 : T::values[0];
 
 protected:
   using this_t = CyberEnum<T>;
 };
 
+/// @cond
 template<typename T>
 struct is_cyber_enum : public std::is_base_of<CyberEnum<T>, T>
 {};
+/// @endcond
 
+/**
+ * @brief Check if a type is a CyberEnum.
+ */
 template<typename T>
 inline constexpr bool is_cyber_enum_v = is_cyber_enum<T>::value;
 
