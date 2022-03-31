@@ -10,7 +10,7 @@ var searchData=
   ['integerpack_5fcat_5ft_64',['integerpack_cat_t',['../integer__pack_8hpp.html#a87c814087d85117f70e821796b07bfd2',1,'cbr']]],
   ['introspection_2ehpp_65',['introspection.hpp',['../introspection_8hpp.html',1,'']]],
   ['is_5fchrono_5fduration_5fv_66',['is_chrono_duration_v',['../type__traits_8hpp.html#a8096e9d38b1ec707b624f320ac6563a4',1,'cbr']]],
-  ['is_5fcyber_5fenum_67',['is_cyber_enum',['../structcbr_1_1is__cyber__enum.html',1,'cbr']]],
+  ['is_5fcyber_5fenum_5fv_67',['is_cyber_enum_v',['../cyber__enum_8hpp.html#acc516af2507ca687e32d0f0cc86e65bc',1,'cbr']]],
   ['is_5frunnning_68',['is_runnning',['../classcbr_1_1CyberTimer.html#a1cea0e41abc08f249f9a60ee1217d682',1,'cbr::CyberTimer']]],
   ['is_5fscoped_5fenum_5fv_69',['is_scoped_enum_v',['../type__traits_8hpp.html#a3d022989f9c0363a59bf62155d2e762b',1,'cbr']]],
   ['is_5fsorted_70',['is_sorted',['../utils_8hpp.html#aa69fa80809ba13f441a5c88dc39f6821',1,'cbr::is_sorted(ForwardIt first, ForwardIt last)'],['../utils_8hpp.html#a60bbbd58284aa0d3ecd067126e73f633',1,'cbr::is_sorted(ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)']]],

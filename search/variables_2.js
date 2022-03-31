@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['is_5fchrono_5fduration_5fv_275',['is_chrono_duration_v',['../type__traits_8hpp.html#a8096e9d38b1ec707b624f320ac6563a4',1,'cbr']]],
+  ['is_5fchrono_5fduration_5fv_274',['is_chrono_duration_v',['../type__traits_8hpp.html#a8096e9d38b1ec707b624f320ac6563a4',1,'cbr']]],
+  ['is_5fcyber_5fenum_5fv_275',['is_cyber_enum_v',['../cyber__enum_8hpp.html#acc516af2507ca687e32d0f0cc86e65bc',1,'cbr']]],
   ['is_5fscoped_5fenum_5fv_276',['is_scoped_enum_v',['../type__traits_8hpp.html#a3d022989f9c0363a59bf62155d2e762b',1,'cbr']]],
   ['is_5fspecialization_5fv_277',['is_specialization_v',['../type__traits_8hpp.html#a796095724bc1bde5bceeb66f424bfe10',1,'cbr']]],
   ['is_5fstd_5farray_5fv_278',['is_std_array_v',['../type__traits_8hpp.html#a14accbc49ce2e44ca2d9ebf4750a7995',1,'cbr']]],
