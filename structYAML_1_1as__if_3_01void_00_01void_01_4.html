@@ -81,15 +81,20 @@ $(function() {
 <div class="title">YAML::as_if&lt; void, void &gt; Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Overload yaml-cpp's as_if struct to return a variant.  
+ <a href="structYAML_1_1as__if_3_01void_00_01void_01_4.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="yaml_8hpp_source.html">yaml.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a36d79840c3a7c3dfb3f3e6230f6648e1"><td class="memItemLeft" align="right" valign="top"><a id="a36d79840c3a7c3dfb3f3e6230f6648e1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>as_if</b> (const Node &amp;node_)</td></tr>
 <tr class="separator:a36d79840c3a7c3dfb3f3e6230f6648e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a5230c7c547671461f0a247fabd1a3b"><td class="memItemLeft" align="right" valign="top"><a id="a7a5230c7c547671461f0a247fabd1a3b"></a>
-std::variant&lt; void *, bool, int, double, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> () const</td></tr>
-<tr class="separator:a7a5230c7c547671461f0a247fabd1a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11a7084631dc4e0eddafe6dce9a626f7"><td class="memItemLeft" align="right" valign="top"><a id="a11a7084631dc4e0eddafe6dce9a626f7"></a>
+std::variant&lt; std::monostate, bool, int, double, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> () const</td></tr>
+<tr class="separator:a11a7084631dc4e0eddafe6dce9a626f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -98,8 +103,16 @@ const Node &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>node</b><
 <tr class="separator:ac496aa824c72a6383a814728c2bab58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="yaml_8hpp_source.html#l00121">121</a> of file <a class="el" href="yaml_8hpp_source.html">yaml.hpp</a>.</p>
+<div class="textblock"><p>Overload yaml-cpp's as_if struct to return a variant. </p>
+<p>Currently supported types in the variant:</p><ul>
+<li>bool</li>
+<li>int</li>
+<li>double</li>
+<li>std::string</li>
+</ul>
+<p>To use this as_if overload, specify void template arguments : as_if&lt;void,void&gt;(node). </p>
+
+<p class="definition">Definition at line <a class="el" href="yaml_8hpp_source.html#l00138">138</a> of file <a class="el" href="yaml_8hpp_source.html">yaml.hpp</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/cbr_utils/<a class="el" href="yaml_8hpp_source.html">yaml.hpp</a></li>
 </ul>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['is_5frunnning_348',['is_runnning',['../classcbr_1_1CyberTimer.html#a1cea0e41abc08f249f9a60ee1217d682',1,'cbr::CyberTimer']]],
-  ['is_5fvalid_349',['is_valid',['../structcbr_1_1CyberEnum.html#afce918334748fb220da3ab7a26235050',1,'cbr::CyberEnum']]]
+  ['formatduration_218',['formatDuration',['../utils_8hpp.html#a0a0c7379572ba80c98302c6bda64afe7',1,'cbr']]],
+  ['fromdatestr_219',['fromDateStr',['../utils_8hpp.html#af79da22f840ec1ffd334e50dfa80f084',1,'cbr']]]
 ];

@@ -74,7 +74,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">loop_timer.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -102,11 +103,17 @@ Include dependency graph for loop_timer.hpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1LoopTimer.html">cbr::LoopTimer&lt; _clock_t, _steady &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop synchronization utility class.  <a href="classcbr_1_1LoopTimer.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1LoopTimer.html">cbr::LoopTimer&lt; clock_t, steady &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop synchronization utility.  <a href="classcbr_1_1LoopTimer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1LoopTimerSteady.html">cbr::LoopTimerSteady&lt; clock_t &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a50d7193151c650f5b7973fd3709c540b"><td class="memTemplParams" colspan="2"><a id="a50d7193151c650f5b7973fd3709c540b"></a>
+template&lt;typename clock_t  = std::chrono::high_resolution_clock&gt; </td></tr>
+<tr class="memitem:a50d7193151c650f5b7973fd3709c540b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="loop__timer_8hpp.html#a50d7193151c650f5b7973fd3709c540b">cbr::LoopTimerSteady</a> = LoopTimer&lt; clock_t, true &gt;</td></tr>
+<tr class="memdesc:a50d7193151c650f5b7973fd3709c540b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for a steady <a class="el" href="classcbr_1_1LoopTimer.html" title="Loop synchronization utility.">LoopTimer</a>. <br /></td></tr>
+<tr class="separator:a50d7193151c650f5b7973fd3709c540b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

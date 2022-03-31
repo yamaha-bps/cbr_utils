@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
 <a href="structcbr_1_1CyberEnum-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cbr::CyberEnum&lt; T &gt; Struct Template Reference</div>  </div>
@@ -180,6 +181,12 @@ static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a clas
 static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1CyberEnum.html#ae8bebad4ae21af0b6a1fa379cf700e12">check</a> (const std::string_view dataStr, int &amp;dataVal) noexcept</td></tr>
 <tr class="memdesc:ae8bebad4ae21af0b6a1fa379cf700e12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if dataStr is in names array, sets dataVal to corresponding element in value array. <br /></td></tr>
 <tr class="separator:ae8bebad4ae21af0b6a1fa379cf700e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:a7f1bf09c11c993b1a50a0c40731766e3"><td class="memItemLeft" align="right" valign="top"><a id="a7f1bf09c11c993b1a50a0c40731766e3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>this_t</b> = <a class="el" href="structcbr_1_1CyberEnum.html">CyberEnum</a>&lt; T &gt;</td></tr>
+<tr class="separator:a7f1bf09c11c993b1a50a0c40731766e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
@@ -189,8 +196,8 @@ struct cbr::CyberEnum&lt; T &gt;</h3>
 <p>Enum that can be implicitly constructed/converted to and from integer and string_view.</p>
 <p>Example: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>ExampleEnum : CyberEnum&lt;ExampleEnum&gt;</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using</span> CyberEnum&lt;ExampleEnum&gt;::CyberEnum;</div>
-<div class="line">  <span class="keyword">using</span> CyberEnum&lt;ExampleEnum&gt;::operator=;</div>
+<div class="line">  <span class="keyword">using</span> this_t::CyberEnum;</div>
+<div class="line">  <span class="keyword">using</span> this_t::operator=;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">static</span> constexpr <span class="keywordtype">int</span> off = 0;</div>
 <div class="line">  <span class="keyword">static</span> constexpr <span class="keywordtype">int</span> on = 1;</div>

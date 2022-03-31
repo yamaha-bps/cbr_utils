@@ -212,20 +212,23 @@ $(function() {
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">int</span> data_ = T::values[0];</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;};</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="structcbr_1_1is__cyber__enum.html">  200</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structcbr_1_1is__cyber__enum.html">is_cyber_enum</a> : <span class="keyword">public</span> std::is_base_of&lt;CyberEnum&lt;T&gt;, T&gt;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;{};</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keyword">inline</span> constexpr <span class="keywordtype">bool</span> is_cyber_enum_v = <a class="code" href="structcbr_1_1is__cyber__enum.html">is_cyber_enum&lt;T&gt;::value</a>;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keyword">using</span> this_t = <a class="code" href="structcbr_1_1CyberEnum.html">CyberEnum&lt;T&gt;</a>;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;};</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00203"></a><span class="lineno"><a class="line" href="structcbr_1_1is__cyber__enum.html">  203</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structcbr_1_1is__cyber__enum.html">is_cyber_enum</a> : <span class="keyword">public</span> std::is_base_of&lt;CyberEnum&lt;T&gt;, T&gt;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;{};</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}  <span class="comment">// namespace cbr</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="preprocessor">#endif  // CBR_UTILS__CYBER_ENUM_HPP_</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keyword">inline</span> constexpr <span class="keywordtype">bool</span> is_cyber_enum_v = <a class="code" href="structcbr_1_1is__cyber__enum.html">is_cyber_enum&lt;T&gt;::value</a>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;}  <span class="comment">// namespace cbr</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="preprocessor">#endif  // CBR_UTILS__CYBER_ENUM_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructcbr_1_1is__cyber__enum_html"><div class="ttname"><a href="structcbr_1_1is__cyber__enum.html">cbr::is_cyber_enum</a></div><div class="ttdef"><b>Definition:</b> <a href="cyber__enum_8hpp_source.html#l00200">cyber_enum.hpp:200</a></div></div>
+<div class="ttc" id="astructcbr_1_1is__cyber__enum_html"><div class="ttname"><a href="structcbr_1_1is__cyber__enum.html">cbr::is_cyber_enum</a></div><div class="ttdef"><b>Definition:</b> <a href="cyber__enum_8hpp_source.html#l00203">cyber_enum.hpp:203</a></div></div>
 <div class="ttc" id="astructcbr_1_1CyberEnum_html_a5c9ead7bd84444788ae3945880b9ed1e"><div class="ttname"><a href="structcbr_1_1CyberEnum.html#a5c9ead7bd84444788ae3945880b9ed1e">cbr::CyberEnum::check</a></div><div class="ttdeci">static constexpr bool check(const int data) noexcept</div><div class="ttdoc">Returns true if data is in values array.</div><div class="ttdef"><b>Definition:</b> <a href="cyber__enum_8hpp_source.html#l00165">cyber_enum.hpp:165</a></div></div>
 <div class="ttc" id="astructcbr_1_1CyberEnum_html_a5daf69ec82f41593467641b2325e6ddf"><div class="ttname"><a href="structcbr_1_1CyberEnum.html#a5daf69ec82f41593467641b2325e6ddf">cbr::CyberEnum::string_view</a></div><div class="ttdeci">constexpr std::string_view string_view() const noexcept</div><div class="ttdoc">Returns the result of c_str() as type std::string_view.</div><div class="ttdef"><b>Definition:</b> <a href="cyber__enum_8hpp_source.html#l00147">cyber_enum.hpp:147</a></div></div>
 <div class="ttc" id="astructcbr_1_1CyberEnum_html_afce918334748fb220da3ab7a26235050"><div class="ttname"><a href="structcbr_1_1CyberEnum.html#afce918334748fb220da3ab7a26235050">cbr::CyberEnum::is_valid</a></div><div class="ttdeci">constexpr bool is_valid() const noexcept</div><div class="ttdoc">Returns true if data_ is a member of values array.</div><div class="ttdef"><b>Definition:</b> <a href="cyber__enum_8hpp_source.html#l00152">cyber_enum.hpp:152</a></div></div>

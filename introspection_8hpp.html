@@ -106,13 +106,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="introspection_8hpp__dep__incl.png" border="0" usemap="#include_2cbr__utils_2introspection_8hppdep" alt=""/></div>
 <map name="include_2cbr__utils_2introspection_8hppdep" id="include_2cbr__utils_2introspection_8hppdep">
-<area shape="rect" title=" " alt="" coords="28,5,273,32"/>
-<area shape="rect" href="static__for_8hpp.html" title=" " alt="" coords="67,80,235,121"/>
-<area shape="rect" href="integer__pack_8hpp.html" title=" " alt="" coords="41,259,220,300"/>
-<area shape="rect" href="utils_8hpp.html" title=" " alt="" coords="37,348,225,375"/>
-<area shape="rect" href="type__pack_8hpp.html" title=" " alt="" coords="130,169,291,211"/>
-<area shape="rect" href="yaml_8hpp.html" title=" " alt="" coords="315,177,509,203"/>
-<area shape="rect" href="matplotlibcpp_8hpp_source.html" title=" " alt="" coords="5,423,256,449"/>
+<area shape="rect" title=" " alt="" coords="10,5,255,32"/>
+<area shape="rect" href="static__for_8hpp.html" title=" " alt="" coords="49,80,217,121"/>
+<area shape="rect" href="integer__pack_8hpp.html" title=" " alt="" coords="23,259,202,300"/>
+<area shape="rect" href="utils_8hpp.html" title=" " alt="" coords="19,348,207,375"/>
+<area shape="rect" href="type__pack_8hpp.html" title=" " alt="" coords="112,169,273,211"/>
+<area shape="rect" href="yaml_8hpp.html" title=" " alt="" coords="297,177,491,203"/>
 </map>
 </div>
 </div>
@@ -120,25 +119,92 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac00916c2357fc76ecc9fd22822029ce0"><td class="memTemplParams" colspan="2"><a id="ac00916c2357fc76ecc9fd22822029ce0"></a>
-template&lt;typename Seq , std::size_t... Is&gt; </td></tr>
-<tr class="memitem:ac00916c2357fc76ecc9fd22822029ce0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::detail::copy_to_tuple_impl</b> (Seq &amp;&amp;s, std::index_sequence&lt; Is... &gt;)</td></tr>
-<tr class="separator:ac00916c2357fc76ecc9fd22822029ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e0eac865c329a1845024aba7030d45e"><td class="memTemplParams" colspan="2"><a id="a6e0eac865c329a1845024aba7030d45e"></a>
-template&lt;typename Seq , std::size_t... Is&gt; </td></tr>
-<tr class="memitem:a6e0eac865c329a1845024aba7030d45e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::detail::bind_to_tuple_impl</b> (Seq &amp;s, std::index_sequence&lt; Is... &gt;)</td></tr>
-<tr class="separator:a6e0eac865c329a1845024aba7030d45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad40b95f0b322f4eb7b4d26f2523187ed"><td class="memTemplParams" colspan="2"><a id="ad40b95f0b322f4eb7b4d26f2523187ed"></a>
-template&lt;typename Seq &gt; </td></tr>
+<tr class="memitem:ad40b95f0b322f4eb7b4d26f2523187ed"><td class="memTemplParams" colspan="2">template&lt;typename Seq &gt; </td></tr>
 <tr class="memitem:ad40b95f0b322f4eb7b4d26f2523187ed"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="introspection_8hpp.html#ad40b95f0b322f4eb7b4d26f2523187ed">cbr::copy_to_tuple</a> (Seq &amp;&amp;s)</td></tr>
-<tr class="memdesc:ad40b95f0b322f4eb7b4d26f2523187ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy the fields of a boost::hana::Struct into a tuple <br /></td></tr>
+<tr class="memdesc:ad40b95f0b322f4eb7b4d26f2523187ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the fields of a boost::hana::Struct into a tuple.  <a href="introspection_8hpp.html#ad40b95f0b322f4eb7b4d26f2523187ed">More...</a><br /></td></tr>
 <tr class="separator:ad40b95f0b322f4eb7b4d26f2523187ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05aa249150cbf1c43d6989a3186afc0a"><td class="memTemplParams" colspan="2"><a id="a05aa249150cbf1c43d6989a3186afc0a"></a>
-template&lt;typename Seq &gt; </td></tr>
+<tr class="memitem:a05aa249150cbf1c43d6989a3186afc0a"><td class="memTemplParams" colspan="2">template&lt;typename Seq &gt; </td></tr>
 <tr class="memitem:a05aa249150cbf1c43d6989a3186afc0a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="introspection_8hpp.html#a05aa249150cbf1c43d6989a3186afc0a">cbr::bind_to_tuple</a> (Seq &amp;s)</td></tr>
-<tr class="memdesc:a05aa249150cbf1c43d6989a3186afc0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ties the fields of a boost::hana::Struct to a tuple <br /></td></tr>
+<tr class="memdesc:a05aa249150cbf1c43d6989a3186afc0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bind the fields of a boost::hana::Struct to a tuple of references to these field.  <a href="introspection_8hpp.html#a05aa249150cbf1c43d6989a3186afc0a">More...</a><br /></td></tr>
 <tr class="separator:a05aa249150cbf1c43d6989a3186afc0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a05aa249150cbf1c43d6989a3186afc0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05aa249150cbf1c43d6989a3186afc0a">&#9670;&nbsp;</a></span>bind_to_tuple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Seq &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto cbr::bind_to_tuple </td>
+          <td>(</td>
+          <td class="paramtype">Seq &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Bind the fields of a boost::hana::Struct to a tuple of references to these field. </p>
+<p>Not recursive.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Seq</td><td>Type of the input struct. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Input struct. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::tuple containting references to the fields of the struct. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="introspection_8hpp_source.html#l00086">86</a> of file <a class="el" href="introspection_8hpp_source.html">introspection.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad40b95f0b322f4eb7b4d26f2523187ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad40b95f0b322f4eb7b4d26f2523187ed">&#9670;&nbsp;</a></span>copy_to_tuple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Seq &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto cbr::copy_to_tuple </td>
+          <td>(</td>
+          <td class="paramtype">Seq &amp;&amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy the fields of a boost::hana::Struct into a tuple. </p>
+<p>Not recursive.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Seq</td><td>Type of the input struct. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Input struct. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::tuple containting copies of the fields of the the struct. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="introspection_8hpp_source.html#l00067">67</a> of file <a class="el" href="introspection_8hpp_source.html">introspection.hpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

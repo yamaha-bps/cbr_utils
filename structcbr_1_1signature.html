@@ -77,12 +77,30 @@ $(function() {
 <div class="title">cbr::signature&lt; S &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Extract signature of member function.  
+ <a href="structcbr_1_1signature.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="utils_8hpp_source.html">utils.hpp</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename S&gt;<br />
 struct cbr::signature&lt; S &gt;</h3>
 
+<p>Extract signature of member function. </p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>S{<span class="keywordtype">void</span> foo(<span class="keywordtype">double</span>){}};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> sig = signature&lt;decltype(&amp;S::foo)&gt;;</div>
+<div class="line"><span class="keyword">using</span> return_type = <span class="keyword">typename</span> sig::return_type</div>
+<div class="line"><span class="keyword">using</span> argument_type = <span class="keyword">typename</span> sig::argument_type</div>
+</div><!-- fragment --><p>Then return_type == void and argument_type == double.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>Type of the member function to extract signature out of. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00173">173</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00294">294</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/cbr_utils/<a class="el" href="utils_8hpp_source.html">utils.hpp</a></li>
 </ul>

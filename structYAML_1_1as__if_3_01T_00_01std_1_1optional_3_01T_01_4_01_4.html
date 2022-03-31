@@ -81,6 +81,11 @@ $(function() {
 <div class="title">YAML::as_if&lt; T, std::optional&lt; T &gt; &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Overload yaml-cpp's as_if struct to return an optional.  
+ <a href="structYAML_1_1as__if_3_01T_00_01std_1_1optional_3_01T_01_4_01_4.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="yaml_8hpp_source.html">yaml.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -101,8 +106,10 @@ const Node &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>node</b><
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 struct YAML::as_if&lt; T, std::optional&lt; T &gt; &gt;</h3>
 
+<p>Overload yaml-cpp's as_if struct to return an optional. </p>
+<p>To use this as_if overload, specify template arguments like these (for double for example): as_if&lt;double,std::optional&lt;double&gt;&gt;(node). </p>
 
-<p class="definition">Definition at line <a class="el" href="yaml_8hpp_source.html#l00161">161</a> of file <a class="el" href="yaml_8hpp_source.html">yaml.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="yaml_8hpp_source.html#l00183">183</a> of file <a class="el" href="yaml_8hpp_source.html">yaml.hpp</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/cbr_utils/<a class="el" href="yaml_8hpp_source.html">yaml.hpp</a></li>
 </ul>

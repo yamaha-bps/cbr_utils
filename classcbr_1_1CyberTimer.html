@@ -119,10 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a55cc4670fa45e1ef87888ed4c3d0b700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classcbr_1_1CyberTimer.html" title="Timer class with averaging capabilities.">CyberTimer</a> object.  <a href="classcbr_1_1CyberTimer.html#a55cc4670fa45e1ef87888ed4c3d0b700">More...</a><br /></td></tr>
 <tr class="separator:a55cc4670fa45e1ef87888ed4c3d0b700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9143d0d17623ac31bc91cdc0366b674a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1CyberTimer.html#a9143d0d17623ac31bc91cdc0366b674a">set_clock</a> (const std::shared_ptr&lt; clock_t &gt; &amp;clock) noexcept</td></tr>
-<tr class="memdesc:a9143d0d17623ac31bc91cdc0366b674a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the clock object.  <a href="classcbr_1_1CyberTimer.html#a9143d0d17623ac31bc91cdc0366b674a">More...</a><br /></td></tr>
+<tr class="memdesc:a9143d0d17623ac31bc91cdc0366b674a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the timer's clock.  <a href="classcbr_1_1CyberTimer.html#a9143d0d17623ac31bc91cdc0366b674a">More...</a><br /></td></tr>
 <tr class="separator:a9143d0d17623ac31bc91cdc0366b674a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2980c393257d1e1313168d9a777a6ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1CyberTimer.html#af2980c393257d1e1313168d9a777a6ad">set_clock</a> (std::shared_ptr&lt; clock_t &gt; &amp;&amp;clock) noexcept</td></tr>
-<tr class="memdesc:af2980c393257d1e1313168d9a777a6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the clock object.  <a href="classcbr_1_1CyberTimer.html#af2980c393257d1e1313168d9a777a6ad">More...</a><br /></td></tr>
+<tr class="memdesc:af2980c393257d1e1313168d9a777a6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the timer's clock.  <a href="classcbr_1_1CyberTimer.html#af2980c393257d1e1313168d9a777a6ad">More...</a><br /></td></tr>
 <tr class="separator:af2980c393257d1e1313168d9a777a6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e75c8c9c4479906b4a5a94cffd945c5"><td class="memItemLeft" align="right" valign="top">time_point_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1CyberTimer.html#a6e75c8c9c4479906b4a5a94cffd945c5">now</a> () const noexcept</td></tr>
 <tr class="memdesc:a6e75c8c9c4479906b4a5a94cffd945c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current clock time.  <a href="classcbr_1_1CyberTimer.html#a6e75c8c9c4479906b4a5a94cffd945c5">More...</a><br /></td></tr>
@@ -253,13 +253,15 @@ class cbr::CyberTimer&lt; ratio_t, T, clock_t, with_average &gt;</h3>
 <div class="line"> </div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Function 1 took: &quot;</span> &lt;&lt; duration1 &lt;&lt; <span class="stringliteral">&quot;seconds&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Functions 1 and 2 combined took: &quot;</span> &lt;&lt; duration2 &lt;&lt; <span class="stringliteral">&quot;seconds&quot;</span> &lt;&lt; std::endl;</div>
-</div><!-- fragment --><p>Notes: clock is default constructed from specified type if not specified at construction or set.</p>
+</div><!-- fragment --><p>Notes:</p><ul>
+<li>Clock is default constructed from specified type if not specified at construction or set.</li>
+</ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ratio_t</td><td>Duration units (default: std::ratio&lt;1&gt;, i.e. seconds) </td></tr>
     <tr><td class="paramname">T</td><td>Duration underlying representation type (default: double) </td></tr>
     <tr><td class="paramname">clock_t</td><td>Clock type (default: std::chrono::high_resolution_clock) </td></tr>
-    <tr><td class="paramname">with_average</td><td>Boolean value to activate averaging functionalities (default: true) </td></tr>
+    <tr><td class="paramname">with_average</td><td>Boolean value to activate averaging functionality (default: true) </td></tr>
   </table>
   </dd>
 </dl>
@@ -678,7 +680,7 @@ template&lt;typename ratio_t  = std::ratio&lt;1&gt;, typename T  = double, typen
 </table>
 </div><div class="memdoc">
 
-<p>Set the clock object. </p>
+<p>Set the timer's clock. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">clock</td><td>Shared pointer to a clock. </td></tr>
@@ -716,7 +718,7 @@ template&lt;typename ratio_t  = std::ratio&lt;1&gt;, typename T  = double, typen
 </table>
 </div><div class="memdoc">
 
-<p>Set the clock object. </p>
+<p>Set the timer's clock. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">clock</td><td>Shared pointer to a clock. </td></tr>

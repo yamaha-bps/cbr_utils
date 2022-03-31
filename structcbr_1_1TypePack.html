@@ -82,69 +82,75 @@ $(function() {
 <div class="title">cbr::TypePack&lt; Args &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Utility to manipulate a list of types.  
+ <a href="structcbr_1_1TypePack.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a846e1a1f1a019bee7ea6f6ed22ed8dc6"><td class="memItemLeft" align="right" valign="top"><a id="a846e1a1f1a019bee7ea6f6ed22ed8dc6"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>tuple</b> = std::tuple&lt; Args... &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a846e1a1f1a019bee7ea6f6ed22ed8dc6">tuple</a> = std::tuple&lt; Args... &gt;</td></tr>
+<tr class="memdesc:a846e1a1f1a019bee7ea6f6ed22ed8dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::tuple of the elements of the packs. <br /></td></tr>
 <tr class="separator:a846e1a1f1a019bee7ea6f6ed22ed8dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a6214f14b1278160e71357e75fbbd63"><td class="memTemplParams" colspan="2"><a id="a6a6214f14b1278160e71357e75fbbd63"></a>
-template&lt;std::size_t N&gt; </td></tr>
-<tr class="memitem:a6a6214f14b1278160e71357e75fbbd63"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>type</b> = typename std::tuple_element_t&lt; N, tuple &gt;</td></tr>
-<tr class="separator:a6a6214f14b1278160e71357e75fbbd63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dc117e390a83573b7bb51aa9086b22e"><td class="memTemplParams" colspan="2"><a id="a6dc117e390a83573b7bb51aa9086b22e"></a>
-template&lt;template&lt; typename... &gt; typename T, typename... Ps&gt; </td></tr>
-<tr class="memitem:a6dc117e390a83573b7bb51aa9086b22e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>apply</b> = <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; T&lt; Args, Ps... &gt;... &gt;</td></tr>
-<tr class="separator:a6dc117e390a83573b7bb51aa9086b22e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03b7125d1322b8db9ada52b56b0e987b"><td class="memTemplParams" colspan="2"><a id="a03b7125d1322b8db9ada52b56b0e987b"></a>
-template&lt;template&lt; typename... &gt; typename T, typename... Ps&gt; </td></tr>
-<tr class="memitem:a03b7125d1322b8db9ada52b56b0e987b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>apply_prefixed</b> = <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; T&lt; Ps..., Args &gt;... &gt;</td></tr>
-<tr class="separator:a03b7125d1322b8db9ada52b56b0e987b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb59f3c0fe5b673edc0df2e28f14033a"><td class="memTemplParams" colspan="2"><a id="afb59f3c0fe5b673edc0df2e28f14033a"></a>
-template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:afb59f3c0fe5b673edc0df2e28f14033a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>unpack</b> = T&lt; Args..., Ts... &gt;</td></tr>
+<tr class="memitem:ab1a298420cbc99383378d82bfe66c1ef"><td class="memTemplParams" colspan="2">template&lt;std::size_t idx&gt; </td></tr>
+<tr class="memitem:ab1a298420cbc99383378d82bfe66c1ef"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a> = typename std::tuple_element_t&lt; idx, <a class="el" href="structcbr_1_1TypePack.html#a846e1a1f1a019bee7ea6f6ed22ed8dc6">tuple</a> &gt;</td></tr>
+<tr class="memdesc:ab1a298420cbc99383378d82bfe66c1ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pack type at given index.  <a href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">More...</a><br /></td></tr>
+<tr class="separator:ab1a298420cbc99383378d82bfe66c1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17908a46387844bc60b2444843cd5077"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
+<tr class="memitem:a17908a46387844bc60b2444843cd5077"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a17908a46387844bc60b2444843cd5077">apply</a> = <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; T&lt; Args, Ts... &gt;... &gt;</td></tr>
+<tr class="memdesc:a17908a46387844bc60b2444843cd5077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application of a given templated type over each element of the pack.  <a href="structcbr_1_1TypePack.html#a17908a46387844bc60b2444843cd5077">More...</a><br /></td></tr>
+<tr class="separator:a17908a46387844bc60b2444843cd5077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9dfc504d08ea76980c4c71ab6efa87a"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
+<tr class="memitem:ad9dfc504d08ea76980c4c71ab6efa87a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#ad9dfc504d08ea76980c4c71ab6efa87a">apply_prefixed</a> = <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; T&lt; Ts..., Args &gt;... &gt;</td></tr>
+<tr class="memdesc:ad9dfc504d08ea76980c4c71ab6efa87a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application of a given templated type over each element of the pack.  <a href="structcbr_1_1TypePack.html#ad9dfc504d08ea76980c4c71ab6efa87a">More...</a><br /></td></tr>
+<tr class="separator:ad9dfc504d08ea76980c4c71ab6efa87a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb59f3c0fe5b673edc0df2e28f14033a"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
+<tr class="memitem:afb59f3c0fe5b673edc0df2e28f14033a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#afb59f3c0fe5b673edc0df2e28f14033a">unpack</a> = T&lt; Args..., Ts... &gt;</td></tr>
+<tr class="memdesc:afb59f3c0fe5b673edc0df2e28f14033a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpack elements of the pack into the template parameters of a given type.  <a href="structcbr_1_1TypePack.html#afb59f3c0fe5b673edc0df2e28f14033a">More...</a><br /></td></tr>
 <tr class="separator:afb59f3c0fe5b673edc0df2e28f14033a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8aa71e969ff64553e01f49c37b3c4a56"><td class="memTemplParams" colspan="2"><a id="a8aa71e969ff64553e01f49c37b3c4a56"></a>
-template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:a8aa71e969ff64553e01f49c37b3c4a56"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>unpack_prefixed</b> = T&lt; Ts..., Args... &gt;</td></tr>
+<tr class="memitem:a8aa71e969ff64553e01f49c37b3c4a56"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
+<tr class="memitem:a8aa71e969ff64553e01f49c37b3c4a56"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a8aa71e969ff64553e01f49c37b3c4a56">unpack_prefixed</a> = T&lt; Ts..., Args... &gt;</td></tr>
+<tr class="memdesc:a8aa71e969ff64553e01f49c37b3c4a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpack elements of the pack into the template parameters of a given type.  <a href="structcbr_1_1TypePack.html#a8aa71e969ff64553e01f49c37b3c4a56">More...</a><br /></td></tr>
 <tr class="separator:a8aa71e969ff64553e01f49c37b3c4a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7c586479902b435ba9063a33dd3f9f9"><td class="memTemplParams" colspan="2"><a id="ab7c586479902b435ba9063a33dd3f9f9"></a>
-template&lt;std::size_t N&gt; </td></tr>
-<tr class="memitem:ab7c586479902b435ba9063a33dd3f9f9"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>duplicate</b> = typename <a class="el" href="structcbr_1_1detail_1_1__typepack__dupli.html">detail::_typepack_dupli</a>&lt; <a class="el" href="structcbr_1_1TypePack.html">this_t</a>, std::make_index_sequence&lt; N &gt; &gt;::type</td></tr>
+<tr class="memitem:ab7c586479902b435ba9063a33dd3f9f9"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
+<tr class="memitem:ab7c586479902b435ba9063a33dd3f9f9"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#ab7c586479902b435ba9063a33dd3f9f9">duplicate</a> = typename detail::_typepack_dupli&lt; <a class="el" href="structcbr_1_1TypePack.html">this_t</a>, std::make_index_sequence&lt; N &gt; &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td></tr>
+<tr class="memdesc:ab7c586479902b435ba9063a33dd3f9f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duplicate the pack multiple times.  <a href="structcbr_1_1TypePack.html#ab7c586479902b435ba9063a33dd3f9f9">More...</a><br /></td></tr>
 <tr class="separator:ab7c586479902b435ba9063a33dd3f9f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac145b0996b65a3032208d2079cf85138"><td class="memTemplParams" colspan="2"><a id="ac145b0996b65a3032208d2079cf85138"></a>
-template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:ac145b0996b65a3032208d2079cf85138"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>append</b> = typename typepack_cat&lt; <a class="el" href="structcbr_1_1TypePack.html">this_t</a>, <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; Ts... &gt; &gt;::type</td></tr>
+<tr class="memitem:ac145b0996b65a3032208d2079cf85138"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:ac145b0996b65a3032208d2079cf85138"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#ac145b0996b65a3032208d2079cf85138">append</a> = typename typepack_cat&lt; <a class="el" href="structcbr_1_1TypePack.html">this_t</a>, <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; Ts... &gt; &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td></tr>
+<tr class="memdesc:ac145b0996b65a3032208d2079cf85138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append types to the pack.  <a href="structcbr_1_1TypePack.html#ac145b0996b65a3032208d2079cf85138">More...</a><br /></td></tr>
 <tr class="separator:ac145b0996b65a3032208d2079cf85138"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad910534b0cec9fff6db1188216ea7c1c"><td class="memTemplParams" colspan="2"><a id="ad910534b0cec9fff6db1188216ea7c1c"></a>
-template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:ad910534b0cec9fff6db1188216ea7c1c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>append_front</b> = typename typepack_cat&lt; <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; Ts... &gt;, <a class="el" href="structcbr_1_1TypePack.html">this_t</a> &gt;::type</td></tr>
+<tr class="memitem:ad910534b0cec9fff6db1188216ea7c1c"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:ad910534b0cec9fff6db1188216ea7c1c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#ad910534b0cec9fff6db1188216ea7c1c">append_front</a> = typename typepack_cat&lt; <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; Ts... &gt;, <a class="el" href="structcbr_1_1TypePack.html">this_t</a> &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td></tr>
+<tr class="memdesc:ad910534b0cec9fff6db1188216ea7c1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepend types to the pack.  <a href="structcbr_1_1TypePack.html#ad910534b0cec9fff6db1188216ea7c1c">More...</a><br /></td></tr>
 <tr class="separator:ad910534b0cec9fff6db1188216ea7c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36e0ca3eaa133966c9299d90553adfcb"><td class="memTemplParams" colspan="2"><a id="a36e0ca3eaa133966c9299d90553adfcb"></a>
-template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:a36e0ca3eaa133966c9299d90553adfcb"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>member_t</b> = <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; typename T&lt; Args, Ts... &gt;::type... &gt;</td></tr>
+<tr class="memitem:a36e0ca3eaa133966c9299d90553adfcb"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </td></tr>
+<tr class="memitem:a36e0ca3eaa133966c9299d90553adfcb"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a36e0ca3eaa133966c9299d90553adfcb">member_t</a> = <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt; typename T&lt; Args, Ts... &gt;::type... &gt;</td></tr>
+<tr class="memdesc:a36e0ca3eaa133966c9299d90553adfcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a given type over pack and extract the "type" typedef out of each element of the resulting pack.  <a href="structcbr_1_1TypePack.html#a36e0ca3eaa133966c9299d90553adfcb">More...</a><br /></td></tr>
 <tr class="separator:a36e0ca3eaa133966c9299d90553adfcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a871208953d3cf269a8a4d198f640f1f0"><td class="memTemplParams" colspan="2"><a id="a871208953d3cf269a8a4d198f640f1f0"></a>
-template&lt;template&lt; typename &gt; typename T&gt; </td></tr>
-<tr class="memitem:a871208953d3cf269a8a4d198f640f1f0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>member_v</b> = typename <a class="el" href="structcbr_1_1detail_1_1member__v__impl.html">detail::member_v_impl</a>&lt; T, Args... &gt;::type</td></tr>
+<tr class="memitem:a871208953d3cf269a8a4d198f640f1f0"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename T&gt; </td></tr>
+<tr class="memitem:a871208953d3cf269a8a4d198f640f1f0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a871208953d3cf269a8a4d198f640f1f0">member_v</a> = typename detail::member_v_impl&lt; T, Args... &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td></tr>
+<tr class="memdesc:a871208953d3cf269a8a4d198f640f1f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a given type over pack and extract the "value" static member variable out of each element of the resulting pack.  <a href="structcbr_1_1TypePack.html#a871208953d3cf269a8a4d198f640f1f0">More...</a><br /></td></tr>
 <tr class="separator:a871208953d3cf269a8a4d198f640f1f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a882e4bf7559175ab259b8037ff321a84"><td class="memTemplParams" colspan="2"><a id="a882e4bf7559175ab259b8037ff321a84"></a>
-template&lt;typename ISeq &gt; </td></tr>
-<tr class="memitem:a882e4bf7559175ab259b8037ff321a84"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>subset</b> = typename <a class="el" href="structcbr_1_1detail_1_1__subset__impl.html">detail::_subset_impl</a>&lt; <a class="el" href="structcbr_1_1TypePack.html">this_t</a>, ISeq &gt;::type</td></tr>
+<tr class="memitem:a882e4bf7559175ab259b8037ff321a84"><td class="memTemplParams" colspan="2">template&lt;typename ISeq &gt; </td></tr>
+<tr class="memitem:a882e4bf7559175ab259b8037ff321a84"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a882e4bf7559175ab259b8037ff321a84">subset</a> = typename detail::_subset_impl&lt; <a class="el" href="structcbr_1_1TypePack.html">this_t</a>, ISeq &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td></tr>
+<tr class="memdesc:a882e4bf7559175ab259b8037ff321a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract subset of the pack.  <a href="structcbr_1_1TypePack.html#a882e4bf7559175ab259b8037ff321a84">More...</a><br /></td></tr>
 <tr class="separator:a882e4bf7559175ab259b8037ff321a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acac9c3f194ef2ebce0683c8b7db4efdb"><td class="memItemLeft" align="right" valign="top"><a id="acac9c3f194ef2ebce0683c8b7db4efdb"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>reversed</b> = typename <a class="el" href="structcbr_1_1detail_1_1__reverse__impl.html">detail::_reverse_impl</a>&lt; <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;&gt;, <a class="el" href="structcbr_1_1TypePack.html">this_t</a> &gt;::type</td></tr>
+<tr class="memitem:acac9c3f194ef2ebce0683c8b7db4efdb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#acac9c3f194ef2ebce0683c8b7db4efdb">reversed</a> = typename detail::_reverse_impl&lt; <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;&gt;, <a class="el" href="structcbr_1_1TypePack.html">this_t</a> &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td></tr>
+<tr class="memdesc:acac9c3f194ef2ebce0683c8b7db4efdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverse order of elements in the pack.  <a href="structcbr_1_1TypePack.html#acac9c3f194ef2ebce0683c8b7db4efdb">More...</a><br /></td></tr>
 <tr class="separator:acac9c3f194ef2ebce0683c8b7db4efdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bd9b9d86fb01cb4d66ee2c159dfdbe0"><td class="memTemplParams" colspan="2"><a id="a0bd9b9d86fb01cb4d66ee2c159dfdbe0"></a>
-template&lt;size_t N&gt; </td></tr>
-<tr class="memitem:a0bd9b9d86fb01cb4d66ee2c159dfdbe0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>head</b> = subset&lt; typename std::make_index_sequence&lt; N &gt; &gt;</td></tr>
+<tr class="memitem:a0bd9b9d86fb01cb4d66ee2c159dfdbe0"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
+<tr class="memitem:a0bd9b9d86fb01cb4d66ee2c159dfdbe0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a0bd9b9d86fb01cb4d66ee2c159dfdbe0">head</a> = <a class="el" href="structcbr_1_1TypePack.html#a882e4bf7559175ab259b8037ff321a84">subset</a>&lt; typename std::make_index_sequence&lt; N &gt; &gt;</td></tr>
+<tr class="memdesc:a0bd9b9d86fb01cb4d66ee2c159dfdbe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract first elements of the pack.  <a href="structcbr_1_1TypePack.html#a0bd9b9d86fb01cb4d66ee2c159dfdbe0">More...</a><br /></td></tr>
 <tr class="separator:a0bd9b9d86fb01cb4d66ee2c159dfdbe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa27284bab221b068150e2d905517ff5b"><td class="memTemplParams" colspan="2"><a id="aa27284bab221b068150e2d905517ff5b"></a>
-template&lt;size_t N&gt; </td></tr>
-<tr class="memitem:aa27284bab221b068150e2d905517ff5b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>tail</b> = typename reversed::template head&lt; N &gt;::reversed</td></tr>
+<tr class="memitem:aa27284bab221b068150e2d905517ff5b"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
+<tr class="memitem:aa27284bab221b068150e2d905517ff5b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#aa27284bab221b068150e2d905517ff5b">tail</a> = typename reversed::template <a class="el" href="structcbr_1_1TypePack.html#a0bd9b9d86fb01cb4d66ee2c159dfdbe0">head</a>&lt; N &gt;::<a class="el" href="structcbr_1_1TypePack.html#acac9c3f194ef2ebce0683c8b7db4efdb">reversed</a></td></tr>
+<tr class="memdesc:aa27284bab221b068150e2d905517ff5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract last elements of the pack.  <a href="structcbr_1_1TypePack.html#aa27284bab221b068150e2d905517ff5b">More...</a><br /></td></tr>
 <tr class="separator:aa27284bab221b068150e2d905517ff5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22ffb6d193bdd37f42280774984c0dad"><td class="memItemLeft" align="right" valign="top"><a id="a22ffb6d193bdd37f42280774984c0dad"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>decay</b> = <a class="el" href="structcbr_1_1TypePack.html">apply</a>&lt; std::decay_t &gt;</td></tr>
+<tr class="memitem:a22ffb6d193bdd37f42280774984c0dad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#a22ffb6d193bdd37f42280774984c0dad">decay</a> = <a class="el" href="structcbr_1_1TypePack.html#a17908a46387844bc60b2444843cd5077">apply</a>&lt; std::decay_t &gt;</td></tr>
+<tr class="memdesc:a22ffb6d193bdd37f42280774984c0dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply std::decay to all elements of the pack.  <a href="structcbr_1_1TypePack.html#a22ffb6d193bdd37f42280774984c0dad">More...</a><br /></td></tr>
 <tr class="separator:a22ffb6d193bdd37f42280774984c0dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -157,19 +163,508 @@ template&lt;typename T &gt; </td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:af7861e195be9ab23fb3a51b551f7ce4b"><td class="memItemLeft" align="right" valign="top"><a id="af7861e195be9ab23fb3a51b551f7ce4b"></a>
-static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> = sizeof...(Args)</td></tr>
+static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1TypePack.html#af7861e195be9ab23fb3a51b551f7ce4b">size</a> = sizeof...(Args)</td></tr>
+<tr class="memdesc:af7861e195be9ab23fb3a51b551f7ce4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the pack. <br /></td></tr>
 <tr class="separator:af7861e195be9ab23fb3a51b551f7ce4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename... Args&gt;<br />
 struct cbr::TypePack&lt; Args &gt;</h3>
 
+<p>Utility to manipulate a list of types. </p>
+<p>Utility created to manipulate typed template parameter packs.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>List of types constituting the pack. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00074">74</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00144">144</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ac145b0996b65a3032208d2079cf85138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac145b0996b65a3032208d2079cf85138">&#9670;&nbsp;</a></span>append</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#ac145b0996b65a3032208d2079cf85138">append</a> =  typename typepack_cat&lt;<a class="el" href="structcbr_1_1TypePack.html">this_t</a>, <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;Ts...&gt; &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Append types to the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::append&lt;float,char&gt;;</div>
+</div><!-- fragment --><p>Then T2 == TypePack&lt;int,double,float,char&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ts</td><td>Types to append to the pack. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00285">285</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad910534b0cec9fff6db1188216ea7c1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad910534b0cec9fff6db1188216ea7c1c">&#9670;&nbsp;</a></span>append_front</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#ad910534b0cec9fff6db1188216ea7c1c">append_front</a> =  typename typepack_cat&lt;<a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;Ts...&gt;, <a class="el" href="structcbr_1_1TypePack.html">this_t</a>&gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prepend types to the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::append&lt;float,char&gt;;</div>
+</div><!-- fragment --><p>Then T2 == TypePack&lt;float,char,int,double&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ts</td><td>Types to prepend to the pack. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00302">302</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a17908a46387844bc60b2444843cd5077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17908a46387844bc60b2444843cd5077">&#9670;&nbsp;</a></span>apply</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#a17908a46387844bc60b2444843cd5077">apply</a> =  <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;T&lt;Args, Ts...&gt;...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Application of a given templated type over each element of the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>For example: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><span class="keyword">struct </span>S{};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double,float&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::apply&lt;S,char,void*&gt;;</div>
+</div><!-- fragment --><p>Then T2 == <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>&lt;S&lt;int,char,void*&gt;,S&lt;double,char,void*&gt;,S&lt;float,char,void*&gt;&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Templated type to use for application. </td></tr>
+    <tr><td class="paramname">Ts</td><td>Optional types to append to T's template parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00192">192</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad9dfc504d08ea76980c4c71ab6efa87a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9dfc504d08ea76980c4c71ab6efa87a">&#9670;&nbsp;</a></span>apply_prefixed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#ad9dfc504d08ea76980c4c71ab6efa87a">apply_prefixed</a> =  <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;T&lt;Ts..., Args&gt;...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Application of a given templated type over each element of the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>For example: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><span class="keyword">struct </span>S{};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double,float&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::apply&lt;S,char,void*&gt;;</div>
+</div><!-- fragment --><p>Then T2 == <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>&lt;S&lt;char,void*,int&gt;,S&lt;char,void*,double&gt;,S&lt;char,void*,float&gt;&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Templated type to use for application. </td></tr>
+    <tr><td class="paramname">Ts</td><td>Optional types to prepend to T's template parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00213">213</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a22ffb6d193bdd37f42280774984c0dad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22ffb6d193bdd37f42280774984c0dad">&#9670;&nbsp;</a></span>decay</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#a22ffb6d193bdd37f42280774984c0dad">decay</a> =  <a class="el" href="structcbr_1_1TypePack.html#a17908a46387844bc60b2444843cd5077">apply</a>&lt;std::decay_t&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply std::decay to all elements of the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00416">416</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab7c586479902b435ba9063a33dd3f9f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7c586479902b435ba9063a33dd3f9f9">&#9670;&nbsp;</a></span>duplicate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab7c586479902b435ba9063a33dd3f9f9">duplicate</a> =  typename detail::_typepack_dupli&lt;<a class="el" href="structcbr_1_1TypePack.html">this_t</a>, std::make_index_sequence&lt;N&gt; &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Duplicate the pack multiple times. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::duplicate&lt;3&gt;;</div>
+</div><!-- fragment --><p>Then T2 == IntegerPack&lt;int,double,int,double,int,double&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of times to duplicate the pack. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00268">268</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0bd9b9d86fb01cb4d66ee2c159dfdbe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bd9b9d86fb01cb4d66ee2c159dfdbe0">&#9670;&nbsp;</a></span>head</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#a0bd9b9d86fb01cb4d66ee2c159dfdbe0">head</a> =  <a class="el" href="structcbr_1_1TypePack.html#a882e4bf7559175ab259b8037ff321a84">subset</a>&lt;typename std::make_index_sequence&lt;N&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract first elements of the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">using</span> T = TypePack&lt;float,double,int&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::head&lt;2&gt;;</div>
+</div><!-- fragment --><p>Then T2 == TypePack&lt;float,double&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of elements to extract. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00393">393</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a36e0ca3eaa133966c9299d90553adfcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36e0ca3eaa133966c9299d90553adfcb">&#9670;&nbsp;</a></span>member_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#a36e0ca3eaa133966c9299d90553adfcb">member_t</a> =  <a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;typename T&lt;Args, Ts...&gt;::type...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply a given type over pack and extract the "type" typedef out of each element of the resulting pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1, <span class="keyword">class</span> T2&gt;</div>
+<div class="line"><span class="keyword">struct </span>S{<span class="keyword">using</span> <a class="code" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a> = std::make_unsigned_t&lt;T1&gt;;};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> T = TypePack&lt;int,unsigned int&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::member_t&lt;S,char&gt;;</div>
+</div><!-- fragment --><p>Then T2 == TypePack&lt;unsigned int,unsigned int&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Templated type to use for application. </td></tr>
+    <tr><td class="paramname">Ts</td><td>Optional types to append to T's template parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00324">324</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a871208953d3cf269a8a4d198f640f1f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a871208953d3cf269a8a4d198f640f1f0">&#9670;&nbsp;</a></span>member_v</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename &gt; typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#a871208953d3cf269a8a4d198f640f1f0">member_v</a> =  typename detail::member_v_impl&lt;T, Args...&gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply a given type over pack and extract the "value" static member variable out of each element of the resulting pack. </p>
+<p>Result is an std::integer_sequence.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><span class="keyword">struct </span>S{<span class="keyword">static</span> constexpr std::size_t value = <span class="keyword">sizeof</span>(T);};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double,char&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::member_v&lt;S&gt;;</div>
+</div><!-- fragment --><p>Then T2 == std::integer_sequence&lt;std::size_t,4,8,1&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Templated type to use for application. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00345">345</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acac9c3f194ef2ebce0683c8b7db4efdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acac9c3f194ef2ebce0683c8b7db4efdb">&#9670;&nbsp;</a></span>reversed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#acac9c3f194ef2ebce0683c8b7db4efdb">reversed</a> =  typename detail::_reverse_impl&lt;<a class="el" href="structcbr_1_1TypePack.html">TypePack</a>&lt;&gt;, <a class="el" href="structcbr_1_1TypePack.html">this_t</a>&gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reverse order of elements in the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">using</span> T = TypePack&lt;float,double,int&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::reversed;</div>
+</div><!-- fragment --><p>Then T2 == TypePack&lt;int,double,float&gt;. </p>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00376">376</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a882e4bf7559175ab259b8037ff321a84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a882e4bf7559175ab259b8037ff321a84">&#9670;&nbsp;</a></span>subset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename ISeq &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#a882e4bf7559175ab259b8037ff321a84">subset</a> =  typename detail::_subset_impl&lt;<a class="el" href="structcbr_1_1TypePack.html">this_t</a>, ISeq&gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract subset of the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">using</span> T = TypePack&lt;float,double,int&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::subset&lt;std::index_sequence&lt;0, 2&gt;&gt;;</div>
+</div><!-- fragment --><p>Then T2 == TypePack&lt;float,int&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ISeq</td><td>An std::index_sequence of indexes of elements that will compose the subset. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00362">362</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa27284bab221b068150e2d905517ff5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa27284bab221b068150e2d905517ff5b">&#9670;&nbsp;</a></span>tail</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#aa27284bab221b068150e2d905517ff5b">tail</a> =  typename reversed::template <a class="el" href="structcbr_1_1TypePack.html#a0bd9b9d86fb01cb4d66ee2c159dfdbe0">head</a>&lt;N&gt;::<a class="el" href="structcbr_1_1TypePack.html#acac9c3f194ef2ebce0683c8b7db4efdb">reversed</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract last elements of the pack. </p>
+<p>Result is another <a class="el" href="structcbr_1_1TypePack.html" title="Utility to manipulate a list of types.">TypePack</a>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">using</span> T = TypePack&lt;float,double,int&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::tail&lt;2&gt;;</div>
+</div><!-- fragment --><p>Then T2 == TypePack&lt;double,int&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of elements to extract. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00410">410</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab1a298420cbc99383378d82bfe66c1ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1a298420cbc99383378d82bfe66c1ef">&#9670;&nbsp;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t idx&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">type</a> =  typename std::tuple_element_t&lt;idx, <a class="el" href="structcbr_1_1TypePack.html#a846e1a1f1a019bee7ea6f6ed22ed8dc6">tuple</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get pack type at given index. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">idx</td><td>Index of the type to return. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00171">171</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afb59f3c0fe5b673edc0df2e28f14033a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb59f3c0fe5b673edc0df2e28f14033a">&#9670;&nbsp;</a></span>unpack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#afb59f3c0fe5b673edc0df2e28f14033a">unpack</a> =  T&lt;Args..., Ts...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpack elements of the pack into the template parameters of a given type. </p>
+<p>For example: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1, <span class="keyword">class</span> T2, <span class="keyword">class</span> T3&gt;</div>
+<div class="line"><span class="keyword">struct </span>S{};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::unpack&lt;S,char&gt;;</div>
+</div><!-- fragment --><p>Then T2 == S&lt;int,double,char&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Templated type to use for unpacking. </td></tr>
+    <tr><td class="paramname">Ts</td><td>Optional types to append to T's template parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00232">232</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8aa71e969ff64553e01f49c37b3c4a56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aa71e969ff64553e01f49c37b3c4a56">&#9670;&nbsp;</a></span>unpack_prefixed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename T, typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structcbr_1_1TypePack.html">cbr::TypePack</a>&lt; Args &gt;::<a class="el" href="structcbr_1_1TypePack.html#a8aa71e969ff64553e01f49c37b3c4a56">unpack_prefixed</a> =  T&lt;Ts..., Args...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpack elements of the pack into the template parameters of a given type. </p>
+<p>For example: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1,<span class="keyword">class</span> T2,<span class="keyword">class</span> T3&gt;</div>
+<div class="line"><span class="keyword">struct </span>S{};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> T = TypePack&lt;int,double&gt;;</div>
+<div class="line"><span class="keyword">using</span> T2 = T::unpack&lt;S,char&gt;;</div>
+</div><!-- fragment --><p>Then T2 == S&lt;char,int,double&gt;.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Templated type to use for unpacking. </td></tr>
+    <tr><td class="paramname">Ts</td><td>Optional types to prepend to T's template parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="type__pack_8hpp_source.html#l00251">251</a> of file <a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/cbr_utils/<a class="el" href="type__pack_8hpp_source.html">type_pack.hpp</a></li>
 </ul>
 </div><!-- contents -->
+<div class="ttc" id="astructcbr_1_1TypePack_html_ab1a298420cbc99383378d82bfe66c1ef"><div class="ttname"><a href="structcbr_1_1TypePack.html#ab1a298420cbc99383378d82bfe66c1ef">cbr::TypePack::type</a></div><div class="ttdeci">typename std::tuple_element_t&lt; idx, tuple &gt; type</div><div class="ttdoc">Get pack type at given index.</div><div class="ttdef"><b>Definition:</b> <a href="type__pack_8hpp_source.html#l00171">type_pack.hpp:171</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

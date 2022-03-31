@@ -1,8 +1,7 @@
 <map id="include/cbr_utils/static_for.hpp" name="include/cbr_utils/static_for.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="67,5,235,47"/>
-<area shape="rect" id="node2" href="$integer__pack_8hpp.html" title=" " alt="" coords="41,184,220,225"/>
-<area shape="rect" id="node3" href="$utils_8hpp.html" title=" " alt="" coords="37,273,225,300"/>
-<area shape="rect" id="node5" href="$type__pack_8hpp.html" title=" " alt="" coords="130,95,291,136"/>
-<area shape="rect" id="node6" href="$yaml_8hpp.html" title=" " alt="" coords="315,102,509,129"/>
-<area shape="rect" id="node4" href="$matplotlibcpp_8hpp_source.html" title=" " alt="" coords="5,348,256,375"/>
+<area shape="rect" id="node1" title=" " alt="" coords="49,5,217,47"/>
+<area shape="rect" id="node2" href="$integer__pack_8hpp.html" title=" " alt="" coords="23,184,202,225"/>
+<area shape="rect" id="node3" href="$utils_8hpp.html" title=" " alt="" coords="19,273,207,300"/>
+<area shape="rect" id="node4" href="$type__pack_8hpp.html" title=" " alt="" coords="112,95,273,136"/>
+<area shape="rect" id="node5" href="$yaml_8hpp.html" title=" " alt="" coords="297,102,491,129"/>
 </map>

@@ -80,6 +80,11 @@ $(function() {
 <div class="title">cbr::ThreadPool Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Thread pool.  
+ <a href="classcbr_1_1ThreadPool.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -95,18 +100,116 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a30c13e2a9314bf8af041a81def213e3a"><td class="memItemLeft" align="right" valign="top"><a id="a30c13e2a9314bf8af041a81def213e3a"></a>
 <a class="el" href="classcbr_1_1ThreadPool.html">ThreadPool</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classcbr_1_1ThreadPool.html">ThreadPool</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a30c13e2a9314bf8af041a81def213e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53c17e61165dbc96edf033eccfaa0bb2"><td class="memItemLeft" align="right" valign="top"><a id="a53c17e61165dbc96edf033eccfaa0bb2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ThreadPool</b> (size_t)</td></tr>
-<tr class="separator:a53c17e61165dbc96edf033eccfaa0bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9a4dea1048f92bdd661311ca47880e6"><td class="memTemplParams" colspan="2"><a id="ab9a4dea1048f92bdd661311ca47880e6"></a>
-template&lt;class F , class... Args&gt; </td></tr>
-<tr class="memitem:ab9a4dea1048f92bdd661311ca47880e6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>enqueue</b> (F &amp;&amp;f, Args &amp;&amp;... args) -&gt; std::future&lt; typename std::result_of&lt; F(Args...)&gt;::type &gt;</td></tr>
-<tr class="separator:ab9a4dea1048f92bdd661311ca47880e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad800bf69ec833ed9a48f5913c44406b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1ThreadPool.html#ad800bf69ec833ed9a48f5913c44406b8">ThreadPool</a> (const std::size_t n_workers)</td></tr>
+<tr class="memdesc:ad800bf69ec833ed9a48f5913c44406b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classcbr_1_1ThreadPool.html" title="Thread pool.">ThreadPool</a> with a given number of workers.  <a href="classcbr_1_1ThreadPool.html#ad800bf69ec833ed9a48f5913c44406b8">More...</a><br /></td></tr>
+<tr class="separator:ad800bf69ec833ed9a48f5913c44406b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4774a8fe87f0830dcfa87faa7a24ed"><td class="memTemplParams" colspan="2">template&lt;class F , class... Args&gt; </td></tr>
+<tr class="memitem:a0f4774a8fe87f0830dcfa87faa7a24ed"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; typename std::result_of&lt; F(Args...)&gt;::type &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcbr_1_1ThreadPool.html#a0f4774a8fe87f0830dcfa87faa7a24ed">enqueue</a> (F &amp;&amp;f, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a0f4774a8fe87f0830dcfa87faa7a24ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueue task into the thread pool.  <a href="classcbr_1_1ThreadPool.html#a0f4774a8fe87f0830dcfa87faa7a24ed">More...</a><br /></td></tr>
+<tr class="separator:a0f4774a8fe87f0830dcfa87faa7a24ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="thread__pool_8hpp_source.html#l00040">40</a> of file <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><p>Thread pool. </p>
+<p>Pool with a fixed number of workers that can used to dispatch work. </p>
+
+<p class="definition">Definition at line <a class="el" href="thread__pool_8hpp_source.html#l00044">44</a> of file <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad800bf69ec833ed9a48f5913c44406b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad800bf69ec833ed9a48f5913c44406b8">&#9670;&nbsp;</a></span>ThreadPool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">cbr::ThreadPool::ThreadPool </td>
+          <td>(</td>
+          <td class="paramtype">const std::size_t&#160;</td>
+          <td class="paramname"><em>n_workers</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classcbr_1_1ThreadPool.html" title="Thread pool.">ThreadPool</a> with a given number of workers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n_workers</td><td>Number of workers in the thread pool. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="thread__pool_8hpp_source.html#l00068">68</a> of file <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0f4774a8fe87f0830dcfa87faa7a24ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4774a8fe87f0830dcfa87faa7a24ed">&#9670;&nbsp;</a></span>enqueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class F , class... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt;typename std::result_of&lt;F(Args...)&gt;::type&gt; cbr::ThreadPool::enqueue </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enqueue task into the thread pool. </p>
+<p>Task is automatically started as soon as worker becomes available.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Type of the task. </td></tr>
+    <tr><td class="paramname">Args</td><td>Types of the arguments of the task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Task callable object. </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments of the task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::future for the task. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="thread__pool_8hpp_source.html#l00099">99</a> of file <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/cbr_utils/<a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a></li>
 </ul>
 </div><!-- contents -->

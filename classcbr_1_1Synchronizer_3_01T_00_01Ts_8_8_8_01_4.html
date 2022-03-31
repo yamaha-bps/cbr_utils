@@ -74,32 +74,29 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cbr::Synchronizer&lt; T, Ts... &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Synchronize a message stream.  
+ <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for cbr::Synchronizer&lt; T, Ts... &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4__inherit__graph.png" border="0" usemap="#cbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="cbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4_inherit__map" id="cbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,95,151,136"/>
-<area shape="rect" href="classcbr_1_1Synchronizer.html" title=" " alt="" coords="5,5,151,47"/>
+<area shape="rect" title="Synchronize a message stream." alt="" coords="13,80,159,121"/>
+<area shape="rect" title=" " alt="" coords="5,5,167,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4_1_1Impl.html">Impl</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ad3642e921ca670e8de1dc4c27cf9883c"><td class="memItemLeft" align="right" valign="top"><a id="ad3642e921ca670e8de1dc4c27cf9883c"></a>
@@ -112,108 +109,85 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>CallbackThis</b> = s
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aac91e522d24d4d4427abbfbf1b5582a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">Synchronizer</a> (int64_t delta_t=0)</td></tr>
-<tr class="memdesc:aac91e522d24d4d4427abbfbf1b5582a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize a message stream @tparams T, Ts variadic templates for message types.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">More...</a><br /></td></tr>
+<tr class="memdesc:aac91e522d24d4d4427abbfbf1b5582a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Synchronizer object.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">More...</a><br /></td></tr>
 <tr class="separator:aac91e522d24d4d4427abbfbf1b5582a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ed580b0f324727d318f2958b47db85b"><td class="memItemLeft" align="right" valign="top"><a id="a2ed580b0f324727d318f2958b47db85b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Synchronizer</b> (const <a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a>&lt; T, Ts... &gt; &amp;)=delete</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Synchronizer</b> (const Synchronizer&lt; T, Ts... &gt; &amp;)=delete</td></tr>
 <tr class="separator:a2ed580b0f324727d318f2958b47db85b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42f415608a17b86869fc794b8c8b4de9"><td class="memItemLeft" align="right" valign="top"><a id="a42f415608a17b86869fc794b8c8b4de9"></a>
-<a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a>&lt; T, Ts... &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a>&lt; T, Ts... &gt; &amp;)=delete</td></tr>
+<a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">Synchronizer</a>&lt; T, Ts... &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">Synchronizer</a>&lt; T, Ts... &gt; &amp;)=delete</td></tr>
 <tr class="separator:a42f415608a17b86869fc794b8c8b4de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59227e0a3cc6f46ace1424639a18d825"><td class="memItemLeft" align="right" valign="top"><a id="a59227e0a3cc6f46ace1424639a18d825"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Synchronizer</b> (<a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a>&lt; T, Ts... &gt; &amp;&amp;)=delete</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Synchronizer</b> (Synchronizer&lt; T, Ts... &gt; &amp;&amp;)=delete</td></tr>
 <tr class="separator:a59227e0a3cc6f46ace1424639a18d825"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4530430b1962498dac965faa8954494"><td class="memItemLeft" align="right" valign="top"><a id="ad4530430b1962498dac965faa8954494"></a>
-<a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a>&lt; T, Ts... &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a>&lt; T, Ts... &gt; &amp;&amp;)=delete</td></tr>
+<a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">Synchronizer</a>&lt; T, Ts... &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">Synchronizer</a>&lt; T, Ts... &gt; &amp;&amp;)=delete</td></tr>
 <tr class="separator:ad4530430b1962498dac965faa8954494"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8399efb0e6a1ed7efb9c2fc7ed75657"><td class="memTemplParams" colspan="2">template&lt;typename S &gt; </td></tr>
 <tr class="memitem:ae8399efb0e6a1ed7efb9c2fc7ed75657"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#ae8399efb0e6a1ed7efb9c2fc7ed75657">register_callback</a> (S &amp;&amp;c)</td></tr>
 <tr class="memdesc:ae8399efb0e6a1ed7efb9c2fc7ed75657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback to use for synchronized element sets.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#ae8399efb0e6a1ed7efb9c2fc7ed75657">More...</a><br /></td></tr>
 <tr class="separator:ae8399efb0e6a1ed7efb9c2fc7ed75657"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a771d40f6816b42fdc965b3fe93f67b3c"><td class="memTemplParams" colspan="2">template&lt;size_t k, typename S &gt; </td></tr>
+<tr class="memitem:a771d40f6816b42fdc965b3fe93f67b3c"><td class="memTemplParams" colspan="2">template&lt;std::size_t k, typename S &gt; </td></tr>
 <tr class="memitem:a771d40f6816b42fdc965b3fe93f67b3c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#a771d40f6816b42fdc965b3fe93f67b3c">register_nonsync_callback</a> (S &amp;&amp;c)</td></tr>
 <tr class="memdesc:a771d40f6816b42fdc965b3fe93f67b3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback to use on individual elements that are not synchronized.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#a771d40f6816b42fdc965b3fe93f67b3c">More...</a><br /></td></tr>
 <tr class="separator:a771d40f6816b42fdc965b3fe93f67b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3298b1fffe610652eae750451bf4955"><td class="memTemplParams" colspan="2">template&lt;size_t k, typename S &gt; </td></tr>
+<tr class="memitem:af3298b1fffe610652eae750451bf4955"><td class="memTemplParams" colspan="2">template&lt;std::size_t k, typename S &gt; </td></tr>
 <tr class="memitem:af3298b1fffe610652eae750451bf4955"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#af3298b1fffe610652eae750451bf4955">set_time_fcn</a> (S &amp;&amp;f)</td></tr>
 <tr class="memdesc:af3298b1fffe610652eae750451bf4955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set function to compute timestamps.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#af3298b1fffe610652eae750451bf4955">More...</a><br /></td></tr>
 <tr class="separator:af3298b1fffe610652eae750451bf4955"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1c036d777b047a72352780b9c3e02c5"><td class="memTemplParams" colspan="2">template&lt;size_t k, typename S &gt; </td></tr>
+<tr class="memitem:aa1c036d777b047a72352780b9c3e02c5"><td class="memTemplParams" colspan="2">template&lt;std::size_t k, typename S &gt; </td></tr>
 <tr class="memitem:aa1c036d777b047a72352780b9c3e02c5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aa1c036d777b047a72352780b9c3e02c5">add</a> (S &amp;&amp;el)</td></tr>
 <tr class="memdesc:aa1c036d777b047a72352780b9c3e02c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert new element.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aa1c036d777b047a72352780b9c3e02c5">More...</a><br /></td></tr>
 <tr class="separator:aa1c036d777b047a72352780b9c3e02c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa150141e1d1cc7ea46a54cb232abe538"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aa150141e1d1cc7ea46a54cb232abe538">search</a> ()</td></tr>
+<tr class="memdesc:aa150141e1d1cc7ea46a54cb232abe538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for new synchronized sets, callback is called on found sets.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aa150141e1d1cc7ea46a54cb232abe538">More...</a><br /></td></tr>
 <tr class="separator:aa150141e1d1cc7ea46a54cb232abe538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8351cae6cf30e040c0dfa74449b5b87b"><td class="memTemplParams" colspan="2">template&lt;size_t k, typename S &gt; </td></tr>
+<tr class="memitem:a8351cae6cf30e040c0dfa74449b5b87b"><td class="memTemplParams" colspan="2">template&lt;std::size_t k, typename S &gt; </td></tr>
 <tr class="memitem:a8351cae6cf30e040c0dfa74449b5b87b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#a8351cae6cf30e040c0dfa74449b5b87b">add_and_search</a> (S &amp;&amp;el)</td></tr>
-<tr class="memdesc:a8351cae6cf30e040c0dfa74449b5b87b"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert new element and run search algorithm  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#a8351cae6cf30e040c0dfa74449b5b87b">More...</a><br /></td></tr>
+<tr class="memdesc:a8351cae6cf30e040c0dfa74449b5b87b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert new element and run search algorithm.  <a href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#a8351cae6cf30e040c0dfa74449b5b87b">More...</a><br /></td></tr>
 <tr class="separator:a8351cae6cf30e040c0dfa74449b5b87b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a30d6301e6309381b63c0da78ac1dd80c"><td class="memItemLeft" align="right" valign="top"><a id="a30d6301e6309381b63c0da78ac1dd80c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>printOn</b> (std::ostream &amp;os) const</td></tr>
-<tr class="separator:a30d6301e6309381b63c0da78ac1dd80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae488a7f901c4f96ed3054cfc03433673"><td class="memTemplParams" colspan="2"><a id="ae488a7f901c4f96ed3054cfc03433673"></a>
-template&lt;size_t... I&gt; </td></tr>
-<tr class="memitem:ae488a7f901c4f96ed3054cfc03433673"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>call_callback</b> (std::index_sequence&lt; I... &gt;)</td></tr>
-<tr class="separator:ae488a7f901c4f96ed3054cfc03433673"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7be0324672cca8ad5ea172db791fcae5"><td class="memItemLeft" align="right" valign="top"><a id="a7be0324672cca8ad5ea172db791fcae5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>keep_n_before_time</b> (size_t n, int64_t time)</td></tr>
-<tr class="separator:a7be0324672cca8ad5ea172db791fcae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60c747d2910172f7485ec1852c7ef4ed"><td class="memItemLeft" align="right" valign="top"><a id="a60c747d2910172f7485ec1852c7ef4ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>increase_first_with_time</b> (int64_t time)</td></tr>
-<tr class="separator:a60c747d2910172f7485ec1852c7ef4ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51e064ad5df54cc6d455127a77da76ab"><td class="memTemplParams" colspan="2"><a id="a51e064ad5df54cc6d455127a77da76ab"></a>
-template&lt;size_t k&gt; </td></tr>
-<tr class="memitem:a51e064ad5df54cc6d455127a77da76ab"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getImpl</b> ()</td></tr>
-<tr class="separator:a51e064ad5df54cc6d455127a77da76ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ddb255322f8d41bfe2006ac81b80f5f"><td class="memTemplParams" colspan="2"><a id="a9ddb255322f8d41bfe2006ac81b80f5f"></a>
-template&lt;size_t k&gt; </td></tr>
-<tr class="memitem:a9ddb255322f8d41bfe2006ac81b80f5f"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getImpl</b> () const</td></tr>
-<tr class="separator:a9ddb255322f8d41bfe2006ac81b80f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67c0630ff851a3823574689fa6fca1bf"><td class="memTemplParams" colspan="2"><a id="a67c0630ff851a3823574689fa6fca1bf"></a>
-template&lt;size_t... I&gt; </td></tr>
-<tr class="memitem:a67c0630ff851a3823574689fa6fca1bf"><td class="memTemplItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>min_first_time</b> (std::index_sequence&lt; I... &gt;) const</td></tr>
-<tr class="separator:a67c0630ff851a3823574689fa6fca1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa772223d7587f15c9375eff8e34be8a4"><td class="memTemplParams" colspan="2"><a id="aa772223d7587f15c9375eff8e34be8a4"></a>
-template&lt;size_t... I&gt; </td></tr>
-<tr class="memitem:aa772223d7587f15c9375eff8e34be8a4"><td class="memTemplItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>max_first_time</b> (std::index_sequence&lt; I... &gt;) const</td></tr>
-<tr class="separator:aa772223d7587f15c9375eff8e34be8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2bc7fc2661e7fc3c12575124ff81d9e"><td class="memTemplParams" colspan="2"><a id="ac2bc7fc2661e7fc3c12575124ff81d9e"></a>
-template&lt;size_t... I, typename S &gt; </td></tr>
-<tr class="memitem:ac2bc7fc2661e7fc3c12575124ff81d9e"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>foldWithAnd</b> (S &amp;&amp;f, std::index_sequence&lt; I... &gt;) const</td></tr>
-<tr class="separator:ac2bc7fc2661e7fc3c12575124ff81d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac390330ddcb3385f1c56ea5de598d3a"><td class="memTemplParams" colspan="2"><a id="aac390330ddcb3385f1c56ea5de598d3a"></a>
-template&lt;size_t... I, typename S &gt; </td></tr>
-<tr class="memitem:aac390330ddcb3385f1c56ea5de598d3a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>mapApply</b> (S &amp;&amp;f, std::index_sequence&lt; I... &gt;)</td></tr>
-<tr class="separator:aac390330ddcb3385f1c56ea5de598d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ba255d25056f6ab96a9ab893bf4294a"><td class="memTemplParams" colspan="2"><a id="a2ba255d25056f6ab96a9ab893bf4294a"></a>
-template&lt;size_t... I, typename S &gt; </td></tr>
-<tr class="memitem:a2ba255d25056f6ab96a9ab893bf4294a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>mapApply</b> (S &amp;&amp;f, std::index_sequence&lt; I... &gt;) const</td></tr>
-<tr class="separator:a2ba255d25056f6ab96a9ab893bf4294a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a2f673483f1d7a6fab0ffe6ff3b3bf5d0"><td class="memItemLeft" align="right" valign="top"><a id="a2f673483f1d7a6fab0ffe6ff3b3bf5d0"></a>
-Impl&#160;</td><td class="memItemRight" valign="bottom"><b>m_impl</b> {}</td></tr>
-<tr class="separator:a2f673483f1d7a6fab0ffe6ff3b3bf5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad78f8ee2beffbc3c9e1f9df63140d15d"><td class="memItemLeft" align="right" valign="top"><a id="ad78f8ee2beffbc3c9e1f9df63140d15d"></a>
-CallbackAll&#160;</td><td class="memItemRight" valign="bottom"><b>callback_</b> {}</td></tr>
-<tr class="separator:ad78f8ee2beffbc3c9e1f9df63140d15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a87cafec0c1c833679563f000e0a10ca5"><td class="memItemLeft" align="right" valign="top"><a id="a87cafec0c1c833679563f000e0a10ca5"></a>
-std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;os, const <a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a>&lt; T, Ts... &gt; &amp;s)</td></tr>
+std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#a87cafec0c1c833679563f000e0a10ca5">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classcbr_1_1Synchronizer_3_01T_00_01Ts_8_8_8_01_4.html#aac91e522d24d4d4427abbfbf1b5582a2">Synchronizer</a>&lt; T, Ts... &gt; &amp;s)</td></tr>
+<tr class="memdesc:a87cafec0c1c833679563f000e0a10ca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print wrapper for ostream. <br /></td></tr>
 <tr class="separator:a87cafec0c1c833679563f000e0a10ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T, typename... Ts&gt;<br />
 class cbr::Synchronizer&lt; T, Ts... &gt;</h3>
 
+<p>Synchronize a message stream. </p>
+<p>Groups messages into <em>sets</em> which contain one message from each stream, and calls a provided callback on each set.</p>
+<p>Optionally also calls provided callbacks on non-synchronized elements</p>
+<p>Messages in each stream are assumed to arrive in order, if they do not they will be discarded without triggerning the non-sync callback</p>
+<p>Takes ownership over objects passed as rvalues, and also sends rvalues back to callback</p>
+<p>Usage example: </p><div class="fragment"><div class="line">sync.set_time_fcn&lt;0&gt;([] (<span class="keyword">const</span> Type0 &amp; o0) {</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>int64_t<span class="keyword">&gt;</span>(o0.time);</div>
+<div class="line">});</div>
+<div class="line">sync.set_time_fcn&lt;1&gt;([] (<span class="keyword">const</span> Type1 &amp; o1) {</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>int64_t<span class="keyword">&gt;</span>(o1.time);</div>
+<div class="line">});</div>
+<div class="line">Synchronizer&lt;Type0, Type1&gt; sync;</div>
+<div class="line">sync.register_callback([] (Type1 &amp;&amp; o0, Type1 &amp;&amp; o1) {</div>
+<div class="line">  <span class="comment">// performed for all synchronized groups</span></div>
+<div class="line">});</div>
+<div class="line">sync.register_nonsync_callback&lt;1&gt;([] (Type1 &amp;&amp; o1) {</div>
+<div class="line">  <span class="comment">// performed for all Type1 elements that are not synchronized into a set</span></div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// add data, first callback is executed on all synchronized groups</span></div>
+<div class="line">sync.add_and_search&lt;0&gt;(o0_1);</div>
+<div class="line">sync.add_and_search&lt;1&gt;(o1_1);</div>
+</div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T,Ts</td><td>Variadic templates for message types. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00038">38</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00077">77</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aac91e522d24d4d4427abbfbf1b5582a2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac91e522d24d4d4427abbfbf1b5582a2">&#9670;&nbsp;</a></span>Synchronizer()</h2>
@@ -227,7 +201,7 @@ template&lt;typename T , typename... Ts&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classcbr_1_1Synchronizer.html">cbr::Synchronizer</a>&lt; T, Ts... &gt;::<a class="el" href="classcbr_1_1Synchronizer.html">Synchronizer</a> </td>
+          <td class="memname">cbr::Synchronizer&lt; T, Ts... &gt;::Synchronizer </td>
           <td>(</td>
           <td class="paramtype">int64_t&#160;</td>
           <td class="paramname"><em>delta_t</em> = <code>0</code></td><td>)</td>
@@ -241,22 +215,15 @@ template&lt;typename T , typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Synchronize a message stream @tparams T, Ts variadic templates for message types. </p>
+<p>Construct a new Synchronizer object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">delta_t</td><td>minimal time between messages</td></tr>
+    <tr><td class="paramname">delta_t</td><td>Minimal time between messages </td></tr>
   </table>
   </dd>
 </dl>
-<p>Groups messages into <em>sets</em> which contain one message from each stream, and calls a provided callback on each set.</p>
-<p>Optionally also calls provided callbacks on non-synchronized elements</p>
-<p>Messages in each stream are assumed to arrive in order, if they do not they will be discarded without triggerning the non-sync callback</p>
-<p>Takes ownership over objects passed as rvalues, and also sends rvalues back to callback</p>
-<p>Usage example:</p>
-<p>sync.set_time_fcn&lt;0&gt;([] (const Type0 &amp; o0) { return static_cast&lt;int64_t&gt;(o0.time); }); sync.set_time_fcn&lt;1&gt;([] (const Type1 &amp; o1) { return static_cast&lt;int64_t&gt;(o1.time); }); Synchronizer&lt;Type0, Type1&gt; sync; sync.register_callback([] (Type1 &amp;&amp; o0, Type1 &amp;&amp; o1) { // performed for all synchronized groups }); sync.register_nonsync_callback&lt;1&gt;([] (Type1 &amp;&amp; o1) { // performed for all Type1 elements that are not synchronized into a set });</p>
-<p>// add data, first callback is executed on all synchronized groups sync.add_and_search&lt;0&gt;(o0_1); sync.add_and_search&lt;1&gt;(o1_1); /// ... </p>
 
-<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00082">82</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00088">88</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
 
 </div>
 </div>
@@ -269,13 +236,13 @@ template&lt;typename T , typename... Ts&gt; </div>
 <div class="memtemplate">
 template&lt;typename T , typename... Ts&gt; </div>
 <div class="memtemplate">
-template&lt;size_t k, typename S &gt; </div>
+template&lt;std::size_t k, typename S &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classcbr_1_1Synchronizer.html">cbr::Synchronizer</a>&lt; T, Ts... &gt;::add </td>
+          <td class="memname">void cbr::Synchronizer&lt; T, Ts... &gt;::add </td>
           <td>(</td>
           <td class="paramtype">S &amp;&amp;&#160;</td>
           <td class="paramname"><em>el</em></td><td>)</td>
@@ -290,16 +257,15 @@ template&lt;size_t k, typename S &gt; </div>
 </div><div class="memdoc">
 
 <p>Insert new element. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Not thread safe. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">k</td><td>queue to insert in </td></tr>
-    <tr><td class="paramname">el</td><td>new element to insert</td></tr>
+    <tr><td class="paramname">k</td><td>Index of queue to insert in. </td></tr>
+    <tr><td class="paramname">el</td><td>New element to insert. </td></tr>
   </table>
   </dd>
 </dl>
-<p>NOT THREAD-SAFE TOGETHER WITH SEARCH </p>
 
-<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00159">159</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00167">167</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,13 +277,13 @@ template&lt;size_t k, typename S &gt; </div>
 <div class="memtemplate">
 template&lt;typename T , typename... Ts&gt; </div>
 <div class="memtemplate">
-template&lt;size_t k, typename S &gt; </div>
+template&lt;std::size_t k, typename S &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classcbr_1_1Synchronizer.html">cbr::Synchronizer</a>&lt; T, Ts... &gt;::add_and_search </td>
+          <td class="memname">void cbr::Synchronizer&lt; T, Ts... &gt;::add_and_search </td>
           <td>(</td>
           <td class="paramtype">S &amp;&amp;&#160;</td>
           <td class="paramname"><em>el</em></td><td>)</td>
@@ -331,17 +297,17 @@ template&lt;size_t k, typename S &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>insert new element and run search algorithm </p>
+<p>Insert new element and run search algorithm. </p>
+<p>This is thread-safe by skipping search if it is already running.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">k</td><td>queue to insert in </td></tr>
-    <tr><td class="paramname">el</td><td>new element to insert</td></tr>
+    <tr><td class="paramname">k</td><td>Index of queue to insert in. </td></tr>
+    <tr><td class="paramname">el</td><td>New element to insert. </td></tr>
   </table>
   </dd>
 </dl>
-<p>This is thread-safe by skipping search if it is already running </p>
 
-<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00190">190</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00198">198</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
 
 </div>
 </div>
@@ -359,7 +325,7 @@ template&lt;typename S &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classcbr_1_1Synchronizer.html">cbr::Synchronizer</a>&lt; T, Ts... &gt;::register_callback </td>
+          <td class="memname">void cbr::Synchronizer&lt; T, Ts... &gt;::register_callback </td>
           <td>(</td>
           <td class="paramtype">S &amp;&amp;&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
@@ -374,17 +340,18 @@ template&lt;typename S &gt; </div>
 </div><div class="memdoc">
 
 <p>Register a callback to use for synchronized element sets. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Example: </p><div class="fragment"><div class="line">Synchronizer&lt;Type1, Type2&gt; sync;</div>
+<div class="line">sync.register_callback&lt;1&gt;([] (Type1 &amp;&amp; t1, Type2 &amp;&amp; t2) {</div>
+<div class="line">  <span class="comment">// will be called on every synchronized set</span></div>
+<div class="line">})</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">c</td><td>callback taking an r-value of each template type</td></tr>
+    <tr><td class="paramname">c</td><td>Callback taking an r-value of each template type. </td></tr>
   </table>
   </dd>
 </dl>
-<p>Example: </p><blockquote class="doxtable">
-<p>Synchronizer&lt;Type1, Type2&gt; sync; sync.register_callback&lt;1&gt;([] (Type1 &amp;&amp; t1, Type2 &amp;&amp; t2) { // will be called on every synchronized set }) </p>
-</blockquote>
 
-<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00110">110</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00117">117</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
 
 </div>
 </div>
@@ -396,13 +363,13 @@ template&lt;typename S &gt; </div>
 <div class="memtemplate">
 template&lt;typename T , typename... Ts&gt; </div>
 <div class="memtemplate">
-template&lt;size_t k, typename S &gt; </div>
+template&lt;std::size_t k, typename S &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classcbr_1_1Synchronizer.html">cbr::Synchronizer</a>&lt; T, Ts... &gt;::register_nonsync_callback </td>
+          <td class="memname">void cbr::Synchronizer&lt; T, Ts... &gt;::register_nonsync_callback </td>
           <td>(</td>
           <td class="paramtype">S &amp;&amp;&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
@@ -417,17 +384,18 @@ template&lt;size_t k, typename S &gt; </div>
 </div><div class="memdoc">
 
 <p>Register a callback to use on individual elements that are not synchronized. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Example: </p><div class="fragment"><div class="line">Synchronizer&lt;Type1, Type2&gt; sync;</div>
+<div class="line">sync.register_nonsync_callback&lt;1&gt;([] (Type2 &amp;&amp; t2) {</div>
+<div class="line">  <span class="comment">// will be called on every non-synchronized t2</span></div>
+<div class="line">});</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">c</td><td>callback taking an r-value for a single element</td></tr>
+    <tr><td class="paramname">c</td><td>Callback taking an r-value for a single element. </td></tr>
   </table>
   </dd>
 </dl>
-<p>Example: </p><blockquote class="doxtable">
-<p>Synchronizer&lt;Type1, Type2&gt; sync; sync.register_nonsync_callback&lt;1&gt;([] (Type2 &amp;&amp; t2) { // will be called on every non-synchronized t2 }); </p>
-</blockquote>
 
-<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00126">126</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00135">135</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
 
 </div>
 </div>
@@ -440,15 +408,17 @@ template&lt;size_t k, typename S &gt; </div>
 template&lt;typename T , typename... Ts&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classcbr_1_1Synchronizer.html">cbr::Synchronizer</a>&lt; T, Ts... &gt;::search </td>
+          <td class="memname">bool cbr::Synchronizer&lt; T, Ts... &gt;::search </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Search for new synchronized sets, callback is called on found sets. Returns true if a synchronized group was found.</p>
-<p>NOT THREAD-SAFE </p>
+
+<p>Search for new synchronized sets, callback is called on found sets. </p>
+<p>Not thread safe.</p>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if a synchronized group was found. </dd></dl>
 
 </div>
 </div>
@@ -460,13 +430,13 @@ template&lt;typename T , typename... Ts&gt; </div>
 <div class="memtemplate">
 template&lt;typename T , typename... Ts&gt; </div>
 <div class="memtemplate">
-template&lt;size_t k, typename S &gt; </div>
+template&lt;std::size_t k, typename S &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classcbr_1_1Synchronizer.html">cbr::Synchronizer</a>&lt; T, Ts... &gt;::set_time_fcn </td>
+          <td class="memname">void cbr::Synchronizer&lt; T, Ts... &gt;::set_time_fcn </td>
           <td>(</td>
           <td class="paramtype">S &amp;&amp;&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
@@ -491,7 +461,7 @@ template&lt;size_t k, typename S &gt; </div>
 <p>Synchronizer&lt;Type1, Type2&gt; sync; sync.set_time_fcn&lt;1&gt;([] (const Type2 &amp; t) { return t.time; }); </p>
 </blockquote>
 
-<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00145">145</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="synchronizer_8hpp_source.html#l00154">154</a> of file <a class="el" href="synchronizer_8hpp_source.html">synchronizer.hpp</a>.</p>
 
 </div>
 </div>

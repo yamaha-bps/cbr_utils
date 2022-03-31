@@ -132,90 +132,547 @@ Include dependency graph for utils.hpp:</div>
 <area shape="rect" title=" " alt="" coords="1266,379,1363,405"/>
 </map>
 </div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="utils_8hpp__dep__incl.png" border="0" usemap="#include_2cbr__utils_2utils_8hppdep" alt=""/></div>
-<map name="include_2cbr__utils_2utils_8hppdep" id="include_2cbr__utils_2utils_8hppdep">
-<area shape="rect" title=" " alt="" coords="37,5,225,32"/>
-<area shape="rect" href="matplotlibcpp_8hpp_source.html" title=" " alt="" coords="5,80,256,107"/>
-</map>
-</div>
 </div>
 <p><a href="utils_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1overload.html">cbr::overload&lt; Ts &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct with overloaded call operators of all specified types.  <a href="structcbr_1_1overload.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1signature.html">cbr::signature&lt; S &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1signature_3_01R_07Cls_1_1_5_08_07Args_8_8_8_08_4.html">cbr::signature&lt; R(Cls::*)(Args...)&gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1signature_3_01R_07Cls_1_1_5_08_07Args_8_8_8_08_01const_01_4.html">cbr::signature&lt; R(Cls::*)(Args...) const &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract signature of member function.  <a href="structcbr_1_1signature.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4c6992f071bd848a78acc02704f9453f"><td class="memItemLeft" align="right" valign="top"><a id="a4c6992f071bd848a78acc02704f9453f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>cbr::strcmpi</b> (const std::string_view str1, const std::string_view str2) noexcept</td></tr>
+<tr class="memitem:a4c6992f071bd848a78acc02704f9453f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#a4c6992f071bd848a78acc02704f9453f">cbr::strcmpi</a> (const std::string_view str1, const std::string_view str2) noexcept</td></tr>
+<tr class="memdesc:a4c6992f071bd848a78acc02704f9453f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Case insensitive string comparaison.  <a href="utils_8hpp.html#a4c6992f071bd848a78acc02704f9453f">More...</a><br /></td></tr>
 <tr class="separator:a4c6992f071bd848a78acc02704f9453f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4cd6c0833702066ca9f31c6057f0ff6"><td class="memTemplParams" colspan="2"><a id="af4cd6c0833702066ca9f31c6057f0ff6"></a>
-template&lt;typename clock_t  = std::chrono::system_clock&gt; </td></tr>
-<tr class="memitem:af4cd6c0833702066ca9f31c6057f0ff6"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::dateStr</b> (const typename clock_t::time_point &amp;currentTime, const bool fullPrecision=false)</td></tr>
+<tr class="memitem:af4cd6c0833702066ca9f31c6057f0ff6"><td class="memTemplParams" colspan="2">template&lt;typename clock_t  = std::chrono::system_clock&gt; </td></tr>
+<tr class="memitem:af4cd6c0833702066ca9f31c6057f0ff6"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#af4cd6c0833702066ca9f31c6057f0ff6">cbr::dateStr</a> (const typename clock_t::time_point &amp;currentTime, const bool fullPrecision=false)</td></tr>
+<tr class="memdesc:af4cd6c0833702066ca9f31c6057f0ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert timepoint into string.  <a href="utils_8hpp.html#af4cd6c0833702066ca9f31c6057f0ff6">More...</a><br /></td></tr>
 <tr class="separator:af4cd6c0833702066ca9f31c6057f0ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39af8670830b8b2ca8ae11d8aedff2e2"><td class="memTemplParams" colspan="2"><a id="a39af8670830b8b2ca8ae11d8aedff2e2"></a>
 template&lt;typename clock_t  = std::chrono::system_clock&gt; </td></tr>
-<tr class="memitem:a39af8670830b8b2ca8ae11d8aedff2e2"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::dateStr</b> (const bool fullPrecision=false)</td></tr>
+<tr class="memitem:a39af8670830b8b2ca8ae11d8aedff2e2"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#a39af8670830b8b2ca8ae11d8aedff2e2">cbr::dateStr</a> (const bool fullPrecision=false)</td></tr>
+<tr class="memdesc:a39af8670830b8b2ca8ae11d8aedff2e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload of dateStr(clock_t currentTime, bool fullPrecision) with currentTime = clock_t::now(). <br /></td></tr>
 <tr class="separator:a39af8670830b8b2ca8ae11d8aedff2e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af79da22f840ec1ffd334e50dfa80f084"><td class="memTemplParams" colspan="2"><a id="af79da22f840ec1ffd334e50dfa80f084"></a>
-template&lt;typename clock_t  = std::chrono::system_clock&gt; </td></tr>
-<tr class="memitem:af79da22f840ec1ffd334e50dfa80f084"><td class="memTemplItemLeft" align="right" valign="top">clock_t::time_point&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::fromDateStr</b> (const std::string &amp;str)</td></tr>
+<tr class="memitem:af79da22f840ec1ffd334e50dfa80f084"><td class="memTemplParams" colspan="2">template&lt;typename clock_t  = std::chrono::system_clock&gt; </td></tr>
+<tr class="memitem:af79da22f840ec1ffd334e50dfa80f084"><td class="memTemplItemLeft" align="right" valign="top">clock_t::time_point&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#af79da22f840ec1ffd334e50dfa80f084">cbr::fromDateStr</a> (const std::string &amp;str)</td></tr>
+<tr class="memdesc:af79da22f840ec1ffd334e50dfa80f084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert string generated by dateStr back to timepoint.  <a href="utils_8hpp.html#af79da22f840ec1ffd334e50dfa80f084">More...</a><br /></td></tr>
 <tr class="separator:af79da22f840ec1ffd334e50dfa80f084"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19cfcf47771f7421929899e276fc6798"><td class="memItemLeft" align="right" valign="top"><a id="a19cfcf47771f7421929899e276fc6798"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>cbr::isValidFilename</b> (const std::string_view str)</td></tr>
-<tr class="separator:a19cfcf47771f7421929899e276fc6798"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a0c7379572ba80c98302c6bda64afe7"><td class="memItemLeft" align="right" valign="top"><a id="a0a0c7379572ba80c98302c6bda64afe7"></a>
-std::pair&lt; double, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>cbr::formatDuration</b> (const double t)</td></tr>
+<tr class="memitem:a0aa97937f68c449bf999fcc41e3f28fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#a0aa97937f68c449bf999fcc41e3f28fc">cbr::isValidFilename</a> (const std::string_view str, const bool windows=true)</td></tr>
+<tr class="memdesc:a0aa97937f68c449bf999fcc41e3f28fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if string is a valid Unix and Windows filename.  <a href="utils_8hpp.html#a0aa97937f68c449bf999fcc41e3f28fc">More...</a><br /></td></tr>
+<tr class="separator:a0aa97937f68c449bf999fcc41e3f28fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a0c7379572ba80c98302c6bda64afe7"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#a0a0c7379572ba80c98302c6bda64afe7">cbr::formatDuration</a> (const double t)</td></tr>
+<tr class="memdesc:a0a0c7379572ba80c98302c6bda64afe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">User friendly string representation of a duration.  <a href="utils_8hpp.html#a0a0c7379572ba80c98302c6bda64afe7">More...</a><br /></td></tr>
 <tr class="separator:a0a0c7379572ba80c98302c6bda64afe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcebe582aafe3927c1c119a9773621c3"><td class="memTemplParams" colspan="2"><a id="abcebe582aafe3927c1c119a9773621c3"></a>
-template&lt;typename T , std::size_t N, typename BinaryPredicate &gt; </td></tr>
-<tr class="memitem:abcebe582aafe3927c1c119a9773621c3"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::all_unique</b> (const std::array&lt; T, N &gt; &amp;a, BinaryPredicate &amp;&amp;p)</td></tr>
-<tr class="separator:abcebe582aafe3927c1c119a9773621c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a4b60e8d411cb3f45c6d40ce8c2551b"><td class="memTemplParams" colspan="2"><a id="a0a4b60e8d411cb3f45c6d40ce8c2551b"></a>
-template&lt;typename T , std::size_t N&gt; </td></tr>
-<tr class="memitem:a0a4b60e8d411cb3f45c6d40ce8c2551b"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::all_unique</b> (const std::array&lt; T, N &gt; &amp;a)</td></tr>
-<tr class="separator:a0a4b60e8d411cb3f45c6d40ce8c2551b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c8ec0a0e0e151cc34071659b3534383"><td class="memTemplParams" colspan="2"><a id="a3c8ec0a0e0e151cc34071659b3534383"></a>
-template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:a3c8ec0a0e0e151cc34071659b3534383"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::overload</b> (Ts...) -&gt; overload&lt; Ts... &gt;</td></tr>
-<tr class="separator:a3c8ec0a0e0e151cc34071659b3534383"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a878f5f86551ca537857e01d317693771"><td class="memTemplParams" colspan="2"><a id="a878f5f86551ca537857e01d317693771"></a>
-template&lt;typename ForwardIt , template&lt; typename &gt; typename comp&gt; </td></tr>
-<tr class="memitem:a878f5f86551ca537857e01d317693771"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::detail::is_sorted_impl</b> (ForwardIt first, ForwardIt last)</td></tr>
-<tr class="separator:a878f5f86551ca537857e01d317693771"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2801422a3f4ae87cf969709f13c78cda"><td class="memTemplParams" colspan="2"><a id="a2801422a3f4ae87cf969709f13c78cda"></a>
-template&lt;typename ExecutionPolicy , typename ForwardIt , template&lt; typename &gt; typename comp&gt; </td></tr>
-<tr class="memitem:a2801422a3f4ae87cf969709f13c78cda"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::detail::is_sorted_impl</b> (ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)</td></tr>
-<tr class="separator:a2801422a3f4ae87cf969709f13c78cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa69fa80809ba13f441a5c88dc39f6821"><td class="memTemplParams" colspan="2"><a id="aa69fa80809ba13f441a5c88dc39f6821"></a>
-template&lt;typename ForwardIt &gt; </td></tr>
-<tr class="memitem:aa69fa80809ba13f441a5c88dc39f6821"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::is_sorted</b> (ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memitem:a58de8faabf5ea6479fa281b40301405b"><td class="memTemplParams" colspan="2">template&lt;typename T , std::size_t N, typename BinaryPredicate  = std::equal_to&lt;T&gt;&gt; </td></tr>
+<tr class="memitem:a58de8faabf5ea6479fa281b40301405b"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#a58de8faabf5ea6479fa281b40301405b">cbr::all_unique</a> (const std::array&lt; T, N &gt; &amp;arr, BinaryPredicate &amp;&amp;p={})</td></tr>
+<tr class="memdesc:a58de8faabf5ea6479fa281b40301405b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if all values in std::array are unique.  <a href="utils_8hpp.html#a58de8faabf5ea6479fa281b40301405b">More...</a><br /></td></tr>
+<tr class="separator:a58de8faabf5ea6479fa281b40301405b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa69fa80809ba13f441a5c88dc39f6821"><td class="memTemplParams" colspan="2">template&lt;typename ForwardIt &gt; </td></tr>
+<tr class="memitem:aa69fa80809ba13f441a5c88dc39f6821"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#aa69fa80809ba13f441a5c88dc39f6821">cbr::is_sorted</a> (ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memdesc:aa69fa80809ba13f441a5c88dc39f6821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if range is sorted.  <a href="utils_8hpp.html#aa69fa80809ba13f441a5c88dc39f6821">More...</a><br /></td></tr>
 <tr class="separator:aa69fa80809ba13f441a5c88dc39f6821"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60bbbd58284aa0d3ecd067126e73f633"><td class="memTemplParams" colspan="2"><a id="a60bbbd58284aa0d3ecd067126e73f633"></a>
-template&lt;typename ExecutionPolicy , typename ForwardIt &gt; </td></tr>
-<tr class="memitem:a60bbbd58284aa0d3ecd067126e73f633"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::is_sorted</b> (ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memitem:a60bbbd58284aa0d3ecd067126e73f633"><td class="memTemplParams" colspan="2">template&lt;typename ExecutionPolicy , typename ForwardIt &gt; </td></tr>
+<tr class="memitem:a60bbbd58284aa0d3ecd067126e73f633"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#a60bbbd58284aa0d3ecd067126e73f633">cbr::is_sorted</a> (ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memdesc:a60bbbd58284aa0d3ecd067126e73f633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if range is sorted.  <a href="utils_8hpp.html#a60bbbd58284aa0d3ecd067126e73f633">More...</a><br /></td></tr>
 <tr class="separator:a60bbbd58284aa0d3ecd067126e73f633"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2800dffb586189ef2f8ecb4302f82a8"><td class="memTemplParams" colspan="2"><a id="aa2800dffb586189ef2f8ecb4302f82a8"></a>
-template&lt;class ForwardIt &gt; </td></tr>
-<tr class="memitem:aa2800dffb586189ef2f8ecb4302f82a8"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::is_strictly_sorted</b> (ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memitem:aa2800dffb586189ef2f8ecb4302f82a8"><td class="memTemplParams" colspan="2">template&lt;class ForwardIt &gt; </td></tr>
+<tr class="memitem:aa2800dffb586189ef2f8ecb4302f82a8"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#aa2800dffb586189ef2f8ecb4302f82a8">cbr::is_strictly_sorted</a> (ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memdesc:aa2800dffb586189ef2f8ecb4302f82a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if range is strictly sorted, i.e. no 2 elements are equal.  <a href="utils_8hpp.html#aa2800dffb586189ef2f8ecb4302f82a8">More...</a><br /></td></tr>
 <tr class="separator:aa2800dffb586189ef2f8ecb4302f82a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15a71b45ab88ad8fd69068ede255d1b3"><td class="memTemplParams" colspan="2"><a id="a15a71b45ab88ad8fd69068ede255d1b3"></a>
-template&lt;typename ExecutionPolicy , class ForwardIt &gt; </td></tr>
-<tr class="memitem:a15a71b45ab88ad8fd69068ede255d1b3"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::is_strictly_sorted</b> (ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memitem:a15a71b45ab88ad8fd69068ede255d1b3"><td class="memTemplParams" colspan="2">template&lt;typename ExecutionPolicy , class ForwardIt &gt; </td></tr>
+<tr class="memitem:a15a71b45ab88ad8fd69068ede255d1b3"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8hpp.html#a15a71b45ab88ad8fd69068ede255d1b3">cbr::is_strictly_sorted</a> (ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)</td></tr>
+<tr class="memdesc:a15a71b45ab88ad8fd69068ede255d1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if range is strictly sorted, i.e. no 2 elements are equal.  <a href="utils_8hpp.html#a15a71b45ab88ad8fd69068ede255d1b3">More...</a><br /></td></tr>
 <tr class="separator:a15a71b45ab88ad8fd69068ede255d1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a58de8faabf5ea6479fa281b40301405b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58de8faabf5ea6479fa281b40301405b">&#9670;&nbsp;</a></span>all_unique()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , std::size_t N, typename BinaryPredicate  = std::equal_to&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool cbr::all_unique </td>
+          <td>(</td>
+          <td class="paramtype">const std::array&lt; T, N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryPredicate &amp;&amp;&#160;</td>
+          <td class="paramname"><em>p</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if all values in std::array are unique. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements of the array. </td></tr>
+    <tr><td class="paramname">N</td><td>Size of the array. </td></tr>
+    <tr><td class="paramname">BinaryPredicate</td><td>Type of the binary predicate to compare values of the array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arr</td><td>Array to check. </td></tr>
+    <tr><td class="paramname">p</td><td>Binary predicatate to compare values of the array (default: std::equal_to). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether or not all elements in the input array are different. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00234">234</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af4cd6c0833702066ca9f31c6057f0ff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4cd6c0833702066ca9f31c6057f0ff6">&#9670;&nbsp;</a></span>dateStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename clock_t  = std::chrono::system_clock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string cbr::dateStr </td>
+          <td>(</td>
+          <td class="paramtype">const typename clock_t::time_point &amp;&#160;</td>
+          <td class="paramname"><em>currentTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>fullPrecision</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert timepoint into string. </p>
+<p>String format is Y-m-d_H-M-S(.nanoseconds). See <a href="https://en.cppreference.com/w/cpp/chrono/c/strftime">https://en.cppreference.com/w/cpp/chrono/c/strftime</a>. Example: </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> now = std::chrono::system_clock::now();</div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> s1 = <a class="code" href="utils_8hpp.html#af4cd6c0833702066ca9f31c6057f0ff6">dateStr</a>(now);</div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> s2 = <a class="code" href="utils_8hpp.html#af4cd6c0833702066ca9f31c6057f0ff6">dateStr</a>(now,<span class="keyword">true</span>);</div>
+</div><!-- fragment --><p>Then s1 == "2022-01-01_15-13-54", and s2 == "2022-01-01_15-13-54.142542392".</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">clock_t</td><td>Type of the clock. Defines the type of the input arguments. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">currentTime</td><td>Timepoint to convert into a string. </td></tr>
+    <tr><td class="paramname">fullPrecision</td><td>If true, adds nanosecond value to output string (default: false). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string representation of the input timepoint. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00068">68</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0a0c7379572ba80c98302c6bda64afe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a0c7379572ba80c98302c6bda64afe7">&#9670;&nbsp;</a></span>formatDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;double, std::string&gt; cbr::formatDuration </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>User friendly string representation of a duration. </p>
+<p>Takes a duration in second (as a double) and rounds to a duration in the most relevant units (min, s, ms, or us).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Duration (in seconds) to convert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::pair&lt;double, std::string&gt;, where the first member is the value of the duration converted into the selected unit, and the second member is the acronym for the selected unit. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00203">203</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af79da22f840ec1ffd334e50dfa80f084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af79da22f840ec1ffd334e50dfa80f084">&#9670;&nbsp;</a></span>fromDateStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename clock_t  = std::chrono::system_clock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">clock_t::time_point cbr::fromDateStr </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert string generated by dateStr back to timepoint. </p>
+<p>Works for strings generated with and without fullPrecision = true.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">clock_t</td><td>Type of the clock. Defines the type of the returned value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>std::string to be converted into a timepoint. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>clock_t::time_point representation of the input string. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00117">117</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a60bbbd58284aa0d3ecd067126e73f633"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60bbbd58284aa0d3ecd067126e73f633">&#9670;&nbsp;</a></span>is_sorted() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ExecutionPolicy , typename ForwardIt &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cbr::is_sorted </td>
+          <td>(</td>
+          <td class="paramtype">ExecutionPolicy &amp;&amp;&#160;</td>
+          <td class="paramname"><em>policy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if range is sorted. </p>
+<p>Uses std::adjacent_find behind the scenes: <a href="https://en.cppreference.com/w/cpp/algorithm/adjacent_find">https://en.cppreference.com/w/cpp/algorithm/adjacent_find</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">policy</td><td>Execution policy to use for std::adjacent_find: <a href="https://en.cppreference.com/w/cpp/header/execution">https://en.cppreference.com/w/cpp/header/execution</a> </td></tr>
+    <tr><td class="paramname">first,last</td><td>The range of the elements to examine. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean of whether or not the range is sorted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00371">371</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa69fa80809ba13f441a5c88dc39f6821"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa69fa80809ba13f441a5c88dc39f6821">&#9670;&nbsp;</a></span>is_sorted() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ForwardIt &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cbr::is_sorted </td>
+          <td>(</td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if range is sorted. </p>
+<p>Uses std::adjacent_find behind the scenes: <a href="https://en.cppreference.com/w/cpp/algorithm/adjacent_find">https://en.cppreference.com/w/cpp/algorithm/adjacent_find</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first,last</td><td>The range of the elements to examine. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean of whether or not the range is sorted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00355">355</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a15a71b45ab88ad8fd69068ede255d1b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15a71b45ab88ad8fd69068ede255d1b3">&#9670;&nbsp;</a></span>is_strictly_sorted() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ExecutionPolicy , class ForwardIt &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cbr::is_strictly_sorted </td>
+          <td>(</td>
+          <td class="paramtype">ExecutionPolicy &amp;&amp;&#160;</td>
+          <td class="paramname"><em>policy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if range is strictly sorted, i.e. no 2 elements are equal. </p>
+<p>Uses std::adjacent_find behind the scenes: <a href="https://en.cppreference.com/w/cpp/algorithm/adjacent_find">https://en.cppreference.com/w/cpp/algorithm/adjacent_find</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">policy</td><td>Execution policy to use for std::adjacent_find: <a href="https://en.cppreference.com/w/cpp/header/execution">https://en.cppreference.com/w/cpp/header/execution</a> </td></tr>
+    <tr><td class="paramname">first,last</td><td>The range of the elements to examine. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean of whether or not the range is strictly sorted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00402">402</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa2800dffb586189ef2f8ecb4302f82a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2800dffb586189ef2f8ecb4302f82a8">&#9670;&nbsp;</a></span>is_strictly_sorted() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ForwardIt &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cbr::is_strictly_sorted </td>
+          <td>(</td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardIt&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if range is strictly sorted, i.e. no 2 elements are equal. </p>
+<p>Uses std::adjacent_find behind the scenes: <a href="https://en.cppreference.com/w/cpp/algorithm/adjacent_find">https://en.cppreference.com/w/cpp/algorithm/adjacent_find</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first,last</td><td>The range of the elements to examine. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean of whether or not the range is strictly sorted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00386">386</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0aa97937f68c449bf999fcc41e3f28fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa97937f68c449bf999fcc41e3f28fc">&#9670;&nbsp;</a></span>isValidFilename()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cbr::isValidFilename </td>
+          <td>(</td>
+          <td class="paramtype">const std::string_view&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>windows</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if string is a valid Unix and Windows filename. </p>
+<p>Can also only check for Unix validity.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>String to check. </td></tr>
+    <tr><td class="paramname">windows</td><td>Check windows validity (default: true). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean for whether or not string is a valid filename. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00149">149</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4c6992f071bd848a78acc02704f9453f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c6992f071bd848a78acc02704f9453f">&#9670;&nbsp;</a></span>strcmpi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cbr::strcmpi </td>
+          <td>(</td>
+          <td class="paramtype">const std::string_view&#160;</td>
+          <td class="paramname"><em>str1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string_view&#160;</td>
+          <td class="paramname"><em>str2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Case insensitive string comparaison. </p>
+<p>Input arguments are std::string_views.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str1,str2</td><td>Strings to compare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether or not both strings are equal. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00036">36</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
+<div class="ttc" id="autils_8hpp_html_af4cd6c0833702066ca9f31c6057f0ff6"><div class="ttname"><a href="utils_8hpp.html#af4cd6c0833702066ca9f31c6057f0ff6">cbr::dateStr</a></div><div class="ttdeci">std::string dateStr(const typename clock_t::time_point &amp;currentTime, const bool fullPrecision=false)</div><div class="ttdoc">Convert timepoint into string.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8hpp_source.html#l00068">utils.hpp:68</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

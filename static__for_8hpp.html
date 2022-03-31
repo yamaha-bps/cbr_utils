@@ -74,7 +74,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -120,60 +119,170 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="static__for_8hpp__dep__incl.png" border="0" usemap="#include_2cbr__utils_2static__for_8hppdep" alt=""/></div>
 <map name="include_2cbr__utils_2static__for_8hppdep" id="include_2cbr__utils_2static__for_8hppdep">
-<area shape="rect" title=" " alt="" coords="67,5,235,47"/>
-<area shape="rect" href="integer__pack_8hpp.html" title=" " alt="" coords="41,184,220,225"/>
-<area shape="rect" href="utils_8hpp.html" title=" " alt="" coords="37,273,225,300"/>
-<area shape="rect" href="type__pack_8hpp.html" title=" " alt="" coords="130,95,291,136"/>
-<area shape="rect" href="yaml_8hpp.html" title=" " alt="" coords="315,102,509,129"/>
-<area shape="rect" href="matplotlibcpp_8hpp_source.html" title=" " alt="" coords="5,348,256,375"/>
+<area shape="rect" title=" " alt="" coords="49,5,217,47"/>
+<area shape="rect" href="integer__pack_8hpp.html" title=" " alt="" coords="23,184,202,225"/>
+<area shape="rect" href="utils_8hpp.html" title=" " alt="" coords="19,273,207,300"/>
+<area shape="rect" href="type__pack_8hpp.html" title=" " alt="" coords="112,95,273,136"/>
+<area shape="rect" href="yaml_8hpp.html" title=" " alt="" coords="297,102,491,129"/>
 </map>
 </div>
 </div>
 <p><a href="static__for_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1detail_1_1static__for__impl.html">cbr::detail::static_for_impl&lt; T, Vs &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1detail_1_1static__for__impl_3_01Is_01_4.html">cbr::detail::static_for_impl&lt; Is &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1detail_1_1static__for__impl_3_01T_00_01First_00_01Last_01_4.html">cbr::detail::static_for_impl&lt; T, First, Last &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcbr_1_1detail_1_1static__for__impl_3_01T_00_01N_01_4.html">cbr::detail::static_for_impl&lt; T, N &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:af727058da9cda4db765fc1aa0bbeba60"><td class="memTemplParams" colspan="2"><a id="af727058da9cda4db765fc1aa0bbeba60"></a>
-template&lt;typename T , T... Vs&gt; </td></tr>
-<tr class="memitem:af727058da9cda4db765fc1aa0bbeba60"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::static_for</b> = detail::static_for_impl&lt; T, Vs... &gt;</td></tr>
+<tr class="memitem:af727058da9cda4db765fc1aa0bbeba60"><td class="memTemplParams" colspan="2">template&lt;typename T , T... Vs&gt; </td></tr>
+<tr class="memitem:af727058da9cda4db765fc1aa0bbeba60"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="static__for_8hpp.html#af727058da9cda4db765fc1aa0bbeba60">cbr::static_for</a> = detail::static_for_impl&lt; T, Vs... &gt;</td></tr>
+<tr class="memdesc:af727058da9cda4db765fc1aa0bbeba60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile time loop over integers.  <a href="static__for_8hpp.html#af727058da9cda4db765fc1aa0bbeba60">More...</a><br /></td></tr>
 <tr class="separator:af727058da9cda4db765fc1aa0bbeba60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60c64f594d7579a95d63dd9bc4fa6ada"><td class="memTemplParams" colspan="2"><a id="a60c64f594d7579a95d63dd9bc4fa6ada"></a>
 template&lt;std::size_t... Vs&gt; </td></tr>
-<tr class="memitem:a60c64f594d7579a95d63dd9bc4fa6ada"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::static_for_index</b> = detail::static_for_impl&lt; std::size_t, Vs... &gt;</td></tr>
+<tr class="memitem:a60c64f594d7579a95d63dd9bc4fa6ada"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="static__for_8hpp.html#a60c64f594d7579a95d63dd9bc4fa6ada">cbr::static_for_index</a> = detail::static_for_impl&lt; std::size_t, Vs... &gt;</td></tr>
+<tr class="memdesc:a60c64f594d7579a95d63dd9bc4fa6ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as static_for but with integer type set to std::size_t. <br /></td></tr>
 <tr class="separator:a60c64f594d7579a95d63dd9bc4fa6ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7c6bb7534c0f6e28f06cf6b226dcd199"><td class="memTemplParams" colspan="2"><a id="a7c6bb7534c0f6e28f06cf6b226dcd199"></a>
-template&lt;typename Lambda , typename T , T... Is&gt; </td></tr>
-<tr class="memitem:a7c6bb7534c0f6e28f06cf6b226dcd199"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::detail::static_for_iseq_impl</b> (Lambda &amp;&amp;f, std::integer_sequence&lt; T, Is... &gt;)</td></tr>
-<tr class="separator:a7c6bb7534c0f6e28f06cf6b226dcd199"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff2f65029b657b205a5249d3b0ef6a17"><td class="memTemplParams" colspan="2"><a id="aff2f65029b657b205a5249d3b0ef6a17"></a>
-template&lt;typename Seq , typename Lambda , std::size_t... Is&gt; </td></tr>
-<tr class="memitem:aff2f65029b657b205a5249d3b0ef6a17"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::detail::static_for_aggregate_impl</b> (Seq &amp;&amp;s, Lambda &amp;&amp;f, std::index_sequence&lt; Is... &gt;)</td></tr>
-<tr class="separator:aff2f65029b657b205a5249d3b0ef6a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a038577396e578a4e881f22f74d7fb0"><td class="memTemplParams" colspan="2"><a id="a2a038577396e578a4e881f22f74d7fb0"></a>
-template&lt;typename Seq , typename Lambda &gt; </td></tr>
-<tr class="memitem:a2a038577396e578a4e881f22f74d7fb0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="static__for_8hpp.html#a2a038577396e578a4e881f22f74d7fb0">cbr::static_for_aggregate</a> (Seq &amp;&amp;s, Lambda &amp;&amp;f)</td></tr>
-<tr class="memdesc:a2a038577396e578a4e881f22f74d7fb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">statically iterate over the fields of an aggregate <br /></td></tr>
-<tr class="separator:a2a038577396e578a4e881f22f74d7fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cb33f3cc658b3bfc797a0180963e886"><td class="memTemplParams" colspan="2"><a id="a4cb33f3cc658b3bfc797a0180963e886"></a>
-template&lt;typename Seq , typename Lambda &gt; </td></tr>
-<tr class="memitem:a4cb33f3cc658b3bfc797a0180963e886"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cbr::static_for_hana</b> (Seq &amp;&amp;s, Lambda &amp;&amp;f)</td></tr>
-<tr class="separator:a4cb33f3cc658b3bfc797a0180963e886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6007006a17249aa4c219dbd4eb51e8b"><td class="memTemplParams" colspan="2">template&lt;typename Seq , typename T &gt; </td></tr>
+<tr class="memitem:ae6007006a17249aa4c219dbd4eb51e8b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="static__for_8hpp.html#ae6007006a17249aa4c219dbd4eb51e8b">cbr::static_for_aggregate</a> (Seq &amp;&amp;s, T &amp;&amp;f)</td></tr>
+<tr class="memdesc:ae6007006a17249aa4c219dbd4eb51e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile time loop over fields of an aggregage.  <a href="static__for_8hpp.html#ae6007006a17249aa4c219dbd4eb51e8b">More...</a><br /></td></tr>
+<tr class="separator:ae6007006a17249aa4c219dbd4eb51e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96f654003f71a62916029896ecf31ae"><td class="memTemplParams" colspan="2">template&lt;typename Seq , typename T &gt; </td></tr>
+<tr class="memitem:af96f654003f71a62916029896ecf31ae"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="static__for_8hpp.html#af96f654003f71a62916029896ecf31ae">cbr::static_for_hana</a> (Seq &amp;&amp;s, T &amp;&amp;f)</td></tr>
+<tr class="memdesc:af96f654003f71a62916029896ecf31ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile time loop over fields of a boost::hana::Struct.  <a href="static__for_8hpp.html#af96f654003f71a62916029896ecf31ae">More...</a><br /></td></tr>
+<tr class="separator:af96f654003f71a62916029896ecf31ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="af727058da9cda4db765fc1aa0bbeba60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af727058da9cda4db765fc1aa0bbeba60">&#9670;&nbsp;</a></span>static_for</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , T... Vs&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="static__for_8hpp.html#af727058da9cda4db765fc1aa0bbeba60">cbr::static_for</a> = typedef detail::static_for_impl&lt;T, Vs...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile time loop over integers. </p>
+<p>Defines a type whose contructor takes a callable. What is being passed to the callable are std::integral_contant objects whose values are specified by the template parameters:</p><ul>
+<li>If Vs is empty, then iterates the std::integer_sequence T.</li>
+<li>If Vs is 2 elements, iterates over all values between this 2 elements (2 elements included).</li>
+<li>If Vs is 1 element, iterates from 0 to Vs (Vs excluded).</li>
+</ul>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">int</span> i&gt;</div>
+<div class="line"><span class="keyword">struct </span>S{</div>
+<div class="line"> <span class="keywordtype">void</span> print(){</div>
+<div class="line">   std::cout &lt;&lt; i &lt;&lt; std::endl;</div>
+<div class="line"> }</div>
+<div class="line">};</div>
+<div class="line">static_for&lt;int,2,3&gt;([]{<span class="keyword">const</span> <span class="keyword">auto</span> i}{</div>
+<div class="line">   S&lt;i.value&gt; s;</div>
+<div class="line">   s.print();</div>
+<div class="line">});</div>
+</div><!-- fragment --><p>Notes:</p><ul>
+<li>The callables passed to the static_for function must all have the same return type.</li>
+<li>If return type is bool, only iterates until callable returns false;</li>
+</ul>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements to iterate over, or std::integer_sequence </td></tr>
+    <tr><td class="paramname">Vs</td><td>Loop values parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="static__for_8hpp_source.html#l00122">122</a> of file <a class="el" href="static__for_8hpp_source.html">static_for.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ae6007006a17249aa4c219dbd4eb51e8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6007006a17249aa4c219dbd4eb51e8b">&#9670;&nbsp;</a></span>static_for_aggregate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Seq , typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbr::static_for_aggregate </td>
+          <td>(</td>
+          <td class="paramtype">Seq &amp;&amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile time loop over fields of an aggregage. </p>
+<p>Works for every type that supports std::get(). What is being passed to the callable are references (possibly const) to the fields of the aggregage.</p>
+<p>Example: </p><div class="fragment"><div class="line">std::tuple&lt;int,double,float&gt; t{0,1.,2.};</div>
+<div class="line"><a class="code" href="static__for_8hpp.html#ae6007006a17249aa4c219dbd4eb51e8b">static_for_aggregate</a>(t, []{<span class="keyword">const</span> <span class="keyword">auto</span> &amp; v}{</div>
+<div class="line">  std::cout &lt;&lt; v &lt;&lt; std::endl;</div>
+<div class="line">});</div>
+</div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Seq</td><td>Type of the aggregate object. </td></tr>
+    <tr><td class="paramname">T</td><td>Type of the callable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="static__for_8hpp_source.html#l00164">164</a> of file <a class="el" href="static__for_8hpp_source.html">static_for.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af96f654003f71a62916029896ecf31ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96f654003f71a62916029896ecf31ae">&#9670;&nbsp;</a></span>static_for_hana()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Seq , typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbr::static_for_hana </td>
+          <td>(</td>
+          <td class="paramtype">Seq &amp;&amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile time loop over fields of a boost::hana::Struct. </p>
+<p>Works the same as static_for_aggregate, but uses boost::hana::Struct machinery to reference the fields. </p>
+
+<p class="definition">Definition at line <a class="el" href="static__for_8hpp_source.html#l00178">178</a> of file <a class="el" href="static__for_8hpp_source.html">static_for.hpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
+<div class="ttc" id="astatic__for_8hpp_html_ae6007006a17249aa4c219dbd4eb51e8b"><div class="ttname"><a href="static__for_8hpp.html#ae6007006a17249aa4c219dbd4eb51e8b">cbr::static_for_aggregate</a></div><div class="ttdeci">void static_for_aggregate(Seq &amp;&amp;s, T &amp;&amp;f)</div><div class="ttdoc">Compile time loop over fields of an aggregage.</div><div class="ttdef"><b>Definition:</b> <a href="static__for_8hpp_source.html#l00164">static_for.hpp:164</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

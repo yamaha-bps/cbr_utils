@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['make_5fiseq_5fimpl_5f_113',['make_iseq_impl_',['../structcbr_1_1detail_1_1make__iseq__impl__.html',1,'cbr::detail']]],
-  ['make_5fiseq_5fimpl_5f_3c_20t_20_3e_114',['make_iseq_impl_&lt; T &gt;',['../structcbr_1_1detail_1_1make__iseq__impl___3_01T_01_4.html',1,'cbr::detail']]],
-  ['make_5fiseq_5fimpl_5f_3c_20t_2c_20first_2c_20curr_2c_20ts_2e_2e_2e_20_3e_115',['make_iseq_impl_&lt; T, First, Curr, Ts... &gt;',['../structcbr_1_1detail_1_1make__iseq__impl___3_01T_00_01First_00_01Curr_00_01Ts_8_8_8_01_4.html',1,'cbr::detail']]],
-  ['make_5fiseq_5fimpl_5f_3c_20t_2c_20first_2c_20first_2c_20ts_2e_2e_2e_20_3e_116',['make_iseq_impl_&lt; T, First, First, Ts... &gt;',['../structcbr_1_1detail_1_1make__iseq__impl___3_01T_00_01First_00_01First_00_01Ts_8_8_8_01_4.html',1,'cbr::detail']]],
-  ['make_5fiseq_5fimpl_5f_3c_20t_2c_20val_20_3e_117',['make_iseq_impl_&lt; T, Val &gt;',['../structcbr_1_1detail_1_1make__iseq__impl___3_01T_00_01Val_01_4.html',1,'cbr::detail']]],
-  ['member_5fv_5fimpl_118',['member_v_impl',['../structcbr_1_1detail_1_1member__v__impl.html',1,'cbr::detail']]],
-  ['member_5fv_5fimpl_3c_20t_20_3e_119',['member_v_impl&lt; T &gt;',['../structcbr_1_1detail_1_1member__v__impl_3_01T_01_4.html',1,'cbr::detail']]]
+  ['loop_87',['loop',['../structcbr_1_1IntegerPack.html#a2140c07608cdcd6a94a5a82ac30fee10',1,'cbr::IntegerPack']]],
+  ['loop_5ftimer_2ehpp_88',['loop_timer.hpp',['../loop__timer_8hpp.html',1,'']]],
+  ['looptimer_89',['LoopTimer',['../classcbr_1_1LoopTimer.html',1,'cbr::LoopTimer&lt; clock_t, steady &gt;'],['../classcbr_1_1LoopTimer.html#a401b3608af22c5cc20cf1eaf87c80a85',1,'cbr::LoopTimer::LoopTimer(const duration_t &amp;rate) noexcept'],['../classcbr_1_1LoopTimer.html#aaaf7e0f61c146dfb28cbb4cfd93aad91',1,'cbr::LoopTimer::LoopTimer(const duration_t &amp;rate, const std::shared_ptr&lt; clock_t &gt; &amp;clock) noexcept'],['../classcbr_1_1LoopTimer.html#a474968c6d5be19d60397eb6c53a635c4',1,'cbr::LoopTimer::LoopTimer(const duration_t &amp;rate, std::shared_ptr&lt; clock_t &gt; &amp;&amp;clock) noexcept']]],
+  ['looptimersteady_90',['LoopTimerSteady',['../loop__timer_8hpp.html#a50d7193151c650f5b7973fd3709c540b',1,'cbr']]]
 ];

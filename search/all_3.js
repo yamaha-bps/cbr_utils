@@ -1,21 +1,10 @@
 var searchData=
 [
-  ['c_5fstr_28',['c_str',['../structcbr_1_1CyberEnum.html#ada744c984c694cdac23f43c338e56583',1,'cbr::CyberEnum']]],
-  ['check_29',['Check',['../structmatplotlibcpp_1_1detail_1_1is__callable__impl_3_01true_00_01T_01_4_1_1Check.html',1,'matplotlibcpp::detail::is_callable_impl&lt; true, T &gt;::Check&lt; U, U &gt;'],['../structcbr_1_1CyberEnum.html#a5c9ead7bd84444788ae3945880b9ed1e',1,'cbr::CyberEnum::check(const int data) noexcept'],['../structcbr_1_1CyberEnum.html#ae8bebad4ae21af0b6a1fa379cf700e12',1,'cbr::CyberEnum::check(const std::string_view dataStr, int &amp;dataVal) noexcept']]],
-  ['clock_5ftraits_2ehpp_30',['clock_traits.hpp',['../clock__traits_8hpp.html',1,'']]],
-  ['clocktraits_31',['ClockTraits',['../structcbr_1_1detail_1_1ClockTraits.html',1,'cbr::detail']]],
-  ['clocktraits_3c_20std_3a_3achrono_3a_3ahigh_5fresolution_5fclock_20_3e_32',['ClockTraits&lt; std::chrono::high_resolution_clock &gt;',['../structcbr_1_1detail_1_1ClockTraits.html',1,'cbr::detail']]],
-  ['compute_5favg_33',['compute_avg',['../classcbr_1_1CyberTimer.html#ac7d50ef9b0c4d4e2aa5b4d493d385678',1,'cbr::CyberTimer']]],
-  ['convert_34',['convert',['../structYAML_1_1convert.html',1,'YAML']]],
-  ['copy_5fto_5ftuple_35',['copy_to_tuple',['../introspection_8hpp.html#ad40b95f0b322f4eb7b4d26f2523187ed',1,'cbr']]],
-  ['count_36',['count',['../classcbr_1_1digitset.html#a1b9756bf4a0f934c97619d6649c2424f',1,'cbr::digitset']]],
-  ['crtp_37',['crtp',['../structcbr_1_1crtp.html',1,'cbr']]],
-  ['crtp_2ehpp_38',['crtp.hpp',['../crtp_8hpp.html',1,'']]],
-  ['cyber_5fenum_2ehpp_39',['cyber_enum.hpp',['../cyber__enum_8hpp.html',1,'']]],
-  ['cyber_5ftimer_2ehpp_40',['cyber_timer.hpp',['../cyber__timer_8hpp.html',1,'']]],
-  ['cyberenum_41',['CyberEnum',['../structcbr_1_1CyberEnum.html',1,'cbr']]],
-  ['cybertimer_42',['CyberTimer',['../classcbr_1_1CyberTimer.html',1,'cbr::CyberTimer&lt; ratio_t, T, clock_t, with_average &gt;'],['../classcbr_1_1CyberTimer.html#a9139e6b1c6bce7a2d80064e8aba45f15',1,'cbr::CyberTimer::CyberTimer(const std::shared_ptr&lt; clock_t &gt; &amp;clock) noexcept'],['../classcbr_1_1CyberTimer.html#a55cc4670fa45e1ef87888ed4c3d0b700',1,'cbr::CyberTimer::CyberTimer(std::shared_ptr&lt; clock_t &gt; &amp;&amp;clock) noexcept']]],
-  ['cybertimermicro_43',['CyberTimerMicro',['../cyber__timer_8hpp.html#ada5c1b1bcc224d9ca1a2bacf3c17a003',1,'cbr']]],
-  ['cybertimermilli_44',['CyberTimerMilli',['../cyber__timer_8hpp.html#aa1f84772db802a4df7c2e8c68ffab49e',1,'cbr']]],
-  ['cybertimernano_45',['CyberTimerNano',['../cyber__timer_8hpp.html#a60d6c910b2c1e110951cc65cb1af4679',1,'cbr']]]
+  ['datestr_37',['dateStr',['../utils_8hpp.html#af4cd6c0833702066ca9f31c6057f0ff6',1,'cbr::dateStr(const typename clock_t::time_point &amp;currentTime, const bool fullPrecision=false)'],['../utils_8hpp.html#a39af8670830b8b2ca8ae11d8aedff2e2',1,'cbr::dateStr(const bool fullPrecision=false)']]],
+  ['decay_38',['decay',['../structcbr_1_1TypePack.html#a22ffb6d193bdd37f42280774984c0dad',1,'cbr::TypePack']]],
+  ['digit_5fperm_39',['digit_perm',['../digitset_8hpp.html#af899dce00c455465d3f053e6c5ab10a1',1,'cbr::digit_perm(const std::array&lt; std::array&lt; T, m &gt;, n &gt; &amp;vals) noexcept'],['../digitset_8hpp.html#ae0c168a41240263f3158981323d28210',1,'cbr::digit_perm(const std::array&lt; T, m &gt; &amp;vals) noexcept'],['../digitset_8hpp.html#ad039d060d3d6a141b941e9f6312a9ed8',1,'cbr::digit_perm() noexcept']]],
+  ['digitset_40',['digitset',['../classcbr_1_1digitset.html',1,'cbr::digitset&lt; N_DIGITS, BASE &gt;'],['../classcbr_1_1digitset.html#a236e70b4ba1b6874a359bdc6b857034a',1,'cbr::digitset::digitset()']]],
+  ['digitset_2ehpp_41',['digitset.hpp',['../digitset_8hpp.html',1,'']]],
+  ['duplicate_42',['duplicate',['../structcbr_1_1IntegerPack.html#a728416540aed9d095e4eda8257cea82c',1,'cbr::IntegerPack::duplicate()'],['../structcbr_1_1TypePack.html#ab7c586479902b435ba9063a33dd3f9f9',1,'cbr::TypePack::duplicate()']]],
+  ['duration_5fcast_43',['duration_cast',['../structcbr_1_1detail_1_1ClockTraits.html#ae2a4f58f64984a301dc417a59863a699',1,'cbr::detail::ClockTraits']]]
 ];

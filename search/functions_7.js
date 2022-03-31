@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['operator_3c_351',['operator&lt;',['../structcbr_1_1CyberEnum.html#aab3d35130088c884fd8a19b16bbd2722',1,'cbr::CyberEnum']]],
-  ['operator_3c_3d_352',['operator&lt;=',['../structcbr_1_1CyberEnum.html#ab773a6c023414055e66e623adfec1abe',1,'cbr::CyberEnum']]],
-  ['operator_3d_353',['operator=',['../structcbr_1_1CyberEnum.html#a86bf4881612fea4846a3bbdb2bb69c5f',1,'cbr::CyberEnum::operator=(const int data)'],['../structcbr_1_1CyberEnum.html#ae612db2cfeae4b4cd6d505a549647e03',1,'cbr::CyberEnum::operator=(const std::string_view data)']]],
-  ['operator_3e_354',['operator&gt;',['../structcbr_1_1CyberEnum.html#a0f32c5efec50f38bc6ff9a8568321bdb',1,'cbr::CyberEnum']]],
-  ['operator_3e_3d_355',['operator&gt;=',['../structcbr_1_1CyberEnum.html#a092206cbd83c5032cc630a75cae61acb',1,'cbr::CyberEnum']]],
-  ['operator_5b_5d_356',['operator[]',['../classcbr_1_1digitset.html#a64f8bc185ebb0eca74878afe6d960ee7',1,'cbr::digitset::operator[](const std::size_t n) const'],['../classcbr_1_1digitset.html#a966c77814d43f06d63c638a7bd1cd11a',1,'cbr::digitset::operator[](const std::size_t n)']]]
+  ['is_5frunnning_228',['is_runnning',['../classcbr_1_1CyberTimer.html#a1cea0e41abc08f249f9a60ee1217d682',1,'cbr::CyberTimer']]],
+  ['is_5fsorted_229',['is_sorted',['../utils_8hpp.html#aa69fa80809ba13f441a5c88dc39f6821',1,'cbr::is_sorted(ForwardIt first, ForwardIt last)'],['../utils_8hpp.html#a60bbbd58284aa0d3ecd067126e73f633',1,'cbr::is_sorted(ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)']]],
+  ['is_5fstrictly_5fsorted_230',['is_strictly_sorted',['../utils_8hpp.html#aa2800dffb586189ef2f8ecb4302f82a8',1,'cbr::is_strictly_sorted(ForwardIt first, ForwardIt last)'],['../utils_8hpp.html#a15a71b45ab88ad8fd69068ede255d1b3',1,'cbr::is_strictly_sorted(ExecutionPolicy &amp;&amp;policy, ForwardIt first, ForwardIt last)']]],
+  ['is_5fvalid_231',['is_valid',['../structcbr_1_1CyberEnum.html#afce918334748fb220da3ab7a26235050',1,'cbr::CyberEnum']]],
+  ['isvalidfilename_232',['isValidFilename',['../utils_8hpp.html#a0aa97937f68c449bf999fcc41e3f28fc',1,'cbr']]]
 ];
