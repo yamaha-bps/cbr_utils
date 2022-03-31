@@ -451,7 +451,7 @@ public:
    *
    * Then T2 == IntegerPack<int,0,2>.
    *
-   * @tparam Vs Values to prepend to the pack.
+   * @tparam ISeq An std::index_sequence of indexes of elements that will compose the subset.
    */
   template<typename ISeq>
   using subset = typename detail::_subset_impl_int<this_t, ISeq>::type;
@@ -467,8 +467,6 @@ public:
    * ```
    *
    * Then T2 == IntegerPack<int,2,1,0>.
-   *
-   * @tparam ISeq An std::index_sequence of indexes of elements that will compose the subset.
    */
   using reversed = typename detail::_reverse_impl_int<IntegerPack<Type>, this_t>::type;
 

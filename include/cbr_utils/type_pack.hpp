@@ -177,7 +177,7 @@ public:
    * template<class T>
    * struct S{};
    *
-   * using T = TypePack<int, double, float>;
+   * using T = TypePack<int,double,float>;
    * using T2 = T::apply<S,char,void*>;
    * ```
    *
@@ -198,7 +198,7 @@ public:
    * template<class T>
    * struct S{};
    *
-   * using T = TypePack<int, double, float>;
+   * using T = TypePack<int,double,float>;
    * using T2 = T::apply<S,char,void*>;
    * ```
    *
@@ -217,7 +217,7 @@ public:
    * template<class T1, class T2, class T3>
    * struct S{};
    *
-   * using T = TypePack<int, double>;
+   * using T = TypePack<int,double>;
    * using T2 = T::unpack<S,char>;
    * ```
    *
@@ -233,10 +233,10 @@ public:
    * @brief Unpack elements of the pack into the template parameters of a given type.
    * @details For example:
    * ```
-   * template<class T1, class T2, class T3>
+   * template<class T1,class T2,class T3>
    * struct S{};
    *
-   * using T = TypePack<int, double>;
+   * using T = TypePack<int,double>;
    * using T2 = T::unpack<S,char>;
    * ```
    *
@@ -254,11 +254,11 @@ public:
    *
    * Example:
    * ```
-   * using T = TypePack<int, double>;
+   * using T = TypePack<int,double>;
    * using T2 = T::duplicate<3>;
    * ```
    *
-   * Then T2 == IntegerPack<int, double, int, double, int, double>.
+   * Then T2 == IntegerPack<int,double,int,double,int,double>.
    *
    * @tparam N Number of times to duplicate the pack.
    */
@@ -271,42 +271,146 @@ public:
    *
    * Example:
    * ```
-   * using T = TypePack<int, double>;
+   * using T = TypePack<int,double>;
    * using T2 = T::append<float,char>;
    * ```
    *
-   * Then T2 == TypePack<int,double,float,char>>.
+   * Then T2 == TypePack<int,double,float,char>.
    *
    * @tparam Ts Types to append to the pack.
    */
   template<typename... Ts>
   using append = typename typepack_cat<this_t, TypePack<Ts...>>::type;
 
+  /**
+   * @brief Prepend types to the pack.
+   * @details Result is another TypePack.
+   *
+   * Example:
+   * ```
+   * using T = TypePack<int,double>;
+   * using T2 = T::append<float,char>;
+   * ```
+   *
+   * Then T2 == TypePack<float,char,int,double>.
+   *
+   * @tparam Ts Types to prepend to the pack.
+   */
   template<typename... Ts>
   using append_front = typename typepack_cat<TypePack<Ts...>, this_t>::type;
 
+  /**
+   * @brief Apply a given type over pack and extract the "type" typedef out of each element of the
+   resulting pack.
+   * @details Result is another TypePack.
+   *
+   * Example:
+   * ```
+   * template<class T1, class T2>
+   * struct S{using type = std::make_unsigned_t<T1>;};
+   *
+   * using T = TypePack<int,unsigned int>;
+   * using T2 = T::member_t<S,char>;
+   * ```
+   *
+   * Then T2 == TypePack<unsigned int,unsigned int>.
+   *
+   * @tparam T Templated type to use for application.
+   * @tparam Ts Optional types to append to T's template parameters.
+   */
   template<template<typename...> typename T, typename... Ts>
   using member_t = TypePack<typename T<Args, Ts...>::type...>;
 
+  /**
+   * @brief Apply a given type over pack and extract the "value" static member variable out of each
+   element of the resulting pack.
+   * @details Result is an std::integer_sequence.
+   *
+   * Example:
+   * ```
+   * template<class T>
+   * struct S{static constexpr std::size_t value = sizeof(T);};
+   *
+   * using T = TypePack<int,double,char>;
+   * using T2 = T::member_v<S>;
+   * ```
+   *
+   * Then T2 == std::integer_sequence<std::size_t,4,8,1>.
+   *
+   * @tparam T Templated type to use for application.
+   */
   template<template<typename> typename T>
   using member_v = typename detail::member_v_impl<T, Args...>::type;
 
-  // TypePack subset from std::index_sequence
+  /**
+   * @brief Extract subset of the pack.
+   * @details Result is another TypePack.
+   *
+   * Example:
+   * ```
+   * using T = TypePack<float,double,int>;
+   * using T2 = T::subset<std::index_sequence<0, 2>>;
+   * ```
+   *
+   * Then T2 == TypePack<float,int>.
+   *
+   * @tparam ISeq An std::index_sequence of indexes of elements that will compose the subset.
+   */
   template<typename ISeq>
   using subset = typename detail::_subset_impl<this_t, ISeq>::type;
 
-  // reversed TypePack
+  /**
+   * @brief Reverse order of elements in the pack.
+   * @details Result is another TypePack.
+   *
+   * Example:
+   * ```
+   * using T = TypePack<float,double,int>;
+   * using T2 = T::reversed;
+   * ```
+   *
+   * Then T2 == TypePack<int,double,float>.
+   */
   using reversed = typename detail::_reverse_impl<TypePack<>, this_t>::type;
 
-  // TypePack of first N elements
+  /**
+   * @brief Extract first elements of the pack.
+   * @details Result is another TypePack.
+   *
+   * Example:
+   * ```
+   * using T = TypePack<float,double,int>;
+   * using T2 = T::head<2>;
+   * ```
+   *
+   * Then T2 == TypePack<float,double>.
+   *
+   * @tparam N Number of elements to extract.
+   */
   template<std::size_t N>
   using head = subset<typename std::make_index_sequence<N>>;
 
-  // TypePack of last N elements
+  /**
+   * @brief Extract last elements of the pack.
+   * @details Result is another TypePack.
+   *
+   * Example:
+   * ```
+   * using T = TypePack<float,double,int>;
+   * using T2 = T::tail<2>;
+   * ```
+   *
+   * Then T2 == TypePack<double,int>.
+   *
+   * @tparam N Number of elements to extract.
+   */
   template<std::size_t N>
   using tail = typename reversed::template head<N>::reversed;
 
-  // strip reference and cv qualifiers from TypePack
+  /**
+   * @brief Apply std::decay to all elements of the pack.
+   * @details Result is another TypePack.
+   */
   using decay = apply<std::decay_t>;
 
   template<typename T>
