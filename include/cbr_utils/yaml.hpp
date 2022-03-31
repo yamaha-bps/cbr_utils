@@ -25,7 +25,14 @@
 
 namespace YAML {
 
-/* Overload yaml-cpp encode and decode functions for several containers */
+/**
+ * @brief Overload yaml-cpp's convert struct for several types not natively supported by yaml-cpp.
+ * @details Currently supported types:
+ * - boost::hana::Struct
+ * - Scoped enums
+ * - std::tuple
+ * - std::optional
+ */
 template<typename T>
 struct convert
 {
@@ -117,17 +124,27 @@ struct convert
   }
 };
 
+/**
+ * @brief Overload yaml-cpp's as_if struct to return a variant.
+ * @details Currently supported types in the variant:
+ * - bool
+ * - int
+ * - double
+ * - std::string
+ *
+ * To use this as_if overload, specify void template arguments : as_if<void,void>(node).
+ */
 template<>
 struct as_if<void, void>
 {
   explicit as_if(const Node & node_) : node(node_) {}
   const Node & node;
 
-  std::variant<void *, bool, int, double, std::string> operator()() const
+  std::variant<std::monostate, bool, int, double, std::string> operator()() const
   {
     if (node.IsNull()) { return {}; }
 
-    std::variant<void *, bool, int, double, std::string> out;
+    std::variant<std::monostate, bool, int, double, std::string> out;
 
     bool val_bool;
     if (convert<bool>::decode(node, val_bool)) {
@@ -157,6 +174,11 @@ struct as_if<void, void>
   }
 };
 
+/**
+ * @brief Overload yaml-cpp's as_if struct to return an optional.
+ * @details To use this as_if overload, specify template arguments like these (for double for
+ * example): as_if<double,std::optional<double>>(node).
+ */
 template<typename T>
 struct as_if<T, std::optional<T>>
 {
@@ -173,6 +195,7 @@ struct as_if<T, std::optional<T>>
   }
 };
 
+/// @cond
 // There is already a std::string partial specialisation, so we need a full specialisation here
 template<>
 struct as_if<std::string, std::optional<std::string>>
@@ -189,6 +212,7 @@ struct as_if<std::string, std::optional<std::string>>
     return val;
   }
 };
+/// @endcond
 
 }  // namespace YAML
 

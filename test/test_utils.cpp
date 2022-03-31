@@ -549,8 +549,12 @@ TEST(Utils, is_sorted)
 
 TEST(Utils, ValidFilename)
 {
+  EXPECT_FALSE(cbr::isValidFilename("\0test", false));
+  EXPECT_TRUE(cbr::isValidFilename("\1test", false));
+  EXPECT_FALSE(cbr::isValidFilename("\1test"));
   EXPECT_TRUE(cbr::isValidFilename("test"));
   EXPECT_FALSE(cbr::isValidFilename("\\test"));
+  EXPECT_TRUE(cbr::isValidFilename("\\test", false));
   EXPECT_FALSE(cbr::isValidFilename("/test"));
   EXPECT_FALSE(cbr::isValidFilename(":test"));
   EXPECT_FALSE(cbr::isValidFilename("*test"));
@@ -559,10 +563,15 @@ TEST(Utils, ValidFilename)
   EXPECT_FALSE(cbr::isValidFilename("<test"));
   EXPECT_FALSE(cbr::isValidFilename(">test"));
   EXPECT_FALSE(cbr::isValidFilename("|test"));
+  EXPECT_FALSE(cbr::isValidFilename("test "));
+  EXPECT_FALSE(cbr::isValidFilename("test."));
 }
 
 TEST(Utils, formatDuration)
 {
+  EXPECT_DOUBLE_EQ(cbr::formatDuration(90.).first, 1.5);
+  EXPECT_EQ(cbr::formatDuration(90.).second, "min");
+
   EXPECT_DOUBLE_EQ(cbr::formatDuration(5.).first, 5.);
   EXPECT_EQ(cbr::formatDuration(5.).second, "s");
 
