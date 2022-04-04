@@ -6,11 +6,13 @@
   <description>Collection of various programmatic tools</description>
 
   <author>Thomas Gurriet</author>
-  <maintainer email="thomas.gurriet@hotmail.fr">Thomas Gurriet</maintainer>
+  <maintainer email="thomas_gurriet@yamaha-motor.com">Thomas Gurriet</maintainer>
   <license>MIT</license>
 
-  <depend>libboost-dev</depend>
-  <depend>yaml-cpp</depend>
+  <!-- Optional: -->
+  <!-- <depend>libboost-dev</depend> -->
+  <!-- <depend>yaml-cpp</depend> -->
+  <!-- <depend>libgtest-dev</depend> -->
 
   <buildtool_depend>cmake</buildtool_depend>
 

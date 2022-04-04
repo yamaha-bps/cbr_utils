@@ -12,6 +12,10 @@
 #include <vector>
 
 #include "cbr_utils/digitset.hpp"
+#include "cbr_utils/integer_pack.hpp"
+#include "cbr_utils/integer_sequence.hpp"
+#include "cbr_utils/static_for.hpp"
+#include "cbr_utils/type_pack.hpp"
 #include "cbr_utils/utils.hpp"
 
 template<typename T>

@@ -92,12 +92,10 @@ All the provided utilities are in the `cbr` namespace and are `C++17` compatible
 ### Misc
 
 ## Dependencies
+As decribed in the overview section, a couple of headers have some depedencies.
 
-### Required
 * [Libboost](https://www.boost.org/)
 * [yaml-cpp](https://github.com/jbeder/yaml-cpp)
-
-### Optional
 * [GTest](https://github.com/google/googletest) (to build tests)
 * [Python](https://www.python.org/), [Numpy](https://numpy.org/), [Matplotlib](https://matplotlib.org/) (to use matplotlibcpp.hpp header)
 
@@ -110,6 +108,8 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
+To use certain header or build tests and examples, one must first install a couple of dependencies.
+
 * libboost
   ```sh
   sudo apt install libboost-dev
@@ -119,7 +119,7 @@ To get a local copy up and running follow these simple steps.
   ```sh
   sudo apt install libyaml-cpp-dev
   ```
-#### Optional
+
 * GTest (only necessary to build tests)
   ```sh
   sudo apt install libgtest-dev
@@ -152,22 +152,24 @@ To get a local copy up and running follow these simple steps.
    make
    ```
 
-5. Install
-   ```sh
-   sudo make install
-   ```
-
-6. To uninstall if you don't like it
-   ```sh
-   sudo make uninstall
-   ```
-
-7. To build and run the tests:
+5. To build and run the tests (optional):
    ```sh
    cmake .. -DBUILD_TESTING=ON
    make
    make test
    ```
+
+6. Install
+   ```sh
+   sudo make install
+   ```
+
+7. To uninstall if you don't like it
+   ```sh
+   sudo make uninstall
+   ```
+
+
 
 ## Use with cmake
 
