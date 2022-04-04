@@ -79,7 +79,7 @@ $(function() {
 <p><a href="https://github.com/yamaha-bps/cbr_utils"><img src="images/logo.png" alt="Logo" width="80" height="80" class="inline"/> </a></p>
 <h3 align="center">Cyber Utilities</h3>
 <p align="center"></p>
-<p>Collection of various programmatic tools. <br  />
+<p>Collection of various C++ programmatic tools. <br  />
  <a href="https://github.com/yamaha-bps/cbr_utils/"><b>Explore the repo»</b></a> <br  />
  <a href="https://yamaha-bps.github.io/cbr_utils/"><b>Explore the docs»</b></a> <br  />
  <br  />
@@ -88,19 +88,19 @@ $(function() {
 Table of Contents</h2>
 <ol>
 <li>
-<a href="#about-the-project">About The Project</a> <ul>
+<a href="#content-overview">Content Overview</a> </li>
 <li>
-<a href="#built-with">Built With</a> </li>
-</ul>
-</li>
+<a href="#dependencies">Dependencies</a> </li>
 <li>
 <a href="#getting-started">Getting Started</a> <ul>
 <li>
 <a href="#prerequisites">Prerequisites</a> </li>
 <li>
-<a href="#installation">Installation</a> </li>
+<a href="#build-and-install">Installation</a> </li>
 </ul>
 </li>
+<li>
+<a href="#use-with-cmake">Usage</a> </li>
 <li>
 <a href="#roadmap">Roadmap</a> </li>
 <li>
@@ -114,65 +114,98 @@ Table of Contents</h2>
 </ol>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Content overview</h2>
-<p>All the provided utilities are in the <code>cbr</code> namespace (except for <a class="el" href="matplotlibcpp_8hpp_source.html">matplotlibcpp.hpp</a>, where things have been left in the <code>matplotlibcpp</code> namespace). </p>
+<p>All the provided utilities are in the <code>cbr</code> namespace and are <code>C++17</code> compatible, except for <a href="include/cbr_utils/matplotlibcpp.hpp">matplotlibcpp.hpp</a> for which things have been left in the original <code>matplotlibcpp</code> namespace, and which leverages <code>C++20</code> constructs.</p>
 <h3><a class="anchor" id="autotoc_md2"></a>
 Clocks and timers</h3>
+<ul>
+<li><a href="include/cbr_utils/clock_traits.hpp">clock_traits.hpp</a>: Trait definition for chrono clocks.</li>
+<li><a href="include/cbr_utils/cyber_timer.hpp">cyber_timer.hpp</a>: Timer utility.</li>
+<li><a href="include/cbr_utils/loop_timer.hpp">loop_timer.hpp</a>: Loop synchronization utility.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md3"></a>
 Compile time loop</h3>
+<ul>
+<li><a href="include/cbr_utils/static_for.hpp">static_for.hpp</a>: Compile time loop over integers. Also provides utility loop over boost::hana::Struct if boost::hana available.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md4"></a>
 Digitset</h3>
+<ul>
+<li><a href="include/cbr_utils/digitset.hpp">digitset.hpp</a>: Extention of std::bitset for bases &gt; 2.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md5"></a>
 Enum</h3>
+<ul>
+<li><a href="include/cbr_utils/cyber_enum.hpp">cyber_enum.hpp</a>: Enum that can be implicitly constructed/converted to and from integers and strings.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md6"></a>
 Integer sequence</h3>
+<ul>
+<li><a href="include/cbr_utils/integer_sequence.hpp">integer_sequence.hpp</a>: Utilities to build and use std::integer_sequence.</li>
+<li><a href="include/cbr_utils/integer_pack.hpp">integer_pack.hpp</a>: IntegerPack class, similar to std::integer_sequence but with more functionalities.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md7"></a>
 List of types</h3>
+<ul>
+<li><a href="include/cbr_utils/type_pack.hpp">type_pack.hpp</a>: Utility to manipulate a list of types.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md8"></a>
 Plotting</h3>
+<ul>
+<li><a href="include/cbr_utils/matplotlibcpp.hpp">matplotlibcpp.hpp</a>: C++20 ranges based version of <a href="https://github.com/lava/matplotlib-cpp">https://github.com/lava/matplotlib-cpp</a>.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md9"></a>
 Synchronization</h3>
+<ul>
+<li><a href="include/cbr_utils/synchronizer.hpp">synchronizer.hpp</a>: Utility to synchronize a message stream.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md10"></a>
 Thead pool</h3>
+<ul>
+<li><a href="include/cbr_utils/thread_pool.hpp">thread_pool.hpp</a>: Thread ressources pool with a fixed number of workers that can be used to dispatch work.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md11"></a>
 Type traits</h3>
+<ul>
+<li><a href="include/cbr_utils/type_traits.hpp">type_traits.hpp</a>: Various traits for common std types, as well as a type printing utility function and other goodies.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md12"></a>
 Yaml</h3>
+<ul>
+<li><a href="include/cbr_utils/yaml.hpp">yaml.hpp</a>: <a href="https://www.boost.org/doc/libs/1_61_0/libs/hana/doc/html/index.html">Boost hana</a> support and other goodies for <a href="https://github.com/jbeder/yaml-cpp">yaml-cpp</a> library.</li>
+</ul>
 <h3><a class="anchor" id="autotoc_md13"></a>
 Misc</h3>
+<ul>
+<li><a href="include/cbr_utils/crtp.hpp">crtp.hpp</a>: CRTP helper, small variation on <a href="https://www.fluentcpp.com/2017/05/19/crtp-helper/">https://www.fluentcpp.com/2017/05/19/crtp-helper/</a>.</li>
+<li><a href="include/cbr_utils/introspection.hpp">introspection.hpp</a>: Introspection utilities around boost::hana.</li>
+<li><a href="include/cbr_utils/utils.hpp">utils.hpp</a>: Various utilities to check if a range is sorted, check if a string is a valid filename, convert time to string, etc.</li>
+</ul>
 <h2><a class="anchor" id="autotoc_md14"></a>
 Dependencies</h2>
-<h3><a class="anchor" id="autotoc_md15"></a>
-Required</h3>
-<ul>
-<li><a href="https://www.boost.org/">Libboost</a></li>
-<li><a href="https://github.com/jbeder/yaml-cpp">yaml-cpp</a></li>
-</ul>
-<h3><a class="anchor" id="autotoc_md16"></a>
-Optional</h3>
-<ul>
+<p>As decribed in the overview section, a couple of headers have depedencies. These dependecies are however optional, and not having then won't prevent installation of the package and usage of the headers that dont include these dependencies.</p><ul>
+<li><a href="https://www.boost.org/">Libboost</a> (for <a href="/include/cbr_utils/yaml.hpp">yaml.hpp</a> and <a href="/include/cbr_utils/introspection.hpp">introspection.hpp</a>)</li>
+<li><a href="https://github.com/jbeder/yaml-cpp">yaml-cpp</a> (for <a href="/include/cbr_utils/yaml.hpp">yaml.hpp</a>)</li>
 <li><a href="https://github.com/google/googletest">GTest</a> (to build tests)</li>
-<li><a href="https://www.python.org/">Python</a>, <a href="https://numpy.org/">Numpy</a>, <a href="https://matplotlib.org/">Matplotlib</a> (to use <a class="el" href="matplotlibcpp_8hpp_source.html">matplotlibcpp.hpp</a> header)</li>
+<li><a href="https://www.python.org/">Python</a>, <a href="https://numpy.org/">Numpy</a>, <a href="https://matplotlib.org/">Matplotlib</a> (to use <a href="include/cbr_utils/matplotlibcpp.hpp">matplotlibcpp.hpp</a>)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Getting Started</h2>
-<p>To get a local copy up and running follow these simple steps.</p>
-<h3><a class="anchor" id="autotoc_md18"></a>
-Install dependencies</h3>
+<p>To get a local copy up and running on your machine, follow these simple steps.</p>
+<h3><a class="anchor" id="autotoc_md16"></a>
+Prerequisites</h3>
+<p>To build the tests and examples, it is required to install all the dependencies. However, to just build and install the library, it is recommended but not necessary.</p>
+<p>If the dependencies are found when building cbr_utils, then code linking to cbr_utils will automatically link to these dependencies. Otherwise, it will either have to be linked manually in the client's CMakeLists.txt, or certain headers won't be usable.</p>
 <ul>
 <li>libboost <div class="fragment"><div class="line">sudo apt install libboost-dev</div>
 </div><!-- fragment --></li>
 <li>yaml-cpp <div class="fragment"><div class="line">sudo apt install libyaml-cpp-dev</div>
 </div><!-- fragment --></li>
-</ul>
-<h4><a class="anchor" id="autotoc_md19"></a>
-Optional</h4>
-<ul>
 <li>GTest (only necessary to build tests) <div class="fragment"><div class="line">sudo apt install libgtest-dev</div>
 </div><!-- fragment --></li>
 <li>Python, Numpy, Matplotlib (only necessary to use matplotlibcpp) <div class="fragment"><div class="line">sudo apt install libpython3-dev python3-matplotlib python3-numpy</div>
 </div><!-- fragment --></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md20"></a>
+<h3><a class="anchor" id="autotoc_md17"></a>
 Build and Install</h3>
 <ol type="1">
 <li>Clone the repo <div class="fragment"><div class="line">git clone https://github.com/yamaha-bps/cbr_utils.git</div>
@@ -185,24 +218,25 @@ Build and Install</h3>
 <li>To build examples (optional) <div class="fragment"><div class="line">cmake .. -DBUILD_EXAMPLES=ON</div>
 <div class="line">make</div>
 </div><!-- fragment --></li>
+<li>To build and run the tests (optional): <div class="fragment"><div class="line">cmake .. -DBUILD_TESTING=ON</div>
+<div class="line">make</div>
+<div class="line">make test</div>
+</div><!-- fragment --></li>
 <li>Install <div class="fragment"><div class="line">sudo make install</div>
 </div><!-- fragment --></li>
 <li>To uninstall if you don't like it <div class="fragment"><div class="line">sudo make uninstall</div>
 </div><!-- fragment --></li>
-<li>To build and run the tests: <div class="fragment"><div class="line">cmake .. -DBUILD_TESTING=ON</div>
-<div class="line">make test</div>
-</div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Use with cmake</h2>
 <p>To utilize <code>cbr_utils</code> in your own project, include something along these lines in your <code>CMakeLists.txt</code> </p><div class="fragment"><div class="line">find_package(cbr_utils)</div>
 <div class="line"> </div>
 <div class="line">add_executable(my_executable main.cpp)</div>
 <div class="line">target_link_libraries(my_executable cbr_utils::cbr_utils)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md22"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md19"></a>
 Roadmap</h2>
 <p>See the <a href="https://github.com/yamaha-bps/cbr_utils/issues">open issues</a> for a list of proposed features (and known issues).</p>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 Contributing</h2>
 <p>Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are <b>greatly appreciated</b>.</p>
 <ol type="1">
@@ -212,14 +246,14 @@ Contributing</h2>
 <li><code>Push to the Branch (</code>git push origin feature/AmazingFeature`)</li>
 <li>Open a Pull Request</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 License</h2>
 <p>Distributed under the MIT License. See <code>LICENSE</code> for more information.</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 Contact</h2>
 <p>Thomas Gurriet - <a href="#" onclick="location.href='mai'+'lto:'+'tho'+'ma'+'s_g'+'ur'+'rie'+'t@'+'yam'+'ah'+'a-m'+'ot'+'or.'+'co'+'m'; return false;">thoma<span style="display: none;">.nosp@m.</span>s_gu<span style="display: none;">.nosp@m.</span>rriet<span style="display: none;">.nosp@m.</span>@yam<span style="display: none;">.nosp@m.</span>aha-m<span style="display: none;">.nosp@m.</span>otor<span style="display: none;">.nosp@m.</span>.com</a></p>
 <p>Project Link: <a href="https://github.com/yamaha-bps/cbr_utils">https://github.com/yamaha-bps/cbr_utils</a></p>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Acknowledgements</h2>
 <ul>
 <li><a href="https://yamaha-motor.com/">Yamaha Motor Corporation</a> </li>

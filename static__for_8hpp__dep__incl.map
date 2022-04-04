@@ -1,7 +1,7 @@
 <map id="include/cbr_utils/static_for.hpp" name="include/cbr_utils/static_for.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="49,5,217,47"/>
-<area shape="rect" id="node2" href="$integer__pack_8hpp.html" title=" " alt="" coords="23,184,202,225"/>
-<area shape="rect" id="node3" href="$utils_8hpp.html" title=" " alt="" coords="19,273,207,300"/>
-<area shape="rect" id="node4" href="$type__pack_8hpp.html" title=" " alt="" coords="112,95,273,136"/>
-<area shape="rect" id="node5" href="$yaml_8hpp.html" title=" " alt="" coords="297,102,491,129"/>
+<area shape="rect" id="node1" title=" " alt="" coords="129,5,297,47"/>
+<area shape="rect" id="node2" href="$integer__pack_8hpp.html" title=" " alt="" coords="5,184,184,225"/>
+<area shape="rect" id="node3" href="$type__pack_8hpp.html" title=" " alt="" coords="133,95,294,136"/>
+<area shape="rect" id="node5" href="$yaml_8hpp.html" title=" " alt="" coords="318,102,511,129"/>
+<area shape="rect" id="node4" href="$utils_8hpp.html" title=" " alt="" coords="209,191,397,218"/>
 </map>

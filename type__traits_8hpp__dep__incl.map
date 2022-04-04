@@ -1,8 +1,8 @@
 <map id="include/cbr_utils/type_traits.hpp" name="include/cbr_utils/type_traits.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="284,5,446,47"/>
-<area shape="rect" id="node2" href="$static__for_8hpp.html" title=" " alt="" coords="146,95,314,136"/>
-<area shape="rect" id="node3" href="$integer__pack_8hpp.html" title=" " alt="" coords="141,273,320,315"/>
-<area shape="rect" id="node6" href="$yaml_8hpp.html" title=" " alt="" coords="268,191,462,218"/>
-<area shape="rect" id="node4" href="$utils_8hpp.html" title=" " alt="" coords="10,363,198,389"/>
-<area shape="rect" id="node5" href="$type__pack_8hpp.html" title=" " alt="" coords="31,184,192,225"/>
+<area shape="rect" id="node1" title=" " alt="" coords="47,5,208,47"/>
+<area shape="rect" id="node2" href="$static__for_8hpp.html" title=" " alt="" coords="171,95,339,136"/>
+<area shape="rect" id="node3" href="$integer__pack_8hpp.html" title=" " alt="" coords="127,273,306,315"/>
+<area shape="rect" id="node6" href="$yaml_8hpp.html" title=" " alt="" coords="31,191,224,218"/>
+<area shape="rect" id="node4" href="$type__pack_8hpp.html" title=" " alt="" coords="300,184,461,225"/>
+<area shape="rect" id="node5" href="$utils_8hpp.html" title=" " alt="" coords="331,281,519,307"/>
 </map>
