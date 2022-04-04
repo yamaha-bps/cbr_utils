@@ -15,7 +15,7 @@
 namespace cbr {
 
 /**
- * @brief Type unsafe enum
+ * @brief Type unsafe enum.
  * @details Enum that can be implicitly constructed/converted to and from integer and string_view.
  *
  * Example:

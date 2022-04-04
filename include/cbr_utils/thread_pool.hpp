@@ -39,7 +39,7 @@ namespace cbr {
 
 /**
  * @brief Thread pool.
- * @details Pool with a fixed number of workers that can used to dispatch work.
+ * @details Pool with a fixed number of workers that can be used to dispatch work.
  */
 class ThreadPool
 {

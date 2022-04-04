@@ -78,37 +78,69 @@
 
 ## Content overview
 All the provided utilities are in the `cbr` namespace and are `C++17` compatible, except for [matplotlibcpp.hpp](include/cbr_utils/matplotlibcpp.hpp) for which things have been left in the original `matplotlibcpp` namespace, and which leverages `C++20` constructs.
+
 ### Clocks and timers
+* [clock_traits.hpp](include/cbr_utils/clock_traits.hpp): Trait definition for chrono clocks.
+* [cyber_timer.hpp](include/cbr_utils/cyber_timer.hpp): Timer utility.
+* [loop_timer.hpp](include/cbr_utils/loop_timer.hpp): Loop synchronization utility.
+
 ### Compile time loop
+* [static_for.hpp](include/cbr_utils/static_for.hpp): Compile time loop over integers.
+
+  Also provides utility loop over boost::hana::Struct if boost::hana available.
+
 ### Digitset
+* [digitset.hpp](include/cbr_utils/digitset.hpp): Extention of std::bitset for bases > 2.
+
 ### Enum
+* [cyber_enum.hpp](include/cbr_utils/cyber_enum.hpp): Enum that can be implicitly constructed/converted to and from integers and strings.
+
 ### Integer sequence
+* [integer_sequence.hpp](include/cbr_utils/integer_sequence.hpp): Utilities to build and use std::integer_sequence.
+* [integer_pack.hpp](include/cbr_utils/integer_pack.hpp): IntegerPack class, similar to std::integer_sequence but with more functionalities.
+
 ### List of types
+* [type_pack.hpp](include/cbr_utils/type_pack.hpp): Utility to manipulate a list of types.
+
 ### Plotting
+* [matplotlibcpp.hpp](include/cbr_utils/matplotlibcpp.hpp): C++20 ranges based version of https://github.com/lava/matplotlib-cpp.
+
 ### Synchronization
+* [synchronizer.hpp](include/cbr_utils/synchronizer.hpp): Utility to synchronize a message stream.
+
 ### Thead pool
+* [thread_pool.hpp](include/cbr_utils/thread_pool.hpp): Thread ressources pool with a fixed number of workers that can be used to dispatch work.
+
 ### Type traits
+* [type_traits.hpp](include/cbr_utils/type_traits.hpp): Various traits for common std types, as well as a type printing utility function and other goodies.
+
 ### Yaml
+* [yaml.hpp](include/cbr_utils/yaml.hpp): [Boost hana](https://www.boost.org/doc/libs/1_61_0/libs/hana/doc/html/index.html) support and other goodies for [yaml-cpp](https://github.com/jbeder/yaml-cpp) library.
+
 ### Misc
+* [crtp.hpp](include/cbr_utils/crtp.hpp): CRTP helper, small variation on https://www.fluentcpp.com/2017/05/19/crtp-helper/.
+* [introspection.hpp](include/cbr_utils/introspection.hpp): Introspection utilities.
+* [utils.hpp](include/cbr_utils/utils.hpp): Various utilities to check if a range is sorted, check if a string is a valid filename, convert time to string, etc.
 
 ## Dependencies
-As decribed in the overview section, a couple of headers have some depedencies.
-
-* [Libboost](https://www.boost.org/)
-* [yaml-cpp](https://github.com/jbeder/yaml-cpp)
+As decribed in the overview section, a couple of headers have depedencies. These dependecies are however optional, and not having then won't prevent installation of the package and usage of the headers that dont include these dependencies.
+* [Libboost](https://www.boost.org/) (for [yaml.hpp](/include/cbr_utils/yaml.hpp) and [introspection.hpp](/include/cbr_utils/introspection.hpp))
+* [yaml-cpp](https://github.com/jbeder/yaml-cpp) (for [yaml.hpp](/include/cbr_utils/yaml.hpp))
 * [GTest](https://github.com/google/googletest) (to build tests)
-* [Python](https://www.python.org/), [Numpy](https://numpy.org/), [Matplotlib](https://matplotlib.org/) (to use matplotlibcpp.hpp header)
+* [Python](https://www.python.org/), [Numpy](https://numpy.org/), [Matplotlib](https://matplotlib.org/) (to use [matplotlibcpp.hpp](include/cbr_utils/matplotlibcpp.hpp))
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+To get a local copy up and running on your machine, follow these simple steps.
 
 
 ### Prerequisites
 
-To use certain header or build tests and examples, one must first install a couple of dependencies.
+To build the tests and examples, it is required to install all the dependencies. However, to just build and install the library, it is recommended but not necessary.
+
+If the dependencies are found when building cbr_utils, then code linking to cbr_utils will automatically link to these dependencies. Otherwise, it will either have to be linked manually in the client's CMakeLists.txt, or certain headers won't be usable.
 
 * libboost
   ```sh
