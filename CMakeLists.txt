@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
-project(cbr_utils VERSION 0.1.0)
+project(cbr_utils VERSION 1.0.0)
 
 # ---------------------------------------------------------------------------------------
-# GLOBAL FLAGS
+# GLOBAL VARIABLES
 # ---------------------------------------------------------------------------------------
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# For building tests and examples
+set(CMAKE_CXX_STANDARD 17)
 
 
 # ---------------------------------------------------------------------------------------
@@ -22,21 +22,18 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # Build examples
-if(NOT BUILD_EXAMPLES)
-  set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples." FORCE)
-endif()
+set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples.")
 
 # Build examples
-if(NOT BUILD_TESTING)
-  set(BUILD_TESTING OFF CACHE BOOL "Build tests." FORCE)
-endif()
+set(BUILD_TESTING OFF CACHE BOOL "Build tests.")
+
 
 # ---------------------------------------------------------------------------------------
 # DEPENDENCIES
 # ---------------------------------------------------------------------------------------
 
-find_package(Boost REQUIRED)
-find_package(yaml-cpp REQUIRED)
+find_package(Boost QUIET)
+find_package(yaml-cpp QUIET)
 
 
 # ---------------------------------------------------------------------------------------
@@ -49,12 +46,20 @@ INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(${PROJECT_NAME}
-INTERFACE
-  Boost::headers
-  yaml-cpp
-)
 
+if(Boost_FOUND)
+  target_link_libraries(${PROJECT_NAME}
+  INTERFACE
+    Boost::headers
+  )
+endif()
+
+if(yaml-cpp_FOUND)
+  target_link_libraries(${PROJECT_NAME}
+  INTERFACE
+    yaml-cpp
+  )
+endif()
 
 # ---------------------------------------------------------------------------------------
 # INSTALLATION
@@ -121,9 +126,11 @@ configure_file(
 )
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)
 
+
 # ---------------------------------------------------------------------------------------
 # EXAMPLES
 # ---------------------------------------------------------------------------------------
+
 if(BUILD_EXAMPLES)
   file(GLOB EXAMPLES_SRC "examples/*")
   foreach(testsourcefile ${EXAMPLES_SRC})
@@ -133,14 +140,19 @@ if(BUILD_EXAMPLES)
   endforeach(testsourcefile ${PROJECT_NAME})
 endif()
 
+
 # ---------------------------------------------------------------------------------------
 # TESTING
 # ---------------------------------------------------------------------------------------
 
 if(BUILD_TESTING)
+
   enable_testing()
   include(GoogleTest)
   find_package(GTest REQUIRED)
+
+  find_package(Boost REQUIRED)
+  find_package(yaml-cpp REQUIRED)
 
   add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wconversion -Werror)
 
@@ -171,7 +183,7 @@ if(BUILD_TESTING)
 
   # Introspection
   add_executable(${PROJECT_NAME}_test_introspection test/test_introspection.cpp)
-  target_link_libraries(${PROJECT_NAME}_test_introspection PRIVATE ${PROJECT_NAME} GTest::Main)
+  target_link_libraries(${PROJECT_NAME}_test_introspection PRIVATE ${PROJECT_NAME} GTest::Main Boost::headers)
   gtest_discover_tests(${PROJECT_NAME}_test_introspection)
 
   # Utils
@@ -181,7 +193,9 @@ if(BUILD_TESTING)
 
   # Yaml
   add_executable(${PROJECT_NAME}_test_yaml test/test_yaml.cpp)
-  target_link_libraries(${PROJECT_NAME}_test_yaml PRIVATE ${PROJECT_NAME} GTest::Main)
+  target_link_libraries(${PROJECT_NAME}_test_yaml PRIVATE ${PROJECT_NAME} GTest::Main Boost::headers yaml-cpp)
   gtest_discover_tests(${PROJECT_NAME}_test_yaml)
+
+
 endif()
 

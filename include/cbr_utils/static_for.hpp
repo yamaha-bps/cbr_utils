@@ -13,7 +13,9 @@
 #include <utility>
 
 #include "integer_sequence.hpp"
+#if __has_include(<boost/hana/version.hpp>)
 #include "introspection.hpp"
+#endif
 #include "type_traits.hpp"
 
 namespace cbr {
@@ -169,6 +171,7 @@ void static_for_aggregate(Seq && s, T && f)
     std::forward<Seq>(s), std::forward<T>(f), std::make_index_sequence<std::tuple_size_v<Seq_t>>{});
 }
 
+#if __has_include(<boost/hana/version.hpp>)
 /**
  * @brief Compile time loop over fields of a boost::hana::Struct.
  * @details Works the same as static_for_aggregate, but uses boost::hana::Struct machinery to
@@ -190,6 +193,7 @@ void static_for_hana(Seq && s, T && f)
       std::move(t), std::forward<T>(f), std::make_index_sequence<N::value>{});
   }
 }
+#endif
 
 }  // namespace cbr
 
