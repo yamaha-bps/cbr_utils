@@ -2,14 +2,6 @@ cmake_minimum_required(VERSION 3.15)
 project(cbr_utils VERSION 0.1.0)
 
 # ---------------------------------------------------------------------------------------
-# GLOBAL FLAGS
-# ---------------------------------------------------------------------------------------
-
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-
-# ---------------------------------------------------------------------------------------
 # OPTIONS
 # ---------------------------------------------------------------------------------------
 
@@ -30,6 +22,7 @@ endif()
 if(NOT BUILD_TESTING)
   set(BUILD_TESTING OFF CACHE BOOL "Build tests." FORCE)
 endif()
+
 
 # ---------------------------------------------------------------------------------------
 # DEPENDENCIES
@@ -121,9 +114,11 @@ configure_file(
 )
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)
 
+
 # ---------------------------------------------------------------------------------------
 # EXAMPLES
 # ---------------------------------------------------------------------------------------
+
 if(BUILD_EXAMPLES)
   file(GLOB EXAMPLES_SRC "examples/*")
   foreach(testsourcefile ${EXAMPLES_SRC})
@@ -133,14 +128,17 @@ if(BUILD_EXAMPLES)
   endforeach(testsourcefile ${PROJECT_NAME})
 endif()
 
+
 # ---------------------------------------------------------------------------------------
 # TESTING
 # ---------------------------------------------------------------------------------------
 
 if(BUILD_TESTING)
+
   enable_testing()
   include(GoogleTest)
   find_package(GTest REQUIRED)
+  set(CMAKE_CXX_STANDARD 17)
 
   add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wconversion -Werror)
 
@@ -183,5 +181,7 @@ if(BUILD_TESTING)
   add_executable(${PROJECT_NAME}_test_yaml test/test_yaml.cpp)
   target_link_libraries(${PROJECT_NAME}_test_yaml PRIVATE ${PROJECT_NAME} GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_yaml)
+
+
 endif()
 

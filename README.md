@@ -38,7 +38,7 @@
   <h3 align="center">Cyber Utilities</h3>
 
   <p align="center">
-    Collection of various programmatic tools.
+    Collection of various C++ programmatic tools.
     <br />
     <a href="https://github.com/yamaha-bps/cbr_utils/"><strong>Explore the repo»</strong></a>
     <br />
@@ -56,19 +56,16 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 <ol>
-  <li>
-    <a href="#about-the-project">About The Project</a>
-    <ul>
-      <li><a href="#built-with">Built With</a></li>
-    </ul>
-  </li>
+  <li><a href="#content-overview">Content Overview</a></li>
+  <li><a href="#dependencies">Dependencies</a></li>
   <li>
     <a href="#getting-started">Getting Started</a>
     <ul>
       <li><a href="#prerequisites">Prerequisites</a></li>
-      <li><a href="#installation">Installation</a></li>
+      <li><a href="#build-and-install">Installation</a></li>
     </ul>
   </li>
+  <li><a href="#use-with-cmake">Usage</a></li>
   <li><a href="#roadmap">Roadmap</a></li>
   <li><a href="#contributing">Contributing</a></li>
   <li><a href="#license">License</a></li>
@@ -80,7 +77,7 @@
 
 
 ## Content overview
-All the provided utilities are in the `cbr` namespace (except for matplotlibcpp.hpp, where things have been left in the `matplotlibcpp` namespace).
+All the provided utilities are in the `cbr` namespace and are `C++17` compatible, except for [matplotlibcpp.hpp](include/cbr_utils/matplotlibcpp.hpp) for which things have been left in the original `matplotlibcpp` namespace, and which leverages `C++20` constructs.
 ### Clocks and timers
 ### Compile time loop
 ### Digitset
@@ -111,7 +108,7 @@ All the provided utilities are in the `cbr` namespace (except for matplotlibcpp.
 To get a local copy up and running follow these simple steps.
 
 
-### Install dependencies
+### Prerequisites
 
 * libboost
   ```sh
@@ -168,6 +165,7 @@ To get a local copy up and running follow these simple steps.
 7. To build and run the tests:
    ```sh
    cmake .. -DBUILD_TESTING=ON
+   make
    make test
    ```
 

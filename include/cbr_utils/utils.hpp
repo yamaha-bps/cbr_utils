@@ -185,8 +185,8 @@ inline bool isValidFilename(const std::string_view str, const bool windows = tru
       31};
 
     windowsValid = (str.find_first_of("\\:*?\"<>|") == std::string::npos)
-                && (str.find_first_of(invalidBytes) == std::string::npos) && !str.ends_with('.')
-                && !str.ends_with(' ');
+                && (str.find_first_of(invalidBytes) == std::string::npos) && str.back() != '.'
+                && str.back() != ' ';
   }
   return linuxValid && windowsValid;
 }
