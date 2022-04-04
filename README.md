@@ -85,9 +85,7 @@ All the provided utilities are in the `cbr` namespace and are `C++17` compatible
 * [loop_timer.hpp](include/cbr_utils/loop_timer.hpp): Loop synchronization utility.
 
 ### Compile time loop
-* [static_for.hpp](include/cbr_utils/static_for.hpp): Compile time loop over integers.
-
-  Also provides utility loop over boost::hana::Struct if boost::hana available.
+* [static_for.hpp](include/cbr_utils/static_for.hpp): Compile time loop over integers. Also provides utility loop over boost::hana::Struct if boost::hana available.
 
 ### Digitset
 * [digitset.hpp](include/cbr_utils/digitset.hpp): Extention of std::bitset for bases > 2.
@@ -119,7 +117,7 @@ All the provided utilities are in the `cbr` namespace and are `C++17` compatible
 
 ### Misc
 * [crtp.hpp](include/cbr_utils/crtp.hpp): CRTP helper, small variation on https://www.fluentcpp.com/2017/05/19/crtp-helper/.
-* [introspection.hpp](include/cbr_utils/introspection.hpp): Introspection utilities.
+* [introspection.hpp](include/cbr_utils/introspection.hpp): Introspection utilities around boost::hana.
 * [utils.hpp](include/cbr_utils/utils.hpp): Various utilities to check if a range is sorted, check if a string is a valid filename, convert time to string, etc.
 
 ## Dependencies
